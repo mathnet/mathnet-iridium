@@ -29,6 +29,7 @@
 
 using System;
 using System.Collections.Generic;
+using MathNet.Numerics.NumberTheory;
 
 namespace MathNet.Numerics.Statistics
 {
@@ -181,6 +182,135 @@ namespace MathNet.Numerics.Statistics
             }
 
             return max;
+        }
+
+        /// <summary>
+        /// Order Statistics: Evaluates the lower median value of the provided samples.
+        /// </summary>
+        public static
+        double
+        Median(IEnumerable<double> samples)
+        {
+            List<double> list = new List<double>(samples);
+            int lowerMidpoint = list.Count / 2;
+            return OrderSelect(list, 0, list.Count - 1, lowerMidpoint + 1);
+        }
+
+        /// <summary>
+        /// Order Statistics: Evaluates the upper median value of the provided samples.
+        /// </summary>
+        public static
+        double
+        UpperMedian(IEnumerable<double> samples)
+        {
+            List<double> list = new List<double>(samples);
+            int lowerMidpoint = IntegerTheory.IsEven(list.Count) ? ((list.Count / 2) + 1) : (list.Count / 2);
+            return OrderSelect(list, 0, list.Count - 1, lowerMidpoint + 1);
+        }
+
+        /// <summary>
+        /// Order Statistics: Evaluate the i-order (1..N) statistic of the provided samples.
+        /// </summary>
+        public static
+        double
+        OrderStatistic(IEnumerable<double> samples, int order)
+        {
+            if(order == 1)
+            {
+                // Can be done in linear time by Min()
+                return Min(samples);
+            }
+
+            List<double> list = new List<double>(samples);
+            if(order < 1 || order > list.Count)
+            {
+                throw new ArgumentOutOfRangeException("order", Properties.LocalStrings.ArgumentInIntervalXYInclusive(1, list.Count));
+            }
+
+            if(order == list.Count)
+            {
+                // Can be done in linear time by Max()
+                return Max(list);
+            }
+
+            return OrderSelect(list, 0, list.Count - 1, order);
+        }
+
+        static
+        double
+        OrderSelect(
+            IList<double> samples,
+            int left,
+            int right,
+            int order)
+        {
+            if(left == right)
+            {
+                return samples[left];
+            }
+
+            // Pivoting
+            int a = left;
+            int b = right;
+            int p = a + ((b - a) >> 1); // midpoint
+
+            if(samples[a] > samples[p])
+            {
+                Sorting.Swap(samples, a, p);
+            }
+
+            if(samples[a] > samples[b])
+            {
+                Sorting.Swap(samples, a, b);
+            }
+
+            if(samples[p] > samples[b])
+            {
+                Sorting.Swap(samples, p, b);
+            }
+
+            double pivot = samples[p];
+
+            // Hoare Partitioning
+            do
+            {
+                while(samples[a] < pivot)
+                {
+                    a++;
+                }
+
+                while(samples[b] > pivot)
+                {
+                    b--;
+                }
+
+                if(a > b)
+                {
+                    break;
+                }
+
+                if(a < b)
+                {
+                    Sorting.Swap(samples, a, b);
+                }
+            }
+            while(a < b);
+
+            int k = b - left + 1;
+            if(order == k)
+            {
+                return samples[p];
+            }
+
+            // partial quicksort: only sort the interesting partition further
+            if(order < k)
+            {
+                return OrderSelect(samples, left, b - 1, order);
+            }
+            else
+            {
+                return OrderSelect(samples, b + 1, right, order - k);
+            }
         }
     }
 }

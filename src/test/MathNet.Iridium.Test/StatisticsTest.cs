@@ -118,5 +118,17 @@ namespace Iridium.Test
             NumericAssert.AreAlmostEqual(4, DescriptiveStatistics.Variance(gaussian.EnumerateDoubles(10000)), 0.5, "Variance of (1e+9,2)");
             NumericAssert.AreAlmostEqual(2, DescriptiveStatistics.StandardDeviation(gaussian.EnumerateDoubles(10000)), 0.5, "StdDev of (1e+9,2)");
         }
+
+        [Test]
+        public void TestDescriptiveStatisticsOrderMedian()
+        {
+            // -3 -1 -0.5 0  1  4 5 6 10
+            double[] samples = new double[] { -1, 5, 0, -3, 10, -0.5, 4, 1, 6 };
+            Assert.AreEqual(1, DescriptiveStatistics.Median(samples), "Median");
+            Assert.AreEqual(-3, DescriptiveStatistics.OrderStatistic(samples, 1), "Order-1");
+            Assert.AreEqual(-0.5, DescriptiveStatistics.OrderStatistic(samples, 3), "Order-3");
+            Assert.AreEqual(5, DescriptiveStatistics.OrderStatistic(samples, 7), "Order-7");
+            Assert.AreEqual(10, DescriptiveStatistics.OrderStatistic(samples, 9), "Order-9");
+        }
     }
 }

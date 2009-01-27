@@ -313,6 +313,7 @@ namespace MathNet.Numerics
         {
             do
             {
+                // Pivoting
                 int a = left;
                 int b = right;
                 int p = a + ((b - a) >> 1); // midpoint
@@ -334,6 +335,7 @@ namespace MathNet.Numerics
 
                 T pivot = keys[p];
 
+                // Hoare Partitioning
                 do
                 {
                     while(comparer.Compare(keys[a], pivot) < 0)
@@ -361,6 +363,8 @@ namespace MathNet.Numerics
                 }
                 while(a <= b);
 
+                // In order to limit the recusion depth to log(n), we sort the 
+                // shorter partition recusively and the longer partition iteratively.
                 if((b - left) <= (right - a))
                 {
                     if(left < b)
@@ -394,6 +398,7 @@ namespace MathNet.Numerics
         {
             do
             {
+                // Pivoting
                 int a = left;
                 int b = right;
                 int p = a + ((b - a) >> 1); // midpoint
@@ -418,6 +423,7 @@ namespace MathNet.Numerics
 
                 T pivot = keys[p];
 
+                // Hoare Partitioning
                 do
                 {
                     while(comparer.Compare(keys[a], pivot) < 0)
@@ -446,6 +452,8 @@ namespace MathNet.Numerics
                 }
                 while(a <= b);
 
+                // In order to limit the recusion depth to log(n), we sort the 
+                // shorter partition recusively and the longer partition iteratively.
                 if((b - left) <= (right - a))
                 {
                     if(left < b)
@@ -480,6 +488,7 @@ namespace MathNet.Numerics
         {
             do
             {
+                // Pivoting
                 int a = left;
                 int b = right;
                 int p = a + ((b - a) >> 1); // midpoint
@@ -507,6 +516,7 @@ namespace MathNet.Numerics
 
                 T pivot = keys[p];
 
+                // Hoare Partitioning
                 do
                 {
                     while(comparer.Compare(keys[a], pivot) < 0)
@@ -536,6 +546,8 @@ namespace MathNet.Numerics
                 }
                 while(a <= b);
 
+                // In order to limit the recusion depth to log(n), we sort the 
+                // shorter partition recusively and the longer partition iteratively.
                 if((b - left) <= (right - a))
                 {
                     if(left < b)
@@ -558,7 +570,7 @@ namespace MathNet.Numerics
             while(left < right);
         }
 
-        static
+        internal static
         void
         Swap<T>(
             IList<T> keys,
