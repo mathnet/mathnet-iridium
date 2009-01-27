@@ -67,8 +67,8 @@ namespace Iridium.Test
             {
                 accumulator.Add(gaussian.NextDouble());
             }
-            NumericAssert.AreAlmostEqual(1e+9, accumulator.Mean, 0.2, "Mean of (0,1)");
-            NumericAssert.AreAlmostEqual(1, accumulator.Variance, 0.5, "Variance of (0,1)");
+            NumericAssert.AreAlmostEqual(1e+9, accumulator.Mean, 0.2, "Mean of (1e+9,1)");
+            NumericAssert.AreAlmostEqual(1, accumulator.Variance, 0.5, "Variance of (1e+9,1)");
         }
 
         [Test]
@@ -98,6 +98,25 @@ namespace Iridium.Test
             NumericAssert.AreAlmostEqual(5, accumulator.Mean, "C Mean");
             NumericAssert.AreAlmostEqual(11, accumulator.Variance, "C Variance");
             NumericAssert.AreAlmostEqual(55, accumulator.Sum, "C Sum");
+        }
+
+        [Test]
+        public void TestDescriptiveStatisticsMinMax()
+        {
+            double[] samples = new double[] { -1, 5, 0, -3, 10, -0.5, 4 };
+            Assert.AreEqual(-3, DescriptiveStatistics.Min(samples), "Min");
+            Assert.AreEqual(10, DescriptiveStatistics.Max(samples), "Max");
+        }
+
+        [Test]
+        public void TestDescriptiveStatisticsMeanVariance()
+        {
+            // Test around 10^9, potential stability issues
+            NormalDistribution gaussian = new NormalDistribution(1e+9, 2);
+
+            NumericAssert.AreAlmostEqual(1e+9, DescriptiveStatistics.Mean(gaussian.EnumerateDoubles(10000)), 0.2, "Mean of (1e+9,2)");
+            NumericAssert.AreAlmostEqual(4, DescriptiveStatistics.Variance(gaussian.EnumerateDoubles(10000)), 0.5, "Variance of (1e+9,2)");
+            NumericAssert.AreAlmostEqual(2, DescriptiveStatistics.StandardDeviation(gaussian.EnumerateDoubles(10000)), 0.5, "StdDev of (1e+9,2)");
         }
     }
 }
