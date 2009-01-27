@@ -151,6 +151,7 @@
     <Compile Include="SiPrefixes.cs" />
     <Compile Include="SpecialFunctions.cs" />
     <Compile Include="Statistics\Accumulator.cs" />
+    <Compile Include="Statistics\DescriptiveStatistics.cs" />
     <Compile Include="Statistics\Histogram.cs" />
     <Compile Include="Transformations\ComplexFourierTransformation.cs" />
     <Compile Include="Transformations\InternalFFT.cs" />
