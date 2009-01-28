@@ -1305,6 +1305,49 @@ namespace MathNet.Numerics.LinearAlgebra
         }
 
         /// <summary>
+        /// Multiply this matrix with a right real column vector.
+        /// </summary>
+        /// <param name="b">The right real column vector.</param>
+        /// <returns>
+        /// Vector ret[i] = sum(this[i,k] * b[k])
+        /// </returns>
+        /// <remarks>
+        /// This method has the same effect as the overloaded * operator.
+        /// </remarks>
+        /// <seealso cref="operator * (Matrix, Vector)"/>
+        /// <exception cref="ArgumentNullException">B must not be null.</exception>
+        /// <exception cref="ArgumentException">Matrix inner dimensions must agree.</exception>
+        public
+        Vector
+        MultiplyRightColumn(IVector<double> b)
+        {
+            if(null == b)
+            {
+                throw new ArgumentNullException("B");
+            }
+
+            if(b.Length != _columnCount)
+            {
+                throw new ArgumentException(Properties.LocalStrings.ArgumentMatrixSameDimensions);
+            }
+
+            double[] newData = new double[_rowCount];
+            for(int i = 0; i < newData.Length; i++)
+            {
+                double[] thisRow = _data[i];
+                double s = 0;
+                for(int j = 0; j < thisRow.Length; j++)
+                {
+                    s += thisRow[j] * b[j];
+                }
+
+                newData[i] = s;
+            }
+
+            return new Vector(newData);
+        }
+
+        /// <summary>
         /// In place subtraction of <c>m</c> to this <c>Matrix</c>.
         /// </summary>
         /// <seealso cref="operator - (Matrix, Matrix)"/>
@@ -2084,6 +2127,19 @@ namespace MathNet.Numerics.LinearAlgebra
             double s)
         {
             return s * m;
+        }
+
+        /// <summary>
+        /// Multiply a real matrix with a real column vector.
+        /// </summary>
+        /// <exception cref="System.ArgumentException">Matrix inner dimensions must agree.</exception>
+        public static
+        Vector
+        operator *(
+            Matrix m1,
+            Vector v2)
+        {
+            return m1.MultiplyRightColumn(v2);
         }
 
         #endregion   //Operator Overloading
