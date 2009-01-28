@@ -58,6 +58,7 @@
     <Compile Include="ExcelStatisticsTests.cs" />
     <Compile Include="IntegrationTest.cs" />
     <Compile Include="InterpolationTest.cs" />
+    <Compile Include="LinearAlgebraAlgorithmsTest.cs" />
     <Compile Include="NumberTheoryTest.cs" />
     <Compile Include="NumericAssert.cs" />
     <Compile Include="SetTest.cs" />

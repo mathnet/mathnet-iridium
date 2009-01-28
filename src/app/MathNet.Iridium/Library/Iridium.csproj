@@ -112,6 +112,7 @@
     <Compile Include="Interpolation\Interpolation.cs" />
     <Compile Include="Interpolation\InterpolationMethod.cs" />
     <Compile Include="Interpolation\SplineBoundaryCondition.cs" />
+    <Compile Include="LinearAlgebra\Algorithms\Orthogonal.cs" />
     <Compile Include="LinearAlgebra\ComplexMatrix.cs" />
     <Compile Include="LinearAlgebra\ComplexVector.cs" />
     <Compile Include="LinearAlgebra\IMatrix.cs" />

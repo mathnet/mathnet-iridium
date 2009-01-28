@@ -1199,6 +1199,25 @@ namespace MathNet.Numerics.LinearAlgebra
         #region Vector Norms
 
         /// <summary>
+        /// Euclidean Norm also known as 2-Norm.
+        /// </summary>
+        /// <returns>
+        /// Scalar ret = sqrt(sum(this[i]*conjugate(this[i]))
+        /// </returns>
+        public
+        double
+        Norm()
+        {
+            double sum = 0;
+            for(int i = 0; i < _data.Length; i++)
+            {
+                sum += _data[i].ModulusSquared;
+            }
+
+            return Math.Sqrt(sum);
+        }
+
+        /// <summary>
         /// 1-Norm also known as Manhattan Norm or Taxicab Norm.
         /// </summary>
         /// <returns>

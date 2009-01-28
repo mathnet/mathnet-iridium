@@ -572,7 +572,7 @@ namespace MathNet.Numerics
                 double mod = Fn.Hypot(real, imag);
                 if(mod == 0)
                 {
-                    return Complex.Zero;
+                    return Complex.One;
                 }
 
                 return new Complex(real / mod, imag / mod);
