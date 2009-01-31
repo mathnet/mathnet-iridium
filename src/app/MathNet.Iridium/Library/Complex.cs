@@ -835,10 +835,22 @@ namespace MathNet.Numerics
                 return Complex.Infinity;
             }
 
-            double z2mod = divisor.ModulusSquared;
-            return new Complex(
-                ((dividend.real * divisor.real) + (dividend.imag * divisor.imag)) / z2mod,
-                ((dividend.imag * divisor.real) - (dividend.real * divisor.imag)) / z2mod);
+            if(Math.Abs(divisor.real) >= Math.Abs(divisor.imag))
+            {
+                double r = divisor.imag / divisor.real;
+                double den = divisor.real + r * divisor.imag;
+                return new Complex(
+                    (dividend.real + dividend.imag * r) / den,
+                    (dividend.imag - dividend.real * r) / den);
+            }
+            else
+            {
+                double r = divisor.real / divisor.imag;
+                double den = divisor.imag + r * divisor.real;
+                return new Complex(
+                    (dividend.real * r + dividend.imag) / den,
+                    (dividend.imag * r - dividend.real) / den);
+            }
         }
 
         /// <summary>
@@ -851,8 +863,22 @@ namespace MathNet.Numerics
                 return Complex.Infinity;
             }
 
-            double zmod = divisor.ModulusSquared;
-            return new Complex(dividend * divisor.real / zmod, -dividend * divisor.imag / zmod);
+            if(Math.Abs(divisor.real) >= Math.Abs(divisor.imag))
+            {
+                double r = divisor.imag / divisor.real;
+                double den = divisor.real + r * divisor.imag;
+                return new Complex(
+                    dividend / den,
+                    -dividend * r / den);
+            }
+            else
+            {
+                double r = divisor.real / divisor.imag;
+                double den = divisor.imag + r * divisor.real;
+                return new Complex(
+                    dividend * r / den,
+                    -dividend / den);
+            }
         }
 
         /// <summary>

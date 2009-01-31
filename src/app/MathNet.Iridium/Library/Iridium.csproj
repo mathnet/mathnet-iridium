@@ -195,6 +195,7 @@
       <Output TaskParameter="Include" ItemName="StrongNameTestKeyPrivate" />
     </CreateItem>
     <Error Condition="!Exists('@(StrongNameTestKeyPrivate)')" Text="Test-signing private key not found (expected at @(StrongNameTestKeyPrivate)). Execute 'CreateNewPersonalTestKey.bat' once to generate one." />
+    <Exec Command="$(QUOT)@(StrongNameExe)$(QUOT) -Vr *,$(QUOT)c061a3ec32cc0c6f$(QUOT) $(QUOT)$(StrongNameTestKeyPublicFullName)$(QUOT)" />
     <Message Text="$(NL)Test-Signing the target assembly $(TargetPath):$(NL)" />
     <Exec Command="$(QUOT)@(StrongNameExe)$(QUOT) -TS $(QUOT)$(TargetPath)$(QUOT) $(QUOT)@(StrongNameTestKeyPrivate)$(QUOT)" />
   </Target>
