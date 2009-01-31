@@ -212,8 +212,8 @@ namespace MathNet.Numerics
             ulong ub = ToLexicographicalOrderedUInt64(b);
 
             return (a >= b)
-                ? ua - ub
-                : ub - ua;
+                ? unchecked(ua - ub)
+                : unchecked(ub - ua);
         }
 
         /// <summary>
@@ -225,11 +225,11 @@ namespace MathNet.Numerics
         ToLexicographicalOrderedUInt64(double value)
         {
             long signed64 = BitConverter.DoubleToInt64Bits(value);
-            ulong unsigned64 = (ulong)signed64;
+            ulong unsigned64 = unchecked((ulong)signed64);
 
             return (signed64 >= 0)
                 ? unsigned64
-                : 0x8000000000000000 - unsigned64;
+                : unchecked(0x8000000000000000 - unsigned64);
         }
 
         /// <summary>
@@ -243,7 +243,7 @@ namespace MathNet.Numerics
 
             return (signed64 >= 0)
                 ? signed64
-                : (long)(0x8000000000000000 - (ulong)signed64);
+                : unchecked((long)(0x8000000000000000 - (ulong)signed64));
         }
 
         /// <summary>
@@ -256,7 +256,7 @@ namespace MathNet.Numerics
         {
             return (value >= 0)
                 ? (ulong)value
-                : 0x8000000000000000 - (ulong)value;
+                : unchecked(0x8000000000000000 - (ulong)value);
         }
 
         /// <summary>
@@ -268,7 +268,7 @@ namespace MathNet.Numerics
         {
             return (value >= 0)
                 ? value
-                : (long)(0x8000000000000000 - (ulong)value);
+                : unchecked((long)(0x8000000000000000 - (ulong)value));
         }
 
         /// <summary>

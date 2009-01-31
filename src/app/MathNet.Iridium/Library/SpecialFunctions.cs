@@ -1171,7 +1171,7 @@ namespace MathNet.Numerics
 
             if(n >= HarmonicPrecompSize)
             {
-                double n2 = n * n;
+                double n2 = n * (double)n;
                 double n4 = n2 * n2;
                 return Constants.EulerGamma
                     + Math.Log(n)
