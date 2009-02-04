@@ -239,6 +239,16 @@ namespace MathNet.Numerics.Distributions
         {
             return Fn.GammaRegularized(0.5 * _degreesOfFreedom, 0.5 * x * x);
         }
+
+        /// <summary>
+        /// Continuous inverse of the cumulativ distribution function (icdf) of this probabilit distribution.
+        /// </summary>
+        public
+        double
+        InverseCumulativeDistribution(double x)
+        {
+            return Math.Sqrt(2 * Fn.InverseGammaRegularized(0.5 * _degreesOfFreedom, x));
+        }
         #endregion
 
         #region Generator

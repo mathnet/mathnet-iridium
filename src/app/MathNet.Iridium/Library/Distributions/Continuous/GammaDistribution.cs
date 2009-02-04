@@ -223,6 +223,16 @@ namespace MathNet.Numerics.Distributions
         {
             return Fn.GammaRegularized(_alpha, x / _theta);
         }
+
+        /// <summary>
+        /// Continuous inverse of the cumulativ distribution function (icdf) of this probabilit distribution.
+        /// </summary>
+        public
+        double
+        InverseCumulativeDistribution(double x)
+        {
+            return Fn.InverseGammaRegularized(_alpha, x) * _theta;
+        }
         #endregion
 
         #region Generator
