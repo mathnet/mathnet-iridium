@@ -55,6 +55,7 @@
     <Compile Include="CombinatoricsTest.cs" />
     <Compile Include="ComplexMatrixTest.cs" />
     <Compile Include="DistributionTest.cs" />
+    <Compile Include="ExcelStatisticsTests.cs" />
     <Compile Include="IntegrationTest.cs" />
     <Compile Include="InterpolationTest.cs" />
     <Compile Include="NumberTheoryTest.cs" />
