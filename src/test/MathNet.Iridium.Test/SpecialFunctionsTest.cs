@@ -195,6 +195,84 @@ namespace Iridium.Test
         }
 
         [Test]
+        public void TestSpecialFunctions_GammaRegularized()
+        {
+            /*
+            Maple: P := (a,x) -> 1 - GAMMA(a,x)/GAMMA(a)
+            Mathematica: GammaRegularized[a,0,x]
+            */
+
+            // Special Points
+            Assert.IsTrue(Double.IsNaN(Fn.GammaRegularized(0, 0)), "(0,0) -> NaN");
+
+            // x axis (a=0)
+            NumericAssert.AreAlmostEqual(1, Fn.GammaRegularized(0, 1), "(0,1) -> 1");
+            NumericAssert.AreAlmostEqual(1, Fn.GammaRegularized(0, 0.5), "(0,1/2) -> 1");
+            NumericAssert.AreAlmostEqual(1, Fn.GammaRegularized(0, 0.001), "(0,1/1000) -> 1");
+
+            // a axis (x=0)
+            NumericAssert.AreAlmostEqual(0, Fn.GammaRegularized(1, 0), "(1,0) -> 0");
+            NumericAssert.AreAlmostEqual(0, Fn.GammaRegularized(0.5, 0), "(1/2,0) -> 0");
+            NumericAssert.AreAlmostEqual(0, Fn.GammaRegularized(0.001, 0), "(1/1000,0) -> 0");
+
+            // various points (some with known other representation)
+            NumericAssert.AreAlmostEqual(0.63212055882855767840, Fn.GammaRegularized(1, 1), "(1,1) -> 1-exp(-1)");
+            NumericAssert.AreAlmostEqual(0.95678608173622775023, Fn.GammaRegularized(1, Math.PI), "(1,pi) -> 1-exp(-pi)");
+            NumericAssert.AreAlmostEqual(0.84270079294971486934, Fn.GammaRegularized(0.5, 1), 1e-13, "(1/2,1) -> erf(1)");
+            NumericAssert.AreAlmostEqual(0.47291074313446191487, Fn.GammaRegularized(0.5, 0.2), 1e-13, "(1/2,1/5) -> erf(sqrt(5)/5)");
+            NumericAssert.AreAlmostEqual(0.62890663047730242621, Fn.GammaRegularized(0.5, 0.4), 1e-13, "(1/2,2/5) -> erf(sqrt(10)/5)");
+            NumericAssert.AreAlmostEqual(0.79409678926793169113, Fn.GammaRegularized(0.5, 0.8), 1e-13, "(1/2,4/5) -> erf(sqrt(20)/5)");
+            NumericAssert.AreAlmostEqual(0.70985103173698245837, Fn.GammaRegularized(0.25, 0.2), 1e-13, "(1/4,1/5)");
+            NumericAssert.AreAlmostEqual(0.99999999974603714105, Fn.GammaRegularized(0.5, 20d), "(1/2,20) -> erf(2*5^(1/2))");
+        }
+
+        [Test]
+        public void TestSpecialFunctions_InverseGammaRegularized()
+        {
+            /*
+            Maple: PInv := (a,y) -> RootOf(1 - GAMMA(a,x)/GAMMA(a) - y);
+            Mathematica: InverseGammaRegularized[a,0,x]
+            */
+
+            // Special Points (expected value debatable)
+            Assert.IsTrue(Double.IsNaN(Fn.InverseGammaRegularized(0, 0)), "(0,0) -> NaN");
+
+            // a axis (y=0)
+            NumericAssert.AreAlmostEqual(0, Fn.InverseGammaRegularized(1, 0), "(1,0) -> 0");
+            NumericAssert.AreAlmostEqual(0, Fn.InverseGammaRegularized(0.5, 0), "(1/2,0) -> 0");
+            NumericAssert.AreAlmostEqual(0, Fn.InverseGammaRegularized(0.001, 0), "(1/1000,0) -> 0");
+
+            // shifted a axis (y=1)
+            Assert.IsTrue(Double.IsPositiveInfinity(Fn.InverseGammaRegularized(1, 1)), "(1,1) -> +infty");
+            Assert.IsTrue(Double.IsPositiveInfinity(Fn.InverseGammaRegularized(0.5, 1)), "(1/2,1) -> +infty");
+            Assert.IsTrue(Double.IsPositiveInfinity(Fn.InverseGammaRegularized(0.001, 1)), "(1/1000,1) -> +infty");
+
+            // shifted a axis (y=1.1)
+            Assert.IsTrue(Double.IsNaN(Fn.InverseGammaRegularized(1, 1.1)), "(1,1) -> NaN");
+            Assert.IsTrue(Double.IsNaN(Fn.InverseGammaRegularized(0.5, 1.1)), "(1/2,1) -> NaN");
+            Assert.IsTrue(Double.IsNaN(Fn.InverseGammaRegularized(0.001, 1.1)), "(1/1000,1) -> NaN");
+
+            // y axis (a=0)
+            Assert.IsTrue(Double.IsNaN(Fn.InverseGammaRegularized(0, 1)), "(0,1) -> NaN");
+            Assert.IsTrue(Double.IsNaN(Fn.InverseGammaRegularized(0, 0.001)), "(0,1/1000) -> NaN");
+
+            // various points (some with known other representation)
+            NumericAssert.AreAlmostEqual(1, Fn.InverseGammaRegularized(1, 0.63212055882855767840), 1e-12, "(1,1-exp(-1)) -> 1");
+            NumericAssert.AreAlmostEqual(Math.PI, Fn.InverseGammaRegularized(1, 0.95678608173622775023), 1e-12, "(1,1-exp(-pi)) -> pi");
+            NumericAssert.AreAlmostEqual(1, Fn.InverseGammaRegularized(0.5, 0.84270079294971486934), 1e-12, "(1/2,erf(1)) -> 1");
+            NumericAssert.AreAlmostEqual(0.2, Fn.InverseGammaRegularized(0.5, 0.47291074313446191487), 1e-12, "(1/2,erf(sqrt(1/5))) -> 1/5");
+            NumericAssert.AreAlmostEqual(0.4, Fn.InverseGammaRegularized(0.5, 0.62890663047730242621), 1e-12, "(1/2,erf(sqrt(2/5))) -> 2/5");
+            NumericAssert.AreAlmostEqual(0.8, Fn.InverseGammaRegularized(0.5, 0.79409678926793169113), 1e-12, "(1/2,erf(sqrt(8/5))) -> 4/5");
+            NumericAssert.AreAlmostEqual(0.2, Fn.InverseGammaRegularized(0.25, 0.70985103173698245837), 1e-12, "(1/4,?) -> 4/5");
+            NumericAssert.AreAlmostEqual(10, Fn.InverseGammaRegularized(0.5, 0.99999225578356895592), 1e-12, "(1/2,erf(sqrt(10))) -> 10");
+            NumericAssert.AreAlmostEqual(20, Fn.InverseGammaRegularized(0.5, 0.99999999974603714105), 1e-7, "(1/2,erf(sqrt(20))) -> 20");
+            NumericAssert.AreAlmostEqual(5.4137830853313661466, Fn.InverseGammaRegularized(0.5, 0.999), 1e-12, "(1/2,0.999)");
+            NumericAssert.AreAlmostEqual(0.82118720757490819339, Fn.InverseGammaRegularized(0.5, 0.8), 1e-12, "(1/2,0.8)");
+            NumericAssert.AreAlmostEqual(0.35416315040039690443, Fn.InverseGammaRegularized(0.5, 0.6), 1e-12, "(1/2,0.6)");
+            NumericAssert.AreAlmostEqual(0.032092377333650790123, Fn.InverseGammaRegularized(0.5, 0.2), 1e-13, "(1/2,0.2)");
+        }
+
+        [Test]
         public void TestSpecialFunctions_Digamma()
         {
             // ensure poles return NaN

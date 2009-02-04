@@ -648,10 +648,10 @@ namespace MathNet.Numerics
         /// <summary>
         /// Returns the natural logarithm of Gamma for a real value &gt; 0.
         /// </summary>
-        /// <returns>A value ln|Gamma(value))| for value &gt; 0</returns>
+        /// <returns>A value ln|Gamma(a))| for a &gt; 0</returns>
         public static
         double
-        GammaLn(double value)
+        GammaLn(double a)
         {
             double x, y, ser, temp;
             double[] coefficient = new double[] {
@@ -663,7 +663,7 @@ namespace MathNet.Numerics
                 -0.5395239384953e-5
                 };
 
-            y = x = value;
+            y = x = a;
             temp = x + 5.5;
             temp -= ((x + 0.5) * Math.Log(temp));
             ser = 1.000000000190015;
@@ -680,17 +680,17 @@ namespace MathNet.Numerics
         /// Returns the gamma function for real values (except at 0, -1, -2, ...).
         /// For numeric stability, consider to use GammaLn for positive values.
         /// </summary>
-        /// <returns>A value Gamma(value) for value != 0,-1,-2,...</returns>
+        /// <returns>A value Gamma(a) for a != 0,-1,-2,...</returns>
         public static
         double
-        Gamma(double value)
+        Gamma(double a)
         {
-            if(value > 0.0)
+            if(a > 0.0)
             {
-                return Math.Exp(GammaLn(value));
+                return Math.Exp(GammaLn(a));
             }
 
-            double reflection = 1.0 - value;
+            double reflection = 1.0 - a;
             double s = Math.Sin(Math.PI * reflection);
 
             if(Number.AlmostEqual(0.0, s))
@@ -724,21 +724,37 @@ namespace MathNet.Numerics
             double eps = Number.RelativeAccuracy;
             double fpmin = Number.SmallestNumberGreaterThanZero / eps;
 
-            if(a < 0.0 || x < 0.0)
+            if(a < 0d || x < 0d)
             {
                 throw new ArgumentOutOfRangeException("a,x", Properties.LocalStrings.ArgumentNotNegative);
             }
 
+            if(Number.AlmostZero(a))
+            {
+                if(Number.AlmostZero(x))
+                {
+                    // either 0 or 1, depending on the limit direction
+                    return Double.NaN;
+                }
+
+                return 1d;
+            }
+
+            if(Number.AlmostZero(x))
+            {
+                return 0d;
+            }
+
             double gln = GammaLn(a);
-            if(x < a + 1.0)
+            if(x < a + 1d)
             {
                 /* Series Representation */
 
-                if(x <= 0.0)
+                if(x <= 0d)
                 {
                     /* Yes, I know we've already checked for x<0.0 */
 
-                    return 0.0;
+                    return 0d;
                 }
                 else
                 {
@@ -797,6 +813,193 @@ namespace MathNet.Numerics
             }
 
             throw new ArgumentException(Properties.LocalStrings.ArgumentTooLargeForIterationLimit, "a");
+        }
+
+        /// <summary>
+        /// Returns the inverse P^(-1) of the regularized lower incomplete gamma function
+        /// P(a,x) = 1/Gamma(a) * int(exp(-t)t^(a-1),t=0..x) for real a &gt; 0, x &gt; 0,
+        /// such that P^(-1)(a,P(a,x)) == x.
+        /// </summary>
+        public static
+        double
+        InverseGammaRegularized(double a, double y0)
+        {
+            // TODO: Consider to throw an out-of-range exception instead of NaN
+
+            if(a < 0 || Number.AlmostZero(a) || y0 < 0 || y0 > 1)
+            {
+                return Double.NaN;
+            }
+
+            if(Number.AlmostZero(y0))
+            {
+                return 0d;
+            }
+
+            if(Number.AlmostEqual(y0, 1))
+            {
+                return Double.PositiveInfinity;
+            }
+
+            y0 = 1 - y0;
+
+            const double epsilon = 0.000000000000001;
+            const double big = 4503599627370496.0;
+            const double threshold = 5 * epsilon;
+
+            double xUpper = big;
+            double xLower = 0;
+            double yUpper = 1;
+            double yLower = 0;
+
+            // Initial Guess
+            double d = 1 / (9 * a);
+            double y = 1 - d - 0.98 * Constants.Sqrt2 * Fn.ErfInverse((2.0 * y0) - 1.0) * Math.Sqrt(d);
+            double x = a * y * y * y;
+            double lgm = GammaLn(a);
+
+            for(int i = 0; i < 10; i++)
+            {
+                if(x < xLower || x > xUpper)
+                {
+                    d = 0.0625;
+                    break;
+                }
+
+                y = 1 - GammaRegularized(a, x);
+                if(y < yLower || y > yUpper)
+                {
+                    d = 0.0625;
+                    break;
+                }
+
+                if(y < y0)
+                {
+                    xUpper = x;
+                    yLower = y;
+                }
+                else
+                {
+                    xLower = x;
+                    yUpper = y;
+                }
+
+                d = (a - 1) * Math.Log(x) - x - lgm;
+                if(d < -709.78271289338399)
+                {
+                    d = 0.0625;
+                    break;
+                }
+
+                d = -Math.Exp(d);
+                d = (y - y0) / d;
+                if(Math.Abs(d / x) < epsilon)
+                {
+                    return x;
+                }
+
+                if((d > (x / 4)) && (y0 < 0.05))
+                {
+                    // Naive heuristics for cases near the singularity
+                    d = x / 10;
+                }
+
+                x -= d;
+            }
+
+            if(xUpper == big)
+            {
+                if(x <= 0)
+                {
+                    x = 1;
+                }
+
+                while(xUpper == big)
+                {
+                    x = (1 + d) * x;
+                    y = 1 - GammaRegularized(a, x);
+                    if(y < y0)
+                    {
+                        xUpper = x;
+                        yLower = y;
+                        break;
+                    }
+                    d = d + d;
+                }
+            }
+
+            int dir = 0;
+            d = 0.5;
+            for(int i = 0; i < 400; i++)
+            {
+                x = xLower + d * (xUpper - xLower);
+                y = 1 - GammaRegularized(a, x);
+                lgm = (xUpper - xLower) / (xLower + xUpper);
+                if(Math.Abs(lgm) < threshold)
+                {
+                    return x;
+                }
+
+                lgm = (y - y0) / y0;
+                if(Math.Abs(lgm) < threshold)
+                {
+                    return x;
+                }
+
+                if(x <= 0d)
+                {
+                    return 0d;
+                }
+
+                if(y >= y0)
+                {
+                    xLower = x;
+                    yUpper = y;
+                    if(dir < 0)
+                    {
+                        dir = 0;
+                        d = 0.5;
+                    }
+                    else
+                    {
+                        if(dir > 1)
+                        {
+                            d = 0.5 * d + 0.5;
+                        }
+                        else
+                        {
+                            d = (y0 - yLower) / (yUpper - yLower);
+                        }
+                    }
+
+                    dir = dir + 1;
+                }
+                else
+                {
+                    xUpper = x;
+                    yLower = y;
+                    if(dir > 0)
+                    {
+                        dir = 0;
+                        d = 0.5;
+                    }
+                    else
+                    {
+                        if(dir < -1)
+                        {
+                            d = 0.5 * d;
+                        }
+                        else
+                        {
+                            d = (y0 - yLower) / (yUpper - yLower);
+                        }
+                    }
+
+                    dir = dir - 1;
+                }
+            }
+
+            return x;
         }
 
         #endregion
