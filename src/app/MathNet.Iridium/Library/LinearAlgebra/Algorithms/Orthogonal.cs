@@ -138,7 +138,7 @@ namespace MathNet.Numerics.LinearAlgebra.Algorithms
             u[0] += sigma * v.Norm();
 
             Matrix T = u.TensorMultiply(u);
-            T.Multiply(2d / u.ScalarMultiply(u));
+            T.MultiplyInplace(2d / u.ScalarMultiply(u));
 
             return Matrix.Identity(v.Length, v.Length) - T;
         }

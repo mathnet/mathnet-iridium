@@ -1187,9 +1187,24 @@ namespace MathNet.Numerics.LinearAlgebra
         /// In place addition of <c>m</c> to this <c>Matrix</c>.
         /// </summary>
         /// <seealso cref="operator + (Matrix, Matrix)"/>
+        [Obsolete("Use 'AddInplace' instead. 'Add' will soon be replaced with an outplace version")]
         public virtual
         void
         Add(IMatrix<double> m)
+        {
+            AddInplace(m);
+        }
+
+        /// <summary>
+        /// In place addition of <c>m</c> to this <c>Matrix</c>.
+        /// </summary>
+        /// <seealso cref="operator + (Matrix, Matrix)"/>
+        /// <remarks>
+        /// This method changes this matrix.
+        /// </remarks>
+        public
+        void
+        AddInplace(IMatrix<double> m)
         {
             CheckMatchingMatrixDimensions(this, m);
 
@@ -1208,9 +1223,24 @@ namespace MathNet.Numerics.LinearAlgebra
         /// Multiplies in place this <c>Matrix</c> by a scalar.
         /// </summary>
         /// <seealso cref="operator * (double, Matrix)"/>
+        [Obsolete("Use 'MultiplyInplace' instead. 'Multiply' will soon be replaced with an outplace version")]
         public virtual
         void
         Multiply(double s)
+        {
+            MultiplyInplace(s);
+        }
+
+        /// <summary>
+        /// Multiplies in place this <c>Matrix</c> by a scalar.
+        /// </summary>
+        /// <seealso cref="operator * (double, Matrix)"/>
+        /// <remarks>
+        /// This method changes this matrix.
+        /// </remarks>
+        public
+        void
+        MultiplyInplace(double s)
         {
             for(int i = 0; i < _rowCount; i++)
             {
@@ -1230,26 +1260,45 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <param name="diagonal">Diagonal values of D.</param>
         /// <exception cref="ArgumentNullException"><c>diagonal</c> must not be null.</exception>
         /// <exception cref="ArgumentException">Matrix inner dimensions must agree.</exception>
+        [Obsolete("Use 'MultiplyLeftDiagonalInplace' instead.")]
         public virtual
         void
         Multiply(double[] diagonal)
         {
-            if(diagonal == null)
+            MultiplyLeftDiagonalInplace(new Vector(diagonal));
+        }
+
+        /// <summary>
+        /// In place linear algebraic matrix multiplication, D * A where
+        /// D is the diagonal matrix.
+        /// </summary>
+        /// <param name="diagonal">Diagonal values of D.</param>
+        /// <exception cref="ArgumentNullException"><c>diagonal</c> must not be null.</exception>
+        /// <exception cref="ArgumentException">Matrix inner dimensions must agree.</exception>
+        /// <remarks>
+        /// This method changes this matrix.
+        /// </remarks>
+        public
+        void
+        MultiplyLeftDiagonalInplace(IVector<double> diagonal)
+        {
+            if(null == diagonal)
             {
                 throw new ArgumentNullException("diagonal", Properties.LocalStrings.ArgumentNull("diagonal"));
             }
 
-            if(diagonal.Length != _rowCount)
+            if(_rowCount != diagonal.Length)
             {
                 throw new ArgumentException(Properties.LocalStrings.ArgumentMatrixSameDimensions);
             }
 
             for(int i = 0; i < _rowCount; i++)
             {
-                double d = diagonal[i];
-                for(int j = 0; j < _columnCount; j++)
+                double s = diagonal[i];
+                double[] thisRow = _data[i];
+                for(int j = 0; j < thisRow.Length; j++)
                 {
-                    _data[i][j] *= d;
+                    thisRow[j] *= s;
                 }
             }
 
@@ -1351,9 +1400,24 @@ namespace MathNet.Numerics.LinearAlgebra
         /// In place subtraction of <c>m</c> to this <c>Matrix</c>.
         /// </summary>
         /// <seealso cref="operator - (Matrix, Matrix)"/>
+        [Obsolete("Use 'SubtractInplace' instead. 'Subtract' will soon be replaced with an outplace version")]
         public virtual
         void
         Subtract(IMatrix<double> m)
+        {
+            SubtractInplace(m);
+        }
+
+        /// <summary>
+        /// In place subtraction of <c>m</c> to this <c>Matrix</c>.
+        /// </summary>
+        /// <seealso cref="operator - (Matrix, Matrix)"/>
+        /// <remarks>
+        /// This method changes this matrix.
+        /// </remarks>
+        public
+        void
+        SubtractInplace(IMatrix<double> m)
         {
             CheckMatchingMatrixDimensions(this, m);
 
@@ -1371,9 +1435,24 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <summary>
         /// In place unary minus of the <c>Matrix</c>.
         /// </summary>
+
+        [Obsolete("Use 'NegateInplace' instead.")]
         public virtual
         void
         UnaryMinus()
+        {
+            NegateInplace();
+        }
+
+        /// <summary>
+        /// In place unary minus of the <c>Matrix</c>.
+        /// </summary>
+        /// <remarks>
+        /// This method changes this matrix.
+        /// </remarks>
+        public
+        void
+        NegateInplace()
         {
             for(int i = 0; i < _rowCount; i++)
             {
@@ -1398,9 +1477,25 @@ namespace MathNet.Numerics.LinearAlgebra
         /// for faster access, you'll need to get a new reference to it
         /// using <see cref="GetArray"/>.
         /// </remarks>
+        [Obsolete("Use 'TransposeInplace' instead. 'Transpose' will soon be replaced with an outplace version")]
         public virtual
         void
         Transpose()
+        {
+            TransposeInplace();
+        }
+
+        /// <summary>In place transposition of this <c>Matrix</c>.</summary>
+        /// <seealso cref="Transpose(IMatrix&lt;double&gt;)"/>
+        /// <remarks>
+        /// In case of non-quadratic matrices, this operation replaces the
+        /// internal data structure. Hence, if you hold a reference to it
+        /// for faster access, you'll need to get a new reference to it
+        /// using <see cref="GetArray"/>.
+        /// </remarks>
+        public
+        void
+        TransposeInplace()
         {
             // TODO: test this method
             int m = _rowCount;
@@ -1879,16 +1974,17 @@ namespace MathNet.Numerics.LinearAlgebra
             {
                 G[i] = 1;
             }
+            Vector GV = new Vector(G);
 
             // IRLS loop
             double maxChange = double.MaxValue;
             for(int k = 0; k < maxIteration && maxChange > epsilon; k++)
             {
                 Matrix GA = this.Clone();
-                GA.Multiply(G);
+                GA.MultiplyLeftDiagonalInplace(GV);
 
                 Matrix GB = B.Clone();
-                GB.Multiply(G);
+                GB.MultiplyLeftDiagonalInplace(GV);
 
                 Matrix Ak = tA.Multiply(GA);
                 Matrix Bk = tA.Multiply(GB);
@@ -1906,8 +2002,8 @@ namespace MathNet.Numerics.LinearAlgebra
                 X = Xk;
 
                 Matrix Rk = A.Multiply(Xk);
-                Rk.UnaryMinus();
-                Rk.Add(B);
+                Rk.NegateInplace();
+                Rk.AddInplace(B);
 
                 // updating the weighting matrix
                 for(int i = 0; i < B.RowCount; i++)

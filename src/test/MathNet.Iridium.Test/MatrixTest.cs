@@ -107,7 +107,7 @@ namespace Iridium.Test
 
             NumericAssert.AreAlmostEqual(sum, ma3x2 + mb3x2, "sum 1");
             Matrix sum_inplace = ma3x2.Clone();
-            sum_inplace.Add(mb3x2);
+            sum_inplace.AddInplace(mb3x2);
             NumericAssert.AreAlmostEqual(sum, sum_inplace, "sum 2");
 
             Matrix diff = new Matrix(new double[][] {
@@ -118,7 +118,7 @@ namespace Iridium.Test
 
             NumericAssert.AreAlmostEqual(diff, ma3x2 - mb3x2, "diff 1");
             Matrix diff_inplace = ma3x2.Clone();
-            diff_inplace.Subtract(mb3x2);
+            diff_inplace.SubtractInplace(mb3x2);
             NumericAssert.AreAlmostEqual(diff, diff_inplace, "diff 2");
 
             Matrix neg_m = new Matrix(new double[][] {
@@ -136,7 +136,7 @@ namespace Iridium.Test
 
             NumericAssert.AreAlmostEqual(trans_m, Matrix.Transpose(ma3x2), "trans 1");
             Matrix trans_inplace = ma3x2.Clone();
-            trans_inplace.Transpose();
+            trans_inplace.TransposeInplace();
             NumericAssert.AreAlmostEqual(trans_m, trans_inplace, "trans 2");
         }
 
@@ -166,7 +166,7 @@ namespace Iridium.Test
 
             NumericAssert.AreAlmostEqual(prod_s, ma3x2 * 2, "prod s 1");
             Matrix prod_s_inplace = ma3x2.Clone();
-            prod_s_inplace.Multiply(2);
+            prod_s_inplace.MultiplyInplace(2);
             NumericAssert.AreAlmostEqual(prod_s, prod_s_inplace, "prod s 2");
         }
 

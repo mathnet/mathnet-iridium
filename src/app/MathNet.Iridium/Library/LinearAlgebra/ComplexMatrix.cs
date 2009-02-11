@@ -2090,7 +2090,7 @@ namespace MathNet.Numerics.LinearAlgebra
                 throw new ArgumentException(Properties.LocalStrings.ArgumentMatrixSameDimensions);
             }
 
-            for(int i = 0; i < _data.Length; i++)
+            for(int i = 0; i < _rowCount; i++)
             {
                 double s = diagonal[i];
                 Complex[] thisRow = _data[i];

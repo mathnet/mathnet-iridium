@@ -78,7 +78,7 @@ namespace Iridium.Test
 
             double[] diagonal = new double[3] { 0, 1, 2 };
 
-            A.Multiply(diagonal);
+            A.MultiplyLeftDiagonalInplace(new Vector(diagonal));
 
             Assert.AreEqual(0, A[0, 0], "#A00");
             Assert.AreEqual(0, A[0, 1], "#A01");
@@ -234,7 +234,7 @@ namespace Iridium.Test
 
                 Matrix U = svd.LeftSingularVectors;
                 Matrix Vt = svd.RightSingularVectors;
-                Vt.Transpose();
+                Vt.TransposeInplace();
                 Matrix product = U * svd.S * Vt;
 
                 for(int i = 0; i < matrix.RowCount; i++)
@@ -645,11 +645,11 @@ namespace Iridium.Test
             Assert.AreEqual((A - R).Norm1(), 0.0, "Subtract: difference of identical Matrices is nonzero,\nSubsequent use of Subtract should be suspect");
 
             A = R.Clone();
-            A.Subtract(R);
+            A.SubtractInplace(R);
             Z = new Matrix(A.RowCount, A.ColumnCount);
             try
             {
-                A.Subtract(S);
+                A.SubtractInplace(S);
                 Assert.Fail("SubtractEquals conformance check: nonconformance not raised");
             }
             catch(ArgumentException)
@@ -675,10 +675,10 @@ namespace Iridium.Test
             NumericAssert.AreAlmostEqual(C + B, A, "Add");
 
             C = A - B;
-            C.Add(B);
+            C.AddInplace(B);
             try
             {
-                A.Add(S);
+                A.AddInplace(S);
                 Assert.Fail("AddEquals conformance check: nonconformance not raised");
             }
             catch(ArgumentException)
@@ -689,7 +689,7 @@ namespace Iridium.Test
             NumericAssert.AreAlmostEqual(C, A, "AddEquals");
 
             A = ((Matrix)R.Clone());
-            A.UnaryMinus();
+            A.NegateInplace();
             NumericAssert.AreAlmostEqual(A + R, Z, "UnaryMinus");
 
             A = (Matrix)R.Clone();
