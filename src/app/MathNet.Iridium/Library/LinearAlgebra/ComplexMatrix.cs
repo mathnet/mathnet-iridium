@@ -2253,6 +2253,30 @@ namespace MathNet.Numerics.LinearAlgebra
             ResetOnDemandComputations();
         }
 
+        /// <summary>
+        /// Adds in place the scaled Matrix <c>s*m</c> to this Matrix.
+        /// </summary>
+        /// <remarks>
+        /// This method changes this matrix.
+        /// </remarks>
+        public
+        void
+        MultiplyAccumulateInplace(IMatrix<Complex> m, Complex s)
+        {
+            CheckMatchingMatrixDimensions(this, m);
+
+            for(int i = 0; i < _rowCount; i++)
+            {
+                Complex[] thisRow = _data[i];
+                for(int j = 0; j < thisRow.Length; j++)
+                {
+                    thisRow[j] += s * m[i, j];
+                }
+            }
+
+            ResetOnDemandComputations();
+        }
+
         #endregion
 
         #region Additional elementary operations

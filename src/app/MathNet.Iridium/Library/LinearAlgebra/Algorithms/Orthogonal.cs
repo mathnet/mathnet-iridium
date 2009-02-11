@@ -137,10 +137,10 @@ namespace MathNet.Numerics.LinearAlgebra.Algorithms
             Vector u = v.Clone();
             u[0] += sigma * v.Norm();
 
-            Matrix T = u.TensorMultiply(u);
-            T.MultiplyInplace(2d / u.ScalarMultiply(u));
+            Matrix m = Matrix.Identity(v.Length, v.Length);
+            m.MultiplyAccumulateInplace(u.TensorMultiply(u), -2d / u.ScalarMultiply(u));
 
-            return Matrix.Identity(v.Length, v.Length) - T;
+            return m;
         }
 
         /// <summary>
@@ -153,10 +153,10 @@ namespace MathNet.Numerics.LinearAlgebra.Algorithms
             ComplexVector u = v.Clone();
             u[0] += sigma * v.Norm();
 
-            ComplexMatrix T = u.TensorMultiply(u);
-            T.MultiplyInplace(2d / u.ScalarMultiply(u));
+            ComplexMatrix m = ComplexMatrix.Identity(v.Length, v.Length);
+            m.MultiplyAccumulateInplace(u.TensorMultiply(u), -2d / u.ScalarMultiply(u));
 
-            return ComplexMatrix.Identity(v.Length, v.Length) - T;
+            return m;
         }
     }
 }

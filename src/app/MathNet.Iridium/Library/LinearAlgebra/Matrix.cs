@@ -1210,9 +1210,10 @@ namespace MathNet.Numerics.LinearAlgebra
 
             for(int i = 0; i < _rowCount; i++)
             {
-                for(int j = 0; j < _columnCount; j++)
+                double[] thisRow = _data[i];
+                for(int j = 0; j < thisRow.Length; j++)
                 {
-                    _data[i][j] += m[i, j];
+                    thisRow[j] += m[i, j];
                 }
             }
 
@@ -1423,9 +1424,10 @@ namespace MathNet.Numerics.LinearAlgebra
 
             for(int i = 0; i < _rowCount; i++)
             {
-                for(int j = 0; j < _columnCount; j++)
+                double[] thisRow = _data[i];
+                for(int j = 0; j < thisRow.Length; j++)
                 {
-                    _data[i][j] -= m[i, j];
+                    thisRow[j] -= m[i, j];
                 }
             }
 
@@ -1456,9 +1458,34 @@ namespace MathNet.Numerics.LinearAlgebra
         {
             for(int i = 0; i < _rowCount; i++)
             {
-                for(int j = 0; j < _columnCount; j++)
+                double[] thisRow = _data[i];
+                for(int j = 0; j < thisRow.Length; j++)
                 {
-                    _data[i][j] = -_data[i][j];
+                    thisRow[j] = -thisRow[j];
+                }
+            }
+
+            ResetOnDemandComputations();
+        }
+
+        /// <summary>
+        /// Adds in place the scaled Matrix <c>s*m</c> to this Matrix.
+        /// </summary>
+        /// <remarks>
+        /// This method changes this matrix.
+        /// </remarks>
+        public
+        void
+        MultiplyAccumulateInplace(IMatrix<double> m, double s)
+        {
+            CheckMatchingMatrixDimensions(this, m);
+
+            for(int i = 0; i < _rowCount; i++)
+            {
+                double[] thisRow = _data[i];
+                for(int j = 0; j < thisRow.Length; j++)
+                {
+                    thisRow[j] += s * m[i, j];
                 }
             }
 
