@@ -713,7 +713,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// Scalar product of two vectors.
         /// </summary>
         /// <returns>
-        /// Scalar ret = sum(u[i] * v[i])
+        /// Scalar ret = sum(u[i] * conj(v[i]))
         /// </returns>
         /// <seealso cref="ScalarMultiply(IVector&lt;Complex&gt;)"/>
         /// <seealso cref="operator * (ComplexVector, ComplexVector)"/>
@@ -728,7 +728,7 @@ namespace MathNet.Numerics.LinearAlgebra
             Complex sum = 0;
             for(int i = 0; i < u.Length; i++)
             {
-                sum += u[i] * v[i];
+                sum += u[i] * v[i].Conjugate;
             }
 
             return sum;
@@ -764,7 +764,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// </summary>
         /// <param name="b">The other complex vector.</param>
         /// <returns>
-        /// Scalar ret = sum(this[i] * b[i])
+        /// Scalar ret = sum(this[i] * conj(b[i]))
         /// </returns>
         /// <remarks>
         /// This method has the same effect as the overloaded * operator.
@@ -801,7 +801,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// Dyadic Product of two vectors.
         /// </summary>
         /// <returns>
-        /// Matrix M[i,j] = u[i] * v[j].
+        /// ComplexMatrix M[i,j] = u[i] * conj(v[j]).
         /// </returns>
         /// <seealso cref="TensorMultiply"/>
         public static
@@ -815,7 +815,7 @@ namespace MathNet.Numerics.LinearAlgebra
             {
                 for(int j = 0; j < v.Length; j++)
                 {
-                    m[i][j] = u[i] * v[j];
+                    m[i][j] = u[i] * v[j].Conjugate;
                 }
             }
 
@@ -827,7 +827,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// </summary>
         /// <param name="b">The vector to operate on.</param>
         /// <returns>
-        /// Matrix M[i,j] = this[i] * v[j].
+        /// ComplexMatrix M[i,j] = this[i] * conj(v[j]).
         /// </returns>
         /// <seealso cref="DyadicProduct"/>
         public
