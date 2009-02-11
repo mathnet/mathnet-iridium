@@ -1199,7 +1199,7 @@ namespace MathNet.Numerics.LinearAlgebra
         #region Vector Norms
 
         /// <summary>
-        /// Euclidean Norm also known as 2-Norm.
+        /// L-2 Norm also known as Euclidean Norm.
         /// </summary>
         /// <returns>
         /// Scalar ret = sqrt(sum(this[i]*conjugate(this[i]))
@@ -1218,7 +1218,7 @@ namespace MathNet.Numerics.LinearAlgebra
         }
 
         /// <summary>
-        /// 1-Norm also known as Manhattan Norm or Taxicab Norm.
+        /// L-1 Norm also known as Manhattan Norm or Taxicab Norm.
         /// </summary>
         /// <returns>
         /// Scalar ret = sum(abs(this[i]))

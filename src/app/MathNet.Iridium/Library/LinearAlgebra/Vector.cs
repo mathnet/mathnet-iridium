@@ -813,7 +813,7 @@ namespace MathNet.Numerics.LinearAlgebra
         #region Vector Norms
 
         /// <summary>
-        /// Euclidean Norm also known as 2-Norm.
+        /// L-2 Norm, also known as Euclidean Norm.
         /// </summary>
         /// <returns>
         /// Scalar ret = sqrt(sum(this[i]^2))
@@ -851,7 +851,7 @@ namespace MathNet.Numerics.LinearAlgebra
         }
 
         /// <summary>
-        /// 1-Norm also known as Manhattan Norm or Taxicab Norm.
+        /// L-1 Norm also known as Manhattan Norm or Taxicab Norm.
         /// </summary>
         /// <returns>
         /// Scalar ret = sum(abs(this[i]))
@@ -870,7 +870,7 @@ namespace MathNet.Numerics.LinearAlgebra
         }
 
         /// <summary>
-        /// p-Norm.
+        /// L-p Norm.
         /// </summary>
         /// <returns>
         /// Scalar ret = (sum(abs(this[i])^p))^(1/p)
@@ -904,7 +904,7 @@ namespace MathNet.Numerics.LinearAlgebra
         }
 
         /// <summary>
-        /// Infinity-Norm.
+        /// L-Infinity Norm.
         /// </summary>
         /// <returns>
         /// Scalar ret = max(abs(this[i]))
@@ -923,7 +923,7 @@ namespace MathNet.Numerics.LinearAlgebra
         }
 
         /// <summary>
-        /// Normalizes this vector to a unit vector with respect to the Eucliden 2-Norm.
+        /// Normalizes this vector to a unit vector with respect to the L-2 Eucliden Norm.
         /// </summary>
         public
         Vector
