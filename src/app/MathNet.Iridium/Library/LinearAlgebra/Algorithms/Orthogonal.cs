@@ -126,5 +126,37 @@ namespace MathNet.Numerics.LinearAlgebra.Algorithms
 
             return new ComplexMatrix(m);
         }
+
+        /// <summary>
+        /// Householder Reflection: Evaluate symmetric orthogonal Q such that Q*v = -sigma*||v||*e1 
+        /// </summary>
+        public static Matrix Reflection(Vector v)
+        {
+            double sigma = v[0] >= 0 ? 1 : -1;
+
+            Vector u = v.Clone();
+            u[0] += sigma * v.Norm();
+
+            Matrix T = u.TensorMultiply(u);
+            T.Multiply(2d / u.ScalarMultiply(u));
+
+            return Matrix.Identity(v.Length, v.Length) - T;
+        }
+
+        /// <summary>
+        /// Householder Reflection: Evaluate symmetric? unitary Q such that Q*v = -sigma*||v||*e1 
+        /// </summary>
+        public static ComplexMatrix Reflection(ComplexVector v)
+        {
+            Complex sigma = v[0].Sign;
+
+            ComplexVector u = v.Clone();
+            u[0] += sigma * v.Norm();
+
+            ComplexMatrix T = u.TensorMultiply(u);
+            T.MultiplyInplace(2d / u.ScalarMultiply(u));
+
+            return ComplexMatrix.Identity(v.Length, v.Length) - T;
+        }
     }
 }

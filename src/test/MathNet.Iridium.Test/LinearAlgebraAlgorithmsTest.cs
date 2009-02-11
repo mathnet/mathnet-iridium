@@ -74,5 +74,44 @@ namespace Iridium.Test
                 NumericAssert.AreAlmostEqual(0, res[1], 1e-12, "res(2)");
             }
         }
+
+        [Test]
+        public void TestOrthogonalReflection()
+        {
+            StandardDistribution gaussian = new StandardDistribution();
+            for(int i = 0; i < 100; i++)
+            {
+                Vector v = Vector.Random(4, gaussian);
+                Matrix reflection = Orthogonal.Reflection(v);
+                Vector res = reflection * v;
+                NumericAssert.AreAlmostEqual(Matrix.Identity(4, 4), Matrix.Transpose(reflection) * reflection, "orthogonal reflection matrix");
+                NumericAssert.AreAlmostEqual(1, reflection.Norm2(), "reflection matrix norm");
+                NumericAssert.AreAlmostEqual(v.Norm(), Math.Abs(res[0]), 1e-12, "res(1)");
+                NumericAssert.AreAlmostEqual(0, res[1], 1e-12, "res(2)");
+                NumericAssert.AreAlmostEqual(0, res[2], 1e-12, "res(3)");
+                NumericAssert.AreAlmostEqual(0, res[3], 1e-12, "res(4)");
+            }
+        }
+
+        [Test]
+        public void TestOrthogonalReflectionComplex()
+        {
+            StandardDistribution gaussian = new StandardDistribution();
+            for(int i = 0; i < 100; i++)
+            {
+                ComplexVector v = new ComplexVector(new Complex[] { Complex.Random(gaussian), Complex.Random(gaussian), Complex.Random(gaussian), Complex.Random(gaussian) });
+                ComplexMatrix reflection = Orthogonal.Reflection(v);
+                ComplexVector res = reflection * v;
+                NumericAssert.AreAlmostEqual(ComplexMatrix.Identity(4, 4), reflection.HermitianTranspose() * reflection, "orthogonal reflection matrix");
+                Assert.IsTrue(reflection[0, 0].IsReal, "c1 real");
+                Assert.IsTrue(reflection[1, 1].IsReal, "c2 real");
+                Assert.IsTrue(reflection[2, 2].IsReal, "c3 real");
+                Assert.IsTrue(reflection[3, 3].IsReal, "c4 real");
+                NumericAssert.AreAlmostEqual(v.Norm(), res[0].Modulus, 1e-12, "res(1)");
+                NumericAssert.AreAlmostEqual(0, res[1], 1e-12, "res(2)");
+                NumericAssert.AreAlmostEqual(0, res[2], 1e-12, "res(3)");
+                NumericAssert.AreAlmostEqual(0, res[3], 1e-12, "res(4)");
+            }
+        }
     }
 }
