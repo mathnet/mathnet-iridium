@@ -154,6 +154,17 @@ namespace MathNet.Numerics
             }
         }
 
+        void
+        NormalizeOrder(int candidate)
+        {
+            if(candidate > order)
+            {
+                order = candidate;
+            }
+
+            NormalizeOrder();
+        }
+
         int
         FindOrder(double[] coeff)
         {
@@ -309,6 +320,8 @@ namespace MathNet.Numerics
             Polynomial polynomial1,
             Polynomial polynomial2)
         {
+            // Note: potential minor optimization: always add lower order polynomial
+            // to higher order polynomial, avoids a full array copy in some cases.
             Polynomial ret = new Polynomial(polynomial1);
             ret.AddInplace(polynomial2);
             return ret;
@@ -361,6 +374,8 @@ namespace MathNet.Numerics
             Polynomial polynomial1,
             Polynomial polynomial2)
         {
+            // Note: potential minor optimization: always subtract lower order polynomial
+            // from higher order polynomial, avoids a full array copy in some cases.
             Polynomial ret = new Polynomial(polynomial1);
             ret.SubtractInplace(polynomial2);
             return ret;
@@ -475,12 +490,14 @@ namespace MathNet.Numerics
         void
         AddInplace(Polynomial polynomial)
         {
-            EnsureSupportForOrder(polynomial.Order);
-            int len = Math.Min(order, polynomial.order) + 1;
+            EnsureSupportForOrder(polynomial.order);
+            int len = polynomial.order + 1;
             for(int i = 0; i < len; i++)
             {
                 coefficients[i] += polynomial.coefficients[i];
             }
+
+            NormalizeOrder(polynomial.order);
         }
 
         /// <summary>Add a real number inplace to this polynomial.</summary>
@@ -498,12 +515,14 @@ namespace MathNet.Numerics
         void
         SubtractInplace(Polynomial polynomial)
         {
-            EnsureSupportForOrder(polynomial.Order);
-            int len = Math.Min(order, polynomial.order) + 1;
+            EnsureSupportForOrder(polynomial.order);
+            int len = polynomial.order + 1;
             for(int i = 0; i < len; i++)
             {
                 coefficients[i] -= polynomial.coefficients[i];
             }
+
+            NormalizeOrder(polynomial.order);
         }
 
         /// <summary>Subtract a real number inplace from this polynomial.</summary>
@@ -539,6 +558,9 @@ namespace MathNet.Numerics
             {
                 coefficients[i] = c0 * coefficients[i];
             }
+
+            // zero case
+            NormalizeOrder();
         }
 
         /// <summary>

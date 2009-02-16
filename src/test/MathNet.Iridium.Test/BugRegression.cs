@@ -275,5 +275,17 @@ namespace Iridium.Test
                 NumericAssert.AreAlmostEqual(a, b, 1e-13, "Eigenvector Values: " + i.ToString());
             }
         }
+
+        [Test]
+        public void IRID203_PolynomialAddition()
+        {
+            Polynomial p1 = new Polynomial(new double[] { -1, 0, 2 });
+            Polynomial p2 = new Polynomial(new double[] { 4 });
+
+            Polynomial a = p1 + p2;
+            Polynomial b = p2 + p1;
+
+            Assert.AreEqual(a.ToString(), b.ToString());
+        }
     }
 }
