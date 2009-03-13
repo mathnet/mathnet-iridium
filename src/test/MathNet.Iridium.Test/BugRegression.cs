@@ -317,5 +317,20 @@ namespace Iridium.Test
             double left_tail = gamma_dist.InverseCumulativeDistribution(0.001);
             Assert.IsFalse(Double.IsNaN(left_tail));
         }
+
+        [Test]
+        public void IRID209_InterpolationWithThreeSamples()
+        {
+            double[] values = new double[] { 6.0, 12.0, 16.0 };
+            double[] points = new double[] { 1.0, 2.0, 3.0 };
+
+            IInterpolationMethod method2 = Interpolation.CreatePolynomial(points, values);
+            double b = method2.Interpolate(2.5);
+            Assert.IsFalse(Double.IsNaN(b), "polynomial (neville)");
+
+            IInterpolationMethod method = Interpolation.Create(points, values);
+            double a = method.Interpolate(2.5);
+            Assert.IsFalse(Double.IsNaN(a), "rational pole-free");
+        }
     }
 }
