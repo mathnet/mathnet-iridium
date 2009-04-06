@@ -36,6 +36,7 @@ using NUnit.Framework;
 using MathNet.Numerics;
 using MathNet.Numerics.LinearAlgebra;
 using MathNet.Numerics.Interpolation;
+using MathNet.Numerics.Distributions;
 
 namespace Iridium.Test
 {
@@ -286,6 +287,27 @@ namespace Iridium.Test
             Polynomial b = p2 + p1;
 
             Assert.AreEqual(a.ToString(), b.ToString());
+        }
+
+        [Test]
+        public void IRID204_GammaRegularizedSmallA()
+        {
+            NumericAssert.AreAlmostEqual(.97815275356248035867, Fn.GammaRegularized(0.1, 1.0625), 1e-13, "A");
+            NumericAssert.AreAlmostEqual(.99800133196409378795, Fn.GammaRegularized(0.01, 1.0625), 1e-13, "B");
+            NumericAssert.AreAlmostEqual(.99980203148024635861, Fn.GammaRegularized(0.001, 1.0625), 1e-13, "C");
+            NumericAssert.AreAlmostEqual(.99998022216513016030, Fn.GammaRegularized(0.0001, 1.0625), 1e-13, "D");
+
+            NumericAssert.AreAlmostEqual(.99667704526159905093, Fn.GammaRegularized(0.016512683231958761, 1.0625), 1e-13, "X");
+        }
+
+        [Test]
+        public void IRID205_GammaDistInvCdfSmallAlphaLargeTheta()
+        {
+            double alpha = 0.016512683231958761;
+            double theta = 73076944.560563684;
+            GammaDistribution gamma_dist = new GammaDistribution(alpha, theta);
+            double left_tail = gamma_dist.InverseCumulativeDistribution(0.001);
+            Assert.IsFalse(Double.IsNaN(left_tail));
         }
     }
 }
