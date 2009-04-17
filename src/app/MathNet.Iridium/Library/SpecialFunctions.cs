@@ -1361,7 +1361,7 @@ namespace MathNet.Numerics
         /// </summary>
         /// <param name="n">n >= 0</param>
         /// <remarks>
-        /// See <a http="http://en.wikipedia.org/wiki/Harmonic_Number">Wikipedia - Harmonic Number</a>
+        /// See <a href="http://en.wikipedia.org/wiki/Harmonic_Number">Wikipedia - Harmonic Number</a>
         /// </remarks>
         public static
         double
