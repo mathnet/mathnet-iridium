@@ -209,16 +209,34 @@ namespace MathNet.Numerics.RandomSources
         }
 
         /// <summary>
-        /// Returns an unsigned random number.
+        /// Returns a random number of the full Int32 range.
         /// </summary>
         /// <returns>
-        /// A 32-bit unsigned integer greater than or equal to <see cref="UInt32.MinValue"/> and 
-        ///   less than or equal to <see cref="UInt32.MaxValue"/>.
+        /// A 32-bit signed integer of the full range, including 0, negative numbers,
+        /// <see cref="Int32.MaxValue"/> and <see cref="Int32.MinValue"/>.
+        /// </returns>
+        /// <seealso cref="Next()"/>
+        public override int NextFullRangeInt32()
+        {
+            if(_i >= _longLag)
+            {
+                Fill();
+            }
+
+            return (int)_x[_i++];
+        }
+
+        /// <summary>
+        /// Returns an unsigned random number of the full UInt32 range.
+        /// </summary>
+        /// <returns>
+        /// A 32-bit unsigned integer of the full range, including 0,
+        /// <see cref="UInt32.MaxValue"/> and <see cref="UInt32.MinValue"/>.
         /// </returns>
         [CLSCompliant(false)]
         public
         uint
-        NextUInt()
+        NextFullRangeUInt32()
         {
             if(_i >= _longLag)
             {
@@ -226,6 +244,19 @@ namespace MathNet.Numerics.RandomSources
             }
 
             return _x[_i++];
+        }
+
+        /// <summary>
+        /// Obsolete, use <see cref="NextFullRangeUInt32"/> instead.
+        /// This method will be removed in future versions.
+        /// </summary>
+        [CLSCompliant(false)]
+        [Obsolete("Use NextFullRangeUInt32 instead.")]
+        public
+        uint
+        NextUInt()
+        {
+            return NextFullRangeUInt32();
         }
 
         /// <summary>

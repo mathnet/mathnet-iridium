@@ -311,16 +311,41 @@ namespace MathNet.Numerics.RandomSources
         }
 
         /// <summary>
-        /// Returns an unsigned random number.
+        /// Returns a random number of the full Int32 range.
         /// </summary>
         /// <returns>
-        /// A 32-bit unsigned integer greater than or equal to <see cref="UInt32.MinValue"/> and 
-        ///   less than or equal to <see cref="UInt32.MaxValue"/>.
+        /// A 32-bit signed integer of the full range, including 0, negative numbers,
+        /// <see cref="Int32.MaxValue"/> and <see cref="Int32.MinValue"/>.
+        /// </returns>
+        /// <seealso cref="Next()"/>
+        public override int NextFullRangeInt32()
+        {
+            if(_mti >= N)
+            {
+                // generate N words at one time
+                GenerateNUInts();
+            }
+
+            uint y = _mt[_mti++];
+
+            // Tempering
+            y ^= (y >> 11);
+            y ^= (y << 7) & 0x9d2c5680U;
+            y ^= (y << 15) & 0xefc60000U;
+            return (int)(y ^ (y >> 18));
+        }
+
+        /// <summary>
+        /// Returns an unsigned random number of the full UInt32 range.
+        /// </summary>
+        /// <returns>
+        /// A 32-bit unsigned integer of the full range, including 0,
+        /// <see cref="UInt32.MaxValue"/> and <see cref="UInt32.MinValue"/>.
         /// </returns>
         [CLSCompliant(false)]
         public
         uint
-        NextUInt()
+        NextFullRangeUInt32()
         {
             if(_mti >= N)
             {
@@ -335,6 +360,19 @@ namespace MathNet.Numerics.RandomSources
             y ^= (y << 7) & 0x9d2c5680U;
             y ^= (y << 15) & 0xefc60000U;
             return y ^ (y >> 18);
+        }
+
+        /// <summary>
+        /// Obsolete, use <see cref="NextFullRangeUInt32"/> instead.
+        /// This method will be removed in future versions.
+        /// </summary>
+        [CLSCompliant(false)]
+        [Obsolete("Use NextFullRangeUInt32 instead.")]
+        public
+        uint
+        NextUInt()
+        {
+            return NextFullRangeUInt32();
         }
 
         /// <summary>

@@ -169,22 +169,53 @@ namespace MathNet.Numerics.RandomSources
         }
 
         /// <summary>
-        /// Returns an unsigned random number.
+        /// Returns a random number of the full Int32 range.
         /// </summary>
         /// <returns>
-        /// A 32-bit unsigned integer greater than or equal to <see cref="UInt32.MinValue"/> and 
-        ///   less than or equal to <see cref="UInt32.MaxValue"/>.
+        /// A 32-bit signed integer of the full range, including 0, negative numbers,
+        /// <see cref="Int32.MaxValue"/> and <see cref="Int32.MinValue"/>.
+        /// </returns>
+        /// <seealso cref="Next()"/>
+        public override int NextFullRangeInt32()
+        {
+            uint t = (_x ^ (_x << 11));
+            _x = _y;
+            _y = _z;
+            _z = _w;
+            _w = (_w ^ (_w >> 19)) ^ (t ^ (t >> 8));
+            return (int)_w;
+        }
+
+        /// <summary>
+        /// Returns an unsigned random number of the full UInt32 range.
+        /// </summary>
+        /// <returns>
+        /// A 32-bit unsigned integer of the full range, including 0,
+        /// <see cref="UInt32.MaxValue"/> and <see cref="UInt32.MinValue"/>.
         /// </returns>
         [CLSCompliant(false)]
         public
         uint
-        NextUInt()
+        NextFullRangeUInt32()
         {
             uint t = (_x ^ (_x << 11));
             _x = _y;
             _y = _z;
             _z = _w;
             return _w = (_w ^ (_w >> 19)) ^ (t ^ (t >> 8));
+        }
+
+        /// <summary>
+        /// Obsolete, use <see cref="NextFullRangeUInt32"/> instead.
+        /// This method will be removed in future versions.
+        /// </summary>
+        [CLSCompliant(false)]
+        [Obsolete("Use NextFullRangeUInt32 instead.")]
+        public
+        uint
+        NextUInt()
+        {
+            return NextFullRangeUInt32();
         }
 
         /// <summary>
@@ -198,7 +229,7 @@ namespace MathNet.Numerics.RandomSources
         int
         NextInclusiveMaxValue()
         {
-            // Its faster to explicitly calculate the unsigned random number than simply call NextUInt().
+            // Its faster to explicitly calculate the unsigned random number than simply call NextFullRangeUInt32().
             uint t = (_x ^ (_x << 11));
             _x = _y;
             _y = _z;
@@ -219,7 +250,7 @@ namespace MathNet.Numerics.RandomSources
         int
         Next()
         {
-            // Its faster to explicitly calculate the unsigned random number than simply call NextUInt().
+            // Its faster to explicitly calculate the unsigned random number than simply call NextFullRangeUInt32().
             uint t = (_x ^ (_x << 11));
             _x = _y;
             _y = _z;
@@ -265,7 +296,7 @@ namespace MathNet.Numerics.RandomSources
                     Properties.LocalStrings.ArgumentOutOfRangeGreaterEqual("maxValue", 0));
             }
 
-            // Its faster to explicitly calculate the unsigned random number than simply call NextUInt().
+            // Its faster to explicitly calculate the unsigned random number than simply call NextFullRangeUInt32().
             uint t = (_x ^ (_x << 11));
             _x = _y;
             _y = _z;
@@ -308,7 +339,7 @@ namespace MathNet.Numerics.RandomSources
                     Properties.LocalStrings.ArgumentOutOfRangeGreaterEqual("maxValue", "minValue"));
             }
 
-            // Its faster to explicitly calculate the unsigned random number than simply call NextUInt().
+            // Its faster to explicitly calculate the unsigned random number than simply call NextFullRangeUInt32().
             uint t = (_x ^ (_x << 11));
             _x = _y;
             _y = _z;
@@ -342,7 +373,7 @@ namespace MathNet.Numerics.RandomSources
         double
         NextDouble()
         {
-            // Its faster to explicitly calculate the unsigned random number than simply call NextUInt().
+            // Its faster to explicitly calculate the unsigned random number than simply call NextFullRangeUInt32().
             uint t = (_x ^ (_x << 11));
             _x = _y;
             _y = _z;
@@ -383,7 +414,7 @@ namespace MathNet.Numerics.RandomSources
                     Properties.LocalStrings.ArgumentOutOfRangeGreaterEqual("maxValue", 0));
             }
 
-            // Its faster to explicitly calculate the unsigned random number than simply call NextUInt().
+            // Its faster to explicitly calculate the unsigned random number than simply call NextFullRangeUInt32().
             uint t = (_x ^ (_x << 11));
             _x = _y;
             _y = _z;
@@ -441,7 +472,7 @@ namespace MathNet.Numerics.RandomSources
                 throw new ArgumentException(Properties.LocalStrings.ArgumentRangeLessEqual("minValue", "maxValue", "Double.MaxValue"));
             }
 
-            // Its faster to explicitly calculate the unsigned random number than simply call NextUInt().
+            // Its faster to explicitly calculate the unsigned random number than simply call NextFullRangeUInt32().
             uint t = (_x ^ (_x << 11));
             _x = _y;
             _y = _z;
@@ -469,7 +500,7 @@ namespace MathNet.Numerics.RandomSources
             if(_bitCount == 0)
             {
                 // Generate 32 more bits (1 uint) and store it for future calls.
-                // Its faster to explicitly calculate the unsigned random number than simply call NextUInt().
+                // Its faster to explicitly calculate the unsigned random number than simply call NextFullRangeUInt32().
                 uint t = (_x ^ (_x << 11));
                 _x = _y;
                 _y = _z;
@@ -517,7 +548,7 @@ namespace MathNet.Numerics.RandomSources
             uint t;
             while(i < buffer.Length - 3)
             {
-                // Its faster to explicitly calculate the unsigned random number than simply call NextUInt().
+                // Its faster to explicitly calculate the unsigned random number than simply call NextFullRangeUInt32().
                 t = (x ^ (x << 11));
                 x = y;
                 y = z;
@@ -533,7 +564,7 @@ namespace MathNet.Numerics.RandomSources
             // Fill up any remaining bytes in the buffer.
             if(i < buffer.Length)
             {
-                // Its faster to explicitly calculate the unsigned random number than simply call NextUInt().
+                // Its faster to explicitly calculate the unsigned random number than simply call NextFullRangeUInt32().
                 t = (x ^ (x << 11));
                 x = y;
                 y = z;
