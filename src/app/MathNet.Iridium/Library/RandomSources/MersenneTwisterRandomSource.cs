@@ -79,13 +79,13 @@ namespace MathNet.Numerics.RandomSources
         /// Represents the multiplier that computes a double-precision floating point number greater than or equal to 0.0 
         ///   and less than 1.0 when it gets applied to a nonnegative 32-bit signed integer.
         /// </summary>
-        const double IntToDoubleMultiplier = 1.0 / ((double)int.MaxValue + 1.0);
+        const double IntToDoubleMultiplier = 1.0 / ((double)Int32.MaxValue + 1.0);
 
         /// <summary>
         /// Represents the multiplier that computes a double-precision floating point number greater than or equal to 0.0 
         ///   and less than 1.0  when it gets applied to a 32-bit unsigned integer.
         /// </summary>
-        const double UIntToDoubleMultiplier = 1.0 / ((double)uint.MaxValue + 1.0);
+        const double UIntToDoubleMultiplier = 1.0 / ((double)UInt32.MaxValue + 1.0);
 
         /// <summary>
         /// Stores the state vector array.
@@ -318,7 +318,9 @@ namespace MathNet.Numerics.RandomSources
         /// <see cref="Int32.MaxValue"/> and <see cref="Int32.MinValue"/>.
         /// </returns>
         /// <seealso cref="Next()"/>
-        public override int NextFullRangeInt32()
+        public override
+        int
+        NextFullRangeInt32()
         {
             if(_mti >= N)
             {

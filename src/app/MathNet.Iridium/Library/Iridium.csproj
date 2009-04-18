@@ -120,6 +120,7 @@
     <Compile Include="LinearAlgebra\Vector.cs" />
     <Compile Include="NumberTheory\IntegerTheory.cs" />
     <Compile Include="Properties\LocalStrings.cs" />
+    <Compile Include="RandomSources\CryptographicRandomSource.cs" />
     <Compile Include="Sorting.cs" />
     <Compile Include="OnDemandComputation.cs" />
     <Compile Include="RandomSources\AdditiveLaggedFibonacciRandomSource.cs" />
