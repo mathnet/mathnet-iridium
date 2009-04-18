@@ -51,6 +51,7 @@ namespace MathNet.Numerics.RandomSources
         /// A 32-bit signed integer greater than or equal to 0, and less than <see cref="Int32.MaxValue"/>; that is, 
         ///   the range of return values includes 0 but not <paramref name="Int32.MaxValue"/>.
         /// </returns>
+        /// <seealso cref="NextFullRangeInt32()"/>
         public abstract
         int
         Next();
@@ -90,12 +91,37 @@ namespace MathNet.Numerics.RandomSources
         Next(int minValue, int maxValue);
 
         /// <summary>
+        /// Returns a nonnegative random number less than <see cref="Int64.MaxValue"/>.
+        /// </summary>
+        /// <returns>
+        /// A 64-bit signed integer greater than or equal to 0, and less than <see cref="Int64.MaxValue"/>; that is, 
+        /// the range of return values includes 0 but not <paramref name="Int64.MaxValue"/>.
+        /// </returns>
+        /// <seealso cref="NextFullRangeInt64()"/>
+        public virtual
+        long
+        NextInt64()
+        {
+            byte[] buffer = new byte[sizeof(Int64)];
+            NextBytes(buffer);
+            long candidate = BitConverter.ToInt64(buffer, 0);
+
+            // wrap negative numbers around, mapping every negative number to a distinct nonnegative number
+            // MinValue -> 0, -1 -> MaxValue
+            candidate &= Int64.MaxValue;
+
+            // skip candidate if it is MaxValue. Recursive since rare.
+            return (candidate == Int64.MaxValue) ? NextInt64() : candidate;
+        }
+
+        /// <summary>
         /// Returns a random number of the full Int32 range.
         /// </summary>
         /// <returns>
         /// A 32-bit signed integer of the full range, including 0, negative numbers,
         /// <see cref="Int32.MaxValue"/> and <see cref="Int32.MinValue"/>.
         /// </returns>
+        /// <seealso cref="Next()"/>
         public virtual
         int
         NextFullRangeInt32()
@@ -112,6 +138,7 @@ namespace MathNet.Numerics.RandomSources
         /// A 64-bit signed integer of the full range, including 0, negative numbers,
         /// <see cref="Int64.MaxValue"/> and <see cref="Int64.MinValue"/>.
         /// </returns>
+        /// <seealso cref="NextInt64()"/>
         public virtual
         long
         NextFullRangeInt64()
