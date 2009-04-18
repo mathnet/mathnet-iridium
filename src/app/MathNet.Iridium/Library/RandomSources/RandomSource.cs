@@ -198,6 +198,36 @@ namespace MathNet.Numerics.RandomSources
         NextDouble(double minValue, double maxValue);
 
         /// <summary>
+        /// Returns a nonnegative decimal floating point random number less than 1.0.
+        /// </summary>
+        /// <returns>
+        /// A decimal floating point number greater than or equal to 0.0, and less than 1.0; that is, 
+        /// the range of return values includes 0.0 but not 1.0.
+        /// </returns>
+        public virtual
+        decimal
+        NextDecimal()
+        {
+            decimal candidate;
+
+            // 50.049 % chance that the number is below 1.0. Try until we have one.
+            // Guarantees that any decimal in the interval can
+            // indeed be reached, with uniform probability.
+            do
+            {
+                candidate = new Decimal(
+                    NextFullRangeInt32(),
+                    NextFullRangeInt32(),
+                    NextFullRangeInt32(),
+                    false,
+                    28);
+            }
+            while(candidate >= 1.0m);
+
+            return candidate;
+        }
+
+        /// <summary>
         /// Returns a random Boolean value.
         /// </summary>
         /// <remarks>
