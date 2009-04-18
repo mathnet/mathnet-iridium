@@ -90,6 +90,38 @@ namespace MathNet.Numerics.RandomSources
         Next(int minValue, int maxValue);
 
         /// <summary>
+        /// Returns a random number of the full Int32 range.
+        /// </summary>
+        /// <returns>
+        /// A 32-bit signed integer of the full range, including 0, negative numbers,
+        /// <see cref="Int32.MaxValue"/> and <see cref="Int32.MinValue"/>.
+        /// </returns>
+        public virtual
+        int
+        NextFullRangeInt32()
+        {
+            byte[] buffer = new byte[sizeof(Int32)];
+            NextBytes(buffer);
+            return BitConverter.ToInt32(buffer, 0);
+        }
+
+        /// <summary>
+        /// Returns a random number of the full Int64 range.
+        /// </summary>
+        /// <returns>
+        /// A 64-bit signed integer of the full range, including 0, negative numbers,
+        /// <see cref="Int64.MaxValue"/> and <see cref="Int64.MinValue"/>.
+        /// </returns>
+        public virtual
+        long
+        NextFullRangeInt64()
+        {
+            byte[] buffer = new byte[sizeof(Int64)];
+            NextBytes(buffer);
+            return BitConverter.ToInt64(buffer, 0);
+        }
+
+        /// <summary>
         /// Returns a nonnegative floating point random number less than 1.0.
         /// </summary>
         /// <returns>
