@@ -65,12 +65,11 @@ namespace MathNet.Numerics.RandomSources
         int _bitCount;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SystemRandomSource"/> class, using a time-dependent default 
-        ///   seed value.
+        /// Initializes a new instance of the <see cref="SystemRandomSource"/> class, using a generated GUID as seed value.
         /// </summary>
         public
         SystemRandomSource()
-            : this(Environment.TickCount)
+            : this(Guid.NewGuid().GetHashCode())
         {
         }
 
