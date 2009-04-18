@@ -174,7 +174,7 @@ namespace MathNet.Numerics.RandomSources
             _x = new uint[_longLag];
             for(uint j = 0; j < _longLag; ++j)
             {
-                _x[j] = gen.NextUInt();
+                _x[j] = gen.NextFullRangeUInt32();
             }
 
             _i = _longLag;
