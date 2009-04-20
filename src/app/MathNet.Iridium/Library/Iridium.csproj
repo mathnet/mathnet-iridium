@@ -121,6 +121,7 @@
     <Compile Include="NumberTheory\IntegerTheory.cs" />
     <Compile Include="Properties\LocalStrings.cs" />
     <Compile Include="RandomSources\CryptographicRandomSource.cs" />
+    <Compile Include="RandomSources\OjectModel\RandomByteSourceAdapter.cs" />
     <Compile Include="Sorting.cs" />
     <Compile Include="OnDemandComputation.cs" />
     <Compile Include="RandomSources\AdditiveLaggedFibonacciRandomSource.cs" />
