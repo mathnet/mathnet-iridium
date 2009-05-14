@@ -36,6 +36,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
+using MathNet.Numerics.SpecialFunctions.Algorithms;
+
 namespace MathNet.Numerics
 {
     /// <summary>
@@ -653,27 +655,7 @@ namespace MathNet.Numerics
         double
         GammaLn(double a)
         {
-            double x, y, ser, temp;
-            double[] coefficient = new double[] {
-                76.18009172947146,
-                -86.50532032941677,
-                24.01409824083091,
-                -1.231739572450155,
-                0.1208650973866179e-2,
-                -0.5395239384953e-5
-                };
-
-            y = x = a;
-            temp = x + 5.5;
-            temp -= ((x + 0.5) * Math.Log(temp));
-            ser = 1.000000000190015;
-
-            for(int j = 0; j <= 5; j++)
-            {
-                ser += (coefficient[j] / ++y);
-            }
-
-            return -temp + Math.Log(2.5066282746310005 * ser / x);
+            return GammaAlgorithm.GammaLn(a);
         }
 
         /// <summary>
@@ -685,20 +667,7 @@ namespace MathNet.Numerics
         double
         Gamma(double a)
         {
-            if(a > 0.0)
-            {
-                return Math.Exp(GammaLn(a));
-            }
-
-            double reflection = 1.0 - a;
-            double s = Math.Sin(Math.PI * reflection);
-
-            if(Number.AlmostEqual(0.0, s))
-            {
-                return double.NaN; // singularity, undefined
-            }
-
-            return Math.PI / (s * Math.Exp(GammaLn(reflection)));
+            return GammaAlgorithm.Gamma(a);
         }
 
         /// <summary>
@@ -709,7 +678,12 @@ namespace MathNet.Numerics
         double
         IncompleteGammaRegularized(double a, double x)
         {
-            return GammaRegularized(a, x);
+            if(a < 0d || x < 0d)
+            {
+                throw new ArgumentOutOfRangeException("a,x", Properties.LocalStrings.ArgumentNotNegative);
+            }
+
+            return GammaRegularizedAlgorithm.GammaRegularized(a, x);
         }
 
         /// <summary>
@@ -720,99 +694,12 @@ namespace MathNet.Numerics
         double
         GammaRegularized(double a, double x)
         {
-            const int MaxIterations = 100;
-            double eps = Number.RelativeAccuracy;
-            double fpmin = Number.SmallestNumberGreaterThanZero / eps;
-
             if(a < 0d || x < 0d)
             {
                 throw new ArgumentOutOfRangeException("a,x", Properties.LocalStrings.ArgumentNotNegative);
             }
 
-            if(Number.AlmostZero(a))
-            {
-                if(Number.AlmostZero(x))
-                {
-                    // either 0 or 1, depending on the limit direction
-                    return Double.NaN;
-                }
-
-                return 1d;
-            }
-
-            if(Number.AlmostZero(x))
-            {
-                return 0d;
-            }
-
-            double gln = GammaLn(a);
-            if(x < a + 1d)
-            {
-                /* Series Representation */
-
-                if(x <= 0d)
-                {
-                    /* Yes, I know we've already checked for x<0.0 */
-
-                    return 0d;
-                }
-                else
-                {
-                    double ap = a;
-                    double del, sum = del = 1.0 / a;
-
-                    for(int n = 0; n < MaxIterations; n++)
-                    {
-                        ++ap;
-                        del *= x / ap;
-                        sum += del;
-
-                        if(Math.Abs(del) < Math.Abs(sum) * eps)
-                        {
-                            return sum * Math.Exp(-x + (a * Math.Log(x)) - gln);
-                        }
-                    }
-                }
-            }
-            else
-            {
-                /* Continued fraction representation */
-
-                double b = x + 1.0 - a;
-                double c = 1.0 / fpmin;
-                double d = 1.0 / b;
-                double h = d;
-
-                for(int i = 1; i <= MaxIterations; i++)
-                {
-                    double an = -i * (i - a);
-                    b += 2.0;
-                    d = (an * d) + b;
-
-                    if(Math.Abs(d) < fpmin)
-                    {
-                        d = fpmin;
-                    }
-
-                    c = b + (an / c);
-
-                    if(Math.Abs(c) < fpmin)
-                    {
-                        c = fpmin;
-                    }
-
-                    d = 1.0 / d;
-                    double del = d * c;
-                    h *= del;
-
-                    if(Math.Abs(del - 1.0) <= eps)
-                    {
-                        return 1.0 - (Math.Exp(-x + (a * Math.Log(x)) - gln) * h);
-                    }
-                }
-            }
-
-            throw new ArgumentException(Properties.LocalStrings.ArgumentTooLargeForIterationLimit, "a");
+            return GammaRegularizedAlgorithm.GammaRegularized(a, x);
         }
 
         /// <summary>
@@ -824,182 +711,7 @@ namespace MathNet.Numerics
         double
         InverseGammaRegularized(double a, double y0)
         {
-            // TODO: Consider to throw an out-of-range exception instead of NaN
-
-            if(a < 0 || Number.AlmostZero(a) || y0 < 0 || y0 > 1)
-            {
-                return Double.NaN;
-            }
-
-            if(Number.AlmostZero(y0))
-            {
-                return 0d;
-            }
-
-            if(Number.AlmostEqual(y0, 1))
-            {
-                return Double.PositiveInfinity;
-            }
-
-            y0 = 1 - y0;
-
-            const double epsilon = 0.000000000000001;
-            const double big = 4503599627370496.0;
-            const double threshold = 5 * epsilon;
-
-            double xUpper = big;
-            double xLower = 0;
-            double yUpper = 1;
-            double yLower = 0;
-
-            // Initial Guess
-            double d = 1 / (9 * a);
-            double y = 1 - d - 0.98 * Constants.Sqrt2 * Fn.ErfInverse((2.0 * y0) - 1.0) * Math.Sqrt(d);
-            double x = a * y * y * y;
-            double lgm = GammaLn(a);
-
-            for(int i = 0; i < 10; i++)
-            {
-                if(x < xLower || x > xUpper)
-                {
-                    d = 0.0625;
-                    break;
-                }
-
-                y = 1 - GammaRegularized(a, x);
-                if(y < yLower || y > yUpper)
-                {
-                    d = 0.0625;
-                    break;
-                }
-
-                if(y < y0)
-                {
-                    xUpper = x;
-                    yLower = y;
-                }
-                else
-                {
-                    xLower = x;
-                    yUpper = y;
-                }
-
-                d = (a - 1) * Math.Log(x) - x - lgm;
-                if(d < -709.78271289338399)
-                {
-                    d = 0.0625;
-                    break;
-                }
-
-                d = -Math.Exp(d);
-                d = (y - y0) / d;
-                if(Math.Abs(d / x) < epsilon)
-                {
-                    return x;
-                }
-
-                if((d > (x / 4)) && (y0 < 0.05))
-                {
-                    // Naive heuristics for cases near the singularity
-                    d = x / 10;
-                }
-
-                x -= d;
-            }
-
-            if(xUpper == big)
-            {
-                if(x <= 0)
-                {
-                    x = 1;
-                }
-
-                while(xUpper == big)
-                {
-                    x = (1 + d) * x;
-                    y = 1 - GammaRegularized(a, x);
-                    if(y < y0)
-                    {
-                        xUpper = x;
-                        yLower = y;
-                        break;
-                    }
-                    d = d + d;
-                }
-            }
-
-            int dir = 0;
-            d = 0.5;
-            for(int i = 0; i < 400; i++)
-            {
-                x = xLower + d * (xUpper - xLower);
-                y = 1 - GammaRegularized(a, x);
-                lgm = (xUpper - xLower) / (xLower + xUpper);
-                if(Math.Abs(lgm) < threshold)
-                {
-                    return x;
-                }
-
-                lgm = (y - y0) / y0;
-                if(Math.Abs(lgm) < threshold)
-                {
-                    return x;
-                }
-
-                if(x <= 0d)
-                {
-                    return 0d;
-                }
-
-                if(y >= y0)
-                {
-                    xLower = x;
-                    yUpper = y;
-                    if(dir < 0)
-                    {
-                        dir = 0;
-                        d = 0.5;
-                    }
-                    else
-                    {
-                        if(dir > 1)
-                        {
-                            d = 0.5 * d + 0.5;
-                        }
-                        else
-                        {
-                            d = (y0 - yLower) / (yUpper - yLower);
-                        }
-                    }
-
-                    dir = dir + 1;
-                }
-                else
-                {
-                    xUpper = x;
-                    yLower = y;
-                    if(dir > 0)
-                    {
-                        dir = 0;
-                        d = 0.5;
-                    }
-                    else
-                    {
-                        if(dir < -1)
-                        {
-                            d = 0.5 * d;
-                        }
-                        else
-                        {
-                            d = (y0 - yLower) / (yUpper - yLower);
-                        }
-                    }
-
-                    dir = dir - 1;
-                }
-            }
-
-            return x;
+            return GammaRegularizedAlgorithm.InverseGammaRegularized(a, y0);
         }
 
         #endregion
@@ -1014,90 +726,7 @@ namespace MathNet.Numerics
         double
         Digamma(double x)
         {
-            double y = 0;
-            double nz = 0.0;
-            bool negative = (x <= 0);
-
-            if(negative)
-            {
-                double q = x;
-                double p = Math.Floor(q);
-                negative = true;
-
-                if(Number.AlmostEqual(p, q))
-                {
-                    return double.NaN; // singularity, undefined
-                }
-
-                nz = q - p;
-
-                if(nz != 0.5)
-                {
-                    if(nz > 0.5)
-                    {
-                        p = p + 1.0;
-                        nz = q - p;
-                    }
-
-                    nz = Math.PI / Math.Tan(Math.PI * nz);
-                }
-                else
-                {
-                    nz = 0.0;
-                }
-
-                x = 1.0 - x;
-            }
-
-            if((x <= 10.0) && (x == Math.Floor(x)))
-            {
-                y = 0.0;
-                int n = (int)Math.Floor(x);
-
-                for(int i = 1; i <= n - 1; i++)
-                {
-                    y = y + (1.0 / i);
-                }
-
-                y = y - Constants.EulerGamma;
-            }
-            else
-            {
-                double s = x;
-                double w = 0.0;
-
-                while(s < 10.0)
-                {
-                    w = w + (1.0 / s);
-                    s = s + 1.0;
-                }
-
-                if(s < 1.0e17)
-                {
-                    double z = 1.0 / (s * s);
-                    double polv = 8.33333333333333333333e-2;
-                    polv = (polv * z) - 2.10927960927960927961e-2;
-                    polv = (polv * z) + 7.57575757575757575758e-3;
-                    polv = (polv * z) - 4.16666666666666666667e-3;
-                    polv = (polv * z) + 3.96825396825396825397e-3;
-                    polv = (polv * z) - 8.33333333333333333333e-3;
-                    polv = (polv * z) + 8.33333333333333333333e-2;
-                    y = z * polv;
-                }
-                else
-                {
-                    y = 0.0;
-                }
-
-                y = Math.Log(s) - (0.5 / s) - y - w;
-            }
-
-            if(negative)
-            {
-                return y - nz;
-            }
-
-            return y;
+            return DigammaAlgorithm.Digamma(x);
         }
 
         #endregion
@@ -1137,7 +766,17 @@ namespace MathNet.Numerics
             double b,
             double x)
         {
-            return BetaRegularized(a, b, x);
+            if(a < 0.0 || b < 0.0)
+            {
+                throw new ArgumentOutOfRangeException("a,b", Properties.LocalStrings.ArgumentNotNegative);
+            }
+
+            if(x < 0.0 || x > 1.0)
+            {
+                throw new ArgumentOutOfRangeException("x", Properties.LocalStrings.ArgumentInIntervalXYInclusive(0, 1));
+            }
+
+            return BetaRegularizedAlgorithm.BetaRegularized(a, b, x);
         }
 
         /// <summary>
@@ -1161,89 +800,7 @@ namespace MathNet.Numerics
                 throw new ArgumentOutOfRangeException("x", Properties.LocalStrings.ArgumentInIntervalXYInclusive(0, 1));
             }
 
-            double bt = (x == 0.0 || x == 1.0)
-                ? 0.0
-                : Math.Exp(GammaLn(a + b) - GammaLn(a) - GammaLn(b) + (a * Math.Log(x)) + (b * Math.Log(1.0 - x)));
-
-            bool symmetryTransformation = (x >= (a + 1.0) / (a + b + 2.0));
-
-            /* Continued fraction representation */
-
-            const int MaxIterations = 100;
-            double eps = Number.RelativeAccuracy;
-            double fpmin = Number.SmallestNumberGreaterThanZero / eps;
-
-            if(symmetryTransformation)
-            {
-                x = 1.0 - x;
-                double swap = a;
-                a = b;
-                b = swap;
-            }
-
-            double qab = a + b;
-            double qap = a + 1.0;
-            double qam = a - 1.0;
-            double c = 1.0;
-            double d = 1.0 - (qab * x / qap);
-
-            if(Math.Abs(d) < fpmin)
-            {
-                d = fpmin;
-            }
-
-            d = 1.0 / d;
-            double h = d;
-
-            for(int m = 1, m2 = 2; m <= MaxIterations; m++, m2 += 2)
-            {
-                double aa = m * (b - m) * x / ((qam + m2) * (a + m2));
-                d = 1.0 + (aa * d);
-
-                if(Math.Abs(d) < fpmin)
-                {
-                    d = fpmin;
-                }
-
-                c = 1.0 + (aa / c);
-                if(Math.Abs(c) < fpmin)
-                {
-                    c = fpmin;
-                }
-
-                d = 1.0 / d;
-                h *= d * c;
-                aa = -(a + m) * (qab + m) * x / ((a + m2) * (qap + m2));
-                d = 1.0 + (aa * d);
-
-                if(Math.Abs(d) < fpmin)
-                {
-                    d = fpmin;
-                }
-
-                c = 1.0 + (aa / c);
-
-                if(Math.Abs(c) < fpmin)
-                {
-                    c = fpmin;
-                }
-
-                d = 1.0 / d;
-                double del = d * c;
-                h *= del;
-
-                if(Math.Abs(del - 1.0) <= eps)
-                {
-                    if(symmetryTransformation)
-                    {
-                        return 1.0 - (bt * h / a);
-                    }
-
-                    return bt * h / a;
-                }
-            }
-
-            throw new ArgumentException(Properties.LocalStrings.ArgumentTooLargeForIterationLimit, "a,b");
+            return BetaRegularizedAlgorithm.BetaRegularized(a, b, x);
         }
 
         #endregion

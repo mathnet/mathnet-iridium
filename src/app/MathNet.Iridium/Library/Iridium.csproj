@@ -153,6 +153,10 @@
     <Compile Include="SiConstants.cs" />
     <Compile Include="SiPrefixes.cs" />
     <Compile Include="SpecialFunctions.cs" />
+    <Compile Include="SpecialFunctions\Algorithms\BetaRegularizedAlgorithm.cs" />
+    <Compile Include="SpecialFunctions\Algorithms\DigammaAlgorithm.cs" />
+    <Compile Include="SpecialFunctions\Algorithms\GammaAlgorithm.cs" />
+    <Compile Include="SpecialFunctions\Algorithms\GammaRegularizedAlgorithm.cs" />
     <Compile Include="Statistics\Accumulator.cs" />
     <Compile Include="Statistics\DescriptiveStatistics.cs" />
     <Compile Include="Statistics\Histogram.cs" />
