@@ -63,36 +63,111 @@ namespace MathNet.Numerics.SpecialFunctions.Algorithms
         }
 
         /// <summary>
-        /// Returns the natural logarithm of Gamma for a real value &gt; 0.
+        /// Returns the natural logarithm of the absolute of the Gamma function for real values.
         /// </summary>
-        /// <returns>A value ln|Gamma(a))| for a &gt; 0</returns>
+        /// <remarks>Positive infinite at all non-positive integers.</remarks>
+        /// <returns>A value ln|Gamma(a)|.</returns>
         public static
         double
-        GammaLn(double a)
+        GammaLn(double x)
         {
-            double x, y, ser, temp;
-            double[] coefficient = new double[] {
-                76.18009172947146,
-                -86.50532032941677,
-                24.01409824083091,
-                -1.231739572450155,
-                0.1208650973866179e-2,
-                -0.5395239384953e-5
-                };
-
-            y = x = a;
-            temp = x + 5.5;
-            temp -= ((x + 0.5) * Math.Log(temp));
-            ser = 1.000000000190015;
-
-            for(int j = 0; j <= 5; j++)
+            if(x < -34.0)
             {
-                ser += (coefficient[j] / ++y);
+                // Reflection to positive range
+                double y = -x;
+                double decimalPart = y - Math.Floor(y);
+                double z = y * Math.Sin(Math.PI * decimalPart);
+                return Constants.LnPi - Math.Log(z) - GammaLnLargePositive(y);
             }
 
-            return -temp + Math.Log(2.5066282746310005 * ser / x);
+            if(x < 13)
+            {
+                return GammaLnSmall(x);
+            }
+
+            return GammaLnLargePositive(x);
         }
 
+        static double GammaLnSmall(double x)
+        {
+            double z = 1;
 
+            // normalize to interval [2..3) by incr/decr, build z
+            double normalized = x;
+            double offset = 0;
+
+            while(normalized >= 3)
+            {
+                offset--;
+                normalized = x + offset;
+                z *= normalized;
+            }
+
+            while(normalized < 2)
+            {
+                z /= normalized;
+                offset++;
+                normalized = x + offset;
+            }
+
+            if(z < 0)
+            {
+                z = -z;
+            }
+
+            // integer case
+            if(normalized == 2)
+            {
+                return Math.Log(z);
+            }
+
+            // normalize x to range [0..1) by incr/decr
+            x = x + offset - 2;
+
+            double b = -1378.25152569120859100;
+            b = -38801.6315134637840924 + (x * b);
+            b = -331612.992738871184744 + (x * b);
+            b = -1162370.97492762307383 + (x * b);
+            b = -1721737.00820839662146 + (x * b);
+            b = -853555.664245765465627 + (x * b);
+
+            double c = 1;
+            c = -351.815701436523470549 + (x * c);
+            c = -17064.2106651881159223 + (x * c);
+            c = -220528.590553854454839 + (x * c);
+            c = -1139334.44367982507207 + (x * c);
+            c = -2532523.07177582951285 + (x * c);
+            c = -2018891.41433532773231 + (x * c);
+
+            return Math.Log(z) + (x * b / c);
+        }
+
+        static double GammaLnLargePositive(double x)
+        {
+            // Stirling
+            double q = (x - 0.5) * Math.Log(x) - x + Constants.Ln2Pi_2;
+            if(x > 100000000)
+            {
+                return q;
+            }
+
+            double p = 1 / (x * x);
+            if(x >= 1000.0)
+            {
+                double a = 7.9365079365079365079365e-4;
+                a = -2.7777777777777777777778e-3 + (p * a);
+                a = 0.0833333333333333333333 + (p * a);
+
+                return q + (a / x);
+            }
+
+            double b = 8.11614167470508450300e-4;
+            b = -5.95061904284301438324e-4 + (p * b);
+            b = 7.93650340457716943945e-4 + (p * b);
+            b = -2.77777777730099687205e-3 + (p * b);
+            b = 8.33333333333331927722e-2 + (p * b);
+
+            return q + (b / x);
+        }
     }
 }

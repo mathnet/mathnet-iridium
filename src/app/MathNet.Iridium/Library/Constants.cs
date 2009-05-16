@@ -58,6 +58,9 @@ namespace MathNet.Numerics
         /// <summary>log[e](pi)</summary>
         public const double LnPi = 1.1447298858494001741434273513530587116472948129153d;
 
+        /// <summary>log[e](2*pi)/2</summary>
+        public const double Ln2Pi_2 = 0.91893853320467274178032973640561763986139747363780d;
+
         /// <summary>1/e</summary>
         public const double InvE = 0.36787944117144232159552377016146086744581113103176d;
 
