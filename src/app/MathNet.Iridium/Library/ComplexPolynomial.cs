@@ -165,6 +165,17 @@ namespace MathNet.Numerics
             }
         }
 
+        void
+        NormalizeOrder(int candidate)
+        {
+            if(candidate > order)
+            {
+                order = candidate;
+            }
+
+            NormalizeOrder();
+        }
+
         int
         FindOrder(Complex[] coeff)
         {
@@ -466,6 +477,8 @@ namespace MathNet.Numerics
             ComplexPolynomial polynomial1,
             ComplexPolynomial polynomial2)
         {
+            // Note: potential minor optimization: always add lower order polynomial
+            // to higher order polynomial, avoids a full array copy in some cases.
             ComplexPolynomial ret = new ComplexPolynomial(polynomial1);
             ret.AddInplace(polynomial2);
             return ret;
@@ -574,6 +587,8 @@ namespace MathNet.Numerics
             ComplexPolynomial polynomial1,
             ComplexPolynomial polynomial2)
         {
+            // Note: potential minor optimization: always subtract lower order polynomial
+            // from higher order polynomial, avoids a full array copy in some cases.
             ComplexPolynomial ret = new ComplexPolynomial(polynomial1);
             ret.SubtractInplace(polynomial2);
             return ret;
@@ -816,12 +831,14 @@ namespace MathNet.Numerics
         void
         AddInplace(ComplexPolynomial polynomial)
         {
-            EnsureSupportForOrder(polynomial.Order);
-            int len = Math.Min(order, polynomial.order) + 1;
+            EnsureSupportForOrder(polynomial.order);
+            int len = polynomial.order + 1;
             for(int i = 0; i < len; i++)
             {
                 coefficients[i] += polynomial.coefficients[i];
             }
+
+            NormalizeOrder(polynomial.order);
         }
 
         /// <summary>Add a real polynomial inplace to this polynomial.</summary>
@@ -831,11 +848,13 @@ namespace MathNet.Numerics
         AddInplace(Polynomial polynomial)
         {
             EnsureSupportForOrder(polynomial.Order);
-            int len = Math.Min(order, polynomial.Order) + 1;
+            int len = polynomial.Order + 1;
             for(int i = 0; i < len; i++)
             {
                 coefficients[i] += polynomial[i];
             }
+
+            NormalizeOrder(polynomial.Order);
         }
 
         /// <summary>Add a complex number inplace to this polynomial.</summary>
@@ -862,12 +881,14 @@ namespace MathNet.Numerics
         void
         SubtractInplace(ComplexPolynomial polynomial)
         {
-            EnsureSupportForOrder(polynomial.Order);
-            int len = Math.Min(order, polynomial.order) + 1;
+            EnsureSupportForOrder(polynomial.order);
+            int len = polynomial.order + 1;
             for(int i = 0; i < len; i++)
             {
                 coefficients[i] -= polynomial.coefficients[i];
             }
+
+            NormalizeOrder(polynomial.order);
         }
 
         /// <summary>Subtract a real polynomial inplace from this polynomial.</summary>
@@ -877,11 +898,13 @@ namespace MathNet.Numerics
         SubtractInplace(Polynomial polynomial)
         {
             EnsureSupportForOrder(polynomial.Order);
-            int len = Math.Min(order, polynomial.Order) + 1;
+            int len = polynomial.Order + 1;
             for(int i = 0; i < len; i++)
             {
                 coefficients[i] -= polynomial[i];
             }
+
+            NormalizeOrder(polynomial.Order);
         }
 
         /// <summary>Subtract a complex number inplace from this polynomial.</summary>
@@ -926,6 +949,9 @@ namespace MathNet.Numerics
             {
                 coefficients[i] = c0 * coefficients[i];
             }
+
+            // zero case
+            NormalizeOrder();
         }
 
         /// <summary>
@@ -940,6 +966,9 @@ namespace MathNet.Numerics
             {
                 coefficients[i] = c0 * coefficients[i];
             }
+
+            // zero case
+            NormalizeOrder();
         }
 
         /// <summary>

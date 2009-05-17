@@ -287,6 +287,14 @@ namespace Iridium.Test
             Polynomial b = p2 + p1;
 
             Assert.AreEqual(a.ToString(), b.ToString());
+
+            ComplexPolynomial cp1 = new ComplexPolynomial(new Complex[] { -1, 0, 2 });
+            ComplexPolynomial cp2 = new ComplexPolynomial(new Complex[] { 4 });
+
+            ComplexPolynomial ca = cp1 + cp2;
+            ComplexPolynomial cb = cp2 + cp1;
+
+            Assert.AreEqual(ca.ToString(), cb.ToString());
         }
 
         [Test]
