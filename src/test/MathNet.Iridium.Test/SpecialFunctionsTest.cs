@@ -472,24 +472,24 @@ namespace Iridium.Test
         public void TestSpecialFunctions_Erf()
         {
             // Compare Erf with Maple: "evalf(erf(x),20);"
-            Assert.AreEqual(.0, Fn.Erf(0.0), 1e-14, "A1");
-            Assert.AreEqual(.11246291601828489220, Fn.Erf(0.1), 1e-14, "A2");
-            Assert.AreEqual(.22270258921047845414, Fn.Erf(0.2), 1e-14, "A3");
-            Assert.AreEqual(.32862675945912742764, Fn.Erf(0.3), 1e-13, "A4");
-            Assert.AreEqual(.42839235504666845510, Fn.Erf(0.4), 1e-13, "A5");
-            Assert.AreEqual(.52049987781304653768, Fn.Erf(0.5), 1e-13, "A6");
-            Assert.AreEqual(.60385609084792592256, Fn.Erf(0.6), 1e-13, "A7");
-            Assert.AreEqual(.67780119383741847298, Fn.Erf(0.7), 1e-13, "A8");
-            Assert.AreEqual(.74210096470766048617, Fn.Erf(0.8), 1e-13, "A9");
-            Assert.AreEqual(.79690821242283212852, Fn.Erf(0.9), 1e-13, "A10");
-            Assert.AreEqual(.84270079294971486934, Fn.Erf(1.0), 1e-13, "A11");
-            Assert.AreEqual(.88020506957408169977, Fn.Erf(1.1), 1e-13, "A12");
-            Assert.AreEqual(.91031397822963538024, Fn.Erf(1.2), 1e-13, "A13");
-            Assert.AreEqual(.99997790950300141456, Fn.Erf(3.0), 1e-13, "A14");
-            Assert.AreEqual(1.0, Fn.Erf(9.0), 1e-13, "A15");
-            Assert.AreEqual(1.0, Fn.Erf(100), 1e-13, "A16");
-            Assert.AreEqual(-.32862675945912742764, Fn.Erf(-0.3), 1e-13, "A17");
-            Assert.AreEqual(-.74210096470766048617, Fn.Erf(-0.8), 1e-13, "A18");
+            NumericAssert.AreAlmostEqual(.0, Fn.Erf(0.0), "A1");
+            NumericAssert.AreAlmostEqual(.11246291601828489220, Fn.Erf(0.1), "A2");
+            NumericAssert.AreAlmostEqual(.22270258921047845414, Fn.Erf(0.2), "A3");
+            NumericAssert.AreAlmostEqual(.32862675945912742764, Fn.Erf(0.3), "A4");
+            NumericAssert.AreAlmostEqual(.42839235504666845510, Fn.Erf(0.4), "A5");
+            NumericAssert.AreAlmostEqual(.52049987781304653768, Fn.Erf(0.5), "A6");
+            NumericAssert.AreAlmostEqual(.60385609084792592256, Fn.Erf(0.6), "A7");
+            NumericAssert.AreAlmostEqual(.67780119383741847298, Fn.Erf(0.7), "A8");
+            NumericAssert.AreAlmostEqual(.74210096470766048617, Fn.Erf(0.8), "A9");
+            NumericAssert.AreAlmostEqual(.79690821242283212852, Fn.Erf(0.9), "A10");
+            NumericAssert.AreAlmostEqual(.84270079294971486934, Fn.Erf(1.0), "A11");
+            NumericAssert.AreAlmostEqual(.88020506957408169977, Fn.Erf(1.1), "A12");
+            NumericAssert.AreAlmostEqual(.91031397822963538024, Fn.Erf(1.2), "A13");
+            NumericAssert.AreAlmostEqual(.99997790950300141456, Fn.Erf(3.0), "A14");
+            NumericAssert.AreAlmostEqual(1.0, Fn.Erf(9.0), "A15");
+            NumericAssert.AreAlmostEqual(1.0, Fn.Erf(100), "A16");
+            NumericAssert.AreAlmostEqual(-.32862675945912742764, Fn.Erf(-0.3), "A17");
+            NumericAssert.AreAlmostEqual(-.74210096470766048617, Fn.Erf(-0.8), "A18");
 
             // Compare ErvInverse with Maple: "erfinv := y -> RootOf(-erf(_Z)+y); evalf(erfinv(x),20);"
             Assert.AreEqual(.0, Fn.ErfInverse(0.0), 1e-14, "B1");

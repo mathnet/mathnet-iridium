@@ -45,9 +45,9 @@ namespace MathNet.Numerics.SpecialFunctions.Algorithms
         double
         GammaRegularized(double a, double x)
         {
-            const int MaxIterations = 100;
-            double eps = Number.RelativeAccuracy;
-            double fpmin = Number.SmallestNumberGreaterThanZero / eps;
+            const double Epsilon = 0.000000000000001;
+            const double BigNumber = 4503599627370496.0;
+            const double BigNumberInverse = 2.22044604925031308085e-16;
 
             if(a < 0d || x < 0d)
             {
@@ -70,74 +70,81 @@ namespace MathNet.Numerics.SpecialFunctions.Algorithms
                 return 0d;
             }
 
-            double gln = GammaAlgorithm.GammaLn(a);
-            if(x < a + 1d)
+            double ax = (a * Math.Log(x)) - x - GammaAlgorithm.GammaLn(a);
+            if(ax < -709.78271289338399)
             {
-                /* Series Representation */
+                return 1d;
+            }
 
-                if(x <= 0d)
+            if(x <= 1 || x <= a)
+            {
+                double r2 = a;
+                double c2 = 1;
+                double ans2 = 1;
+
+                do
                 {
-                    /* Yes, I know we've already checked for x<0.0 */
+                    r2 = r2 + 1;
+                    c2 = c2 * x / r2;
+                    ans2 += c2;
+                }
+                while((c2 / ans2) > Epsilon);
 
-                    return 0d;
+                return Math.Exp(ax) * ans2 / a;
+            }
+
+            int c = 0;
+            double y = 1 - a;
+            double z = x + y + 1;
+
+            double p3 = 1;
+            double q3 = x;
+            double p2 = x + 1;
+            double q2 = z * x;
+            double ans = p2 / q2;
+
+            double error = 0;
+
+            do
+            {
+                c++;
+                y += 1;
+                z += 2;
+                double yc = y * c;
+
+                double p = (p2 * z) - (p3 * yc);
+                double q = (q2 * z) - (q3 * yc);
+
+                if(q != 0)
+                {
+                    double nextans = p / q;
+                    error = Math.Abs((ans - nextans) / nextans);
+                    ans = nextans;
                 }
                 else
                 {
-                    double ap = a;
-                    double del, sum = del = 1.0 / a;
-
-                    for(int n = 0; n < MaxIterations; n++)
-                    {
-                        ++ap;
-                        del *= x / ap;
-                        sum += del;
-
-                        if(Math.Abs(del) < Math.Abs(sum) * eps)
-                        {
-                            return sum * Math.Exp(-x + (a * Math.Log(x)) - gln);
-                        }
-                    }
+                    // zero div, skip
+                    error = 1;
                 }
-            }
-            else
-            {
-                /* Continued fraction representation */
 
-                double b = x + 1.0 - a;
-                double c = 1.0 / fpmin;
-                double d = 1.0 / b;
-                double h = d;
+                // shift
+                p3 = p2;
+                p2 = p;
+                q3 = q2;
+                q2 = q;
 
-                for(int i = 1; i <= MaxIterations; i++)
+                // normalize fraction when the numerator becomes large
+                if(Math.Abs(p) > BigNumber)
                 {
-                    double an = -i * (i - a);
-                    b += 2.0;
-                    d = (an * d) + b;
-
-                    if(Math.Abs(d) < fpmin)
-                    {
-                        d = fpmin;
-                    }
-
-                    c = b + (an / c);
-
-                    if(Math.Abs(c) < fpmin)
-                    {
-                        c = fpmin;
-                    }
-
-                    d = 1.0 / d;
-                    double del = d * c;
-                    h *= del;
-
-                    if(Math.Abs(del - 1.0) <= eps)
-                    {
-                        return 1.0 - (Math.Exp(-x + (a * Math.Log(x)) - gln) * h);
-                    }
+                    p3 *= BigNumberInverse;
+                    p2 *= BigNumberInverse;
+                    q3 *= BigNumberInverse;
+                    q2 *= BigNumberInverse;
                 }
             }
+            while(error > Epsilon);
 
-            throw new ArgumentException(Properties.LocalStrings.ArgumentTooLargeForIterationLimit, "a");
+            return 1d - (Math.Exp(ax) * ans);
         }
 
         /// <summary>
@@ -149,8 +156,11 @@ namespace MathNet.Numerics.SpecialFunctions.Algorithms
         double
         InverseGammaRegularized(double a, double y0)
         {
-            // TODO: Consider to throw an out-of-range exception instead of NaN
+            const double Epsilon = 0.000000000000001;
+            const double BigNumber = 4503599627370496.0;
+            const double Threshold = 5 * Epsilon;
 
+            // TODO: Consider to throw an out-of-range exception instead of NaN
             if(a < 0 || Number.AlmostZero(a) || y0 < 0 || y0 > 1)
             {
                 return Double.NaN;
@@ -168,11 +178,7 @@ namespace MathNet.Numerics.SpecialFunctions.Algorithms
 
             y0 = 1 - y0;
 
-            const double epsilon = 0.000000000000001;
-            const double big = 4503599627370496.0;
-            const double threshold = 5 * epsilon;
-
-            double xUpper = big;
+            double xUpper = BigNumber;
             double xLower = 0;
             double yUpper = 1;
             double yLower = 0;
@@ -218,7 +224,7 @@ namespace MathNet.Numerics.SpecialFunctions.Algorithms
 
                 d = -Math.Exp(d);
                 d = (y - y0) / d;
-                if(Math.Abs(d / x) < epsilon)
+                if(Math.Abs(d / x) < Epsilon)
                 {
                     return x;
                 }
@@ -232,14 +238,14 @@ namespace MathNet.Numerics.SpecialFunctions.Algorithms
                 x -= d;
             }
 
-            if(xUpper == big)
+            if(xUpper == BigNumber)
             {
                 if(x <= 0)
                 {
                     x = 1;
                 }
 
-                while(xUpper == big)
+                while(xUpper == BigNumber)
                 {
                     x = (1 + d) * x;
                     y = 1 - GammaRegularized(a, x);
@@ -261,13 +267,13 @@ namespace MathNet.Numerics.SpecialFunctions.Algorithms
                 x = xLower + (d * (xUpper - xLower));
                 y = 1 - GammaRegularized(a, x);
                 lgm = (xUpper - xLower) / (xLower + xUpper);
-                if(Math.Abs(lgm) < threshold)
+                if(Math.Abs(lgm) < Threshold)
                 {
                     return x;
                 }
 
                 lgm = (y - y0) / y0;
-                if(Math.Abs(lgm) < threshold)
+                if(Math.Abs(lgm) < Threshold)
                 {
                     return x;
                 }
