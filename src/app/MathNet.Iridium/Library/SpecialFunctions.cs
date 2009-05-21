@@ -517,28 +517,8 @@ namespace MathNet.Numerics
                 throw new ArgumentOutOfRangeException("value", Properties.LocalStrings.ArgumentPositive);
             }
 
-            if(value <= 1)
-            {
-                return 0.0d;
-            }
-
-            if(value >= FactorialLnCacheSize)
-            {
-                return GammaLn(value + 1.0);
-            }
-
-            if(factorialLnCache == null)
-            {
-                factorialLnCache = new double[FactorialLnCacheSize];
-            }
-
-            return factorialLnCache[value] != 0.0
-                ? factorialLnCache[value]
-                : (factorialLnCache[value] = GammaLn(value + 1.0));
+            return FactorialAlgorithm.FactorialLn(value);
         }
-
-        static double[] factorialLnCache;
-        const int FactorialLnCacheSize = 2 * FactorialPrecompSize;
 
         /// <summary>
         /// Returns the factorial (n!) of an integer number > 0. Consider using <see cref="FactorialLn"/> instead.
@@ -561,51 +541,8 @@ namespace MathNet.Numerics
                 throw new ArgumentOutOfRangeException("value", Properties.LocalStrings.ArgumentPositive);
             }
 
-            if(value >= FactorialPrecompSize)
-            {
-                return Math.Exp(GammaLn(value + 1.0));
-            }
-
-            return factorialPrecomp[value];
+            return FactorialAlgorithm.Factorial(value);
         }
-
-        #region Precomputed Static Array
-        const int FactorialPrecompSize = 32;
-        static double[] factorialPrecomp = new double[] {
-            1d,
-            1d,
-            2d,
-            6d,
-            24d,
-            120d,
-            720d,
-            5040d,
-            40320d,
-            362880d,
-            3628800d,
-            39916800d,
-            479001600d,
-            6227020800d,
-            87178291200d,
-            1307674368000d,
-            20922789888000d,
-            355687428096000d,
-            6402373705728000d,
-            121645100408832000d,
-            2432902008176640000d,
-            51090942171709440000d,
-            1124000727777607680000d,
-            25852016738884976640000d,
-            620448401733239439360000d,
-            15511210043330985984000000d,
-            403291461126605635584000000d,
-            10888869450418352160768000000d,
-            304888344611713860501504000000d,
-            8841761993739701954543616000000d,
-            265252859812191058636308480000000d,
-            8222838654177922817725562880000000d
-        };
-        #endregion
 
         /// <summary>
         /// Returns the binomial coefficient of n and k as a double precision number.
