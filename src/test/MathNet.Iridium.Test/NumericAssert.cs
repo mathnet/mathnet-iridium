@@ -40,99 +40,123 @@ namespace Iridium.Test
     {
         public static void AreAlmostEqual(Matrix expected, Matrix actual, string message)
         {
-            Assert.DoAssert(new AlmostEqualAsserter(expected.Norm1(), actual.Norm1(), (expected - actual).Norm1(), 10 * Number.DefaultRelativeAccuracy, message));
+            //Assert.DoAssert(new AlmostEqualAsserter(expected.Norm1(), actual.Norm1(), (expected - actual).Norm1(), 10 * Number.DefaultRelativeAccuracy, message));
+            Test(expected.Norm1(), actual.Norm1(), (expected - actual).Norm1(), 10 * Number.DefaultRelativeAccuracy, message);
         }
 
         public static void AreAlmostEqual(Matrix expected, Matrix actual, double relativeAccuracy, string message)
         {
-            Assert.DoAssert(new AlmostEqualAsserter(expected.Norm1(), actual.Norm1(), (expected - actual).Norm1(), relativeAccuracy, message));
+            //Assert.DoAssert(new AlmostEqualAsserter(expected.Norm1(), actual.Norm1(), (expected - actual).Norm1(), relativeAccuracy, message));
+            Test(expected.Norm1(), actual.Norm1(), (expected - actual).Norm1(), relativeAccuracy, message);
         }
 
         public static void AreAlmostEqual(ComplexMatrix expected, ComplexMatrix actual, string message)
         {
-            Assert.DoAssert(new AlmostEqualAsserter(expected.Norm1(), actual.Norm1(), (expected - actual).Norm1(), 10 * Number.DefaultRelativeAccuracy, message));
+            //Assert.DoAssert(new AlmostEqualAsserter(expected.Norm1(), actual.Norm1(), (expected - actual).Norm1(), 10 * Number.DefaultRelativeAccuracy, message));
+            Test(expected.Norm1(), actual.Norm1(), (expected - actual).Norm1(), 10 * Number.DefaultRelativeAccuracy, message);
         }
 
         public static void AreAlmostEqual(ComplexMatrix expected, ComplexMatrix actual, double relativeAccuracy, string message)
         {
-            Assert.DoAssert(new AlmostEqualAsserter(expected.Norm1(), actual.Norm1(), (expected - actual).Norm1(), relativeAccuracy, message));
+            //Assert.DoAssert(new AlmostEqualAsserter(expected.Norm1(), actual.Norm1(), (expected - actual).Norm1(), relativeAccuracy, message));
+            Test(expected.Norm1(), actual.Norm1(), (expected - actual).Norm1(), relativeAccuracy, message);
         }
 
         public static void AreAlmostEqual(Vector expected, Vector actual, string message)
         {
-            Assert.DoAssert(new AlmostEqualAsserter(expected.Norm1(), actual.Norm1(), (expected - actual).Norm1(), 10 * Number.DefaultRelativeAccuracy, message));
+            //Assert.DoAssert(new AlmostEqualAsserter(expected.Norm1(), actual.Norm1(), (expected - actual).Norm1(), 10 * Number.DefaultRelativeAccuracy, message));
+            Test(expected.Norm1(), actual.Norm1(), (expected - actual).Norm1(), 10 * Number.DefaultRelativeAccuracy, message);
         }
 
         public static void AreAlmostEqual(Vector expected, Vector actual, double relativeAccuracy, string message)
         {
-            Assert.DoAssert(new AlmostEqualAsserter(expected.Norm1(), actual.Norm1(), (expected - actual).Norm1(), relativeAccuracy, message));
+            //Assert.DoAssert(new AlmostEqualAsserter(expected.Norm1(), actual.Norm1(), (expected - actual).Norm1(), relativeAccuracy, message));
+            Test(expected.Norm1(), actual.Norm1(), (expected - actual).Norm1(), relativeAccuracy, message);
         }
 
         public static void AreAlmostEqual(ComplexVector expected, ComplexVector actual, string message)
         {
-            Assert.DoAssert(new AlmostEqualAsserter(expected.Norm1(), actual.Norm1(), (expected - actual).Norm1(), 10 * Number.DefaultRelativeAccuracy, message));
+            //Assert.DoAssert(new AlmostEqualAsserter(expected.Norm1(), actual.Norm1(), (expected - actual).Norm1(), 10 * Number.DefaultRelativeAccuracy, message));
+            Test(expected.Norm1(), actual.Norm1(), (expected - actual).Norm1(), 10 * Number.DefaultRelativeAccuracy, message);
         }
 
         public static void AreAlmostEqual(ComplexVector expected, ComplexVector actual, double relativeAccuracy, string message)
         {
-            Assert.DoAssert(new AlmostEqualAsserter(expected.Norm1(), actual.Norm1(), (expected - actual).Norm1(), relativeAccuracy, message));
+            //Assert.DoAssert(new AlmostEqualAsserter(expected.Norm1(), actual.Norm1(), (expected - actual).Norm1(), relativeAccuracy, message));
+            Test(expected.Norm1(), actual.Norm1(), (expected - actual).Norm1(), relativeAccuracy, message);
         }
 
         public static void AreAlmostEqual(double expected, double actual, double relativeAccuracy, string message)
         {
-            Assert.DoAssert(new AlmostEqualAsserter(expected, actual, relativeAccuracy, message));
+            //Assert.DoAssert(new AlmostEqualAsserter(expected, actual, relativeAccuracy, message));
+            Test(expected, actual, expected - actual, relativeAccuracy, message);
         }
 
         public static void AreAlmostEqual(double expected, double actual, string message)
         {
-            Assert.DoAssert(new AlmostEqualAsserter(expected, actual, message));
+            //Assert.DoAssert(new AlmostEqualAsserter(expected, actual, message));
+            Test(expected, actual, expected - actual, Number.DefaultRelativeAccuracy, message);
         }
 
         public static void AreAlmostEqual(Complex expected, Complex actual, double relativeAccuracy, string message)
         {
-            Assert.DoAssert(new AlmostEqualAsserter(expected.Modulus, actual.Modulus, (expected - actual).Modulus, relativeAccuracy, message));
+            //Assert.DoAssert(new AlmostEqualAsserter(expected.Modulus, actual.Modulus, (expected - actual).Modulus, relativeAccuracy, message));
+            Test(expected.Modulus, actual.Modulus, (expected - actual).Modulus, relativeAccuracy, message);
         }
 
         public static void AreAlmostEqual(Complex expected, Complex actual, string message)
         {
-            Assert.DoAssert(new AlmostEqualAsserter(expected.Modulus, actual.Modulus, (expected - actual).Modulus, Number.DefaultRelativeAccuracy, message));
-        }
-    }
-
-    public class AlmostEqualAsserter : ComparisonAsserter
-    {
-        double _relativeAccuracy;
-        double _difference;
-
-        public AlmostEqualAsserter(double expected, double actual, double difference, double relativeAccuracy, string message, params object[] args)
-            : base(expected, actual, message, args)
-        {
-            _relativeAccuracy = relativeAccuracy;
-            _difference = difference;
+            //Assert.DoAssert(new AlmostEqualAsserter(expected.Modulus, actual.Modulus, (expected - actual).Modulus, Number.DefaultRelativeAccuracy, message));
+            Test(expected.Modulus, actual.Modulus, (expected - actual).Modulus, Number.DefaultRelativeAccuracy, message);
         }
 
-        public AlmostEqualAsserter(double expected, double actual, double relativeAccuracy, string message, params object[] args)
-            : this(expected, actual, expected - actual, relativeAccuracy, message, args)
+        static void Test(double expected, double actual, double difference, double relativeAccuracy, string message)
         {
-        }
-
-        public AlmostEqualAsserter(double expected, double actual, string message, params object[] args)
-            : this(expected, actual, expected - actual, Number.DefaultRelativeAccuracy, message, args)
-        {
-        }
-
-        public override bool Test()
-        {
-            double actual = (double)this.actual;
-            double expected = (double)this.expected;
-
-            if(!Number.AlmostEqualNorm(actual, expected, _difference, _relativeAccuracy))
+            if(!Number.AlmostEqualNorm(actual, expected, difference, relativeAccuracy))
             {
-                FailureMessage.DisplayDifferences(expected, actual, false);
-                return false;
+                Assert.AreEqual(actual, expected, message);
+                // FailureMessage.DisplayDifferences(expected, actual, false);
+                //return false;
             }
 
-            return true;
+            // return true;
         }
     }
+
+    //public class AlmostEqualAsserter : ComparisonAsserter
+    //{
+    //    double _relativeAccuracy;
+    //    double _difference;
+
+    //    public AlmostEqualAsserter(double expected, double actual, double difference, double relativeAccuracy, string message, params object[] args)
+    //        : base(expected, actual, message, args)
+    //    {
+    //        _relativeAccuracy = relativeAccuracy;
+    //        _difference = difference;
+    //    }
+
+    //    public AlmostEqualAsserter(double expected, double actual, double relativeAccuracy, string message, params object[] args)
+    //        : this(expected, actual, expected - actual, relativeAccuracy, message, args)
+    //    {
+    //    }
+
+    //    public AlmostEqualAsserter(double expected, double actual, string message, params object[] args)
+    //        : this(expected, actual, expected - actual, Number.DefaultRelativeAccuracy, message, args)
+    //    {
+    //    }
+
+    //    public override bool Test()
+    //    {
+    //        double actual = (double)this.actual;
+    //        double expected = (double)this.expected;
+
+    //        if(!Number.AlmostEqualNorm(actual, expected, _difference, _relativeAccuracy))
+    //        {
+    //            FailureMessage.DisplayDifferences(expected, actual, false);
+    //            return false;
+    //        }
+
+    //        return true;
+    //    }
+    //}
 }
