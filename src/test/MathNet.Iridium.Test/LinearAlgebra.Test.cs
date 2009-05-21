@@ -296,16 +296,7 @@ namespace Iridium.Test
              Identity(int)
             */
 
-            try
-            {
-                // check that exception is thrown in packed constructor with invalid length
-                A = new Matrix(columnwise, invalidld);
-                Assert.Fail("Catch invalid length in packed constructor: exception not thrown for invalid input");
-            }
-            catch(ArgumentException)
-            {
-                // expected case, nothing to do.
-            }
+            Assert.That(delegate() { A = new Matrix(columnwise, invalidld); }, Throws.TypeOf<ArgumentException>());
 
             A = new Matrix(columnwise, validld);
             B = new Matrix(avals);
@@ -378,236 +369,71 @@ namespace Iridium.Test
             ////    System.Console.Out.WriteLine(e.Message);
             ////}
 
-            try
-            {
-                tmp = B[B.RowCount, B.ColumnCount - 1];
-                Assert.Fail("get(int,int): OutOfBoundsException expected but not thrown");
-            }
-            catch(IndexOutOfRangeException)
-            {
-                // expected case, nothing to do.
-            }
-
-            try
-            {
-                tmp = B[B.RowCount - 1, B.ColumnCount];
-                Assert.Fail("get(int,int): OutOfBoundsException expected but not thrown II");
-            }
-            catch(IndexOutOfRangeException)
-            {
-                // expected case, nothing to do.
-            }
+            Assert.That(delegate() { tmp = B[B.RowCount, B.ColumnCount - 1]; }, Throws.TypeOf<IndexOutOfRangeException>());
+            Assert.That(delegate() { tmp = B[B.RowCount - 1, B.ColumnCount]; }, Throws.TypeOf<IndexOutOfRangeException>());
 
             Assert.That(B[B.RowCount - 1, B.ColumnCount - 1], Is.EqualTo(avals[B.RowCount - 1][B.ColumnCount - 1]), "get(int,int)");
 
             SUB = new Matrix(subavals);
-            try
-            {
-                M = B.GetMatrix(ib, ie + B.RowCount + 1, jb, je);
-                Assert.Fail("GetMatrix(int,int,int,int): IndexOutOfBoundsException expected but not thrown");
-            }
-            catch(IndexOutOfRangeException)
-            {
-                // expected case, nothing to do.
-            }
 
-            try
-            {
-                M = B.GetMatrix(ib, ie, jb, je + B.ColumnCount + 1);
-                Assert.Fail("GetMatrix(int,int,int,int): IndexOutOfBoundsException expected but not thrown II");
-            }
-            catch(IndexOutOfRangeException)
-            {
-                // expected case, nothing to do.
-            }
+            Assert.That(delegate() { M = B.GetMatrix(ib, ie + B.RowCount + 1, jb, je); }, Throws.TypeOf<IndexOutOfRangeException>());
+            Assert.That(delegate() { M = B.GetMatrix(ib, ie, jb, je + B.ColumnCount + 1); }, Throws.TypeOf<IndexOutOfRangeException>());
 
             M = B.GetMatrix(ib, ie, jb, je);
             NumericAssert.AreAlmostEqual(SUB, M, "GetMatrix(int,int,int,int)");
 
-            try
-            {
-                M = B.GetMatrix(ib, ie, badcolumnindexset);
-                Assert.Fail("GetMatrix(int,int,int[]): IndexOutOfBoundsException expected but not thrown");
-            }
-            catch(IndexOutOfRangeException)
-            {
-                // expected case, nothing to do.
-            }
-
-            try
-            {
-                M = B.GetMatrix(ib, ie + B.RowCount + 1, columnindexset);
-                Assert.Fail("GetMatrix(int,int,int[]): IndexOutOfBoundsException expected but not thrown II");
-            }
-            catch(IndexOutOfRangeException)
-            {
-                // expected case, nothing to do.
-            }
+            Assert.That(delegate() { M = B.GetMatrix(ib, ie, badcolumnindexset); }, Throws.TypeOf<IndexOutOfRangeException>());
+            Assert.That(delegate() { M = B.GetMatrix(ib, ie + B.RowCount + 1, columnindexset); }, Throws.TypeOf<IndexOutOfRangeException>());
 
             M = B.GetMatrix(ib, ie, columnindexset);
             NumericAssert.AreAlmostEqual(SUB, M, "GetMatrix(int,int,int[])");
 
-            try
-            {
-                M = B.GetMatrix(badrowindexset, jb, je);
-                Assert.Fail("GetMatrix(int[],int,int): IndexOutOfBoundsException expected but not thrown");
-            }
-            catch(IndexOutOfRangeException)
-            {
-                // expected case, nothing to do.
-            }
-
-            try
-            {
-                M = B.GetMatrix(rowindexset, jb, je + B.ColumnCount + 1);
-                Assert.Fail("GetMatrix(int[],int,int): IndexOutOfBoundsException expected but not thrown II");
-            }
-            catch(IndexOutOfRangeException)
-            {
-                // expected case, nothing to do.
-            }
+            Assert.That(delegate() { M = B.GetMatrix(badrowindexset, jb, je); }, Throws.TypeOf<IndexOutOfRangeException>());
+            Assert.That(delegate() { M = B.GetMatrix(rowindexset, jb, je + B.ColumnCount + 1); }, Throws.TypeOf<IndexOutOfRangeException>());
 
             M = B.GetMatrix(rowindexset, jb, je);
             NumericAssert.AreAlmostEqual(SUB, M, "GetMatrix(int[],int,int)");
 
-            try
-            {
-                M = B.GetMatrix(badrowindexset, columnindexset);
-                Assert.Fail("GetMatrix(int[],int[]): IndexOutOfBoundsException expected but not thrown");
-            }
-            catch(IndexOutOfRangeException)
-            {
-                // expected case, nothing to do.
-            }
-
-            try
-            {
-                M = B.GetMatrix(rowindexset, badcolumnindexset);
-                Assert.Fail("GetMatrix(int[],int[]): IndexOutOfBoundsException expected but not thrown II");
-            }
-            catch(IndexOutOfRangeException)
-            {
-                // expected case, nothing to do.
-            }
+            Assert.That(delegate() { M = B.GetMatrix(badrowindexset, columnindexset); }, Throws.TypeOf<IndexOutOfRangeException>());
+            Assert.That(delegate() { M = B.GetMatrix(rowindexset, badcolumnindexset); }, Throws.TypeOf<IndexOutOfRangeException>());
 
             M = B.GetMatrix(rowindexset, columnindexset);
             NumericAssert.AreAlmostEqual(SUB, M, "GetMatrix(int[],int[])");
 
             // Various set methods:
-            try
-            {
-                B[B.RowCount, B.ColumnCount - 1] = 0.0;
-                Assert.Fail("set(int,int,double): IndexOutOfBoundsException expected but not thrown");
-            }
-            catch(IndexOutOfRangeException)
-            {
-                // expected case, nothing to do.
-            }
-
-            try
-            {
-                B[B.RowCount - 1, B.ColumnCount] = 0.0;
-                Assert.Fail("set(int,int,double): IndexOutOfBoundsException expected but not thrown II");
-            }
-            catch(IndexOutOfRangeException)
-            {
-                // expected case, nothing to do.
-            }
+            Assert.That(delegate() { B[B.RowCount, B.ColumnCount - 1] = 0.0; }, Throws.TypeOf<IndexOutOfRangeException>());
+            Assert.That(delegate() { B[B.RowCount - 1, B.ColumnCount] = 0.0; }, Throws.TypeOf<IndexOutOfRangeException>());
 
             B[ib, jb] = 0.0;
             tmp = B[ib, jb];
             NumericAssert.AreAlmostEqual(tmp, 0.0, "set(int,int,double)");
 
             M = new Matrix(2, 3, 0.0);
-            try
-            {
-                B.SetMatrix(ib, ie + B.RowCount + 1, jb, je, M);
-                Assert.Fail("SetMatrix(int,int,int,int,Matrix): IndexOutOfBoundsException expected but not thrown");
-            }
-            catch(IndexOutOfRangeException)
-            {
-                // expected case, nothing to do.
-            }
 
-            try
-            {
-                B.SetMatrix(ib, ie, jb, je + B.ColumnCount + 1, M);
-                Assert.Fail("SetMatrix(int,int,int,int,Matrix): IndexOutOfBoundsException expected but not thrown II");
-            }
-            catch(IndexOutOfRangeException)
-            {
-                // expected case, nothing to do.
-            }
+            Assert.That(delegate() { B.SetMatrix(ib, ie + B.RowCount + 1, jb, je, M); }, Throws.TypeOf<IndexOutOfRangeException>());
+            Assert.That(delegate() { B.SetMatrix(ib, ie, jb, je + B.ColumnCount + 1, M); }, Throws.TypeOf<IndexOutOfRangeException>());
 
             B.SetMatrix(ib, ie, jb, je, M);
             NumericAssert.AreAlmostEqual(M - B.GetMatrix(ib, ie, jb, je), M, "SetMatrix(int,int,int,int,Matrix)");
             B.SetMatrix(ib, ie, jb, je, SUB);
-            try
-            {
-                B.SetMatrix(ib, ie + B.RowCount + 1, columnindexset, M);
-                Assert.Fail("SetMatrix(int,int,int[],Matrix): IndexOutOfBoundsException expected but not thrown");
-            }
-            catch(IndexOutOfRangeException)
-            {
-                // expected case, nothing to do.
-            }
 
-            try
-            {
-                B.SetMatrix(ib, ie, badcolumnindexset, M);
-                Assert.Fail("SetMatrix(int,int,int[],Matrix): IndexOutOfBoundsException expected but not thrown II");
-            }
-            catch(IndexOutOfRangeException)
-            {
-                // expected case, nothing to do.
-            }
+            Assert.That(delegate() { B.SetMatrix(ib, ie + B.RowCount + 1, columnindexset, M); }, Throws.TypeOf<IndexOutOfRangeException>());
+            Assert.That(delegate() { B.SetMatrix(ib, ie, badcolumnindexset, M); }, Throws.TypeOf<IndexOutOfRangeException>());
 
             B.SetMatrix(ib, ie, columnindexset, M);
             NumericAssert.AreAlmostEqual(M - B.GetMatrix(ib, ie, columnindexset), M, "SetMatrix(int,int,int[],Matrix)");
             B.SetMatrix(ib, ie, jb, je, SUB);
-            try
-            {
-                B.SetMatrix(rowindexset, jb, je + B.ColumnCount + 1, M);
-                Assert.Fail("SetMatrix(int[],int,int,Matrix): IndexOutOfBoundsException expected but not thrown");
-            }
-            catch(IndexOutOfRangeException)
-            {
-                // expected case, nothing to do.
-            }
 
-            try
-            {
-                B.SetMatrix(badrowindexset, jb, je, M);
-                Assert.Fail("SetMatrix(int[],int,int,Matrix): IndexOutOfBoundsException expected but not thrown II");
-            }
-            catch(IndexOutOfRangeException)
-            {
-                // expected case, nothing to do.
-            }
+            Assert.That(delegate() { B.SetMatrix(rowindexset, jb, je + B.ColumnCount + 1, M); }, Throws.TypeOf<IndexOutOfRangeException>());
+            Assert.That(delegate() { B.SetMatrix(badrowindexset, jb, je, M); }, Throws.TypeOf<IndexOutOfRangeException>());
 
             B.SetMatrix(rowindexset, jb, je, M);
             NumericAssert.AreAlmostEqual(M - B.GetMatrix(rowindexset, jb, je), M, "SetMatrix(int[],int,int,Matrix)");
 
             B.SetMatrix(ib, ie, jb, je, SUB);
-            try
-            {
-                B.SetMatrix(rowindexset, badcolumnindexset, M);
-                Assert.Fail("SetMatrix(int[],int[],Matrix): IndexOutOfBoundsException expected but not thrown");
-            }
-            catch(IndexOutOfRangeException)
-            {
-                // expected case, nothing to do.
-            }
 
-            try
-            {
-                B.SetMatrix(badrowindexset, columnindexset, M);
-                Assert.Fail("SetMatrix(int[],int[],Matrix): IndexOutOfBoundsException expected but not thrown");
-            }
-            catch(IndexOutOfRangeException)
-            {
-                // expected case, nothing to do.
-            }
+            Assert.That(delegate() { B.SetMatrix(rowindexset, badcolumnindexset, M); }, Throws.TypeOf<IndexOutOfRangeException>());
+            Assert.That(delegate() { B.SetMatrix(badrowindexset, columnindexset, M); }, Throws.TypeOf<IndexOutOfRangeException>());
 
             B.SetMatrix(rowindexset, columnindexset, M);
             NumericAssert.AreAlmostEqual(M - B.GetMatrix(rowindexset, columnindexset), M, "SetMatrix(int[],int[],Matrix)");
@@ -632,59 +458,31 @@ namespace Iridium.Test
             S = new Matrix(columnwise, nonconformld);
             R = Matrix.Random(A.RowCount, A.ColumnCount);
             A = R;
-            try
-            {
-                S = A - S;
-                Assert.Fail("Subtract conformance check: nonconformance not raised");
-            }
-            catch(ArgumentException)
-            {
-                // expected case, nothing to do.
-            }
+
+            Assert.That(delegate() { S = A - S; }, Throws.TypeOf<ArgumentException>());
 
             Assert.That((A - R).Norm1(), Is.EqualTo(0.0), "Subtract: difference of identical Matrices is nonzero,\nSubsequent use of Subtract should be suspect");
 
             A = R.Clone();
             A.SubtractInplace(R);
             Z = new Matrix(A.RowCount, A.ColumnCount);
-            try
-            {
-                A.SubtractInplace(S);
-                Assert.Fail("SubtractEquals conformance check: nonconformance not raised");
-            }
-            catch(ArgumentException)
-            {
-                // expected case, nothing to do.
-            }
+
+            Assert.That(delegate() { A.SubtractInplace(S); }, Throws.TypeOf<ArgumentException>());
 
             Assert.That((A - Z).Norm1(), Is.EqualTo(0.0), "SubtractEquals: difference of identical Matrices is nonzero,\nSubsequent use of Subtract should be suspect");
 
             A = R.Clone();
             B = Matrix.Random(A.RowCount, A.ColumnCount);
             C = A - B;
-            try
-            {
-                S = A + S;
-                Assert.Fail("Add conformance check: nonconformance not raised");
-            }
-            catch(ArgumentException)
-            {
-                // expected case, nothing to do.
-            }
+
+            Assert.That(delegate() { S = A + S; }, Throws.TypeOf<ArgumentException>());
 
             NumericAssert.AreAlmostEqual(C + B, A, "Add");
 
             C = A - B;
             C.AddInplace(B);
-            try
-            {
-                A.AddInplace(S);
-                Assert.Fail("AddEquals conformance check: nonconformance not raised");
-            }
-            catch(ArgumentException)
-            {
-                // expected case, nothing to do.
-            }
+
+            Assert.That(delegate() { A.AddInplace(S); }, Throws.TypeOf<ArgumentException>());
 
             NumericAssert.AreAlmostEqual(C, A, "AddEquals");
 
@@ -694,55 +492,27 @@ namespace Iridium.Test
 
             A = (Matrix)R.Clone();
             O = new Matrix(A.RowCount, A.ColumnCount, 1.0);
-            try
-            {
-                Matrix.ArrayDivide(A, S);
-                Assert.Fail("ArrayRightDivide conformance check: nonconformance not raised");
-            }
-            catch(ArgumentException)
-            {
-                // expected case, nothing to do.
-            }
+
+            Assert.That(delegate() { Matrix.ArrayDivide(A, S); }, Throws.TypeOf<ArgumentException>());
 
             C = Matrix.ArrayDivide(A, R);
             NumericAssert.AreAlmostEqual(C, O, "ArrayRightDivide");
-            try
-            {
-                A.ArrayDivide(S);
-                Assert.Fail("ArrayRightDivideEquals conformance check: nonconformance not raised");
-            }
-            catch(ArgumentException)
-            {
-                // expected case, nothing to do.
-            }
+
+            Assert.That(delegate() { A.ArrayDivide(S); }, Throws.TypeOf<ArgumentException>());
 
             A.ArrayDivide(R);
             NumericAssert.AreAlmostEqual(A, O, "ArrayRightDivideEquals");
 
             A = (Matrix)R.Clone();
             B = Matrix.Random(A.RowCount, A.ColumnCount);
-            try
-            {
-                S = Matrix.ArrayMultiply(A, S);
-                Assert.Fail("arrayTimes conformance check: nonconformance not raised");
-            }
-            catch(ArgumentException)
-            {
-                // expected case, nothing to do.
-            }
+
+            Assert.That(delegate() { S = Matrix.ArrayMultiply(A, S); }, Throws.TypeOf<ArgumentException>());
 
             C = Matrix.ArrayMultiply(A, B);
             C.ArrayDivide(B);
             NumericAssert.AreAlmostEqual(C, A, "arrayTimes");
-            try
-            {
-                A.ArrayMultiply(S);
-                Assert.Fail("ArrayMultiplyEquals conformance check: nonconformance not raised");
-            }
-            catch(ArgumentException)
-            {
-                // expected case, nothing to do.
-            }
+
+            Assert.That(delegate() { A.ArrayMultiply(S); }, Throws.TypeOf<ArgumentException>());
 
             A.ArrayMultiply(B);
             A.ArrayDivide(B);
