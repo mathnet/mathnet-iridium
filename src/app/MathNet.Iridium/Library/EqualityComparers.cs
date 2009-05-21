@@ -52,6 +52,17 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
+        /// Create an equality comparer for real floating point numbers with the default maximum relative error.
+        /// </summary>
+        /// <returns></returns>
+        public static
+        IEqualityComparer<double>
+        ForDouble()
+        {
+            return new DoubleEqualityComparer(Number.DefaultRelativeAccuracy);
+        }
+
+        /// <summary>
         /// Create an equality comparer for complex floating point numbers with a custom maximum relative error.
         /// </summary>
         /// <param name="maximumRelativeError">Maximum relative error of the absolute difference.</param>
@@ -61,6 +72,17 @@ namespace MathNet.Numerics
         ForComplex(double maximumRelativeError)
         {
             return new ComplexEqualityComparer(maximumRelativeError);
+        }
+
+        /// <summary>
+        /// Create an equality comparer for complex floating point numbers with the default maximum relative error.
+        /// </summary>
+        /// <returns></returns>
+        public static
+        IEqualityComparer<Complex>
+        ForComplex()
+        {
+            return new ComplexEqualityComparer(Number.DefaultRelativeAccuracy);
         }
 
         /// <summary>
@@ -100,6 +122,17 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
+        /// Create an equality comparer for real matrices with the default maximum relative error.
+        /// </summary>
+        /// <returns></returns>
+        public static
+        IEqualityComparer<Matrix>
+        ForMatrix()
+        {
+            return new MatrixEqualityComparer(10 * Number.DefaultRelativeAccuracy);
+        }
+
+        /// <summary>
         /// Create an equality comparer for complex matrices with a custom maximum relative error.
         /// </summary>
         /// <param name="maximumRelativeError">Maximum relative error of the Matrix difference 1-Norm.</param>
@@ -109,6 +142,17 @@ namespace MathNet.Numerics
         ForComplexMatrix(double maximumRelativeError)
         {
             return new ComplexMatrixEqualityComparer(maximumRelativeError);
+        }
+
+        /// <summary>
+        /// Create an equality comparer for complex matrices with the default maximum relative error.
+        /// </summary>
+        /// <returns></returns>
+        public static
+        IEqualityComparer<ComplexMatrix>
+        ForComplexMatrix()
+        {
+            return new ComplexMatrixEqualityComparer(10 * Number.DefaultRelativeAccuracy);
         }
 
         private class DoubleEqualityComparer : IEqualityComparer<double>

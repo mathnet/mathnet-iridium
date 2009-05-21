@@ -39,6 +39,7 @@ namespace MathNet.Numerics
     /// <remarks>The polynomial coefficients are ordered such that
     /// c[0] is the constant term and c[n] is the coefficient of z^n,
     /// that is y = c[0]*x^0+c[1]*x^1+c[2]*x^2+...</remarks>
+    [Serializable]
     public class ComplexPolynomial :
         IComparable,
         ICloneable
@@ -1540,7 +1541,7 @@ namespace MathNet.Numerics
         Equals(object obj)
         {
             ComplexPolynomial p = obj as ComplexPolynomial;
-            return p == null ? false : Equals(p);
+            return object.ReferenceEquals(p, null) ? false : Equals(p);
         }
 
         /// <summary>
@@ -1562,9 +1563,9 @@ namespace MathNet.Numerics
             ComplexPolynomial polynomial1,
             ComplexPolynomial polynomial2)
         {
-            if(polynomial1 == null)
+            if(object.ReferenceEquals(polynomial1, null))
             {
-                return polynomial2 == null;
+                return object.ReferenceEquals(polynomial2, null);
             }
 
             return polynomial1.Equals(polynomial2);

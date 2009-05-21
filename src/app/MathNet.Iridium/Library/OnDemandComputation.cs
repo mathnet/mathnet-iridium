@@ -33,10 +33,15 @@ namespace MathNet.Numerics
 {
     internal delegate T OnDemandCompute<T>();
 
+    [Serializable]
     internal sealed class OnDemandComputation<T>
     {
         OnDemandCompute<T> _compute;
+
+        [NonSerialized]
         T _result;
+
+        [NonSerialized]
         bool _isValid;
 
         internal

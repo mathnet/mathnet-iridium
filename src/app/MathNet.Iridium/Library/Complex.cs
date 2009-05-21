@@ -76,6 +76,7 @@ namespace MathNet.Numerics
     /// Wikipedia</a>
     /// </p>
     /// </remarks>
+    [Serializable]
     public struct Complex : IEquatable<Complex>, IComparable<Complex>
     {
         #region Complex comparers
