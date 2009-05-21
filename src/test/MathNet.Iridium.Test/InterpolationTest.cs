@@ -50,7 +50,7 @@ namespace Iridium.Test
             double[] x = new double[] { 0.0, 3.0, 1.0, 3.0 };
 
             IInterpolationMethod method = Interpolation.CreatePolynomial(t, x);
-            Assert.IsInstanceOfType(typeof(PolynomialInterpolation), method, "Type");
+            Assert.That(method, Is.TypeOf(typeof(PolynomialInterpolation)), "Type");
 
             double dx, d2x;
 
@@ -97,7 +97,7 @@ namespace Iridium.Test
             double[] x = new double[] { 0.0, 3.0, 2.5, 1.0, 3.0 };
 
             IInterpolationMethod method = Interpolation.CreateOnEquidistantPoints(0.0, 4.0, x);
-            Assert.IsInstanceOfType(typeof(EquidistantPolynomialInterpolation), method, "Type");
+            Assert.That(method, Is.TypeOf(typeof(EquidistantPolynomialInterpolation)), "Type");
 
             for(int i = 0; i < 4; i++)
             {
@@ -134,7 +134,7 @@ namespace Iridium.Test
             double[] x = new double[] { 0.0, 3.0, 2.5, 1.0, 3.0 };
 
             IInterpolationMethod method = Interpolation.CreateOnChebyshevFirstKindPoints(0.0, 4.0, x);
-            Assert.IsInstanceOfType(typeof(ChebyshevFirstKindPolynomialInterpolation), method, "Type");
+            Assert.That(method, Is.TypeOf(typeof(ChebyshevFirstKindPolynomialInterpolation)), "Type");
 
             double[] t = Interpolation.GenerateChebyshevFirstKindSamplePoints(0.0, 4.0, 5);
             for(int i = 0; i < 4; i++)
@@ -164,7 +164,7 @@ namespace Iridium.Test
             double[] x = new double[] { 0.0, 3.0, 2.5, 1.0, 3.0 };
 
             IInterpolationMethod method = Interpolation.CreateOnChebyshevSecondKindPoints(0.0, 4.0, x);
-            Assert.IsInstanceOfType(typeof(ChebyshevSecondKindPolynomialInterpolation), method, "Type");
+            Assert.That(method, Is.TypeOf(typeof(ChebyshevSecondKindPolynomialInterpolation)), "Type");
 
             double[] t = Interpolation.GenerateChebyshevSecondKindSamplePoints(0.0, 4.0, 5);
             for(int i = 0; i < 4; i++)
@@ -199,7 +199,7 @@ namespace Iridium.Test
             double[] x = new double[] { 1.0, 2.0, -1.0, 0.0, 1.0 };
 
             IInterpolationMethod method = Interpolation.Create(t, x);
-            Assert.IsInstanceOfType(typeof(RationalPoleFreeInterpolation), method, "Type");
+            Assert.That(method, Is.TypeOf(typeof(RationalPoleFreeInterpolation)), "Type");
 
             for(int i = 0; i < t.Length; i++)
             {
@@ -363,7 +363,7 @@ namespace Iridium.Test
             double[] x = new double[] { 1.0, 2.0, -1.0, 0.0, 1.0 };
 
             IInterpolationMethod method = Interpolation.CreateLinearSpline(t, x);
-            Assert.IsInstanceOfType(typeof(LinearSplineInterpolation), method, "Type");
+            Assert.That(method, Is.TypeOf(typeof(LinearSplineInterpolation)), "Type");
 
             for(int i = 0; i < t.Length; i++)
             {
@@ -403,7 +403,7 @@ namespace Iridium.Test
             double[] x = new double[] { 1.0, 2.0, -1.0, 0.0, 1.0 };
 
             IInterpolationMethod method = Interpolation.CreateNaturalCubicSpline(t, x);
-            Assert.IsInstanceOfType(typeof(CubicSplineInterpolation), method, "Type");
+            Assert.That(method, Is.TypeOf(typeof(CubicSplineInterpolation)), "Type");
 
             for(int i = 0; i < t.Length; i++)
             {
@@ -443,7 +443,7 @@ namespace Iridium.Test
             double[] x = new double[] { 1.0, 2.0, -1.0, 0.0, 1.0 };
 
             IInterpolationMethod method = Interpolation.CreateCubicSpline(t, x, SplineBoundaryCondition.FirstDerivative, 1.0, SplineBoundaryCondition.FirstDerivative, -1.0);
-            Assert.IsInstanceOfType(typeof(CubicSplineInterpolation), method, "Type");
+            Assert.That(method, Is.TypeOf(typeof(CubicSplineInterpolation)), "Type");
 
             for(int i = 0; i < t.Length; i++)
             {
@@ -471,7 +471,7 @@ namespace Iridium.Test
             double[] x = new double[] { 1.0, 2.0, -1.0, 0.0, 1.0 };
 
             IInterpolationMethod method = Interpolation.CreateCubicSpline(t, x, SplineBoundaryCondition.SecondDerivative, -5.0, SplineBoundaryCondition.SecondDerivative, -1.0);
-            Assert.IsInstanceOfType(typeof(CubicSplineInterpolation), method, "Type");
+            Assert.That(method, Is.TypeOf(typeof(CubicSplineInterpolation)), "Type");
 
             for(int i = 0; i < t.Length; i++)
             {
@@ -499,7 +499,7 @@ namespace Iridium.Test
             double[] x = new double[] { 1.0, 2.0, -1.0, 0.0, 1.0 };
 
             IInterpolationMethod method = Interpolation.CreateAkimaCubicSpline(t, x);
-            Assert.IsInstanceOfType(typeof(AkimaSplineInterpolation), method, "Type");
+            Assert.That(method, Is.TypeOf(typeof(AkimaSplineInterpolation)), "Type");
 
             for(int i = 0; i < t.Length; i++)
             {

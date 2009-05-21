@@ -135,7 +135,7 @@ namespace MathNet.Numerics
                 signed64++;
             }
 
-            if(signed64 == -9223372036854775808) 
+            if(signed64 == -9223372036854775808)
             {
                 /* = "-0", make it "+0" */
 
@@ -307,7 +307,7 @@ namespace MathNet.Numerics
             }
 
             // NaN's should never equal to anything
-            if(double.IsNaN(a) || double.IsNaN(b)) 
+            if(double.IsNaN(a) || double.IsNaN(b))
             {
                 /* (a != a || b != b) */
 

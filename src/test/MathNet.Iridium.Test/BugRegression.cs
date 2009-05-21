@@ -250,7 +250,7 @@ namespace Iridium.Test
             // Verify the eigen values
             ComplexVector eigenValues = m.EigenValues;
             Assert.AreEqual(12, eigenValues.Length, "Eigenvalue Length");
-            NumericAssert.AreAlmostEqual(expectedEigenValues, eigenValues, "Eigenvalue Values");
+            NumericAssert.AreAlmostEqual(expectedEigenValues, eigenValues, 1e-13, "Eigenvalue Values");
 
             // verify the eigen vectors, except the first 4 (since their eigen values are 0)
             Matrix eigenVectors = m.EigenVectors;
@@ -273,7 +273,7 @@ namespace Iridium.Test
                 }
 
                 // Compare
-                NumericAssert.AreAlmostEqual(a, b, 1e-13, "Eigenvector Values: " + i.ToString());
+                NumericAssert.AreAlmostEqual(a, b, 1e-11, "Eigenvector Values: " + i.ToString());
             }
         }
 

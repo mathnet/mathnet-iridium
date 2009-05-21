@@ -30,7 +30,10 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+
 using NUnit.Framework;
+using NUnit.Framework.Constraints;
+
 using MathNet.Numerics;
 using MathNet.Numerics.LinearAlgebra;
 
@@ -40,123 +43,74 @@ namespace Iridium.Test
     {
         public static void AreAlmostEqual(Matrix expected, Matrix actual, string message)
         {
-            //Assert.DoAssert(new AlmostEqualAsserter(expected.Norm1(), actual.Norm1(), (expected - actual).Norm1(), 10 * Number.DefaultRelativeAccuracy, message));
-            Test(expected.Norm1(), actual.Norm1(), (expected - actual).Norm1(), 10 * Number.DefaultRelativeAccuracy, message);
+            IEqualityComparer<Matrix> comparer = EqualityComparers.ForMatrix(10 * Number.DefaultRelativeAccuracy);
+            Assert.That(actual, Is.EqualTo(expected).Using(comparer), message);
         }
 
         public static void AreAlmostEqual(Matrix expected, Matrix actual, double relativeAccuracy, string message)
         {
-            //Assert.DoAssert(new AlmostEqualAsserter(expected.Norm1(), actual.Norm1(), (expected - actual).Norm1(), relativeAccuracy, message));
-            Test(expected.Norm1(), actual.Norm1(), (expected - actual).Norm1(), relativeAccuracy, message);
+            IEqualityComparer<Matrix> comparer = EqualityComparers.ForMatrix(relativeAccuracy);
+            Assert.That(actual, Is.EqualTo(expected).Using(comparer), message);
         }
 
         public static void AreAlmostEqual(ComplexMatrix expected, ComplexMatrix actual, string message)
         {
-            //Assert.DoAssert(new AlmostEqualAsserter(expected.Norm1(), actual.Norm1(), (expected - actual).Norm1(), 10 * Number.DefaultRelativeAccuracy, message));
-            Test(expected.Norm1(), actual.Norm1(), (expected - actual).Norm1(), 10 * Number.DefaultRelativeAccuracy, message);
+            IEqualityComparer<ComplexMatrix> comparer = EqualityComparers.ForComplexMatrix(10 * Number.DefaultRelativeAccuracy);
+            Assert.That(actual, Is.EqualTo(expected).Using(comparer), message);
         }
 
         public static void AreAlmostEqual(ComplexMatrix expected, ComplexMatrix actual, double relativeAccuracy, string message)
         {
-            //Assert.DoAssert(new AlmostEqualAsserter(expected.Norm1(), actual.Norm1(), (expected - actual).Norm1(), relativeAccuracy, message));
-            Test(expected.Norm1(), actual.Norm1(), (expected - actual).Norm1(), relativeAccuracy, message);
+            IEqualityComparer<ComplexMatrix> comparer = EqualityComparers.ForComplexMatrix(relativeAccuracy);
+            Assert.That(actual, Is.EqualTo(expected).Using(comparer), message);
         }
 
         public static void AreAlmostEqual(Vector expected, Vector actual, string message)
         {
-            //Assert.DoAssert(new AlmostEqualAsserter(expected.Norm1(), actual.Norm1(), (expected - actual).Norm1(), 10 * Number.DefaultRelativeAccuracy, message));
-            Test(expected.Norm1(), actual.Norm1(), (expected - actual).Norm1(), 10 * Number.DefaultRelativeAccuracy, message);
+            IEqualityComparer<double> comparer = EqualityComparers.ForDouble(10 * Number.DefaultRelativeAccuracy);
+            Assert.That(actual, Is.EqualTo(expected).Using(comparer), message);
         }
 
         public static void AreAlmostEqual(Vector expected, Vector actual, double relativeAccuracy, string message)
         {
-            //Assert.DoAssert(new AlmostEqualAsserter(expected.Norm1(), actual.Norm1(), (expected - actual).Norm1(), relativeAccuracy, message));
-            Test(expected.Norm1(), actual.Norm1(), (expected - actual).Norm1(), relativeAccuracy, message);
+            IEqualityComparer<double> comparer = EqualityComparers.ForDouble(relativeAccuracy);
+            Assert.That(actual, Is.EqualTo(expected).Using(comparer), message);
         }
 
         public static void AreAlmostEqual(ComplexVector expected, ComplexVector actual, string message)
         {
-            //Assert.DoAssert(new AlmostEqualAsserter(expected.Norm1(), actual.Norm1(), (expected - actual).Norm1(), 10 * Number.DefaultRelativeAccuracy, message));
-            Test(expected.Norm1(), actual.Norm1(), (expected - actual).Norm1(), 10 * Number.DefaultRelativeAccuracy, message);
+            IEqualityComparer<Complex> comparer = EqualityComparers.ForComplex(10 * Number.DefaultRelativeAccuracy);
+            Assert.That(actual, Is.EqualTo(expected).Using(comparer), message);
         }
 
         public static void AreAlmostEqual(ComplexVector expected, ComplexVector actual, double relativeAccuracy, string message)
         {
-            //Assert.DoAssert(new AlmostEqualAsserter(expected.Norm1(), actual.Norm1(), (expected - actual).Norm1(), relativeAccuracy, message));
-            Test(expected.Norm1(), actual.Norm1(), (expected - actual).Norm1(), relativeAccuracy, message);
+            IEqualityComparer<Complex> comparer = EqualityComparers.ForComplex(relativeAccuracy);
+            Assert.That(actual, Is.EqualTo(expected).Using(comparer), message);
         }
 
         public static void AreAlmostEqual(double expected, double actual, double relativeAccuracy, string message)
         {
-            //Assert.DoAssert(new AlmostEqualAsserter(expected, actual, relativeAccuracy, message));
-            Test(expected, actual, expected - actual, relativeAccuracy, message);
+            IEqualityComparer<double> comparer = EqualityComparers.ForDouble(relativeAccuracy);
+            Assert.That(actual, Is.EqualTo(expected).Using(comparer), message);
         }
 
         public static void AreAlmostEqual(double expected, double actual, string message)
         {
-            //Assert.DoAssert(new AlmostEqualAsserter(expected, actual, message));
-            Test(expected, actual, expected - actual, Number.DefaultRelativeAccuracy, message);
+            IEqualityComparer<double> comparer = EqualityComparers.ForDouble(Number.DefaultRelativeAccuracy);
+            Assert.That(actual, Is.EqualTo(expected).Using(comparer), message);
         }
 
         public static void AreAlmostEqual(Complex expected, Complex actual, double relativeAccuracy, string message)
         {
-            //Assert.DoAssert(new AlmostEqualAsserter(expected.Modulus, actual.Modulus, (expected - actual).Modulus, relativeAccuracy, message));
-            Test(expected.Modulus, actual.Modulus, (expected - actual).Modulus, relativeAccuracy, message);
+            IEqualityComparer<Complex> comparer = EqualityComparers.ForComplex(relativeAccuracy);
+            Assert.That(actual, Is.EqualTo(expected).Using(comparer), message);
         }
 
         public static void AreAlmostEqual(Complex expected, Complex actual, string message)
         {
-            //Assert.DoAssert(new AlmostEqualAsserter(expected.Modulus, actual.Modulus, (expected - actual).Modulus, Number.DefaultRelativeAccuracy, message));
-            Test(expected.Modulus, actual.Modulus, (expected - actual).Modulus, Number.DefaultRelativeAccuracy, message);
-        }
-
-        static void Test(double expected, double actual, double difference, double relativeAccuracy, string message)
-        {
-            if(!Number.AlmostEqualNorm(actual, expected, difference, relativeAccuracy))
-            {
-                Assert.AreEqual(actual, expected, message);
-                // FailureMessage.DisplayDifferences(expected, actual, false);
-                //return false;
-            }
-
-            // return true;
+            IEqualityComparer<Complex> comparer = EqualityComparers.ForComplex(Number.DefaultRelativeAccuracy);
+            Assert.That(actual, Is.EqualTo(expected).Using(comparer), message);
         }
     }
-
-    //public class AlmostEqualAsserter : ComparisonAsserter
-    //{
-    //    double _relativeAccuracy;
-    //    double _difference;
-
-    //    public AlmostEqualAsserter(double expected, double actual, double difference, double relativeAccuracy, string message, params object[] args)
-    //        : base(expected, actual, message, args)
-    //    {
-    //        _relativeAccuracy = relativeAccuracy;
-    //        _difference = difference;
-    //    }
-
-    //    public AlmostEqualAsserter(double expected, double actual, double relativeAccuracy, string message, params object[] args)
-    //        : this(expected, actual, expected - actual, relativeAccuracy, message, args)
-    //    {
-    //    }
-
-    //    public AlmostEqualAsserter(double expected, double actual, string message, params object[] args)
-    //        : this(expected, actual, expected - actual, Number.DefaultRelativeAccuracy, message, args)
-    //    {
-    //    }
-
-    //    public override bool Test()
-    //    {
-    //        double actual = (double)this.actual;
-    //        double expected = (double)this.expected;
-
-    //        if(!Number.AlmostEqualNorm(actual, expected, _difference, _relativeAccuracy))
-    //        {
-    //            FailureMessage.DisplayDifferences(expected, actual, false);
-    //            return false;
-    //        }
-
-    //        return true;
-    //    }
-    //}
 }
