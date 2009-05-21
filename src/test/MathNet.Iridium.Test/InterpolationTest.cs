@@ -34,6 +34,7 @@ using System.Text;
 using NUnit.Framework;
 
 using MathNet.Numerics;
+using MathNet.Numerics.Distributions;
 using MathNet.Numerics.Interpolation;
 using MathNet.Numerics.Interpolation.Algorithms;
 
@@ -76,6 +77,18 @@ namespace Iridium.Test
             NumericAssert.AreAlmostEqual(277.50000000000000000, method.Differentiate(10.0, out dx, out d2x), 1e-15, "B 10.0");
             NumericAssert.AreAlmostEqual(-1010.8333333333333333, method.Interpolate(-10.0), 1e-15, "A -10.0");
             NumericAssert.AreAlmostEqual(-1010.8333333333333333, method.Differentiate(-10.0, out dx, out d2x), 1e-15, "B -10.0");
+
+            // Test Linear Case
+            for(int k = 2; k < 7; k++)
+            {
+                double[] linx, liny, linxtest, linytest;
+                BuildLinearCase(2, k, out linx, out liny, out linxtest, out linytest);
+                IInterpolationMethod linearMethod = Interpolation.CreatePolynomial(linx, liny);
+                for(int i = 0; i < linxtest.Length; i++)
+                {
+                    NumericAssert.AreAlmostEqual(linytest[i], linearMethod.Interpolate(linxtest[i]), 1e-12, String.Format("Linear k={0} i={1}", k, i));
+                }
+            }
         }
 
         [Test]
@@ -101,6 +114,18 @@ namespace Iridium.Test
             NumericAssert.AreAlmostEqual(7.265625000000000001, method.Interpolate(4.5), 1e-15, "A 4.5");
             NumericAssert.AreAlmostEqual(592.50000000000000000, method.Interpolate(10.0), 1e-13, "A 10.0");
             NumericAssert.AreAlmostEqual(657.50000000000000000, method.Interpolate(-10.0), 1e-12, "A -10.0");
+
+            // Test Linear Case
+            for(int k = 2; k < 7; k++)
+            {
+                double[] linx, liny, linxtest, linytest;
+                BuildLinearCase(2, k, out linx, out liny, out linxtest, out linytest);
+                IInterpolationMethod linearMethod = Interpolation.CreateOnEquidistantPoints(2, Math.Max(k, 3), liny);
+                for(int i = 0; i < linxtest.Length; i++)
+                {
+                    NumericAssert.AreAlmostEqual(linytest[i], linearMethod.Interpolate(linxtest[i]), 1e-12, String.Format("Linear k={0} i={1}", k, i));
+                }
+            }
         }
 
         [Test]
@@ -221,6 +246,18 @@ namespace Iridium.Test
             // Maple: "with(CurveFitting);"
             // Maple: "tt := [seq(-5+(i-1)*10/39,i=1..40)]: xx := [seq(1/(1+tt[i]*tt[i]),i=1..40)]:"
             // Maple: "RationalInterpolation(tt, xx, x);"
+
+            // Test Linear Case
+            for(int k = 2; k < 7; k++)
+            {
+                double[] linx, liny, linxtest, linytest;
+                BuildLinearCase(2, k, out linx, out liny, out linxtest, out linytest);
+                IInterpolationMethod linearMethod = Interpolation.Create(linx, liny);
+                for(int i = 0; i < linxtest.Length; i++)
+                {
+                    NumericAssert.AreAlmostEqual(linytest[i], linearMethod.Interpolate(linxtest[i]), 1e-12, String.Format("Linear k={0} i={1}", k, i));
+                }
+            }
         }
 
         [Test]
@@ -250,6 +287,19 @@ namespace Iridium.Test
             NumericAssert.AreAlmostEqual(21.208249625210155439, method.Interpolate(4.5), 1e-14, "A 4.5");
             NumericAssert.AreAlmostEqual(-4.8936986959784751517, method.Interpolate(10.0), 1e-13, "A 10.0");
             NumericAssert.AreAlmostEqual(-3.6017584308603731307, method.Interpolate(-10.0), 1e-13, "A -10.0");
+
+            // Test Linear Case
+            for(int k = 2; k < 6; k++)
+            {
+                double[] linx, liny, linxtest, linytest;
+                BuildLinearCase(2, k, out linx, out liny, out linxtest, out linytest);
+                IInterpolationMethod linearMethod = Interpolation.CreateRational(linx, liny);
+                for(int i = 0; i < linxtest.Length; i++)
+                {
+                    // very weak test, but rational with poles is incredibly bad in the linear case
+                    Assert.IsFalse(Double.IsNaN(linearMethod.Interpolate(linxtest[i])), String.Format("Linear k={0} i={1}", k, i));
+                }
+            }
         }
 
         [Test]
@@ -332,6 +382,18 @@ namespace Iridium.Test
             NumericAssert.AreAlmostEqual(.2, method.Interpolate(1.2), 1e-15, "A 1.2");
             NumericAssert.AreAlmostEqual(9.0, method.Interpolate(10.0), 1e-15, "A 10.0");
             NumericAssert.AreAlmostEqual(-7.0, method.Interpolate(-10.0), 1e-15, "A -10.0");
+
+            // Test Linear Case
+            for(int k = 2; k < 6; k++)
+            {
+                double[] linx, liny, linxtest, linytest;
+                BuildLinearCase(2, k + 1, out linx, out liny, out linxtest, out linytest);
+                IInterpolationMethod linearMethod = Interpolation.CreateLinearSpline(linx, liny);
+                for(int i = 0; i < linxtest.Length; i++)
+                {
+                    NumericAssert.AreAlmostEqual(linytest[i], linearMethod.Interpolate(linxtest[i]), 1e-12, String.Format("Linear k={0} i={1}", k, i));
+                }
+            }
         }
 
         [Test]
@@ -360,6 +422,18 @@ namespace Iridium.Test
             NumericAssert.AreAlmostEqual(.30285714285714285716, method.Interpolate(1.2), 1e-15, "A 1.2");
             NumericAssert.AreAlmostEqual(189, method.Interpolate(10.0), 1e-15, "A 10.0");
             NumericAssert.AreAlmostEqual(677, method.Interpolate(-10.0), 1e-15, "A -10.0");
+
+            // Test Linear Case
+            for(int k = 2; k < 6; k++)
+            {
+                double[] linx, liny, linxtest, linytest;
+                BuildLinearCase(2, k + 1, out linx, out liny, out linxtest, out linytest);
+                IInterpolationMethod linearMethod = Interpolation.CreateNaturalCubicSpline(linx, liny);
+                for(int i = 0; i < linxtest.Length; i++)
+                {
+                    NumericAssert.AreAlmostEqual(linytest[i], linearMethod.Interpolate(linxtest[i]), 1e-12, String.Format("Linear k={0} i={1}", k, i));
+                }
+            }
         }
 
         [Test]
@@ -443,6 +517,54 @@ namespace Iridium.Test
             NumericAssert.AreAlmostEqual(0.2, method.Interpolate(1.2), 1e-15, "A 1.2");
             NumericAssert.AreAlmostEqual(9, method.Interpolate(10.0), 1e-14, "A 10.0");
             NumericAssert.AreAlmostEqual(-151, method.Interpolate(-10.0), 1e-14, "A -10.0");
+
+            // Test Linear Case
+            for(int k = 2; k < 6; k++)
+            {
+                double[] linx, liny, linxtest, linytest;
+                BuildLinearCase(2, k + 4, out linx, out liny, out linxtest, out linytest);
+                IInterpolationMethod linearMethod = Interpolation.CreateAkimaCubicSpline(linx, liny);
+                for(int i = 0; i < linxtest.Length; i++)
+                {
+                    NumericAssert.AreAlmostEqual(linytest[i], linearMethod.Interpolate(linxtest[i]), 1e-12, String.Format("Linear k={0} i={1}", k, i));
+                }
+            }
+        }
+
+        void BuildLinearCase(int start, int stop, out double[] x, out double[] y, out double[] xtest, out double[] ytest)
+        {
+            const double yoffset = 2.0;
+            int samples = stop - start + 1;
+            ContinuousUniformDistribution uniform = new ContinuousUniformDistribution();
+
+            // build linear samples
+            x = new double[samples];
+            y = new double[samples];
+            for(int i = 0; i < x.Length; i++)
+            {
+                int z = start + i;
+                x[i] = z;
+                y[i] = z + yoffset; // arbitrary small y-axis offset
+            }
+
+            // build linear test vectors randomly between the sample points
+            xtest = new double[samples+1];
+            ytest = new double[samples+1];
+            if(samples == 1)
+            {
+                xtest[0] = start - uniform.NextDouble();
+                xtest[1] = start + uniform.NextDouble();
+                ytest[0] = ytest[1] = start + yoffset;
+            }
+            else
+            {
+                for(int i = 0; i < xtest.Length; i++)
+                {
+                    double z = (i - 1) + uniform.NextDouble();
+                    xtest[i] = z;
+                    ytest[i] = z + yoffset;
+                }
+            }
         }
     }
 }
