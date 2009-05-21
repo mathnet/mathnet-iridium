@@ -389,7 +389,7 @@ namespace MathNet.Numerics.LinearAlgebra
         }
 
         /// <summary>
-        /// In place addition of a complex vector to this vector.
+        /// Inplace addition of a complex vector to this vector.
         /// </summary>
         /// <remarks>
         /// This method changes this vector.
@@ -409,7 +409,7 @@ namespace MathNet.Numerics.LinearAlgebra
         }
 
         /// <summary>
-        /// In place addition of a real vector to this vector.
+        /// Inplace addition of a real vector to this vector.
         /// </summary>
         /// <remarks>
         /// This method changes this vector.
@@ -429,7 +429,7 @@ namespace MathNet.Numerics.LinearAlgebra
         }
 
         /// <summary>
-        /// In place addition of a complex scalar to all elements of this vector.
+        /// Inplace addition of a complex scalar to all elements of this vector.
         /// </summary>
         /// <remarks>
         /// This method changes this vector.
@@ -526,7 +526,7 @@ namespace MathNet.Numerics.LinearAlgebra
         }
 
         /// <summary>
-        /// In place subtraction of a complex vector from this vector.
+        /// Inplace subtraction of a complex vector from this vector.
         /// </summary>
         /// <remarks>
         /// This method changes this vector.
@@ -546,7 +546,7 @@ namespace MathNet.Numerics.LinearAlgebra
         }
 
         /// <summary>
-        /// In place subtraction of a real vector from this vector.
+        /// Inplace subtraction of a real vector from this vector.
         /// </summary>
         /// <remarks>
         /// This method changes this vector.
@@ -566,7 +566,7 @@ namespace MathNet.Numerics.LinearAlgebra
         }
 
         /// <summary>
-        /// In place subtraction of a complex scalar from all elements of this vector.
+        /// Inplace subtraction of a complex scalar from all elements of this vector.
         /// </summary>
         /// <remarks>
         /// This method changes this vector.
@@ -608,7 +608,7 @@ namespace MathNet.Numerics.LinearAlgebra
         }
 
         /// <summary>
-        /// In place unary minus of the <c>Vector</c>.
+        /// Inplace unary minus of the <c>Vector</c>.
         /// </summary>
         /// <remarks>
         /// This method changes this vector.
@@ -646,7 +646,7 @@ namespace MathNet.Numerics.LinearAlgebra
         }
 
         /// <summary>
-        /// In place conjugation of this vector.
+        /// Inplace conjugation of this vector.
         /// </summary>
         /// <remarks>
         /// This method changes this vector.

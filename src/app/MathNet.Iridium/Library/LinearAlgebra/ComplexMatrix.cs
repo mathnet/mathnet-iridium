@@ -1736,6 +1736,30 @@ namespace MathNet.Numerics.LinearAlgebra
         }
 
         /// <summary>
+        /// Inplace scale this matrix by a complex scalar.
+        /// </summary>
+        /// <param name="b">The other complex scalar.</param>
+        /// <remarks>
+        /// This method changes this matrix.
+        /// </remarks>
+        /// <seealso cref="Multiply(Complex)"/>
+        /// <seealso cref="operator * (ComplexMatrix, Complex)"/>
+        public
+        void
+        MultiplyInplace(Complex b)
+        {
+            for(int i = 0; i < _rowCount; i++)
+            {
+                for(int j = 0; j < _columnCount; j++)
+                {
+                    _data[i][j] *= b;
+                }
+            }
+
+            ResetOnDemandComputations();
+        }
+
+        /// <summary>
         /// Inplace complex square matrix multiplication.
         /// </summary>
         /// <param name="b">The other square complex matrix.</param>
@@ -1840,30 +1864,6 @@ namespace MathNet.Numerics.LinearAlgebra
         }
 
         /// <summary>
-        /// Inplace scale this matrix by a complex scalar.
-        /// </summary>
-        /// <param name="b">The other complex scalar.</param>
-        /// <remarks>
-        /// This method changes this matrix.
-        /// </remarks>
-        /// <seealso cref="Multiply(Complex)"/>
-        /// <seealso cref="operator * (ComplexMatrix, Complex)"/>
-        public
-        void
-        MultiplyInplace(Complex b)
-        {
-            for(int i = 0; i < _rowCount; i++)
-            {
-                for(int j = 0; j < _columnCount; j++)
-                {
-                    _data[i][j] *= b;
-                }
-            }
-
-            ResetOnDemandComputations();
-        }
-
-        /// <summary>
         /// Multiply this matrix with a right complex column vector.
         /// </summary>
         /// <param name="b">The right complex column vector.</param>
@@ -1955,7 +1955,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// </summary>
         /// <param name="diagonal">The left diagonal complex matrix.</param>
         /// <returns>
-        /// Matrix ret[i,j] = this[i,j] * diagonal[i]
+        /// ComplexMatrix ret[i,j] = this[i,j] * diagonal[i]
         /// </returns>
         /// <remarks>
         /// This method has the same effect as the overloaded * operator.
@@ -1997,7 +1997,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// </summary>
         /// <param name="diagonal">The left diagonal real matrix.</param>
         /// <returns>
-        /// Matrix ret[i,j] = this[i,j] * diagonal[i]
+        /// ComplexMatrix ret[i,j] = this[i,j] * diagonal[i]
         /// </returns>
         /// <remarks>
         /// This method has the same effect as the overloaded * operator.
@@ -2109,7 +2109,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// </summary>
         /// <param name="diagonal">The right diagonal complex matrix.</param>
         /// <returns>
-        /// Matrix ret[i,j] = this[i,j] * diagonal[j]
+        /// ComplexMatrix ret[i,j] = this[i,j] * diagonal[j]
         /// </returns>
         /// <remarks>
         /// This method has the same effect as the overloaded * operator.
@@ -2150,7 +2150,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// </summary>
         /// <param name="diagonal">The right diagonal real matrix.</param>
         /// <returns>
-        /// Matrix ret[i,j] = this[i,j] * diagonal[j]
+        /// ComplexMatrix ret[i,j] = this[i,j] * diagonal[j]
         /// </returns>
         /// <remarks>
         /// This method has the same effect as the overloaded * operator.

@@ -345,7 +345,7 @@ namespace MathNet.Numerics.LinearAlgebra
         }
 
         /// <summary>
-        /// In place addition of a real vector to this vector.
+        /// Inplace addition of a real vector to this vector.
         /// </summary>
         /// <remarks>
         /// This method changes this vector.
@@ -365,7 +365,7 @@ namespace MathNet.Numerics.LinearAlgebra
         }
 
         /// <summary>
-        /// In place addition of real scalar to all elements of this vector.
+        /// Inplace addition of real scalar to all elements of this vector.
         /// </summary>
         /// <remarks>
         /// This method changes this vector.
@@ -435,7 +435,7 @@ namespace MathNet.Numerics.LinearAlgebra
         }
 
         /// <summary>
-        /// In place subtraction of a real vector from this vector.
+        /// Inplace subtraction of a real vector from this vector.
         /// </summary>
         /// <remarks>
         /// This method changes this vector.
@@ -455,7 +455,7 @@ namespace MathNet.Numerics.LinearAlgebra
         }
 
         /// <summary>
-        /// In place subtraction of a real scalar from all elements of this vector.
+        /// Inplace subtraction of a real scalar from all elements of this vector.
         /// </summary>
         /// <remarks>
         /// This method changes this vector.
@@ -497,7 +497,7 @@ namespace MathNet.Numerics.LinearAlgebra
         }
 
         /// <summary>
-        /// In place unary minus of this vector.
+        /// Inplace unary minus of this vector.
         /// </summary>
         /// <remarks>
         /// This method changes this vector.

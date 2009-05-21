@@ -1220,6 +1220,100 @@ namespace MathNet.Numerics.LinearAlgebra
             ResetOnDemandComputations();
         }
 
+
+        /// <summary>
+        /// In place subtraction of <c>m</c> to this <c>Matrix</c>.
+        /// </summary>
+        /// <seealso cref="operator - (Matrix, Matrix)"/>
+        [Obsolete("Use 'SubtractInplace' instead. 'Subtract' will soon be replaced with an outplace version")]
+        public virtual
+        void
+        Subtract(IMatrix<double> m)
+        {
+            SubtractInplace(m);
+        }
+
+        /// <summary>
+        /// In place subtraction of <c>m</c> to this <c>Matrix</c>.
+        /// </summary>
+        /// <seealso cref="operator - (Matrix, Matrix)"/>
+        /// <remarks>
+        /// This method changes this matrix.
+        /// </remarks>
+        public
+        void
+        SubtractInplace(IMatrix<double> m)
+        {
+            CheckMatchingMatrixDimensions(this, m);
+
+            for(int i = 0; i < _rowCount; i++)
+            {
+                double[] thisRow = _data[i];
+                for(int j = 0; j < thisRow.Length; j++)
+                {
+                    thisRow[j] -= m[i, j];
+                }
+            }
+
+            ResetOnDemandComputations();
+        }
+
+        /// <summary>
+        /// Negate this real matrix.
+        /// </summary>
+        public
+        Matrix
+        Negate()
+        {
+            double[][] newData = new double[_rowCount][];
+            for(int i = 0; i < newData.Length; i++)
+            {
+                double[] thisRow = _data[i];
+                double[] newRow = new double[_columnCount];
+                for(int j = 0; j < newRow.Length; j++)
+                {
+                    newRow[j] = -thisRow[j];
+                }
+
+                newData[i] = newRow;
+            }
+
+            return new Matrix(newData);
+        }
+
+        /// <summary>
+        /// In place unary minus of the <c>Matrix</c>.
+        /// </summary>
+        [Obsolete("Use 'NegateInplace' instead. 'UnaryMinus' will soon be removed.")]
+        public virtual
+        void
+        UnaryMinus()
+        {
+            NegateInplace();
+        }
+
+        /// <summary>
+        /// In place unary minus of the <c>Matrix</c>.
+        /// </summary>
+        /// <remarks>
+        /// This method changes this matrix.
+        /// </remarks>
+        public
+        void
+        NegateInplace()
+        {
+            for(int i = 0; i < _rowCount; i++)
+            {
+                double[] thisRow = _data[i];
+                for(int j = 0; j < thisRow.Length; j++)
+                {
+                    thisRow[j] = -thisRow[j];
+                }
+            }
+
+            ResetOnDemandComputations();
+        }
+
         /// <summary>
         /// Multiplies in place this <c>Matrix</c> by a scalar.
         /// </summary>
@@ -1248,58 +1342,6 @@ namespace MathNet.Numerics.LinearAlgebra
                 for(int j = 0; j < _columnCount; j++)
                 {
                     _data[i][j] *= s;
-                }
-            }
-
-            ResetOnDemandComputations();
-        }
-
-        /// <summary>
-        /// In place linear algebraic matrix multiplication, D * A where
-        /// D is the diagonal matrix.
-        /// </summary>
-        /// <param name="diagonal">Diagonal values of D.</param>
-        /// <exception cref="ArgumentNullException"><c>diagonal</c> must not be null.</exception>
-        /// <exception cref="ArgumentException">Matrix inner dimensions must agree.</exception>
-        [Obsolete("Use 'MultiplyLeftDiagonalInplace' instead.")]
-        public virtual
-        void
-        Multiply(double[] diagonal)
-        {
-            MultiplyLeftDiagonalInplace(new Vector(diagonal));
-        }
-
-        /// <summary>
-        /// In place linear algebraic matrix multiplication, D * A where
-        /// D is the diagonal matrix.
-        /// </summary>
-        /// <param name="diagonal">Diagonal values of D.</param>
-        /// <exception cref="ArgumentNullException"><c>diagonal</c> must not be null.</exception>
-        /// <exception cref="ArgumentException">Matrix inner dimensions must agree.</exception>
-        /// <remarks>
-        /// This method changes this matrix.
-        /// </remarks>
-        public
-        void
-        MultiplyLeftDiagonalInplace(IVector<double> diagonal)
-        {
-            if(null == diagonal)
-            {
-                throw new ArgumentNullException("diagonal", Properties.LocalStrings.ArgumentNull("diagonal"));
-            }
-
-            if(_rowCount != diagonal.Length)
-            {
-                throw new ArgumentException(Properties.LocalStrings.ArgumentMatrixSameDimensions);
-            }
-
-            for(int i = 0; i < _rowCount; i++)
-            {
-                double s = diagonal[i];
-                double[] thisRow = _data[i];
-                for(int j = 0; j < thisRow.Length; j++)
-                {
-                    thisRow[j] *= s;
                 }
             }
 
@@ -1355,6 +1397,58 @@ namespace MathNet.Numerics.LinearAlgebra
         }
 
         /// <summary>
+        /// Inplace real square matrix multiplication.
+        /// </summary>
+        /// <param name="b">The other square real matrix.</param>
+        /// <remarks>
+        /// This method changes this matrix. Only square matrices are supported.
+        /// </remarks>
+        /// <seealso cref="Multiply(IMatrix&lt;double&gt;)"/>
+        /// <seealso cref="operator * (Matrix, Matrix)"/>
+        /// <exception cref="ArgumentNullException">B must not be null.</exception>
+        /// <exception cref="ArgumentException">Matrix inner dimensions must agree.</exception>
+        public
+        void
+        MultiplyInplace(IMatrix<double> b)
+        {
+            if(null == b)
+            {
+                throw new ArgumentNullException("B");
+            }
+
+            if(_rowCount != _columnCount || b.RowCount != b.ColumnCount)
+            {
+                throw new ArgumentException(Properties.LocalStrings.ArgumentMatrixSquare);
+            }
+
+            if(_rowCount != b.RowCount)
+            {
+                throw new ArgumentException(Properties.LocalStrings.ArgumentMatrixSameDimensions);
+            }
+
+            double[] tempRow = new double[_columnCount];
+            for(int i = 0; i < _data.Length; i++)
+            {
+                double[] thisRow = _data[i];
+                for(int j = 0; j < tempRow.Length; j++)
+                {
+                    double s = 0;
+                    for(int k = 0; k < thisRow.Length; k++)
+                    {
+                        s += thisRow[k] * b[k, j];
+                    }
+
+                    tempRow[j] = s;
+                }
+
+                _data[i] = tempRow;
+                tempRow = thisRow;
+            }
+
+            ResetOnDemandComputations();
+        }
+
+        /// <summary>
         /// Multiply this matrix with a right real column vector.
         /// </summary>
         /// <param name="b">The right real column vector.</param>
@@ -1398,36 +1492,93 @@ namespace MathNet.Numerics.LinearAlgebra
         }
 
         /// <summary>
-        /// In place subtraction of <c>m</c> to this <c>Matrix</c>.
+        /// In place linear algebraic matrix multiplication, D * A where
+        /// D is the diagonal matrix.
         /// </summary>
-        /// <seealso cref="operator - (Matrix, Matrix)"/>
-        [Obsolete("Use 'SubtractInplace' instead. 'Subtract' will soon be replaced with an outplace version")]
+        /// <param name="diagonal">Diagonal values of D.</param>
+        /// <exception cref="ArgumentNullException"><c>diagonal</c> must not be null.</exception>
+        /// <exception cref="ArgumentException">Matrix inner dimensions must agree.</exception>
+        [Obsolete("Use 'MultiplyLeftDiagonalInplace' instead.")]
         public virtual
         void
-        Subtract(IMatrix<double> m)
+        Multiply(double[] diagonal)
         {
-            SubtractInplace(m);
+            MultiplyLeftDiagonalInplace(new Vector(diagonal));
         }
 
         /// <summary>
-        /// In place subtraction of <c>m</c> to this <c>Matrix</c>.
+        /// Muliply a diagonal real matrix with this matrix. This has the same effect
+        /// as scaling the rows of this matrix by the scalar elements of the diagonal.
         /// </summary>
-        /// <seealso cref="operator - (Matrix, Matrix)"/>
+        /// <param name="diagonal">The left diagonal real matrix.</param>
+        /// <returns>
+        /// Matrix ret[i,j] = this[i,j] * diagonal[i]
+        /// </returns>
+        /// <remarks>
+        /// This method has the same effect as the overloaded * operator.
+        /// </remarks>
+        public
+        Matrix
+        MultiplyLeftDiagonal(IVector<double> diagonal)
+        {
+            if(null == diagonal)
+            {
+                throw new ArgumentNullException("diagonal");
+            }
+
+            if(_rowCount != diagonal.Length)
+            {
+                throw new ArgumentException(Properties.LocalStrings.ArgumentMatrixSameDimensions);
+            }
+
+            double[][] newData = new double[_rowCount][];
+            for(int i = 0; i < newData.Length; i++)
+            {
+                double s = diagonal[i];
+                double[] thisRow = _data[i];
+                double[] newRow = new double[_columnCount];
+                for(int j = 0; j < newRow.Length; j++)
+                {
+                    newRow[j] = thisRow[j] * s;
+                }
+
+                newData[i] = newRow;
+            }
+
+            return new Matrix(newData);
+        }
+
+        /// <summary>
+        /// Inplace muliply a real diagonal matrix with this matrix. This has the same effect
+        /// as scaling the rows of this matrix by the scalar elements of the diagonal.
+        /// </summary>
+        /// <param name="diagonal">The left diagonal real matrix.</param>
+        /// <exception cref="ArgumentNullException"><c>diagonal</c> must not be null.</exception>
+        /// <exception cref="ArgumentException">Matrix inner dimensions must agree.</exception>
         /// <remarks>
         /// This method changes this matrix.
         /// </remarks>
         public
         void
-        SubtractInplace(IMatrix<double> m)
+        MultiplyLeftDiagonalInplace(IVector<double> diagonal)
         {
-            CheckMatchingMatrixDimensions(this, m);
+            if(null == diagonal)
+            {
+                throw new ArgumentNullException("diagonal", Properties.LocalStrings.ArgumentNull("diagonal"));
+            }
+
+            if(_rowCount != diagonal.Length)
+            {
+                throw new ArgumentException(Properties.LocalStrings.ArgumentMatrixSameDimensions);
+            }
 
             for(int i = 0; i < _rowCount; i++)
             {
+                double s = diagonal[i];
                 double[] thisRow = _data[i];
                 for(int j = 0; j < thisRow.Length; j++)
                 {
-                    thisRow[j] -= m[i, j];
+                    thisRow[j] *= s;
                 }
             }
 
@@ -1435,32 +1586,74 @@ namespace MathNet.Numerics.LinearAlgebra
         }
 
         /// <summary>
-        /// In place unary minus of the <c>Matrix</c>.
+        /// Muliply this matrix with a real diagonal matrix. This has the same effect
+        /// as scaling the columns of this matrix by the scalar elements of the diagonal.
         /// </summary>
-        [Obsolete("Use 'NegateInplace' instead.")]
-        public virtual
-        void
-        UnaryMinus()
+        /// <param name="diagonal">The right diagonal real matrix.</param>
+        /// <returns>
+        /// Matrix ret[i,j] = this[i,j] * diagonal[j]
+        /// </returns>
+        /// <remarks>
+        /// This method has the same effect as the overloaded * operator.
+        /// </remarks>
+        public
+        Matrix
+        MultiplyRightDiagonal(IVector<double> diagonal)
         {
-            NegateInplace();
+            if(null == diagonal)
+            {
+                throw new ArgumentNullException("diagonal");
+            }
+
+            if(_columnCount != diagonal.Length)
+            {
+                throw new ArgumentException(Properties.LocalStrings.ArgumentMatrixSameDimensions);
+            }
+
+            double[][] newData = new double[_rowCount][];
+            for(int i = 0; i < newData.Length; i++)
+            {
+                double[] thisRow = _data[i];
+                double[] newRow = new double[_columnCount];
+                for(int j = 0; j < newRow.Length; j++)
+                {
+                    newRow[j] = thisRow[j] * diagonal[j];
+                }
+
+                newData[i] = newRow;
+            }
+
+            return new Matrix(newData);
         }
 
         /// <summary>
-        /// In place unary minus of the <c>Matrix</c>.
+        /// Inplace Muliply this matrix with a real diagonal matrix. This has the same effect
+        /// as scaling the columns of this matrix by the scalar elements of the diagonal.
         /// </summary>
+        /// <param name="diagonal">The right diagonal real matrix.</param>
         /// <remarks>
         /// This method changes this matrix.
         /// </remarks>
         public
         void
-        NegateInplace()
+        MultiplyRightDiagonalInplace(IVector<double> diagonal)
         {
-            for(int i = 0; i < _rowCount; i++)
+            if(null == diagonal)
+            {
+                throw new ArgumentNullException("diagonal");
+            }
+
+            if(_columnCount != diagonal.Length)
+            {
+                throw new ArgumentException(Properties.LocalStrings.ArgumentMatrixSameDimensions);
+            }
+
+            for(int i = 0; i < _data.Length; i++)
             {
                 double[] thisRow = _data[i];
                 for(int j = 0; j < thisRow.Length; j++)
                 {
-                    thisRow[j] = -thisRow[j];
+                    thisRow[j] *= diagonal[j];
                 }
             }
 
@@ -1495,7 +1688,9 @@ namespace MathNet.Numerics.LinearAlgebra
 
         #region Additional elementary operations
 
-        /// <summary>In place transposition of this <c>Matrix</c>.</summary>
+        /// <summary>
+        /// In place transposition of this <c>Matrix</c>.
+        /// </summary>
         /// <seealso cref="Transpose(IMatrix&lt;double&gt;)"/>
         /// <remarks>
         /// In case of non-quadratic matrices, this operation replaces the
@@ -1511,7 +1706,9 @@ namespace MathNet.Numerics.LinearAlgebra
             TransposeInplace();
         }
 
-        /// <summary>In place transposition of this <c>Matrix</c>.</summary>
+        /// <summary>
+        /// In place transposition of this <c>Matrix</c>.
+        /// </summary>
         /// <seealso cref="Transpose(IMatrix&lt;double&gt;)"/>
         /// <remarks>
         /// In case of non-quadratic matrices, this operation replaces the
@@ -1559,7 +1756,9 @@ namespace MathNet.Numerics.LinearAlgebra
             ResetOnDemandComputations();
         }
 
-        /// <summary>Gets the transposition of the provided <c>Matrix</c>.</summary>
+        /// <summary>
+        /// Gets the transposition of the provided <c>Matrix</c>.
+        /// </summary>
         public static
         Matrix
         Transpose(IMatrix<double> m)
@@ -1576,7 +1775,23 @@ namespace MathNet.Numerics.LinearAlgebra
             return new Matrix(newData);
         }
 
-        /// <summary>Kronecker Product of two matrices.</summary>
+        /// <summary>
+        /// Tensor Product (Kronecker) of this and another matrix.
+        /// </summary>
+        /// <param name="B">The matrix to operate on.</param>
+        /// <returns>
+        /// Kronecker Product of this and the given matrix.
+        /// </returns>
+        public
+        Matrix
+        TensorMultiply(Matrix B)
+        {
+            return KroneckerProduct(this, B);
+        }
+
+        /// <summary>
+        /// Kronecker Product of two matrices.
+        /// </summary>
         public static
         Matrix
         KroneckerProduct(
@@ -1605,16 +1820,6 @@ namespace MathNet.Numerics.LinearAlgebra
             }
 
             return outMat;
-        }
-
-        /// <summary>Tensor Product (Kronecker) of this and another matrix.</summary>
-        /// <param name="B">The matrix to operate on.</param>
-        /// <returns>Kronecker Product of this and the given matrix.</returns>
-        public
-        Matrix
-        TensorMultiply(Matrix B)
-        {
-            return KroneckerProduct(this, B);
         }
 
         #endregion
@@ -2195,16 +2400,7 @@ namespace MathNet.Numerics.LinearAlgebra
         Matrix
         operator -(Matrix m1)
         {
-            double[][] newData = CreateMatrixData(m1.RowCount, m1.ColumnCount);
-            for(int i = 0; i < m1.RowCount; i++)
-            {
-                for(int j = 0; j < m1.ColumnCount; j++)
-                {
-                    newData[i][j] = -m1[i, j];
-                }
-            }
-
-            return new Matrix(newData);
+            return m1.Negate();
         }
 
         /// <summary>Linear algebraic matrix multiplication.</summary>
