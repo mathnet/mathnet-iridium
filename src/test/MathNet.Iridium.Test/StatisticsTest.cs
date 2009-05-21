@@ -44,9 +44,9 @@ namespace Iridium.Test
         [Test]
         public void TestAccumulatorNumericStability()
         {
-            // NOTE: Statistically it is possible that this test fails even
-            // if everything works as expected. However, it's very unlikely to happen,
-            // and even more unlikely to happen in a series.
+             /* NOTE: Statistically it is possible that this test fails even
+              * if everything works as expected. However, it's very unlikely to happen,
+              * and even more unlikely to happen in a series. */
 
             Accumulator accumulator = new Accumulator();
             NormalDistribution gaussian = new NormalDistribution();
@@ -57,6 +57,7 @@ namespace Iridium.Test
             {
                 accumulator.Add(gaussian.NextDouble());
             }
+
             NumericAssert.AreAlmostEqual(0, accumulator.Mean, 0.2, "Mean of (0,1)");
             NumericAssert.AreAlmostEqual(1, accumulator.Variance, 0.5, "Variance of (0,1)");
 
@@ -67,6 +68,7 @@ namespace Iridium.Test
             {
                 accumulator.Add(gaussian.NextDouble());
             }
+
             NumericAssert.AreAlmostEqual(1e+9, accumulator.Mean, 0.2, "Mean of (1e+9,1)");
             NumericAssert.AreAlmostEqual(1, accumulator.Variance, 0.5, "Variance of (1e+9,1)");
         }

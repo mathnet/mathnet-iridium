@@ -45,8 +45,8 @@ namespace MathNet.Numerics.Statistics
         double
         Mean(IEnumerable<double> samples)
         {
-            // TODO: Evaluate whether an alternative approach with
-            // absolute sorting might have advantages
+            /* TODO: Evaluate whether an alternative approach with
+             * absolute sorting might have advantages */
 
             long count = 0;
             double mean = 0;
@@ -67,8 +67,8 @@ namespace MathNet.Numerics.Statistics
         double
         Variance(IEnumerable<double> samples)
         {
-            // TODO: Evaluate whether an alternative approach with
-            // absolute sorting might have advantages
+            /* TODO: Evaluate whether an alternative approach with
+             * absolute sorting might have advantages */
 
             IEnumerator<double> iterator = samples.GetEnumerator();
             if(!iterator.MoveNext())
@@ -98,8 +98,8 @@ namespace MathNet.Numerics.Statistics
         double
         SampleVariance(IEnumerable<double> samples)
         {
-            // TODO: Evaluate whether an alternative approach with
-            // absolute sorting might have advantages
+             /* TODO: Evaluate whether an alternative approach with
+              * absolute sorting might have advantages */
 
             IEnumerator<double> iterator = samples.GetEnumerator();
             if(!iterator.MoveNext())

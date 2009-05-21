@@ -1437,7 +1437,6 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <summary>
         /// In place unary minus of the <c>Matrix</c>.
         /// </summary>
-
         [Obsolete("Use 'NegateInplace' instead.")]
         public virtual
         void
@@ -2001,6 +2000,7 @@ namespace MathNet.Numerics.LinearAlgebra
             {
                 G[i] = 1;
             }
+
             Vector GV = new Vector(G);
 
             // IRLS loop

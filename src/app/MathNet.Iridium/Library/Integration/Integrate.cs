@@ -43,7 +43,7 @@ namespace MathNet.Numerics.Integration
         static DoubleExponentialTransformation det = new DoubleExponentialTransformation();
 
         /// <summary>
-        /// Approximation of the definite interal of an analytic smooth function on a closed interval.
+        /// Approximation of the definite interval of an analytic smooth function on a closed interval.
         /// </summary>
         /// <param name="f">The analytic smooth function to integrate.</param>
         /// <param name="intervalBegin">Where the interval starts, inclusive and finite.</param>
@@ -65,7 +65,7 @@ namespace MathNet.Numerics.Integration
         }
 
         /// <summary>
-        /// Approximation of the definite interal of an analytic smooth function on a closed interval.
+        /// Approximation of the definite interval of an analytic smooth function on a closed interval.
         /// </summary>
         /// <param name="f">The analytic smooth function to integrate.</param>
         /// <param name="intervalBegin">Where the interval starts, inclusive and finite.</param>

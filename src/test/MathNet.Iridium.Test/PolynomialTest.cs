@@ -56,11 +56,11 @@ namespace Iridium.Test
             Assert.That(r1.Order, Is.EqualTo(2), "R1 Order");
 
             Polynomial r2 = p1 - p3;
-            Assert.That(r2.ToString(), Is.EqualTo("1"));;
+            Assert.That(r2.ToString(), Is.EqualTo("1"));
             Assert.That(r2.Order, Is.EqualTo(0), "R2 Order");
 
             Polynomial r3 = p1 + (-p3);
-            Assert.That(r3.ToString(), Is.EqualTo("1"));;
+            Assert.That(r3.ToString(), Is.EqualTo("1"));
             Assert.That(r3.Order, Is.EqualTo(0), "R3 Order");
 
             Polynomial r4 = p1 + p2;

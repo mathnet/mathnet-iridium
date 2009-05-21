@@ -533,7 +533,7 @@ namespace Iridium.Test
 
         void BuildLinearCase(int start, int stop, out double[] x, out double[] y, out double[] xtest, out double[] ytest)
         {
-            const double yoffset = 2.0;
+            const double YOffset = 2.0;
             int samples = stop - start + 1;
             ContinuousUniformDistribution uniform = new ContinuousUniformDistribution();
 
@@ -544,7 +544,7 @@ namespace Iridium.Test
             {
                 int z = start + i;
                 x[i] = z;
-                y[i] = z + yoffset; // arbitrary small y-axis offset
+                y[i] = z + YOffset; // arbitrary small y-axis offset
             }
 
             // build linear test vectors randomly between the sample points
@@ -554,7 +554,7 @@ namespace Iridium.Test
             {
                 xtest[0] = start - uniform.NextDouble();
                 xtest[1] = start + uniform.NextDouble();
-                ytest[0] = ytest[1] = start + yoffset;
+                ytest[0] = ytest[1] = start + YOffset;
             }
             else
             {
@@ -562,7 +562,7 @@ namespace Iridium.Test
                 {
                     double z = (i - 1) + uniform.NextDouble();
                     xtest[i] = z;
-                    ytest[i] = z + yoffset;
+                    ytest[i] = z + YOffset;
                 }
             }
         }

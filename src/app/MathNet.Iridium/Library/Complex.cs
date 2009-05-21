@@ -839,18 +839,18 @@ namespace MathNet.Numerics
             if(Math.Abs(divisor.real) >= Math.Abs(divisor.imag))
             {
                 double r = divisor.imag / divisor.real;
-                double den = divisor.real + r * divisor.imag;
+                double den = divisor.real + (r * divisor.imag);
                 return new Complex(
-                    (dividend.real + dividend.imag * r) / den,
-                    (dividend.imag - dividend.real * r) / den);
+                    (dividend.real + (dividend.imag * r)) / den,
+                    (dividend.imag - (dividend.real * r)) / den);
             }
             else
             {
                 double r = divisor.real / divisor.imag;
-                double den = divisor.imag + r * divisor.real;
+                double den = divisor.imag + (r * divisor.real);
                 return new Complex(
-                    (dividend.real * r + dividend.imag) / den,
-                    (dividend.imag * r - dividend.real) / den);
+                    ((dividend.real * r) + dividend.imag) / den,
+                    ((dividend.imag * r) - dividend.real) / den);
             }
         }
 
@@ -867,7 +867,7 @@ namespace MathNet.Numerics
             if(Math.Abs(divisor.real) >= Math.Abs(divisor.imag))
             {
                 double r = divisor.imag / divisor.real;
-                double den = divisor.real + r * divisor.imag;
+                double den = divisor.real + (r * divisor.imag);
                 return new Complex(
                     dividend / den,
                     -dividend * r / den);
@@ -875,7 +875,7 @@ namespace MathNet.Numerics
             else
             {
                 double r = divisor.real / divisor.imag;
-                double den = divisor.imag + r * divisor.real;
+                double den = divisor.imag + (r * divisor.real);
                 return new Complex(
                     dividend * r / den,
                     -dividend / den);

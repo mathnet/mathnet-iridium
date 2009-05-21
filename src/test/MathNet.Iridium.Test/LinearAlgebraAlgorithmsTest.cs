@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------
-// <copyright file="LinearAlgebraAlgorithms.cs" company="Math.NET Project">
+// <copyright file="LinearAlgebraAlgorithmsTest.cs" company="Math.NET Project">
 //    Copyright (c) 2002-2009, Christoph Rüegg.
 //    All Right Reserved.
 // </copyright>

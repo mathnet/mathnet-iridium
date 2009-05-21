@@ -185,7 +185,7 @@ namespace MathNet.Numerics.SpecialFunctions.Algorithms
 
             // Initial Guess
             double d = 1 / (9 * a);
-            double y = 1 - d - 0.98 * Constants.Sqrt2 * Fn.ErfInverse((2.0 * y0) - 1.0) * Math.Sqrt(d);
+            double y = 1 - d - (0.98 * Constants.Sqrt2 * Fn.ErfInverse((2.0 * y0) - 1.0) * Math.Sqrt(d));
             double x = a * y * y * y;
             double lgm = GammaAlgorithm.GammaLn(a);
 

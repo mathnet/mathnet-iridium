@@ -102,7 +102,7 @@ namespace MathNet.Numerics.RandomSources
         long
         NextInt64()
         {
-            byte[] buffer = new byte[sizeof(Int64)];
+            byte[] buffer = new byte[sizeof(long)];
             NextBytes(buffer);
             long candidate = BitConverter.ToInt64(buffer, 0);
 
@@ -126,7 +126,7 @@ namespace MathNet.Numerics.RandomSources
         int
         NextFullRangeInt32()
         {
-            byte[] buffer = new byte[sizeof(Int32)];
+            byte[] buffer = new byte[sizeof(int)];
             NextBytes(buffer);
             return BitConverter.ToInt32(buffer, 0);
         }
@@ -143,7 +143,7 @@ namespace MathNet.Numerics.RandomSources
         long
         NextFullRangeInt64()
         {
-            byte[] buffer = new byte[sizeof(Int64)];
+            byte[] buffer = new byte[sizeof(long)];
             NextBytes(buffer);
             return BitConverter.ToInt64(buffer, 0);
         }
@@ -215,7 +215,7 @@ namespace MathNet.Numerics.RandomSources
             // indeed be reached, with uniform probability.
             do
             {
-                candidate = new Decimal(
+                candidate = new decimal(
                     NextFullRangeInt32(),
                     NextFullRangeInt32(),
                     NextFullRangeInt32(),

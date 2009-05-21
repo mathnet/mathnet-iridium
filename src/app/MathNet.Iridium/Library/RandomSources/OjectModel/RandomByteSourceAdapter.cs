@@ -40,16 +40,6 @@ namespace MathNet.Numerics.RandomSources.OjectModel
         RandomSource
     {
         /// <summary>
-        /// Stores an <see cref="Int32"/> used to generate up to 31 random <see cref="Boolean"/> values.
-        /// </summary>
-        int _bitBuffer;
-
-        /// <summary>
-        /// Stores how many random <see cref="Boolean"/> values still can be generated from <see cref="_bitBuffer"/>.
-        /// </summary>
-        int _bitCount;
-
-        /// <summary>
         /// Represents the multiplier that computes a double-precision floating point number greater than or equal to 0.0 
         ///   and less than 1.0 when it gets applied to a nonnegative 32-bit signed integer.
         /// </summary>
@@ -74,6 +64,16 @@ namespace MathNet.Numerics.RandomSources.OjectModel
         const double UInt64ToDoubleMultiplier = 1.0 / ((double)UInt64.MaxValue + 1.0);
 
         /// <summary>
+        /// Stores an <see cref="Int32"/> used to generate up to 31 random <see cref="Boolean"/> values.
+        /// </summary>
+        int _bitBuffer;
+
+        /// <summary>
+        /// Stores how many random <see cref="Boolean"/> values still can be generated from <see cref="_bitBuffer"/>.
+        /// </summary>
+        int _bitCount;
+
+        /// <summary>
         /// Returns a random number of the full Int32 range.
         /// </summary>
         /// <returns>
@@ -85,7 +85,7 @@ namespace MathNet.Numerics.RandomSources.OjectModel
         int
         NextFullRangeInt32()
         {
-            byte[] buffer = new byte[sizeof(Int32)];
+            byte[] buffer = new byte[sizeof(int)];
             NextBytes(buffer);
             return BitConverter.ToInt32(buffer, 0);
         }
@@ -102,7 +102,7 @@ namespace MathNet.Numerics.RandomSources.OjectModel
         uint
         NextFullRangeUInt32()
         {
-            byte[] buffer = new byte[sizeof(UInt32)];
+            byte[] buffer = new byte[sizeof(uint)];
             NextBytes(buffer);
             return BitConverter.ToUInt32(buffer, 0);
         }
@@ -119,7 +119,7 @@ namespace MathNet.Numerics.RandomSources.OjectModel
         long
         NextFullRangeInt64()
         {
-            byte[] buffer = new byte[sizeof(Int64)];
+            byte[] buffer = new byte[sizeof(long)];
             NextBytes(buffer);
             return BitConverter.ToInt64(buffer, 0);
         }
@@ -136,7 +136,7 @@ namespace MathNet.Numerics.RandomSources.OjectModel
         ulong
         NextFullRangeUInt64()
         {
-            byte[] buffer = new byte[sizeof(UInt64)];
+            byte[] buffer = new byte[sizeof(ulong)];
             NextBytes(buffer);
             return BitConverter.ToUInt64(buffer, 0);
         }
@@ -151,7 +151,7 @@ namespace MathNet.Numerics.RandomSources.OjectModel
         int
         Next()
         {
-            byte[] buffer = new byte[sizeof(Int32)];
+            byte[] buffer = new byte[sizeof(int)];
             NextBytes(buffer);
             int candidate = BitConverter.ToInt32(buffer, 0);
 
@@ -252,9 +252,9 @@ namespace MathNet.Numerics.RandomSources.OjectModel
         long
         NextInt64()
         {
-            byte[] buffer = new byte[sizeof(Int64)];
+            byte[] buffer = new byte[sizeof(long)];
             NextBytes(buffer);
-            long candidate =  BitConverter.ToInt64(buffer, 0);
+            long candidate = BitConverter.ToInt64(buffer, 0);
 
             // wrap negative numbers around, mapping every negative number to a distinct nonnegative number
             // MinValue -> 0, -1 -> MaxValue

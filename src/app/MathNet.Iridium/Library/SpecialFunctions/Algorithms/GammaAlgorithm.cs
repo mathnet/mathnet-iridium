@@ -145,7 +145,7 @@ namespace MathNet.Numerics.SpecialFunctions.Algorithms
         static double GammaLnLargePositive(double x)
         {
             // Stirling
-            double q = (x - 0.5) * Math.Log(x) - x + Constants.Ln2Pi_2;
+            double q = ((x - 0.5) * Math.Log(x)) - x + Constants.Ln2Pi_2;
             if(x > 100000000)
             {
                 return q;
