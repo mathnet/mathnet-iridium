@@ -104,8 +104,8 @@ namespace Iridium.Test
         public void TestDescriptiveStatisticsMinMax()
         {
             double[] samples = new double[] { -1, 5, 0, -3, 10, -0.5, 4 };
-            Assert.AreEqual(-3, DescriptiveStatistics.Min(samples), "Min");
-            Assert.AreEqual(10, DescriptiveStatistics.Max(samples), "Max");
+            Assert.That(DescriptiveStatistics.Min(samples), Is.EqualTo(-3), "Min");
+            Assert.That(DescriptiveStatistics.Max(samples), Is.EqualTo(10), "Max");
         }
 
         [Test]
@@ -124,11 +124,11 @@ namespace Iridium.Test
         {
             // -3 -1 -0.5 0  1  4 5 6 10
             double[] samples = new double[] { -1, 5, 0, -3, 10, -0.5, 4, 1, 6 };
-            Assert.AreEqual(1, DescriptiveStatistics.Median(samples), "Median");
-            Assert.AreEqual(-3, DescriptiveStatistics.OrderStatistic(samples, 1), "Order-1");
-            Assert.AreEqual(-0.5, DescriptiveStatistics.OrderStatistic(samples, 3), "Order-3");
-            Assert.AreEqual(5, DescriptiveStatistics.OrderStatistic(samples, 7), "Order-7");
-            Assert.AreEqual(10, DescriptiveStatistics.OrderStatistic(samples, 9), "Order-9");
+            Assert.That(DescriptiveStatistics.Median(samples), Is.EqualTo(1), "Median");
+            Assert.That(DescriptiveStatistics.OrderStatistic(samples, 1), Is.EqualTo(-3), "Order-1");
+            Assert.That(DescriptiveStatistics.OrderStatistic(samples, 3), Is.EqualTo(-0.5), "Order-3");
+            Assert.That(DescriptiveStatistics.OrderStatistic(samples, 7), Is.EqualTo(5), "Order-7");
+            Assert.That(DescriptiveStatistics.OrderStatistic(samples, 9), Is.EqualTo(10), "Order-9");
         }
     }
 }

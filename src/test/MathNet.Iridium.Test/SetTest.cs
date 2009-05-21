@@ -58,10 +58,10 @@ namespace Iridium.Test
 
             Set<int> inter = a.Intersect(b);
 
-            Assert.AreEqual(3, inter.Count, "A01");
-            Assert.AreEqual(0, inter[0], "A02");
-            Assert.AreEqual(6, inter[1], "A03");
-            Assert.AreEqual(12, inter[2], "A04");
+            Assert.That(inter.Count, Is.EqualTo(3), "A01");
+            Assert.That(inter[0], Is.EqualTo(0), "A02");
+            Assert.That(inter[1], Is.EqualTo(6), "A03");
+            Assert.That(inter[2], Is.EqualTo(12), "A04");
         }
     }
 }

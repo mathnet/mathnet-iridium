@@ -49,14 +49,14 @@ namespace Iridium.Test
             Complex minusOne = -Complex.One;
             Complex piI = minusOne.NaturalLogarithm();
 
-            Assert.AreEqual(0.0, piI.Real, 1e-8, "Re{ln(-1)} = 0");
-            Assert.AreEqual(Constants.Pi, piI.Imag, 1e-8, "Im{ln(-1)} = Pi");
+            NumericAssert.AreAlmostEqual(0.0, piI.Real, "Re{ln(-1)} = 0");
+            NumericAssert.AreAlmostEqual(Constants.Pi, piI.Imag, "Im{ln(-1)} = Pi");
 
             Complex zero = Complex.Zero;
             Complex lnZero = zero.NaturalLogarithm();
 
-            Assert.AreEqual(double.NegativeInfinity, lnZero.Real, "Re{ln(0)} = -infinity");
-            Assert.AreEqual(0, lnZero.Imag, "Im{ln(0)} = 0");
+            Assert.That(lnZero.Real, Is.EqualTo(double.NegativeInfinity), "Re{ln(0)} = -infinity");
+            NumericAssert.AreAlmostEqual(0, lnZero.Imag, "Im{ln(0)} = 0");
         }
 
         [Test]
@@ -89,8 +89,8 @@ namespace Iridium.Test
         public void IRID107_ComplexPowerAtZero()
         {
             Complex zeroPowTwo = Complex.Zero.Power(2);
-            Assert.AreEqual(0d, zeroPowTwo.Real, "Re{(0)^(2)} = 0");
-            Assert.AreEqual(0d, zeroPowTwo.Imag, "Im{(0)^(2)} = 0");
+            NumericAssert.AreAlmostEqual(0d, zeroPowTwo.Real, "Re{(0)^(2)} = 0");
+            NumericAssert.AreAlmostEqual(0d, zeroPowTwo.Imag, "Im{(0)^(2)} = 0");
         }
 
         [Test]
@@ -115,10 +115,10 @@ namespace Iridium.Test
         [Test]
         public void IRID178_ComplexNumbersHashCode()
         {
-            Assert.AreNotEqual(Complex.One.GetHashCode(), Complex.I.GetHashCode(), "A");
-            Assert.AreNotEqual(Complex.One.GetHashCode(), (-Complex.I).GetHashCode(), "B");
-            Assert.AreNotEqual((-Complex.One).GetHashCode(), Complex.I.GetHashCode(), "C");
-            Assert.AreNotEqual((-Complex.One).GetHashCode(), (-Complex.I).GetHashCode(), "D");
+            Assert.That(Complex.One.GetHashCode(), Is.Not.EqualTo(Complex.I.GetHashCode()), "A");
+            Assert.That(Complex.One.GetHashCode(), Is.Not.EqualTo((-Complex.I).GetHashCode()), "B");
+            Assert.That((-Complex.One).GetHashCode(), Is.Not.EqualTo(Complex.I.GetHashCode()), "C");
+            Assert.That((-Complex.One).GetHashCode(), Is.Not.EqualTo((-Complex.I).GetHashCode()), "D");
         }
 
         [Test]
@@ -249,13 +249,13 @@ namespace Iridium.Test
 
             // Verify the eigen values
             ComplexVector eigenValues = m.EigenValues;
-            Assert.AreEqual(12, eigenValues.Length, "Eigenvalue Length");
+            Assert.That(eigenValues.Length, Is.EqualTo(12), "Eigenvalue Length");
             NumericAssert.AreAlmostEqual(expectedEigenValues, eigenValues, 1e-13, "Eigenvalue Values");
 
             // verify the eigen vectors, except the first 4 (since their eigen values are 0)
             Matrix eigenVectors = m.EigenVectors;
-            Assert.AreEqual(12, eigenVectors.RowCount, "Eigenvector Rows");
-            Assert.AreEqual(12, eigenVectors.ColumnCount, "Eigenvector Columns");
+            Assert.That(eigenVectors.RowCount, Is.EqualTo(12), "Eigenvector Rows");
+            Assert.That(eigenVectors.ColumnCount, Is.EqualTo(12), "Eigenvector Columns");
             for(int i = 4; i < 12; i++)
             {
                 Vector a = expectedEigenVectors.GetColumnVector(i);
@@ -286,7 +286,7 @@ namespace Iridium.Test
             Polynomial a = p1 + p2;
             Polynomial b = p2 + p1;
 
-            Assert.AreEqual(a.ToString(), b.ToString());
+            Assert.That(a.ToString(), Is.EqualTo(b.ToString()));
 
             ComplexPolynomial cp1 = new ComplexPolynomial(new Complex[] { -1, 0, 2 });
             ComplexPolynomial cp2 = new ComplexPolynomial(new Complex[] { 4 });
@@ -294,7 +294,7 @@ namespace Iridium.Test
             ComplexPolynomial ca = cp1 + cp2;
             ComplexPolynomial cb = cp2 + cp1;
 
-            Assert.AreEqual(ca.ToString(), cb.ToString());
+            Assert.That(ca.ToString(), Is.EqualTo(cb.ToString()));
         }
 
         [Test]
@@ -315,7 +315,7 @@ namespace Iridium.Test
             double theta = 73076944.560563684;
             GammaDistribution gamma_dist = new GammaDistribution(alpha, theta);
             double left_tail = gamma_dist.InverseCumulativeDistribution(0.001);
-            Assert.IsFalse(Double.IsNaN(left_tail));
+            Assert.That(left_tail, Is.Not.NaN);
         }
 
         [Test]
@@ -326,11 +326,11 @@ namespace Iridium.Test
 
             IInterpolationMethod method2 = Interpolation.CreatePolynomial(points, values);
             double b = method2.Interpolate(2.5);
-            Assert.IsFalse(Double.IsNaN(b), "polynomial (neville)");
+            Assert.That(b, Is.Not.NaN, "polynomial (neville)");
 
             IInterpolationMethod method = Interpolation.Create(points, values);
             double a = method.Interpolate(2.5);
-            Assert.IsFalse(Double.IsNaN(a), "rational pole-free");
+            Assert.That(a, Is.Not.NaN, "rational pole-free");
         }
     }
 }

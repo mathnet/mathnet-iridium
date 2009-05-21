@@ -43,73 +43,73 @@ namespace Iridium.Test
         [Test]
         public void CountingVariationsTest()
         {
-            Assert.AreEqual(1, Combinatorics.Variations(0, 0), "Var(0,0)");
-            Assert.AreEqual(1, Combinatorics.Variations(1, 0), "Var(1,0)");
-            Assert.AreEqual(0, Combinatorics.Variations(0, 1), "Var(0,1)");
-            Assert.AreEqual(1, Combinatorics.Variations(10, 0), "Var(10,0)");
-            Assert.AreEqual(90, Combinatorics.Variations(10, 2), "Var(10,2)");
-            Assert.AreEqual(5040, Combinatorics.Variations(10, 4), "Var(10,4)");
-            Assert.AreEqual(151200, Combinatorics.Variations(10, 6), "Var(10,6)");
-            NumericAssert.AreAlmostEqual(3628800, Combinatorics.Variations(10, 9), 1e-5, "Var(10,9)");
-            NumericAssert.AreAlmostEqual(3628800, Combinatorics.Variations(10, 10), 1e-5, "Var(10,10)");
-            Assert.AreEqual(0, Combinatorics.Variations(10, 11), "Var(10,11)");
+            Assert.That(Combinatorics.Variations(0, 0), Is.EqualTo(1), "Var(0,0)");
+            Assert.That(Combinatorics.Variations(1, 0), Is.EqualTo(1), "Var(1,0)");
+            Assert.That(Combinatorics.Variations(0, 1), Is.EqualTo(0), "Var(0,1)");
+            Assert.That(Combinatorics.Variations(10, 0), Is.EqualTo(1), "Var(10,0)");
+            Assert.That(Combinatorics.Variations(10, 2), Is.EqualTo(90), "Var(10,2)");
+            Assert.That(Combinatorics.Variations(10, 4), Is.EqualTo(5040), "Var(10,4)");
+            Assert.That(Combinatorics.Variations(10, 6), Is.EqualTo(151200), "Var(10,6)");
+            Assert.That(Combinatorics.Variations(10, 9), Is.EqualTo(3628800), "Var(10,9)");
+            Assert.That(Combinatorics.Variations(10, 10), Is.EqualTo(3628800), "Var(10,10)");
+            Assert.That(Combinatorics.Variations(10, 11), Is.EqualTo(0), "Var(10,11)");
         }
 
         [Test]
         public void CountingVariationsWithRepetitionTest()
         {
-            Assert.AreEqual(1, Combinatorics.VariationsWithRepetition(0, 0), "VarRep(0,0)");
-            Assert.AreEqual(1, Combinatorics.VariationsWithRepetition(1, 0), "VarRep(1,0)");
-            Assert.AreEqual(0, Combinatorics.VariationsWithRepetition(0, 1), "VarRep(0,1)");
-            Assert.AreEqual(1, Combinatorics.VariationsWithRepetition(10, 0), "VarRep(10,0)");
-            Assert.AreEqual(100, Combinatorics.VariationsWithRepetition(10, 2), "VarRep(10,2)");
-            Assert.AreEqual(10000, Combinatorics.VariationsWithRepetition(10, 4), "VarRep(10,4)");
-            Assert.AreEqual(1000000, Combinatorics.VariationsWithRepetition(10, 6), "VarRep(10,6)");
-            Assert.AreEqual(1000000000, Combinatorics.VariationsWithRepetition(10, 9), "VarRep(10,9)");
-            Assert.AreEqual(10000000000, Combinatorics.VariationsWithRepetition(10, 10), "VarRep(10,10)");
-            Assert.AreEqual(100000000000, Combinatorics.VariationsWithRepetition(10, 11), "VarRep(10,11)");
+            Assert.That(Combinatorics.VariationsWithRepetition(0, 0), Is.EqualTo(1), "VarRep(0,0)");
+            Assert.That(Combinatorics.VariationsWithRepetition(1, 0), Is.EqualTo(1), "VarRep(1,0)");
+            Assert.That(Combinatorics.VariationsWithRepetition(0, 1), Is.EqualTo(0), "VarRep(0,1)");
+            Assert.That(Combinatorics.VariationsWithRepetition(10, 0), Is.EqualTo(1), "VarRep(10,0)");
+            Assert.That(Combinatorics.VariationsWithRepetition(10, 2), Is.EqualTo(100), "VarRep(10,2)");
+            Assert.That(Combinatorics.VariationsWithRepetition(10, 4), Is.EqualTo(10000), "VarRep(10,4)");
+            Assert.That(Combinatorics.VariationsWithRepetition(10, 6), Is.EqualTo(1000000), "VarRep(10,6)");
+            Assert.That(Combinatorics.VariationsWithRepetition(10, 9), Is.EqualTo(1000000000), "VarRep(10,9)");
+            Assert.That(Combinatorics.VariationsWithRepetition(10, 10), Is.EqualTo(10000000000), "VarRep(10,10)");
+            Assert.That(Combinatorics.VariationsWithRepetition(10, 11), Is.EqualTo(100000000000), "VarRep(10,11)");
         }
 
         [Test]
         public void CountingCombinationsTest()
         {
-            Assert.AreEqual(1, Combinatorics.Combinations(0, 0), "Comb(0,0)");
-            Assert.AreEqual(1, Combinatorics.Combinations(1, 0), "Comb(1,0)");
-            Assert.AreEqual(0, Combinatorics.Combinations(0, 1), "Comb(0,1)");
-            Assert.AreEqual(1, Combinatorics.Combinations(10, 0), "Comb(10,0)");
-            Assert.AreEqual(45, Combinatorics.Combinations(10, 2), "Comb(10,2)");
-            Assert.AreEqual(210, Combinatorics.Combinations(10, 4), "Comb(10,4)");
-            Assert.AreEqual(210, Combinatorics.Combinations(10, 6), "Comb(10,6)");
-            Assert.AreEqual(10, Combinatorics.Combinations(10, 9), "Comb(10,9)");
-            Assert.AreEqual(1, Combinatorics.Combinations(10, 10), "Comb(10,10)");
-            Assert.AreEqual(0, Combinatorics.Combinations(10, 11), "Comb(10,11)");
+            Assert.That(Combinatorics.Combinations(0, 0), Is.EqualTo(1), "Comb(0,0)");
+            Assert.That(Combinatorics.Combinations(1, 0), Is.EqualTo(1), "Comb(1,0)");
+            Assert.That(Combinatorics.Combinations(0, 1), Is.EqualTo(0), "Comb(0,1)");
+            Assert.That(Combinatorics.Combinations(10, 0), Is.EqualTo(1), "Comb(10,0)");
+            Assert.That(Combinatorics.Combinations(10, 2), Is.EqualTo(45), "Comb(10,2)");
+            Assert.That(Combinatorics.Combinations(10, 4), Is.EqualTo(210), "Comb(10,4)");
+            Assert.That(Combinatorics.Combinations(10, 6), Is.EqualTo(210), "Comb(10,6)");
+            Assert.That(Combinatorics.Combinations(10, 9), Is.EqualTo(10), "Comb(10,9)");
+            Assert.That(Combinatorics.Combinations(10, 10), Is.EqualTo(1), "Comb(10,10)");
+            Assert.That(Combinatorics.Combinations(10, 11), Is.EqualTo(0), "Comb(10,11)");
         }
 
         [Test]
         public void CountingCombinationsWithRepetitionTest()
         {
-            Assert.AreEqual(1, Combinatorics.CombinationsWithRepetition(0, 0), "CombRep(0,0)");
-            Assert.AreEqual(1, Combinatorics.CombinationsWithRepetition(1, 0), "CombRep(1,0)");
-            Assert.AreEqual(0, Combinatorics.CombinationsWithRepetition(0, 1), "CombRep(0,1)");
-            Assert.AreEqual(1, Combinatorics.CombinationsWithRepetition(10, 0), "CombRep(10,0)");
-            Assert.AreEqual(55, Combinatorics.CombinationsWithRepetition(10, 2), "CombRep(10,2)");
-            Assert.AreEqual(715, Combinatorics.CombinationsWithRepetition(10, 4), "CombRep(10,4)");
-            Assert.AreEqual(5005, Combinatorics.CombinationsWithRepetition(10, 6), "CombRep(10,6)");
-            Assert.AreEqual(48620, Combinatorics.CombinationsWithRepetition(10, 9), "CombRep(10,9)");
-            Assert.AreEqual(92378, Combinatorics.CombinationsWithRepetition(10, 10), "CombRep(10,10)");
-            Assert.AreEqual(167960, Combinatorics.CombinationsWithRepetition(10, 11), "CombRep(10,11)");
+            Assert.That(Combinatorics.CombinationsWithRepetition(0, 0), Is.EqualTo(1), "CombRep(0,0)");
+            Assert.That(Combinatorics.CombinationsWithRepetition(1, 0), Is.EqualTo(1), "CombRep(1,0)");
+            Assert.That(Combinatorics.CombinationsWithRepetition(0, 1), Is.EqualTo(0), "CombRep(0,1)");
+            Assert.That(Combinatorics.CombinationsWithRepetition(10, 0), Is.EqualTo(1), "CombRep(10,0)");
+            Assert.That(Combinatorics.CombinationsWithRepetition(10, 2), Is.EqualTo(55), "CombRep(10,2)");
+            Assert.That(Combinatorics.CombinationsWithRepetition(10, 4), Is.EqualTo(715), "CombRep(10,4)");
+            Assert.That(Combinatorics.CombinationsWithRepetition(10, 6), Is.EqualTo(5005), "CombRep(10,6)");
+            Assert.That(Combinatorics.CombinationsWithRepetition(10, 9), Is.EqualTo(48620), "CombRep(10,9)");
+            Assert.That(Combinatorics.CombinationsWithRepetition(10, 10), Is.EqualTo(92378), "CombRep(10,10)");
+            Assert.That(Combinatorics.CombinationsWithRepetition(10, 11), Is.EqualTo(167960), "CombRep(10,11)");
         }
 
         [Test]
         public void CountingPermutations()
         {
-            Assert.AreEqual(1, Combinatorics.Permutations(0), "Perm(0)");
-            Assert.AreEqual(1, Combinatorics.Permutations(1), "Perm(1)");
-            Assert.AreEqual(2, Combinatorics.Permutations(2), "Perm(2)");
-            Assert.AreEqual(40320, Combinatorics.Permutations(8), "Perm(8)");
-            Assert.AreEqual(1307674368000, Combinatorics.Permutations(15), "Perm(15)");
-            Assert.AreEqual(265252859812191058636308480000000d, Combinatorics.Permutations(30), "Perm(30)");
-            NumericAssert.AreAlmostEqual(0.3856204824e216, Combinatorics.Permutations(128), 1e-6, "Perm(128)");
+            Assert.That(Combinatorics.Permutations(0), Is.EqualTo(1), "Perm(0)");
+            Assert.That(Combinatorics.Permutations(1), Is.EqualTo(1), "Perm(1)");
+            Assert.That(Combinatorics.Permutations(2), Is.EqualTo(2), "Perm(2)");
+            Assert.That(Combinatorics.Permutations(8), Is.EqualTo(40320), "Perm(8)");
+            Assert.That(Combinatorics.Permutations(15), Is.EqualTo(1307674368000), "Perm(15)");
+            Assert.That(Combinatorics.Permutations(30), Is.EqualTo(265252859812191058636308480000000d), "Perm(30)");
+            NumericAssert.AreAlmostEqual(0.3856204824e216, Combinatorics.Permutations(128), 1e-10, "Perm(128)");
         }
     }
 }

@@ -62,13 +62,13 @@ namespace Iridium.Test
 
             for(int i = 1; i < keys.Length; i++)
             {
-                Assert.IsTrue(keys[i] >= keys[i - 1], "Sort Order - " + i.ToString());
-                Assert.AreEqual(-keys[i], items[i], "Items Permutation - " + i.ToString());
+                Assert.That(keys[i] >= keys[i - 1], "Sort Order - " + i.ToString());
+                Assert.That(items[i], Is.EqualTo(-keys[i]), "Items Permutation - " + i.ToString());
             }
 
             for(int i = 0; i < keysCopy.Length; i++)
             {
-                Assert.IsTrue(Array.IndexOf(keys, keysCopy[i]) >= 0, "All keys still there - " + i.ToString());
+                Assert.That(Array.IndexOf(keys, keysCopy[i]) >= 0, "All keys still there - " + i.ToString());
             }
         }
 
@@ -94,13 +94,13 @@ namespace Iridium.Test
 
             for(int i = 1; i < Len; i++)
             {
-                Assert.IsTrue(keys[i] >= keys[i - 1], "Sort Order - " + i.ToString());
-                Assert.AreEqual(-keys[i], items[i], "Items Permutation - " + i.ToString());
+                Assert.That(keys[i] >= keys[i - 1], "Sort Order - " + i.ToString());
+                Assert.That(items[i], Is.EqualTo(-keys[i]), "Items Permutation - " + i.ToString());
             }
 
             for(int i = 0; i < keysCopy.Length; i++)
             {
-                Assert.IsTrue(keys.IndexOf(keysCopy[i]) >= 0, "All keys still there - " + i.ToString());
+                Assert.That(keys.IndexOf(keysCopy[i]) >= 0, "All keys still there - " + i.ToString());
             }
         }
 
@@ -127,14 +127,14 @@ namespace Iridium.Test
 
             for(int i = 1; i < keys.Length; i++)
             {
-                Assert.IsTrue(keys[i] >= keys[i - 1], "Sort Order - " + i.ToString());
-                Assert.AreEqual(-keys[i], items1[i], "Items1 Permutation - " + i.ToString());
-                Assert.AreEqual(keys[i] >> 2, items2[i], "Items2 Permutation - " + i.ToString());
+                Assert.That(keys[i] >= keys[i - 1], "Sort Order - " + i.ToString());
+                Assert.That(items1[i], Is.EqualTo(-keys[i]), "Items1 Permutation - " + i.ToString());
+                Assert.That(items2[i], Is.EqualTo(keys[i] >> 2), "Items2 Permutation - " + i.ToString());
             }
 
             for(int i = 0; i < keysCopy.Length; i++)
             {
-                Assert.IsTrue(Array.IndexOf(keys, keysCopy[i]) >= 0, "All keys still there - " + i.ToString());
+                Assert.That(Array.IndexOf(keys, keysCopy[i]) >= 0, "All keys still there - " + i.ToString());
             }
         }
 
@@ -157,7 +157,7 @@ namespace Iridium.Test
             // just check that the order is as expected, not that the items are correct
             for(int i = 1; i < set.Count; i++)
             {
-                Assert.IsTrue(set[i] >= set[i - 1], "Sort Order - " + i.ToString());
+                Assert.That(set[i] >= set[i - 1], "Sort Order - " + i.ToString());
             }
         }
     }

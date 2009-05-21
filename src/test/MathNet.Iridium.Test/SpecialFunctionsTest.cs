@@ -44,119 +44,119 @@ namespace Iridium.Test
         [Test]
         public void TestSpecialFunctions_IntLog2()
         {
-            Assert.AreEqual(0, Fn.IntLog2(1), "A");
-            Assert.AreEqual(1, Fn.IntLog2(2), "B");
-            Assert.AreEqual(2, Fn.IntLog2(3), "C");
-            Assert.AreEqual(2, Fn.IntLog2(4), "D");
+            Assert.That(Fn.IntLog2(1), Is.EqualTo(0), "A");
+            Assert.That(Fn.IntLog2(2), Is.EqualTo(1), "B");
+            Assert.That(Fn.IntLog2(3), Is.EqualTo(2), "C");
+            Assert.That(Fn.IntLog2(4), Is.EqualTo(2), "D");
 
             for(int i = 2; i < 31; i++)
             {
                 int pow = (int)Math.Pow(2.0, i);
-                Assert.AreEqual(i, Fn.IntLog2(pow), pow.ToString());
-                Assert.AreEqual(i, Fn.IntLog2(pow - 1), pow.ToString() + "-1");
-                Assert.AreEqual(i + 1, Fn.IntLog2(pow + 1), pow.ToString() + "+1");
+                Assert.That(Fn.IntLog2(pow), Is.EqualTo(i), pow.ToString());
+                Assert.That(Fn.IntLog2(pow - 1), Is.EqualTo(i), pow.ToString() + "-1");
+                Assert.That(Fn.IntLog2(pow + 1), Is.EqualTo(i + 1), pow.ToString() + "+1");
             }
 
-            Assert.AreEqual(31, Fn.IntLog2(int.MaxValue), "Y");
-            Assert.AreEqual(31, Fn.IntLog2(int.MaxValue - 1), "Z");
+            Assert.That(Fn.IntLog2(int.MaxValue), Is.EqualTo(31), "Y");
+            Assert.That(Fn.IntLog2(int.MaxValue - 1), Is.EqualTo(31), "Z");
         }
 
         [Test]
         public void TestSpecialFunctions_FloorToPowerOf2()
         {
-            Assert.AreEqual(0, Fn.FloorToPowerOf2(0), "A");
-            Assert.AreEqual(1, Fn.FloorToPowerOf2(1), "B");
-            Assert.AreEqual(2, Fn.FloorToPowerOf2(2), "C");
-            Assert.AreEqual(2, Fn.FloorToPowerOf2(3), "D");
-            Assert.AreEqual(4, Fn.FloorToPowerOf2(4), "E");
+            Assert.That(Fn.FloorToPowerOf2(0), Is.EqualTo(0), "A");
+            Assert.That(Fn.FloorToPowerOf2(1), Is.EqualTo(1), "B");
+            Assert.That(Fn.FloorToPowerOf2(2), Is.EqualTo(2), "C");
+            Assert.That(Fn.FloorToPowerOf2(3), Is.EqualTo(2), "D");
+            Assert.That(Fn.FloorToPowerOf2(4), Is.EqualTo(4), "E");
 
             for(int i = 2; i < 31; i++)
             {
                 int pow = (int)Math.Pow(2.0, i);
-                Assert.AreEqual(pow, Fn.FloorToPowerOf2(pow), pow.ToString());
-                Assert.AreEqual(pow >> 1, Fn.FloorToPowerOf2(pow - 1), pow.ToString() + "-1");
+                Assert.That(Fn.FloorToPowerOf2(pow), Is.EqualTo(pow), pow.ToString());
+                Assert.That(Fn.FloorToPowerOf2(pow - 1), Is.EqualTo(pow >> 1), pow.ToString() + "-1");
             }
 
-            Assert.AreEqual((int.MaxValue >> 1) + 1, Fn.FloorToPowerOf2(int.MaxValue), "Z");
+            Assert.That(Fn.FloorToPowerOf2(int.MaxValue), Is.EqualTo((int.MaxValue >> 1) + 1), "Z");
         }
 
         [Test]
         public void TestSpecialFunctions_CeilingToPowerOf2()
         {
-            Assert.AreEqual(0, Fn.CeilingToPowerOf2(0), "A");
-            Assert.AreEqual(1, Fn.CeilingToPowerOf2(1), "B");
-            Assert.AreEqual(2, Fn.CeilingToPowerOf2(2), "C");
-            Assert.AreEqual(4, Fn.CeilingToPowerOf2(3), "D");
-            Assert.AreEqual(4, Fn.CeilingToPowerOf2(4), "E");
+            Assert.That(Fn.CeilingToPowerOf2(0), Is.EqualTo(0), "A");
+            Assert.That(Fn.CeilingToPowerOf2(1), Is.EqualTo(1), "B");
+            Assert.That(Fn.CeilingToPowerOf2(2), Is.EqualTo(2), "C");
+            Assert.That(Fn.CeilingToPowerOf2(3), Is.EqualTo(4), "D");
+            Assert.That(Fn.CeilingToPowerOf2(4), Is.EqualTo(4), "E");
 
             for(int i = 2; i < 31; i++)
             {
                 int pow = (int)Math.Pow(2.0, i);
-                Assert.AreEqual(pow, Fn.CeilingToPowerOf2(pow), pow.ToString());
-                Assert.AreEqual(pow, Fn.CeilingToPowerOf2(pow - 1), pow.ToString() + "-1");
+                Assert.That(Fn.CeilingToPowerOf2(pow), Is.EqualTo(pow), pow.ToString());
+                Assert.That(Fn.CeilingToPowerOf2(pow - 1), Is.EqualTo(pow), pow.ToString() + "-1");
             }
 
-            Assert.AreEqual((int.MaxValue >> 1) + 1, Fn.CeilingToPowerOf2((int.MaxValue >> 1) + 1), "Y");
-            Assert.AreEqual((int.MaxValue >> 1) + 1, Fn.CeilingToPowerOf2((int.MaxValue >> 1)), "Z");
+            Assert.That(Fn.CeilingToPowerOf2((int.MaxValue >> 1) + 1), Is.EqualTo((int.MaxValue >> 1) + 1), "Y");
+            Assert.That(Fn.CeilingToPowerOf2((int.MaxValue >> 1)), Is.EqualTo((int.MaxValue >> 1) + 1), "Z");
         }
 
         [Test]
         public void TestSpecialFunctions_Gcd()
         {
-            Assert.AreEqual(0, Fn.Gcd(0, 0), "Gcd(0,0)");
-            Assert.AreEqual(5, Fn.Gcd(-5, 0), "Gcd(-5,0)");
-            Assert.AreEqual(6, Fn.Gcd(0, 6), "Gcd(0,6)");
-            Assert.AreEqual(Int32.MaxValue, Fn.Gcd(0, Int32.MaxValue), "Gcd(0,Int32Max)");
-            Assert.AreEqual(Int64.MaxValue, Fn.Gcd(0, Int64.MaxValue), "Gcd(0,Int64Max)");
-            Assert.AreEqual(1, Fn.Gcd(Int32.MaxValue, Int64.MaxValue), "Gcd(Int32Max,Int64Max)");
-            Assert.AreEqual(1 << 18, Fn.Gcd(1 << 18, 1 << 20), "Gcd(1>>18,1<<20)");
-            Assert.AreEqual(1, Fn.Gcd(7, 13), "Gcd(7,13)");
-            Assert.AreEqual(7, Fn.Gcd(7, 14), "Gcd(7,14)");
-            Assert.AreEqual(1, Fn.Gcd(7, 15), "Gcd(7,15)");
-            Assert.AreEqual(3, Fn.Gcd(6, 15), "Gcd(6,15)");
+            Assert.That(Fn.Gcd(0, 0), Is.EqualTo(0), "Gcd(0,0)");
+            Assert.That(Fn.Gcd(-5, 0), Is.EqualTo(5), "Gcd(-5,0)");
+            Assert.That(Fn.Gcd(0, 6), Is.EqualTo(6), "Gcd(0,6)");
+            Assert.That(Fn.Gcd(0, Int32.MaxValue), Is.EqualTo(Int32.MaxValue), "Gcd(0,Int32Max)");
+            Assert.That(Fn.Gcd(0, Int64.MaxValue), Is.EqualTo(Int64.MaxValue), "Gcd(0,Int64Max)");
+            Assert.That(Fn.Gcd(Int32.MaxValue, Int64.MaxValue), Is.EqualTo(1), "Gcd(Int32Max,Int64Max)");
+            Assert.That(Fn.Gcd(1 << 18, 1 << 20), Is.EqualTo(1 << 18), "Gcd(1>>18,1<<20)");
+            Assert.That(Fn.Gcd(7, 13), Is.EqualTo(1), "Gcd(7,13)");
+            Assert.That(Fn.Gcd(7, 14), Is.EqualTo(7), "Gcd(7,14)");
+            Assert.That(Fn.Gcd(7, 15), Is.EqualTo(1), "Gcd(7,15)");
+            Assert.That(Fn.Gcd(6, 15), Is.EqualTo(3), "Gcd(6,15)");
         }
 
         [Test]
         public void TestSpecialFunctions_GcdList()
         {
-            Assert.AreEqual(0, Fn.Gcd(), "Gcd()");
-            Assert.AreEqual(100, Fn.Gcd(-100), "Gcd(-100)");
-            Assert.AreEqual(2, Fn.Gcd(-10, 6, -8), "Gcd(-10,6,-8)");
-            Assert.AreEqual(1, Fn.Gcd(-10, 6, -8, 5, 9, 13), "Gcd(-10,6,-8,5,9,13)");
-            Assert.AreEqual(5, Fn.Gcd(-10, 20, 120, 60, -15, 1000), "Gcd(-10,20,120,60,-15,1000)");
-            Assert.AreEqual(3, Fn.Gcd(Int64.MaxValue - 1, Int64.MaxValue - 4, Int64.MaxValue - 7), "Gcd(Int64Max-1,Int64Max-4,Int64Max-7)");
-            Assert.AreEqual(123, Fn.Gcd(492, -2 * 492, 492 / 4), "Gcd(492, -984, 123)");
+            Assert.That(Fn.Gcd(), Is.EqualTo(0), "Gcd()");
+            Assert.That(Fn.Gcd(-100), Is.EqualTo(100), "Gcd(-100)");
+            Assert.That(Fn.Gcd(-10, 6, -8), Is.EqualTo(2), "Gcd(-10,6,-8)");
+            Assert.That(Fn.Gcd(-10, 6, -8, 5, 9, 13), Is.EqualTo(1), "Gcd(-10,6,-8,5,9,13)");
+            Assert.That(Fn.Gcd(-10, 20, 120, 60, -15, 1000), Is.EqualTo(5), "Gcd(-10,20,120,60,-15,1000)");
+            Assert.That(Fn.Gcd(Int64.MaxValue - 1, Int64.MaxValue - 4, Int64.MaxValue - 7), Is.EqualTo(3), "Gcd(Int64Max-1,Int64Max-4,Int64Max-7)");
+            Assert.That(Fn.Gcd(492, -2 * 492, 492 / 4), Is.EqualTo(123), "Gcd(492, -984, 123)");
         }
 
         [Test]
         public void TestSpecialFunctions_Lcm()
         {
-            Assert.AreEqual(10, Fn.Lcm(10, 10), "Lcm(10,10)");
-            Assert.AreEqual(Int32.MaxValue, Fn.Lcm(Int32.MaxValue, Int32.MaxValue), "Lcm(Int32Max,Int32Max)");
-            Assert.AreEqual(Int64.MaxValue, Fn.Lcm(Int64.MaxValue, Int64.MaxValue), "Lcm(Int64Max,Int64Max)");
-            Assert.AreEqual(Int64.MaxValue, Fn.Lcm(-Int64.MaxValue, -Int64.MaxValue), "Lcm(-Int64Max,-Int64Max)");
-            Assert.AreEqual(Int64.MaxValue, Fn.Lcm(-Int64.MaxValue, Int64.MaxValue), "Lcm(-Int64Max,Int64Max)");
+            Assert.That(Fn.Lcm(10, 10), Is.EqualTo(10), "Lcm(10,10)");
+            Assert.That(Fn.Lcm(Int32.MaxValue, Int32.MaxValue), Is.EqualTo(Int32.MaxValue), "Lcm(Int32Max,Int32Max)");
+            Assert.That(Fn.Lcm(Int64.MaxValue, Int64.MaxValue), Is.EqualTo(Int64.MaxValue), "Lcm(Int64Max,Int64Max)");
+            Assert.That(Fn.Lcm(-Int64.MaxValue, -Int64.MaxValue), Is.EqualTo(Int64.MaxValue), "Lcm(-Int64Max,-Int64Max)");
+            Assert.That(Fn.Lcm(-Int64.MaxValue, Int64.MaxValue), Is.EqualTo(Int64.MaxValue), "Lcm(-Int64Max,Int64Max)");
 
-            Assert.AreEqual(0, Fn.Lcm(0, 10), "Lcm(0,10)");
-            Assert.AreEqual(0, Fn.Lcm(10, 0), "Lcm(10,0)");
+            Assert.That(Fn.Lcm(0, 10), Is.EqualTo(0), "Lcm(0,10)");
+            Assert.That(Fn.Lcm(10, 0), Is.EqualTo(0), "Lcm(10,0)");
 
-            Assert.AreEqual(77, Fn.Lcm(11, 7), "Lcm(11,7)");
-            Assert.AreEqual(33, Fn.Lcm(11, 33), "Lcm(11,33)");
-            Assert.AreEqual(374, Fn.Lcm(11, 34), "Lcm(11,34)");
-            Assert.AreEqual(352, Fn.Lcm(11, -32), "Lcm(11,-32)");
+            Assert.That(Fn.Lcm(11, 7), Is.EqualTo(77), "Lcm(11,7)");
+            Assert.That(Fn.Lcm(11, 33), Is.EqualTo(33), "Lcm(11,33)");
+            Assert.That(Fn.Lcm(11, 34), Is.EqualTo(374), "Lcm(11,34)");
+            Assert.That(Fn.Lcm(11, -32), Is.EqualTo(352), "Lcm(11,-32)");
         }
 
         [Test]
         public void TestSpecialFunctions_LcmList()
         {
-            Assert.AreEqual(1, Fn.Lcm(), "Lcm()");
-            Assert.AreEqual(100, Fn.Lcm(-100), "Lcm(-100)");
-            Assert.AreEqual(120, Fn.Lcm(-10, 6, -8), "Lcm(-10,6,-8)");
-            Assert.AreEqual(4680, Fn.Lcm(-10, 6, -8, 5, 9, 13), "Lcm(-10,6,-8,5,9,13)");
-            Assert.AreEqual(3000, Fn.Lcm(-10, 20, 120, 60, -15, 1000), "Lcm(-10,20,120,60,-15,1000)");
-            Assert.AreEqual(984, Fn.Lcm(492, -2 * 492, 492 / 4), "Lcm(492, -984, 123)");
-            Assert.AreEqual(2016, Fn.Lcm(32, 42, 36, 18), "Lcm(32,42,36,18)");
-            Assert.AreEqual(2016, Fn.Lcm(32, 42, 36, 18), "Lcm(32,42,36,18)");
+            Assert.That(Fn.Lcm(), Is.EqualTo(1), "Lcm()");
+            Assert.That(Fn.Lcm(-100), Is.EqualTo(100), "Lcm(-100)");
+            Assert.That(Fn.Lcm(-10, 6, -8), Is.EqualTo(120), "Lcm(-10,6,-8)");
+            Assert.That(Fn.Lcm(-10, 6, -8, 5, 9, 13), Is.EqualTo(4680), "Lcm(-10,6,-8,5,9,13)");
+            Assert.That(Fn.Lcm(-10, 20, 120, 60, -15, 1000), Is.EqualTo(3000), "Lcm(-10,20,120,60,-15,1000)");
+            Assert.That(Fn.Lcm(492, -2 * 492, 492 / 4), Is.EqualTo(984), "Lcm(492, -984, 123)");
+            Assert.That(Fn.Lcm(32, 42, 36, 18), Is.EqualTo(2016), "Lcm(32,42,36,18)");
+            Assert.That(Fn.Lcm(32, 42, 36, 18), Is.EqualTo(2016), "Lcm(32,42,36,18)");
         }
 
         [Test]
@@ -170,14 +170,14 @@ namespace Iridium.Test
             NumericAssert.AreAlmostEqual(-0.07108387291437216698800249, Fn.GammaLn(1.8), "A5");
 
             // positive infinity at non-positive integers
-            Assert.IsTrue(double.IsPositiveInfinity(Fn.GammaLn(0.0)), "A6");
-            Assert.IsTrue(double.IsPositiveInfinity(Fn.GammaLn(-1.0)), "A7");
-            Assert.IsTrue(double.IsPositiveInfinity(Fn.GammaLn(-2.0)), "A8");
-            Assert.IsTrue(double.IsPositiveInfinity(Fn.GammaLn(-10.0)), "A9");
-            Assert.IsTrue(double.IsPositiveInfinity(Fn.GammaLn(-100.0)), "A10");
-            Assert.IsFalse(double.IsPositiveInfinity(Fn.GammaLn(-100.1)), "A11");
-            Assert.IsFalse(double.IsPositiveInfinity(Fn.GammaLn(-99.9)), "A12");
-            Assert.IsTrue(double.IsPositiveInfinity(Fn.GammaLn(-100000)), "A13");
+            Assert.That(Fn.GammaLn(0.0), Is.EqualTo(double.PositiveInfinity), "A6");
+            Assert.That(Fn.GammaLn(-1.0), Is.EqualTo(double.PositiveInfinity), "A7");
+            Assert.That(Fn.GammaLn(-2.0), Is.EqualTo(double.PositiveInfinity), "A8");
+            Assert.That(Fn.GammaLn(-10.0), Is.EqualTo(double.PositiveInfinity), "A9");
+            Assert.That(Fn.GammaLn(-100.0), Is.EqualTo(double.PositiveInfinity), "A10");
+            Assert.That(Fn.GammaLn(-100.1), Is.Not.EqualTo(double.PositiveInfinity), "A11");
+            Assert.That(Fn.GammaLn(-99.9), Is.Not.EqualTo(double.PositiveInfinity), "A12");
+            Assert.That(Fn.GammaLn(-100000), Is.EqualTo(double.PositiveInfinity), "A13");
 
             // continuous at branch points
             NumericAssert.AreAlmostEqual(Fn.GammaLn(13), Fn.GammaLn(Number.Increment(13)), "13+");
@@ -324,11 +324,11 @@ namespace Iridium.Test
         public void TestSpecialFunctions_Gamma()
         {
             // ensure poles return NaN
-            Assert.IsTrue(double.IsNaN(Fn.Gamma(0.0)), "A1");
-            Assert.IsTrue(double.IsNaN(Fn.Gamma(-1.0)), "A2");
-            Assert.IsTrue(double.IsNaN(Fn.Gamma(-2.0)), "A3");
-            Assert.IsTrue(double.IsNaN(Fn.Gamma(-20.0)), "A4");
-            Assert.IsFalse(double.IsNaN(Fn.Gamma(-20.0000000001)), "A4b");
+            Assert.That(Fn.Gamma(0.0), Is.NaN, "A1");
+            Assert.That(Fn.Gamma(-1.0), Is.NaN, "A2");
+            Assert.That(Fn.Gamma(-2.0), Is.NaN, "A3");
+            Assert.That(Fn.Gamma(-20.0), Is.NaN, "A4");
+            Assert.That(Fn.Gamma(-20.0000000001), Is.Not.NaN, "A4b");
 
             // Compare Gamma with Maple: "evalf(GAMMA(x),20);"
             NumericAssert.AreAlmostEqual(999.42377248459546611, Fn.Gamma(0.001), "B1");
@@ -364,7 +364,7 @@ namespace Iridium.Test
             */
 
             // Special Points
-            Assert.IsTrue(Double.IsNaN(Fn.GammaRegularized(0, 0)), "(0,0) -> NaN");
+            Assert.That(Fn.GammaRegularized(0, 0), Is.NaN, "(0,0) -> NaN");
 
             // x axis (a=0)
             NumericAssert.AreAlmostEqual(1, Fn.GammaRegularized(0, 1), "(0,1) -> 1");
@@ -396,7 +396,7 @@ namespace Iridium.Test
             */
 
             // Special Points (expected value debatable)
-            Assert.IsTrue(Double.IsNaN(Fn.InverseGammaRegularized(0, 0)), "(0,0) -> NaN");
+            Assert.That(Fn.InverseGammaRegularized(0, 0), Is.NaN, "(0,0) -> NaN");
 
             // a axis (y=0)
             NumericAssert.AreAlmostEqual(0, Fn.InverseGammaRegularized(1, 0), "(1,0) -> 0");
@@ -404,18 +404,18 @@ namespace Iridium.Test
             NumericAssert.AreAlmostEqual(0, Fn.InverseGammaRegularized(0.001, 0), "(1/1000,0) -> 0");
 
             // shifted a axis (y=1)
-            Assert.IsTrue(Double.IsPositiveInfinity(Fn.InverseGammaRegularized(1, 1)), "(1,1) -> +infty");
-            Assert.IsTrue(Double.IsPositiveInfinity(Fn.InverseGammaRegularized(0.5, 1)), "(1/2,1) -> +infty");
-            Assert.IsTrue(Double.IsPositiveInfinity(Fn.InverseGammaRegularized(0.001, 1)), "(1/1000,1) -> +infty");
+            Assert.That(Fn.InverseGammaRegularized(1, 1), Is.EqualTo(double.PositiveInfinity), "(1,1) -> +infty");
+            Assert.That(Fn.InverseGammaRegularized(0.5, 1), Is.EqualTo(double.PositiveInfinity), "(1/2,1) -> +infty");
+            Assert.That(Fn.InverseGammaRegularized(0.001, 1), Is.EqualTo(double.PositiveInfinity), "(1/1000,1) -> +infty");
 
             // shifted a axis (y=1.1)
-            Assert.IsTrue(Double.IsNaN(Fn.InverseGammaRegularized(1, 1.1)), "(1,1) -> NaN");
-            Assert.IsTrue(Double.IsNaN(Fn.InverseGammaRegularized(0.5, 1.1)), "(1/2,1) -> NaN");
-            Assert.IsTrue(Double.IsNaN(Fn.InverseGammaRegularized(0.001, 1.1)), "(1/1000,1) -> NaN");
+            Assert.That(Fn.InverseGammaRegularized(1, 1.1), Is.NaN, "(1,1) -> NaN");
+            Assert.That(Fn.InverseGammaRegularized(0.5, 1.1), Is.NaN, "(1/2,1) -> NaN");
+            Assert.That(Fn.InverseGammaRegularized(0.001, 1.1), Is.NaN, "(1/1000,1) -> NaN");
 
             // y axis (a=0)
-            Assert.IsTrue(Double.IsNaN(Fn.InverseGammaRegularized(0, 1)), "(0,1) -> NaN");
-            Assert.IsTrue(Double.IsNaN(Fn.InverseGammaRegularized(0, 0.001)), "(0,1/1000) -> NaN");
+            Assert.That(Fn.InverseGammaRegularized(0, 1), Is.NaN, "(0,1) -> NaN");
+            Assert.That(Fn.InverseGammaRegularized(0, 0.001), Is.NaN, "(0,1/1000) -> NaN");
 
             // various points (some with known other representation)
             NumericAssert.AreAlmostEqual(1, Fn.InverseGammaRegularized(1, 0.63212055882855767840), "(1,1-exp(-1)) -> 1");
@@ -437,11 +437,11 @@ namespace Iridium.Test
         public void TestSpecialFunctions_Digamma()
         {
             // ensure poles return NaN
-            Assert.IsTrue(double.IsNaN(Fn.Digamma(0.0)), "A1");
-            Assert.IsTrue(double.IsNaN(Fn.Digamma(-1.0)), "A2");
-            Assert.IsTrue(double.IsNaN(Fn.Digamma(-2.0)), "A3");
-            Assert.IsTrue(double.IsNaN(Fn.Digamma(-20.0)), "A4");
-            Assert.IsFalse(double.IsNaN(Fn.Digamma(-20.0000000001)), "A4b");
+            Assert.That(Fn.Digamma(0.0), Is.NaN, "A1");
+            Assert.That(Fn.Digamma(-1.0), Is.NaN, "A2");
+            Assert.That(Fn.Digamma(-2.0), Is.NaN, "A3");
+            Assert.That(Fn.Digamma(-20.0), Is.NaN, "A4");
+            Assert.That(Fn.Digamma(-20.0000000001), Is.Not.NaN, "A4b");
 
             // Compare Gamma with Maple: "evalf(Psi(x),20);"
             NumericAssert.AreAlmostEqual(-1000.5755719318103005, Fn.Digamma(0.001), "B1");
@@ -492,22 +492,22 @@ namespace Iridium.Test
             NumericAssert.AreAlmostEqual(-.74210096470766048617, Fn.Erf(-0.8), "A18");
 
             // Compare ErvInverse with Maple: "erfinv := y -> RootOf(-erf(_Z)+y); evalf(erfinv(x),20);"
-            Assert.AreEqual(.0, Fn.ErfInverse(0.0), 1e-14, "B1");
-            Assert.AreEqual(.88855990494257687016e-1, Fn.ErfInverse(0.1), 1e-10, "B2");
-            Assert.AreEqual(.17914345462129167649, Fn.ErfInverse(0.2), 1e-9, "B3");
-            Assert.AreEqual(.27246271472675435562, Fn.ErfInverse(0.3), 1e-9, "B4");
-            Assert.AreEqual(.37080715859355792906, Fn.ErfInverse(0.4), 1e-9, "B5");
-            Assert.AreEqual(.47693627620446987338, Fn.ErfInverse(0.5), 1e-9, "B6");
-            Assert.AreEqual(.59511608144999485002, Fn.ErfInverse(0.6), 1e-9, "B7");
-            Assert.AreEqual(.73286907795921685222, Fn.ErfInverse(0.7), 1e-9, "B8");
-            Assert.AreEqual(.90619380243682322007, Fn.ErfInverse(0.8), 1e-9, "B9");
-            Assert.AreEqual(1.1630871536766740867, Fn.ErfInverse(0.9), 1e-8, "B10");
-            Assert.AreEqual(2.7510639057120607961, Fn.ErfInverse(0.9999), 1e-8, "B11");
-            Assert.AreEqual(3.7665625815708380738, Fn.ErfInverse(0.9999999), 1e-8, "B12");
-            Assert.AreEqual(-.27246271472675435562, Fn.ErfInverse(-0.3), 1e-10, "B13");
-            Assert.AreEqual(-.90619380243682322007, Fn.ErfInverse(-0.8), 1e-9, "B14");
-            Assert.AreEqual(.88622715746655210457e-3, Fn.ErfInverse(0.001), 1e-12, "B15");
-            Assert.AreEqual(.44311636293707267099e-2, Fn.ErfInverse(0.005), 1e-11, "B16");
+            NumericAssert.AreAlmostEqual(.0, Fn.ErfInverse(0.0), "B1");
+            NumericAssert.AreAlmostEqual(.88855990494257687016e-1, Fn.ErfInverse(0.1), 1e-9, "B2");
+            NumericAssert.AreAlmostEqual(.17914345462129167649, Fn.ErfInverse(0.2), 1e-8, "B3");
+            NumericAssert.AreAlmostEqual(.27246271472675435562, Fn.ErfInverse(0.3), 1e-9, "B4");
+            NumericAssert.AreAlmostEqual(.37080715859355792906, Fn.ErfInverse(0.4), 1e-8, "B5");
+            NumericAssert.AreAlmostEqual(.47693627620446987338, Fn.ErfInverse(0.5), 1e-9, "B6");
+            NumericAssert.AreAlmostEqual(.59511608144999485002, Fn.ErfInverse(0.6), 1e-8, "B7");
+            NumericAssert.AreAlmostEqual(.73286907795921685222, Fn.ErfInverse(0.7), 1e-8, "B8");
+            NumericAssert.AreAlmostEqual(.90619380243682322007, Fn.ErfInverse(0.8), 1e-8, "B9");
+            NumericAssert.AreAlmostEqual(1.1630871536766740867, Fn.ErfInverse(0.9), 1e-8, "B10");
+            NumericAssert.AreAlmostEqual(2.7510639057120607961, Fn.ErfInverse(0.9999), 1e-8, "B11");
+            NumericAssert.AreAlmostEqual(3.7665625815708380738, Fn.ErfInverse(0.9999999), 1e-8, "B12");
+            NumericAssert.AreAlmostEqual(-.27246271472675435562, Fn.ErfInverse(-0.3), 1e-9, "B13");
+            NumericAssert.AreAlmostEqual(-.90619380243682322007, Fn.ErfInverse(-0.8), 1e-8, "B14");
+            NumericAssert.AreAlmostEqual(.88622715746655210457e-3, Fn.ErfInverse(0.001), 1e-8, "B15");
+            NumericAssert.AreAlmostEqual(.44311636293707267099e-2, Fn.ErfInverse(0.005), 1e-8, "B16");
         }
 
         [Test]

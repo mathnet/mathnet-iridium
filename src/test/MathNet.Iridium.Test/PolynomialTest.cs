@@ -47,37 +47,37 @@ namespace Iridium.Test
             Polynomial p2 = new Polynomial(new double[] { 4 });
             Polynomial p3 = new Polynomial(new double[] { -2, 0, 2 });
 
-            Assert.AreEqual(2, p1.Order, "P1 Order");
-            Assert.AreEqual(0, p2.Order, "P2 Order");
-            Assert.AreEqual(2, p3.Order, "P3 Order");
+            Assert.That(p1.Order, Is.EqualTo(2), "P1 Order");
+            Assert.That(p2.Order, Is.EqualTo(0), "P2 Order");
+            Assert.That(p3.Order, Is.EqualTo(2), "P3 Order");
 
             Polynomial r1 = p1 + p3;
-            Assert.AreEqual("4 x^2 - 3", r1.ToString());
-            Assert.AreEqual(2, r1.Order, "R1 Order");
+            Assert.That(r1.ToString(), Is.EqualTo("4 x^2 - 3"));
+            Assert.That(r1.Order, Is.EqualTo(2), "R1 Order");
 
             Polynomial r2 = p1 - p3;
-            Assert.AreEqual("1", r2.ToString());
-            Assert.AreEqual(0, r2.Order, "R2 Order");
+            Assert.That(r2.ToString(), Is.EqualTo("1"));;
+            Assert.That(r2.Order, Is.EqualTo(0), "R2 Order");
 
             Polynomial r3 = p1 + (-p3);
-            Assert.AreEqual("1", r3.ToString());
-            Assert.AreEqual(0, r3.Order, "R3 Order");
+            Assert.That(r3.ToString(), Is.EqualTo("1"));;
+            Assert.That(r3.Order, Is.EqualTo(0), "R3 Order");
 
             Polynomial r4 = p1 + p2;
-            Assert.AreEqual("2 x^2 + 3", r4.ToString());
-            Assert.AreEqual(2, r4.Order, "R4 Order");
+            Assert.That(r4.ToString(), Is.EqualTo("2 x^2 + 3"));
+            Assert.That(r4.Order, Is.EqualTo(2), "R4 Order");
 
             Polynomial r5 = p2 + p1;
-            Assert.AreEqual("2 x^2 + 3", r5.ToString());
-            Assert.AreEqual(2, r5.Order, "R5 Order");
+            Assert.That(r5.ToString(), Is.EqualTo("2 x^2 + 3"));
+            Assert.That(r5.Order, Is.EqualTo(2), "R5 Order");
 
             Polynomial r6 = p1 - (-p2);
-            Assert.AreEqual("2 x^2 + 3", r6.ToString());
-            Assert.AreEqual(2, r6.Order, "R6 Order");
+            Assert.That(r6.ToString(), Is.EqualTo("2 x^2 + 3"));
+            Assert.That(r6.Order, Is.EqualTo(2), "R6 Order");
 
             Polynomial r7 = p2 - (-p1);
-            Assert.AreEqual("2 x^2 + 3", r7.ToString());
-            Assert.AreEqual(2, r7.Order, "R7 Order");
+            Assert.That(r7.ToString(), Is.EqualTo("2 x^2 + 3"));
+            Assert.That(r7.Order, Is.EqualTo(2), "R7 Order");
         }
     }
 }

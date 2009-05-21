@@ -94,8 +94,8 @@ namespace Iridium.Test
             int len = samples.Length;
             for(int i = 0; i < samples.Length / 2; i += 2)
             {
-                Assert.AreEqual(samples[i + 2], samples[len - 2 - i], 0.00000001, "Complex Even in Frequency Space: Real Part");
-                Assert.AreEqual(samples[i + 3], samples[len - 1 - i], 0.00000001, "Complex Even in Frequency Space: Imaginary Part");
+                Assert.That(samples[len - 2 - i], Is.EqualTo(samples[i + 2]).Within(0.00000001), "Complex Even in Frequency Space: Real Part");
+                Assert.That(samples[len - 1 - i], Is.EqualTo(samples[i + 3]).Within(0.00000001), "Complex Even in Frequency Space: Imaginary Part");
             }
         }
 
@@ -104,8 +104,8 @@ namespace Iridium.Test
             int len = samples.Length;
             for(int i = 0; i < samples.Length / 2; i += 2)
             {
-                Assert.AreEqual(samples[i + 2], -samples[len - 2 - i], 0.00000001, "Complex Odd in Frequency Space: Real Part");
-                Assert.AreEqual(samples[i + 3], -samples[len - 1 - i], 0.00000001, "Complex Odd in Frequency Space: Imaginary Part");
+                Assert.That(-samples[len - 2 - i], Is.EqualTo(samples[i + 2]).Within(0.00000001), "Complex Odd in Frequency Space: Real Part");
+                Assert.That(-samples[len - 1 - i], Is.EqualTo(samples[i + 3]).Within(0.00000001), "Complex Odd in Frequency Space: Imaginary Part");
             }
 
             NumericAssert.AreAlmostEqual(0.0, samples[0], "Complex Odd in Frequency Space: Real Part: Periodic Continuation (No DC)");
@@ -167,17 +167,17 @@ namespace Iridium.Test
             samples_f = fft(samples_t)
             */
 
-            Assert.AreEqual(25.128, data[0 * 2], 0.001, "MATLAB 1");
-            Assert.AreEqual(-3.623, data[1 * 2], 0.001, "MATLAB 2");
-            Assert.AreEqual(-0.31055, data[2 * 2], 0.00001, "MATLAB 3");
+            NumericAssert.AreAlmostEqual(25.128, data[0 * 2], 0.001, "MATLAB 1");
+            NumericAssert.AreAlmostEqual(-3.623, data[1 * 2], 0.001, "MATLAB 2");
+            NumericAssert.AreAlmostEqual(-0.31055, data[2 * 2], 0.0001, "MATLAB 3");
 
-            Assert.AreEqual(-0.050611, data[6 * 2], 0.000001, "MATLAB 7");
-            Assert.AreEqual(-0.03882, data[7 * 2], 0.00001, "MATLAB 8");
-            Assert.AreEqual(-0.031248, data[8 * 2], 0.000001, "MATLAB 9");
+            NumericAssert.AreAlmostEqual(-0.050611, data[6 * 2], 0.00001, "MATLAB 7");
+            NumericAssert.AreAlmostEqual(-0.03882, data[7 * 2], 0.00001, "MATLAB 8");
+            NumericAssert.AreAlmostEqual(-0.031248, data[8 * 2], 0.00001, "MATLAB 9");
 
-            Assert.AreEqual(-0.017063, data[13 * 2], 0.000001, "MATLAB 14");
-            Assert.AreEqual(-0.016243, data[14 * 2], 0.000001, "MATLAB 15");
-            Assert.AreEqual(-0.015777, data[15 * 2], 0.000001, "MATLAB 16");
+            NumericAssert.AreAlmostEqual(-0.017063, data[13 * 2], 0.0001, "MATLAB 14");
+            NumericAssert.AreAlmostEqual(-0.016243, data[14 * 2], 0.00001, "MATLAB 15");
+            NumericAssert.AreAlmostEqual(-0.015777, data[15 * 2], 0.0001, "MATLAB 16");
         }
 
         [Test]
@@ -210,17 +210,17 @@ namespace Iridium.Test
             samples_f = fft(samples_t)
             */
 
-            Assert.AreEqual(25.128, data[(0 * 2) + 1], 0.001, "MATLAB 1");
-            Assert.AreEqual(-3.623, data[(1 * 2) + 1], 0.001, "MATLAB 2");
-            Assert.AreEqual(-0.31055, data[(2 * 2) + 1], 0.00001, "MATLAB 3");
+            NumericAssert.AreAlmostEqual(25.128, data[(0 * 2) + 1], 0.001, "MATLAB 1");
+            NumericAssert.AreAlmostEqual(-3.623, data[(1 * 2) + 1], 0.001, "MATLAB 2");
+            NumericAssert.AreAlmostEqual(-0.31055, data[(2 * 2) + 1], 0.0001, "MATLAB 3");
 
-            Assert.AreEqual(-0.050611, data[(6 * 2) + 1], 0.000001, "MATLAB 7");
-            Assert.AreEqual(-0.03882, data[(7 * 2) + 1], 0.00001, "MATLAB 8");
-            Assert.AreEqual(-0.031248, data[(8 * 2) + 1], 0.000001, "MATLAB 9");
+            NumericAssert.AreAlmostEqual(-0.050611, data[(6 * 2) + 1], 0.00001, "MATLAB 7");
+            NumericAssert.AreAlmostEqual(-0.03882, data[(7 * 2) + 1], 0.00001, "MATLAB 8");
+            NumericAssert.AreAlmostEqual(-0.031248, data[(8 * 2) + 1], 0.00001, "MATLAB 9");
 
-            Assert.AreEqual(-0.017063, data[(13 * 2) + 1], 0.000001, "MATLAB 14");
-            Assert.AreEqual(-0.016243, data[(14 * 2) + 1], 0.000001, "MATLAB 15");
-            Assert.AreEqual(-0.015777, data[(15 * 2) + 1], 0.000001, "MATLAB 16");
+            NumericAssert.AreAlmostEqual(-0.017063, data[(13 * 2) + 1], 0.0001, "MATLAB 14");
+            NumericAssert.AreAlmostEqual(-0.016243, data[(14 * 2) + 1], 0.00001, "MATLAB 15");
+            NumericAssert.AreAlmostEqual(-0.015777, data[(15 * 2) + 1], 0.0001, "MATLAB 16");
         }
 
         [Test]
@@ -256,17 +256,17 @@ namespace Iridium.Test
             samples_f = fft(samples_t)
             */
 
-            Assert.AreEqual(0, data[(0 * 2) + 1], 0.001, "MATLAB 1");
-            Assert.AreEqual(7.4953, data[(1 * 2) + 1], 0.0001, "MATLAB 2");
-            Assert.AreEqual(2.4733, data[(2 * 2) + 1], 0.0001, "MATLAB 3");
+            NumericAssert.AreAlmostEqual(0, data[(0 * 2) + 1], 0.001, "MATLAB 1");
+            NumericAssert.AreAlmostEqual(7.4953, data[(1 * 2) + 1], 0.0001, "MATLAB 2");
+            NumericAssert.AreAlmostEqual(2.4733, data[(2 * 2) + 1], 0.0001, "MATLAB 3");
 
-            Assert.AreEqual(0.75063, data[(6 * 2) + 1], 0.00001, "MATLAB 7");
-            Assert.AreEqual(0.61071, data[(7 * 2) + 1], 0.00001, "MATLAB 8");
-            Assert.AreEqual(0.50097, data[(8 * 2) + 1], 0.00001, "MATLAB 9");
+            NumericAssert.AreAlmostEqual(0.75063, data[(6 * 2) + 1], 0.00001, "MATLAB 7");
+            NumericAssert.AreAlmostEqual(0.61071, data[(7 * 2) + 1], 0.00001, "MATLAB 8");
+            NumericAssert.AreAlmostEqual(0.50097, data[(8 * 2) + 1], 0.00001, "MATLAB 9");
 
-            Assert.AreEqual(0.15183, data[(13 * 2) + 1], 0.00001, "MATLAB 14");
-            Assert.AreEqual(0.099557, data[(14 * 2) + 1], 0.000001, "MATLAB 15");
-            Assert.AreEqual(0.049294, data[(15 * 2) + 1], 0.000001, "MATLAB 16");
+            NumericAssert.AreAlmostEqual(0.15183, data[(13 * 2) + 1], 0.0001, "MATLAB 14");
+            NumericAssert.AreAlmostEqual(0.099557, data[(14 * 2) + 1], 0.00001, "MATLAB 15");
+            NumericAssert.AreAlmostEqual(0.049294, data[(15 * 2) + 1], 0.00001, "MATLAB 16");
         }
 
         [Test]
@@ -302,17 +302,17 @@ namespace Iridium.Test
             samples_f = fft(samples_t)
             */
 
-            Assert.AreEqual(0, data[0 * 2], 0.001, "MATLAB 1");
-            Assert.AreEqual(-7.4953, data[1 * 2], 0.0001, "MATLAB 2");
-            Assert.AreEqual(-2.4733, data[2 * 2], 0.0001, "MATLAB 3");
+            NumericAssert.AreAlmostEqual(0, data[0 * 2], 0.001, "MATLAB 1");
+            NumericAssert.AreAlmostEqual(-7.4953, data[1 * 2], 0.0001, "MATLAB 2");
+            NumericAssert.AreAlmostEqual(-2.4733, data[2 * 2], 0.0001, "MATLAB 3");
 
-            Assert.AreEqual(-0.75063, data[6 * 2], 0.00001, "MATLAB 7");
-            Assert.AreEqual(-0.61071, data[7 * 2], 0.00001, "MATLAB 8");
-            Assert.AreEqual(-0.50097, data[8 * 2], 0.00001, "MATLAB 9");
+            NumericAssert.AreAlmostEqual(-0.75063, data[6 * 2], 0.00001, "MATLAB 7");
+            NumericAssert.AreAlmostEqual(-0.61071, data[7 * 2], 0.00001, "MATLAB 8");
+            NumericAssert.AreAlmostEqual(-0.50097, data[8 * 2], 0.00001, "MATLAB 9");
 
-            Assert.AreEqual(-0.15183, data[13 * 2], 0.00001, "MATLAB 14");
-            Assert.AreEqual(-0.099557, data[14 * 2], 0.000001, "MATLAB 15");
-            Assert.AreEqual(-0.049294, data[15 * 2], 0.000001, "MATLAB 16");
+            NumericAssert.AreAlmostEqual(-0.15183, data[13 * 2], 0.0001, "MATLAB 14");
+            NumericAssert.AreAlmostEqual(-0.099557, data[14 * 2], 0.00001, "MATLAB 15");
+            NumericAssert.AreAlmostEqual(-0.049294, data[15 * 2], 0.00001, "MATLAB 16");
         }
 
         [Test]
@@ -344,25 +344,25 @@ namespace Iridium.Test
             samples_f = fft(samples_t)
             */
 
-            Assert.AreEqual(25.128, data[0 * 2], 0.001, "MATLAB 1");
-            Assert.AreEqual(-11.118, data[1 * 2], 0.001, "MATLAB 2");
-            Assert.AreEqual(-2.7838, data[2 * 2], 0.0001, "MATLAB 3");
+            NumericAssert.AreAlmostEqual(25.128, data[0 * 2], 0.001, "MATLAB 1");
+            NumericAssert.AreAlmostEqual(-11.118, data[1 * 2], 0.001, "MATLAB 2");
+            NumericAssert.AreAlmostEqual(-2.7838, data[2 * 2], 0.0001, "MATLAB 3");
 
-            Assert.AreEqual(-0.80124, data[6 * 2], 0.00001, "MATLAB 7");
-            Assert.AreEqual(-0.64953, data[7 * 2], 0.00001, "MATLAB 8");
-            Assert.AreEqual(-0.53221, data[8 * 2], 0.00001, "MATLAB 9");
+            NumericAssert.AreAlmostEqual(-0.80124, data[6 * 2], 0.00001, "MATLAB 7");
+            NumericAssert.AreAlmostEqual(-0.64953, data[7 * 2], 0.00001, "MATLAB 8");
+            NumericAssert.AreAlmostEqual(-0.53221, data[8 * 2], 0.00001, "MATLAB 9");
 
-            Assert.AreEqual(-0.1689, data[13 * 2], 0.0001, "MATLAB 14");
-            Assert.AreEqual(-0.1158, data[14 * 2], 0.0001, "MATLAB 15");
-            Assert.AreEqual(-0.065071, data[15 * 2], 0.000001, "MATLAB 16");
+            NumericAssert.AreAlmostEqual(-0.1689, data[13 * 2], 0.0001, "MATLAB 14");
+            NumericAssert.AreAlmostEqual(-0.1158, data[14 * 2], 0.0001, "MATLAB 15");
+            NumericAssert.AreAlmostEqual(-0.065071, data[15 * 2], 0.00001, "MATLAB 16");
 
-            Assert.AreEqual(0.18904, data[20 * 2], 0.00001, "MATLAB 21");
-            Assert.AreEqual(0.2475, data[21 * 2], 0.0001, "MATLAB 22");
-            Assert.AreEqual(0.31196, data[22 * 2], 0.00001, "MATLAB 23");
+            NumericAssert.AreAlmostEqual(0.18904, data[20 * 2], 0.0001, "MATLAB 21");
+            NumericAssert.AreAlmostEqual(0.2475, data[21 * 2], 0.0001, "MATLAB 22");
+            NumericAssert.AreAlmostEqual(0.31196, data[22 * 2], 0.00001, "MATLAB 23");
 
-            Assert.AreEqual(1.4812, data[29 * 2], 0.0001, "MATLAB 30");
-            Assert.AreEqual(2.1627, data[30 * 2], 0.0001, "MATLAB 31");
-            Assert.AreEqual(3.8723, data[31 * 2], 0.0001, "MATLAB 32");
+            NumericAssert.AreAlmostEqual(1.4812, data[29 * 2], 0.0001, "MATLAB 30");
+            NumericAssert.AreAlmostEqual(2.1627, data[30 * 2], 0.0001, "MATLAB 31");
+            NumericAssert.AreAlmostEqual(3.8723, data[31 * 2], 0.0001, "MATLAB 32");
 
             cft.TransformBackward(data);
 
@@ -370,8 +370,8 @@ namespace Iridium.Test
             for(int i = 0; i < length; i += 2)
             {
                 double z = (double)(i - numSamples) / numSamples;
-                Assert.AreEqual(1.0 / ((z * z) + 1.0), data[i], 0.00001, "Inv: Real: " + i.ToString());
-                Assert.AreEqual(i == 0 ? 0.0 : z / ((z * z) + 1.0), data[i + 1], 0.00001, "Inv: Imag: " + i.ToString());
+                NumericAssert.AreAlmostEqual(1.0 / ((z * z) + 1.0), data[i], 0.00001, "Inv: Real: " + i.ToString());
+                NumericAssert.AreAlmostEqual(i == 0 ? 0.0 : z / ((z * z) + 1.0), data[i + 1], 0.00001, "Inv: Imag: " + i.ToString());
             }
         }
         #endregion
@@ -408,21 +408,21 @@ namespace Iridium.Test
             samples_f = fft(samples_t)
             */
 
-            Assert.AreEqual(25.128, evenReal[0], 0.001, "MATLAB 1 (even)");
-            Assert.AreEqual(-3.623, evenReal[1], 0.001, "MATLAB 2 (even)");
-            Assert.AreEqual(-0.31055, evenReal[2], 0.00001, "MATLAB 3 (even)");
+            NumericAssert.AreAlmostEqual(25.128, evenReal[0], 0.001, "MATLAB 1 (even)");
+            NumericAssert.AreAlmostEqual(-3.623, evenReal[1], 0.001, "MATLAB 2 (even)");
+            NumericAssert.AreAlmostEqual(-0.31055, evenReal[2], 0.0001, "MATLAB 3 (even)");
 
-            Assert.AreEqual(-0.050611, evenReal[6], 0.000001, "MATLAB 7 (even)");
-            Assert.AreEqual(-0.03882, evenReal[7], 0.00001, "MATLAB 8 (even)");
-            Assert.AreEqual(-0.031248, evenReal[8], 0.000001, "MATLAB 9 (even)");
+            NumericAssert.AreAlmostEqual(-0.050611, evenReal[6], 0.00001, "MATLAB 7 (even)");
+            NumericAssert.AreAlmostEqual(-0.03882, evenReal[7], 0.00001, "MATLAB 8 (even)");
+            NumericAssert.AreAlmostEqual(-0.031248, evenReal[8], 0.00001, "MATLAB 9 (even)");
 
-            Assert.AreEqual(-0.017063, evenReal[13], 0.000001, "MATLAB 14 (even)");
-            Assert.AreEqual(-0.016243, evenReal[14], 0.000001, "MATLAB 15 (even)");
-            Assert.AreEqual(-0.015777, evenReal[15], 0.000001, "MATLAB 16 (even)");
+            NumericAssert.AreAlmostEqual(-0.017063, evenReal[13], 0.0001, "MATLAB 14 (even)");
+            NumericAssert.AreAlmostEqual(-0.016243, evenReal[14], 0.00001, "MATLAB 15 (even)");
+            NumericAssert.AreAlmostEqual(-0.015777, evenReal[15], 0.0001, "MATLAB 16 (even)");
 
-            Assert.AreEqual(0, evenImag[1], 0.001, "MATLAB 2i (even)");
-            Assert.AreEqual(0, evenImag[7], 0.001, "MATLAB 8i (even)");
-            Assert.AreEqual(0, evenImag[14], 0.001, "MATLAB 15i (even)");
+            NumericAssert.AreAlmostEqual(0, evenImag[1], 0.001, "MATLAB 2i (even)");
+            NumericAssert.AreAlmostEqual(0, evenImag[7], 0.001, "MATLAB 8i (even)");
+            NumericAssert.AreAlmostEqual(0, evenImag[14], 0.001, "MATLAB 15i (even)");
 
             /* Compare ODD With MATLAB:
             samples_t = ([-16:1:15] ./ 16) ./ (([-16:1:15] ./ 16) .^ 2 + 1.0)
@@ -430,21 +430,21 @@ namespace Iridium.Test
             samples_f = fft(samples_t)
             */
 
-            Assert.AreEqual(0, oddImag[0], 0.001, "MATLAB 1 (odd)");
-            Assert.AreEqual(7.4953, oddImag[1], 0.0001, "MATLAB 2 (odd)");
-            Assert.AreEqual(2.4733, oddImag[2], 0.0001, "MATLAB 3 (odd)");
+            NumericAssert.AreAlmostEqual(0, oddImag[0], 0.001, "MATLAB 1 (odd)");
+            NumericAssert.AreAlmostEqual(7.4953, oddImag[1], 0.0001, "MATLAB 2 (odd)");
+            NumericAssert.AreAlmostEqual(2.4733, oddImag[2], 0.0001, "MATLAB 3 (odd)");
 
-            Assert.AreEqual(0.75063, oddImag[6], 0.00001, "MATLAB 7 (odd)");
-            Assert.AreEqual(0.61071, oddImag[7], 0.00001, "MATLAB 8 (odd)");
-            Assert.AreEqual(0.50097, oddImag[8], 0.00001, "MATLAB 9 (odd)");
+            NumericAssert.AreAlmostEqual(0.75063, oddImag[6], 0.00001, "MATLAB 7 (odd)");
+            NumericAssert.AreAlmostEqual(0.61071, oddImag[7], 0.00001, "MATLAB 8 (odd)");
+            NumericAssert.AreAlmostEqual(0.50097, oddImag[8], 0.00001, "MATLAB 9 (odd)");
 
-            Assert.AreEqual(0.15183, oddImag[13], 0.00001, "MATLAB 14 (odd)");
-            Assert.AreEqual(0.099557, oddImag[14], 0.000001, "MATLAB 15 (odd)");
-            Assert.AreEqual(0.049294, oddImag[15], 0.000001, "MATLAB 16 (odd)");
+            NumericAssert.AreAlmostEqual(0.15183, oddImag[13], 0.0001, "MATLAB 14 (odd)");
+            NumericAssert.AreAlmostEqual(0.099557, oddImag[14], 0.00001, "MATLAB 15 (odd)");
+            NumericAssert.AreAlmostEqual(0.049294, oddImag[15], 0.00001, "MATLAB 16 (odd)");
 
-            Assert.AreEqual(0, oddReal[1], 0.001, "MATLAB 2r (odd)");
-            Assert.AreEqual(0, oddReal[7], 0.001, "MATLAB 8r (odd)");
-            Assert.AreEqual(0, oddReal[14], 0.001, "MATLAB 15r (odd)");
+            NumericAssert.AreAlmostEqual(0, oddReal[1], 0.001, "MATLAB 2r (odd)");
+            NumericAssert.AreAlmostEqual(0, oddReal[7], 0.001, "MATLAB 8r (odd)");
+            NumericAssert.AreAlmostEqual(0, oddReal[14], 0.001, "MATLAB 15r (odd)");
         }
 
         [Test]
@@ -481,8 +481,8 @@ namespace Iridium.Test
             // Compare with original samples
             for(int i = 0; i < numSamples; i += 2)
             {
-                Assert.AreEqual(dataEven[i], dataEven2[i], 0.00001, "Inv: Even: " + i.ToString());
-                Assert.AreEqual(dataOdd[i], dataOdd2[i], 0.00001, "Inv: Odd: " + i.ToString());
+                Assert.That(dataEven[i], Is.EqualTo(dataEven2[i]).Within(0.00001), "Inv: Even: " + i.ToString());
+                Assert.That(dataOdd[i], Is.EqualTo(dataOdd2[i]).Within(0.00001), "Inv: Odd: " + i.ToString());
             }
         }
 
@@ -518,21 +518,21 @@ namespace Iridium.Test
             samples_f = fft(samples_t)
             */
 
-            Assert.AreEqual(25.128, evenReal[0], 0.001, "MATLAB 1 (even)");
-            Assert.AreEqual(-3.623, evenReal[1], 0.001, "MATLAB 2 (even)");
-            Assert.AreEqual(-0.31055, evenReal[2], 0.00001, "MATLAB 3 (even)");
+            NumericAssert.AreAlmostEqual(25.128, evenReal[0], 0.001, "MATLAB 1 (even)");
+            NumericAssert.AreAlmostEqual(-3.623, evenReal[1], 0.001, "MATLAB 2 (even)");
+            NumericAssert.AreAlmostEqual(-0.31055, evenReal[2], 0.0001, "MATLAB 3 (even)");
 
-            Assert.AreEqual(-0.050611, evenReal[6], 0.000001, "MATLAB 7 (even)");
-            Assert.AreEqual(-0.03882, evenReal[7], 0.00001, "MATLAB 8 (even)");
-            Assert.AreEqual(-0.031248, evenReal[8], 0.000001, "MATLAB 9 (even)");
+            NumericAssert.AreAlmostEqual(-0.050611, evenReal[6], 0.00001, "MATLAB 7 (even)");
+            NumericAssert.AreAlmostEqual(-0.03882, evenReal[7], 0.00001, "MATLAB 8 (even)");
+            NumericAssert.AreAlmostEqual(-0.031248, evenReal[8], 0.00001, "MATLAB 9 (even)");
 
-            Assert.AreEqual(-0.017063, evenReal[13], 0.000001, "MATLAB 14 (even)");
-            Assert.AreEqual(-0.016243, evenReal[14], 0.000001, "MATLAB 15 (even)");
-            Assert.AreEqual(-0.015777, evenReal[15], 0.000001, "MATLAB 16 (even)");
+            NumericAssert.AreAlmostEqual(-0.017063, evenReal[13], 0.0001, "MATLAB 14 (even)");
+            NumericAssert.AreAlmostEqual(-0.016243, evenReal[14], 0.00001, "MATLAB 15 (even)");
+            NumericAssert.AreAlmostEqual(-0.015777, evenReal[15], 0.0001, "MATLAB 16 (even)");
 
-            Assert.AreEqual(0, evenImag[1], 0.001, "MATLAB 2i (even)");
-            Assert.AreEqual(0, evenImag[7], 0.001, "MATLAB 8i (even)");
-            Assert.AreEqual(0, evenImag[14], 0.001, "MATLAB 15i (even)");
+            NumericAssert.AreAlmostEqual(0, evenImag[1], 0.001, "MATLAB 2i (even)");
+            NumericAssert.AreAlmostEqual(0, evenImag[7], 0.001, "MATLAB 8i (even)");
+            NumericAssert.AreAlmostEqual(0, evenImag[14], 0.001, "MATLAB 15i (even)");
 
             /* Compare ODD With MATLAB:
             samples_t = ([-16:1:15] ./ 16) ./ (([-16:1:15] ./ 16) .^ 2 + 1.0)
@@ -540,21 +540,21 @@ namespace Iridium.Test
             samples_f = fft(samples_t)
             */
 
-            Assert.AreEqual(0, oddImag[0], 0.001, "MATLAB 1 (odd)");
-            Assert.AreEqual(7.4953, oddImag[1], 0.0001, "MATLAB 2 (odd)");
-            Assert.AreEqual(2.4733, oddImag[2], 0.0001, "MATLAB 3 (odd)");
+            NumericAssert.AreAlmostEqual(0, oddImag[0], 0.001, "MATLAB 1 (odd)");
+            NumericAssert.AreAlmostEqual(7.4953, oddImag[1], 0.0001, "MATLAB 2 (odd)");
+            NumericAssert.AreAlmostEqual(2.4733, oddImag[2], 0.0001, "MATLAB 3 (odd)");
 
-            Assert.AreEqual(0.75063, oddImag[6], 0.00001, "MATLAB 7 (odd)");
-            Assert.AreEqual(0.61071, oddImag[7], 0.00001, "MATLAB 8 (odd)");
-            Assert.AreEqual(0.50097, oddImag[8], 0.00001, "MATLAB 9 (odd)");
+            NumericAssert.AreAlmostEqual(0.75063, oddImag[6], 0.00001, "MATLAB 7 (odd)");
+            NumericAssert.AreAlmostEqual(0.61071, oddImag[7], 0.00001, "MATLAB 8 (odd)");
+            NumericAssert.AreAlmostEqual(0.50097, oddImag[8], 0.00001, "MATLAB 9 (odd)");
 
-            Assert.AreEqual(0.15183, oddImag[13], 0.00001, "MATLAB 14 (odd)");
-            Assert.AreEqual(0.099557, oddImag[14], 0.000001, "MATLAB 15 (odd)");
-            Assert.AreEqual(0.049294, oddImag[15], 0.000001, "MATLAB 16 (odd)");
+            NumericAssert.AreAlmostEqual(0.15183, oddImag[13], 0.0001, "MATLAB 14 (odd)");
+            NumericAssert.AreAlmostEqual(0.099557, oddImag[14], 0.00001, "MATLAB 15 (odd)");
+            NumericAssert.AreAlmostEqual(0.049294, oddImag[15], 0.00001, "MATLAB 16 (odd)");
 
-            Assert.AreEqual(0, oddReal[1], 0.001, "MATLAB 2r (odd)");
-            Assert.AreEqual(0, oddReal[7], 0.001, "MATLAB 8r (odd)");
-            Assert.AreEqual(0, oddReal[14], 0.001, "MATLAB 15r (odd)");
+            NumericAssert.AreAlmostEqual(0, oddReal[1], 0.001, "MATLAB 2r (odd)");
+            NumericAssert.AreAlmostEqual(0, oddReal[7], 0.001, "MATLAB 8r (odd)");
+            NumericAssert.AreAlmostEqual(0, oddReal[14], 0.001, "MATLAB 15r (odd)");
         }
 
         [Test]
@@ -596,11 +596,11 @@ namespace Iridium.Test
             // Compare with original samples
             for(int i = 0; i < numSamples; i += 2)
             {
-                Assert.AreEqual(dataEven[i], dataEven2[i], 0.00001, "Inv: Even: " + i.ToString());
+                Assert.That(dataEven[i], Is.EqualTo(dataEven2[i]).Within(0.00001), "Inv: Even: " + i.ToString());
 
                 // Note: Numerical Recipes applies no scaling, 
                 // so we have to compensate this here by scaling with N/2
-                Assert.AreEqual(dataOdd[i] * half, dataOdd2[i], 0.00001, "Inv: Odd: " + i.ToString());
+                Assert.That(dataOdd[i] * half, Is.EqualTo(dataOdd2[i]).Within(0.00001), "Inv: Odd: " + i.ToString());
             }
         }
         #endregion
@@ -637,25 +637,25 @@ namespace Iridium.Test
             samples_f = fftn(samples_t)
             */
 
-            Assert.AreEqual(25.128, data[0 * 2], 0.001, "MATLAB 1");
-            Assert.AreEqual(-11.118, data[1 * 2], 0.001, "MATLAB 2");
-            Assert.AreEqual(-2.7838, data[2 * 2], 0.0001, "MATLAB 3");
+            NumericAssert.AreAlmostEqual(25.128, data[0 * 2], 0.001, "MATLAB 1");
+            NumericAssert.AreAlmostEqual(-11.118, data[1 * 2], 0.001, "MATLAB 2");
+            NumericAssert.AreAlmostEqual(-2.7838, data[2 * 2], 0.0001, "MATLAB 3");
 
-            Assert.AreEqual(-0.80124, data[6 * 2], 0.00001, "MATLAB 7");
-            Assert.AreEqual(-0.64953, data[7 * 2], 0.00001, "MATLAB 8");
-            Assert.AreEqual(-0.53221, data[8 * 2], 0.00001, "MATLAB 9");
+            NumericAssert.AreAlmostEqual(-0.80124, data[6 * 2], 0.00001, "MATLAB 7");
+            NumericAssert.AreAlmostEqual(-0.64953, data[7 * 2], 0.00001, "MATLAB 8");
+            NumericAssert.AreAlmostEqual(-0.53221, data[8 * 2], 0.00001, "MATLAB 9");
 
-            Assert.AreEqual(-0.1689, data[13 * 2], 0.0001, "MATLAB 14");
-            Assert.AreEqual(-0.1158, data[14 * 2], 0.0001, "MATLAB 15");
-            Assert.AreEqual(-0.065071, data[15 * 2], 0.000001, "MATLAB 16");
+            NumericAssert.AreAlmostEqual(-0.1689, data[13 * 2], 0.0001, "MATLAB 14");
+            NumericAssert.AreAlmostEqual(-0.1158, data[14 * 2], 0.0001, "MATLAB 15");
+            NumericAssert.AreAlmostEqual(-0.065071, data[15 * 2], 0.00001, "MATLAB 16");
 
-            Assert.AreEqual(0.18904, data[20 * 2], 0.00001, "MATLAB 21");
-            Assert.AreEqual(0.2475, data[21 * 2], 0.0001, "MATLAB 22");
-            Assert.AreEqual(0.31196, data[22 * 2], 0.00001, "MATLAB 23");
+            NumericAssert.AreAlmostEqual(0.18904, data[20 * 2], 0.0001, "MATLAB 21");
+            NumericAssert.AreAlmostEqual(0.2475, data[21 * 2], 0.0001, "MATLAB 22");
+            NumericAssert.AreAlmostEqual(0.31196, data[22 * 2], 0.00001, "MATLAB 23");
 
-            Assert.AreEqual(1.4812, data[29 * 2], 0.0001, "MATLAB 30");
-            Assert.AreEqual(2.1627, data[30 * 2], 0.0001, "MATLAB 31");
-            Assert.AreEqual(3.8723, data[31 * 2], 0.0001, "MATLAB 32");
+            NumericAssert.AreAlmostEqual(1.4812, data[29 * 2], 0.0001, "MATLAB 30");
+            NumericAssert.AreAlmostEqual(2.1627, data[30 * 2], 0.0001, "MATLAB 31");
+            NumericAssert.AreAlmostEqual(3.8723, data[31 * 2], 0.0001, "MATLAB 32");
 
             cft.TransformBackward(data, dims);
 
@@ -663,8 +663,8 @@ namespace Iridium.Test
             for(int i = 0; i < length; i += 2)
             {
                 double z = (double)(i - numSamples) / numSamples;
-                Assert.AreEqual(1.0 / ((z * z) + 1.0), data[i], 0.00001, "Inv: Real: " + i.ToString());
-                Assert.AreEqual(i == 0 ? 0.0 : z / ((z * z) + 1.0), data[i + 1], 0.00001, "Inv: Imag: " + i.ToString());
+                Assert.That(data[i], Is.EqualTo(1.0 / ((z * z) + 1.0)).Within(0.00001), "Inv: Real: " + i.ToString());
+                Assert.That(data[i + 1], Is.EqualTo(i == 0 ? 0.0 : z / ((z * z) + 1.0)).Within(0.00001), "Inv: Imag: " + i.ToString());
             }
         }
 
@@ -693,22 +693,22 @@ namespace Iridium.Test
             samples_f = fftn(samples_t)
             */
 
-            Assert.AreEqual(12, data[0 * 2], 0.000001, "MATLAB 1");
-            Assert.AreEqual(0, data[(0 * 2) + 1], 0.000001, "MATLAB 1b");
-            Assert.AreEqual(-4, data[1 * 2], 0.000001, "MATLAB 2");
-            Assert.AreEqual(0, data[(1 * 2) + 1], 0.000001, "MATLAB 2b");
-            Assert.AreEqual(-8, data[2 * 2], 0.000001, "MATLAB 3");
-            Assert.AreEqual(4, data[(2 * 2) + 1], 0.000001, "MATLAB 3b");
-            Assert.AreEqual(0, data[3 * 2], 0.000001, "MATLAB 4");
-            Assert.AreEqual(-4, data[(3 * 2) + 1], 0.000001, "MATLAB 4b");
+            Assert.That(data[0 * 2], Is.EqualTo(12), "MATLAB 1");
+            Assert.That(data[(0 * 2) + 1], Is.EqualTo(0), "MATLAB 1b");
+            Assert.That(data[1 * 2], Is.EqualTo(-4), "MATLAB 2");
+            Assert.That(data[(1 * 2) + 1], Is.EqualTo(0), "MATLAB 2b");
+            Assert.That(data[2 * 2], Is.EqualTo(-8), "MATLAB 3");
+            Assert.That(data[(2 * 2) + 1], Is.EqualTo(4), "MATLAB 3b");
+            Assert.That(data[3 * 2], Is.EqualTo(0), "MATLAB 4");
+            Assert.That(data[(3 * 2) + 1], Is.EqualTo(-4), "MATLAB 4b");
 
             cft.TransformBackward(data, dims);
 
             // Compare with original samples
             for(int i = 0; i < length; i += 2)
             {
-                Assert.AreEqual(i, data[i], 0.000001, "Inv: Real: " + i.ToString());
-                Assert.AreEqual(i == 0 ? 0.0 : numSamples - i, data[i + 1], 0.000001, "Inv: Imag: " + i.ToString());
+                Assert.That(data[i], Is.EqualTo(i), "Inv: Real: " + i.ToString());
+                Assert.That(data[i + 1], Is.EqualTo(i == 0 ? 0.0 : numSamples - i), "Inv: Imag: " + i.ToString());
             }
         }
 
@@ -746,50 +746,50 @@ namespace Iridium.Test
             H2 = reshape(H(2,:,:),[4,8])
             */
 
-            Assert.AreEqual(4032, data[0 * 2], 1, "MATLAB 1");
-            Assert.AreEqual(0, data[(0 * 2) + 1], 1, "MATLAB 2b");
+            NumericAssert.AreAlmostEqual(4032, data[0 * 2], "MATLAB 1");
+            NumericAssert.AreAlmostEqual(0, data[(0 * 2) + 1], "MATLAB 1b");
 
-            Assert.AreEqual(-64, data[1 * 2], 1, "MATLAB 2");
-            Assert.AreEqual(154.51, data[(1 * 2) + 1], 1, "MATLAB 2b");
-            Assert.AreEqual(-64, data[2 * 2], 1, "MATLAB 3");
-            Assert.AreEqual(64, data[(2 * 2) + 1], 1, "MATLAB 3b");
-            Assert.AreEqual(-64, data[6 * 2], 1, "MATLAB 7");
-            Assert.AreEqual(-64, data[(6 * 2) + 1], 1, "MATLAB 7b");
-            Assert.AreEqual(-64, data[7 * 2], 1, "MATLAB 8");
-            Assert.AreEqual(-154.51, data[(7 * 2) + 1], 1, "MATLAB 8b");
+            NumericAssert.AreAlmostEqual(-64, data[1 * 2], "MATLAB 2");
+            NumericAssert.AreAlmostEqual(154.51, data[(1 * 2) + 1], 1e-5, "MATLAB 2b");
+            NumericAssert.AreAlmostEqual(-64, data[2 * 2], "MATLAB 3");
+            NumericAssert.AreAlmostEqual(64, data[(2 * 2) + 1], "MATLAB 3b");
+            NumericAssert.AreAlmostEqual(-64, data[6 * 2], "MATLAB 7");
+            NumericAssert.AreAlmostEqual(-64, data[(6 * 2) + 1], "MATLAB 7b");
+            NumericAssert.AreAlmostEqual(-64, data[7 * 2], "MATLAB 8");
+            NumericAssert.AreAlmostEqual(-154.51, data[(7 * 2) + 1], 1e-5, "MATLAB 8b");
 
-            Assert.AreEqual(-512, data[8 * 2], 1, "MATLAB 9");
-            Assert.AreEqual(512, data[(8 * 2) + 1], 1, "MATLAB 9b");
+            NumericAssert.AreAlmostEqual(-512, data[8 * 2], "MATLAB 9");
+            NumericAssert.AreAlmostEqual(512, data[(8 * 2) + 1], "MATLAB 9b");
 
-            Assert.AreEqual(0, data[9 * 2], 1, "MATLAB 10");
-            Assert.AreEqual(0, data[(9 * 2) + 1], 1, "MATLAB 10b");
-            Assert.AreEqual(0, data[15 * 2], 1, "MATLAB 16");
-            Assert.AreEqual(0, data[(15 * 2) + 1], 1, "MATLAB 16b");
+            NumericAssert.AreAlmostEqual(0, data[9 * 2], "MATLAB 10");
+            NumericAssert.AreAlmostEqual(0, data[(9 * 2) + 1], "MATLAB 10b");
+            NumericAssert.AreAlmostEqual(0, data[15 * 2], "MATLAB 16");
+            NumericAssert.AreAlmostEqual(0, data[(15 * 2) + 1], "MATLAB 16b");
 
-            Assert.AreEqual(-512, data[16 * 2], 1, "MATLAB 17");
-            Assert.AreEqual(0, data[(16 * 2) + 1], 1, "MATLAB 17b");
+            NumericAssert.AreAlmostEqual(-512, data[16 * 2], "MATLAB 17");
+            NumericAssert.AreAlmostEqual(0, data[(16 * 2) + 1], "MATLAB 17b");
 
-            Assert.AreEqual(-512, data[24 * 2], 1, "MATLAB 25");
-            Assert.AreEqual(-512, data[(24 * 2) + 1], 1, "MATLAB 25b");
+            NumericAssert.AreAlmostEqual(-512, data[24 * 2], "MATLAB 25");
+            NumericAssert.AreAlmostEqual(-512, data[(24 * 2) + 1], "MATLAB 25b");
 
-            Assert.AreEqual(-2048, data[32 * 2], 1, "MATLAB 33");
-            Assert.AreEqual(0, data[(32 * 2) + 1], 1, "MATLAB 33b");
+            NumericAssert.AreAlmostEqual(-2048, data[32 * 2], "MATLAB 33");
+            NumericAssert.AreAlmostEqual(0, data[(32 * 2) + 1], "MATLAB 33b");
 
-            Assert.AreEqual(0, data[33 * 2], 1, "MATLAB 34");
-            Assert.AreEqual(0, data[(33 * 2) + 1], 1, "MATLAB 34b");
-            Assert.AreEqual(0, data[39 * 2], 1, "MATLAB 40");
-            Assert.AreEqual(0, data[(39 * 2) + 1], 1, "MATLAB 40b");
+            NumericAssert.AreAlmostEqual(0, data[33 * 2], "MATLAB 34");
+            NumericAssert.AreAlmostEqual(0, data[(33 * 2) + 1], "MATLAB 34b");
+            NumericAssert.AreAlmostEqual(0, data[39 * 2], "MATLAB 40");
+            NumericAssert.AreAlmostEqual(0, data[(39 * 2) + 1], "MATLAB 40b");
 
-            Assert.AreEqual(0, data[56 * 2], 1, "MATLAB 57");
-            Assert.AreEqual(0, data[(56 * 2) + 1], 1, "MATLAB 57b");
+            NumericAssert.AreAlmostEqual(0, data[56 * 2], "MATLAB 57");
+            NumericAssert.AreAlmostEqual(0, data[(56 * 2) + 1], "MATLAB 57b");
 
             cft.TransformBackward(data, dims);
 
             // Compare with original samples
             for(int i = 0; i < len; i += 2)
             {
-                Assert.AreEqual((double)i, data[i], 0.00001, "Inv: Real: " + i.ToString());
-                Assert.AreEqual(0d, data[i + 1], 0.00001, "Inv: Imag: " + i.ToString());
+                NumericAssert.AreAlmostEqual((double)i, data[i], "Inv: Real: " + i.ToString());
+                NumericAssert.AreAlmostEqual(0d, data[i + 1], "Inv: Imag: " + i.ToString());
             }
         }
         #endregion
@@ -828,7 +828,7 @@ namespace Iridium.Test
             // Compare with original samples
             for(int i = 0; i < numSamples; i += 2)
             {
-                Assert.AreEqual(dataEven[i], dataEven2[i], 0.00001, "Inv: " + i.ToString());
+                NumericAssert.AreAlmostEqual(dataEven[i], dataEven2[i], 0.00001, "Inv: " + i.ToString());
             }
         }
 
@@ -866,7 +866,7 @@ namespace Iridium.Test
             // Compare with original samples
             for(int i = 0; i < numSamples; i += 2)
             {
-                Assert.AreEqual(dataEven[i], dataEven2[i], 0.00001, "Inv: " + i.ToString());
+                NumericAssert.AreAlmostEqual(dataEven[i], dataEven2[i], 0.00001, "Inv: " + i.ToString());
             }
         }
 
@@ -904,7 +904,7 @@ namespace Iridium.Test
             // Compare with original samples
             for(int i = 0; i < numSamples; i += 2)
             {
-                Assert.AreEqual(dataEven[i], dataEven2[i], 0.00001, "Inv: " + i.ToString());
+                NumericAssert.AreAlmostEqual(dataEven[i], dataEven2[i], 0.00001, "Inv: " + i.ToString());
             }
         }
 
@@ -942,7 +942,7 @@ namespace Iridium.Test
             // Compare with original samples
             for(int i = 0; i < numSamples; i += 2)
             {
-                Assert.AreEqual(dataEven[i], dataEven2[i], 0.00001, "Inv: " + i.ToString());
+                NumericAssert.AreAlmostEqual(dataEven[i], dataEven2[i], 0.00001, "Inv: " + i.ToString());
             }
         }
 
@@ -980,7 +980,7 @@ namespace Iridium.Test
             // Compare with original samples
             for(int i = 0; i < numSamples; i += 2)
             {
-                Assert.AreEqual(dataEven[i], dataEven2[i], 0.00001, "Inv: " + i.ToString());
+                NumericAssert.AreAlmostEqual(dataEven[i], dataEven2[i], 0.00001, "Inv: " + i.ToString());
             }
         }
 
@@ -1018,7 +1018,7 @@ namespace Iridium.Test
             // Compare with original samples
             for(int i = 0; i < numSamples; i += 2)
             {
-                Assert.AreEqual(dataEven[i], dataEven2[i], 0.00001, "Inv: " + i.ToString());
+                NumericAssert.AreAlmostEqual(dataEven[i], dataEven2[i], 0.00001, "Inv: " + i.ToString());
             }
         }
 
@@ -1056,7 +1056,7 @@ namespace Iridium.Test
             // Compare with original samples
             for(int i = 0; i < numSamples; i += 2)
             {
-                Assert.AreEqual(dataEven[i], dataEven2[i], 0.00001, "Inv: " + i.ToString());
+                NumericAssert.AreAlmostEqual(dataEven[i], dataEven2[i], 0.00001, "Inv: " + i.ToString());
             }
         }
 
@@ -1094,7 +1094,7 @@ namespace Iridium.Test
             // Compare with original samples
             for(int i = 0; i < numSamples; i += 2)
             {
-                Assert.AreEqual(dataEven[i], dataEven2[i], 0.00001, "Inv: " + i.ToString());
+                NumericAssert.AreAlmostEqual(dataEven[i], dataEven2[i], 0.00001, "Inv: " + i.ToString());
             }
         }
         */

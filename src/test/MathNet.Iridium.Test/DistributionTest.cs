@@ -115,10 +115,10 @@ namespace Iridium.Test
             shape.Push(1.0); // overflow
             shape.Push(1.5); // overflow
 
-            Assert.AreEqual(1, shape.Underflow, "underflow");
-            Assert.AreEqual(2, shape.Overflow, "overflow");
-            Assert.AreEqual(2, shape[0], "0");
-            Assert.AreEqual(2, shape[1], "1");
+            Assert.That(shape.Underflow, Is.EqualTo(1), "underflow");
+            Assert.That(shape.Overflow, Is.EqualTo(2), "overflow");
+            Assert.That(shape[0], Is.EqualTo(2), "0");
+            Assert.That(shape[1], Is.EqualTo(2), "1");
         }
 
         private void TestContinuousDistributionShape(
@@ -140,11 +140,11 @@ namespace Iridium.Test
             }
 
             double scale = 1.0 / (avgSamplesPerBucket * expectedShape.Length);
-            Assert.AreEqual(expectedUnderflow, shape.Underflow * scale, absoluteAccuracy, message + " Underflow");
-            Assert.AreEqual(expectedOverflow, shape.Overflow * scale, absoluteAccuracy, message + " Overflow");
+            Assert.That(shape.Underflow * scale, Is.EqualTo(expectedUnderflow).Within(absoluteAccuracy), message + " Underflow");
+            Assert.That(shape.Overflow * scale, Is.EqualTo(expectedOverflow).Within(absoluteAccuracy), message + " Overflow");
             for(int i = 0; i < expectedShape.Length; i++)
             {
-                Assert.AreEqual(expectedShape[i], shape[i] * scale, absoluteAccuracy, message + " Bucket " + i.ToString());
+                Assert.That(shape[i] * scale, Is.EqualTo(expectedShape[i]).Within(absoluteAccuracy), message + " Bucket " + i.ToString());
             }
         }
 
@@ -420,7 +420,7 @@ namespace Iridium.Test
             NumericAssert.AreAlmostEqual(1.0, d.CumulativeDistribution(5.00), 1e-9, "cdf(5.00)");
 
             FisherSnedecorDistribution dOne = new FisherSnedecorDistribution(1, 5);
-            Assert.IsTrue(double.IsPositiveInfinity(dOne.ProbabilityDensity(0.00)), "pdf[1,5](0.00)");
+            Assert.That(dOne.ProbabilityDensity(0.00), Is.EqualTo(double.PositiveInfinity), "pdf[1,5](0.00)");
             NumericAssert.AreAlmostEqual(0.0, dOne.CumulativeDistribution(0.00), "cdf[1,5](0.00)");
 
             FisherSnedecorDistribution dTwo = new FisherSnedecorDistribution(2, 5);

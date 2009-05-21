@@ -85,7 +85,7 @@ namespace Iridium.Test
             Matrix ma = Matrix.Create(a);
             double[][] b = { new double[] { 1.0, 2.0 }, new double[] { 2.0, 3.0 } };
             Matrix mb = Matrix.Create(a);
-            Assert.IsTrue(ma.Equals(ma), "Matrices should be equal");
+            Assert.That(ma.Equals(ma), "Matrices should be equal");
         }
 
         [Test]
@@ -209,7 +209,7 @@ namespace Iridium.Test
             NumericAssert.AreAlmostEqual(P_mcv, Array.ConvertAll(LU.Pivot, int2double), "real LU pivot II");
             NumericAssert.AreAlmostEqual(-2, LU.Determinant(), "real LU determinant");
             NumericAssert.AreAlmostEqual(-2, mc2x2.Determinant(), "real LU determinant II");
-            Assert.IsTrue(LU.IsNonSingular, "real LU non-singular");
+            Assert.That(LU.IsNonSingular, "real LU non-singular");
             NumericAssert.AreAlmostEqual(LU.PermutationMatrix * mc2x2, LU.L * LU.U, "real LU product");
 
             Matrix mc2x2h = Matrix.Transpose(mc2x2);
@@ -237,7 +237,7 @@ namespace Iridium.Test
             NumericAssert.AreAlmostEqual(P_mchv, Array.ConvertAll(LUH.Pivot, int2double), "real LU pivot II (H)");
             NumericAssert.AreAlmostEqual(-2, LUH.Determinant(), "real LU determinant (H)");
             NumericAssert.AreAlmostEqual(-2, mc2x2h.Determinant(), "real LU determinant II (H)");
-            Assert.IsTrue(LUH.IsNonSingular, "real LU non-singular (H)");
+            Assert.That(LUH.IsNonSingular, "real LU non-singular (H)");
             NumericAssert.AreAlmostEqual(LUH.PermutationMatrix * mc2x2h, LUH.L * LUH.U, "real LU product (H)");
         }
 
@@ -338,11 +338,11 @@ namespace Iridium.Test
             ////Console.WriteLine("expected solution");
             ////Console.WriteLine(mr.ToString());
 
-            Assert.AreEqual(mx.ToString(), mr.ToString(), "Matrices should be equal");
+            Assert.That(mr.ToString(), Is.EqualTo(mx.ToString()), "Matrices should be equal");
 
             // Check by multiplying a by x
             Matrix mc = ma * mx;
-            Assert.AreEqual(mc.ToString(), mb.ToString(), "Matrices should be equal");
+            Assert.That(mb.ToString(), Is.EqualTo(mc.ToString()), "Matrices should be equal");
         }
 
         [Test]
@@ -507,8 +507,8 @@ namespace Iridium.Test
             ////Console.Write("Solve Time (ms) for " + ma.ColumnCount + ": ");
             ////MyStopwatch.Time(m);
 
-            Assert.IsTrue(CompareMatrices(ms, mx, epsilon), "Matrices should be equal");
-            ////Assert.AreEqual(ms.ToString(), mx.ToString(), "Matrices should be equal");
+            Assert.That(CompareMatrices(ms, mx, epsilon), "Matrices should be equal");
+            ////Assert.That(mx.ToString(), Is.EqualTo(ms.ToString()), "Matrices should be equal");
 
             return ms;
         }

@@ -57,8 +57,8 @@ namespace Iridium.Test
             for(int i = 0; i < t.Length; i++)
             {
                 // verify the interpolated values exactly at the sample points.
-                Assert.AreEqual(x[i], method.Interpolate(t[i]), "A Exact Point " + i.ToString());
-                Assert.AreEqual(x[i], method.Differentiate(t[i], out dx, out d2x), "B Exact Point " + i.ToString());
+                Assert.That(method.Interpolate(t[i]), Is.EqualTo(x[i]), "A Exact Point " + i.ToString());
+                Assert.That(method.Differentiate(t[i], out dx, out d2x), Is.EqualTo(x[i]), "B Exact Point " + i.ToString());
             }
 
             // Maple: "with(CurveFitting);"
@@ -102,7 +102,7 @@ namespace Iridium.Test
             for(int i = 0; i < 4; i++)
             {
                 // verify the interpolated values exactly at the sample points.
-                Assert.AreEqual(x[i], method.Interpolate(i), "A Exact Point " + i.ToString());
+                Assert.That(method.Interpolate(i), Is.EqualTo(x[i]), "A Exact Point " + i.ToString());
             }
 
             // Maple: "with(CurveFitting);"
@@ -204,7 +204,7 @@ namespace Iridium.Test
             for(int i = 0; i < t.Length; i++)
             {
                 // verify the interpolated values exactly at the sample points.
-                Assert.AreEqual(x[i], method.Interpolate(t[i]), "A Exact Point " + i.ToString());
+                Assert.That(method.Interpolate(t[i]), Is.EqualTo(x[i]), "A Exact Point " + i.ToString());
             }
 
             // Maple: "with(CurveFitting);"
@@ -240,7 +240,7 @@ namespace Iridium.Test
             for(int i = 0; i < t.Length; i++)
             {
                 // verify the interpolated values exactly at the sample points.
-                Assert.AreEqual(x[i], method.Interpolate(t[i]), "B Exact Point " + i.ToString());
+                Assert.That(method.Interpolate(t[i]), Is.EqualTo(x[i]), "B Exact Point " + i.ToString());
             }
 
             // Maple: "with(CurveFitting);"
@@ -271,7 +271,7 @@ namespace Iridium.Test
 
             for(int i = 0; i < t.Length; i++)
             {
-                Assert.AreEqual(x[i], method.Interpolate(t[i]), "Exact Point " + i.ToString());
+                Assert.That(method.Interpolate(t[i]), Is.EqualTo(x[i]), "Exact Point " + i.ToString());
             }
 
             // Maple: "with(CurveFitting);"
@@ -297,7 +297,7 @@ namespace Iridium.Test
                 for(int i = 0; i < linxtest.Length; i++)
                 {
                     // very weak test, but rational with poles is incredibly bad in the linear case
-                    Assert.IsFalse(Double.IsNaN(linearMethod.Interpolate(linxtest[i])), String.Format("Linear k={0} i={1}", k, i));
+                    Assert.That(linearMethod.Interpolate(linxtest[i]), Is.Not.NaN, String.Format("Linear k={0} i={1}", k, i));
                 }
             }
         }
@@ -313,7 +313,7 @@ namespace Iridium.Test
 
             for(int i = 0; i < t.Length; i++)
             {
-                Assert.AreEqual(x[i], method.Interpolate(t[i]), "Exact Point " + i.ToString());
+                Assert.That(method.Interpolate(t[i]), Is.EqualTo(x[i]), "Exact Point " + i.ToString());
             }
 
             // Maple: "with(CurveFitting);"
@@ -338,7 +338,7 @@ namespace Iridium.Test
 
             for(int i = 0; i < t.Length; i++)
             {
-                Assert.AreEqual(x[i], method.Interpolate(t[i]), "Exact Point " + i.ToString());
+                Assert.That(method.Interpolate(t[i]), Is.EqualTo(x[i]), "Exact Point " + i.ToString());
             }
 
             // Maple: "with(CurveFitting);"
@@ -368,7 +368,7 @@ namespace Iridium.Test
             for(int i = 0; i < t.Length; i++)
             {
                 // verify the interpolated values exactly at the sample points.
-                Assert.AreEqual(x[i], method.Interpolate(t[i]), "A Exact Point " + i.ToString());
+                Assert.That(method.Interpolate(t[i]), Is.EqualTo(x[i]), "A Exact Point " + i.ToString());
             }
 
             // Maple: "f := x -> piecewise(x<-1,3+x,x<0,-1-3*x,x<1,-1+x,-1+x);"
@@ -408,7 +408,7 @@ namespace Iridium.Test
             for(int i = 0; i < t.Length; i++)
             {
                 // verify the interpolated values exactly at the sample points.
-                Assert.AreEqual(x[i], method.Interpolate(t[i]), "A Exact Point " + i.ToString());
+                Assert.That(method.Interpolate(t[i]), Is.EqualTo(x[i]), "A Exact Point " + i.ToString());
             }
 
             // Maple: "with(CurveFitting);"
@@ -448,7 +448,7 @@ namespace Iridium.Test
             for(int i = 0; i < t.Length; i++)
             {
                 // verify the interpolated values exactly at the sample points.
-                Assert.AreEqual(x[i], method.Interpolate(t[i]), "A Exact Point " + i.ToString());
+                Assert.That(method.Interpolate(t[i]), Is.EqualTo(x[i]), "A Exact Point " + i.ToString());
             }
 
             // Maple: "with(CurveFitting);"
@@ -476,7 +476,7 @@ namespace Iridium.Test
             for(int i = 0; i < t.Length; i++)
             {
                 // verify the interpolated values exactly at the sample points.
-                Assert.AreEqual(x[i], method.Interpolate(t[i]), "A Exact Point " + i.ToString());
+                Assert.That(method.Interpolate(t[i]), Is.EqualTo(x[i]), "A Exact Point " + i.ToString());
             }
 
             // Maple: "with(CurveFitting);"
@@ -504,7 +504,7 @@ namespace Iridium.Test
             for(int i = 0; i < t.Length; i++)
             {
                 // verify the interpolated values exactly at the sample points.
-                Assert.AreEqual(x[i], method.Interpolate(t[i]), "A Exact Point " + i.ToString());
+                Assert.That(method.Interpolate(t[i]), Is.EqualTo(x[i]), "A Exact Point " + i.ToString());
             }
 
             // TODO: Verify the expected values (that they are really the expected ones)
