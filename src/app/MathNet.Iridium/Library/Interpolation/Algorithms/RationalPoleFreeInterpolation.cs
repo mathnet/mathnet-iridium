@@ -89,7 +89,7 @@ namespace MathNet.Numerics.Interpolation.Algorithms
             IList<double> t,
             IList<double> x)
         {
-            Init(t, x, 3);
+            Init(t, x, Math.Min(3, t.Count - 1));
         }
 
         /// <summary>
@@ -128,7 +128,7 @@ namespace MathNet.Numerics.Interpolation.Algorithms
                 throw new ArgumentException(Properties.LocalStrings.ArgumentVectorsSameLengths);
             }
 
-            if(0 > order || t.Count < order)
+            if(0 > order || t.Count <= order)
             {
                 throw new ArgumentOutOfRangeException("order");
             }
