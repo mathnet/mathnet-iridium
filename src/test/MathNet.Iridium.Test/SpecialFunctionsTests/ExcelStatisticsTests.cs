@@ -32,7 +32,7 @@ using System.Collections.Generic;
 using System.Text;
 using NUnit.Framework;
 
-namespace Iridium.Test
+namespace Iridium.Test.SpecialFunctionsTests
 {
     using MathNet.Numerics.Distributions;
 

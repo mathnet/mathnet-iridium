@@ -31,14 +31,13 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Globalization;
-
 using NUnit.Framework;
 
-using MathNet.Numerics;
-using MathNet.Numerics.LinearAlgebra;
-
-namespace Iridium.Test
+namespace Iridium.Test.LinearAlgebraTests
 {
+    using MathNet.Numerics;
+    using MathNet.Numerics.LinearAlgebra;
+
     [TestFixture]
     public class ComplexMatrixTest
     {

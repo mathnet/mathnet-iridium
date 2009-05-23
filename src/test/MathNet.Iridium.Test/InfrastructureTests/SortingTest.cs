@@ -30,14 +30,13 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-
 using NUnit.Framework;
 
-using MathNet.Numerics;
-using MathNet.Numerics.RandomSources;
-
-namespace Iridium.Test
+namespace Iridium.Test.InfrastructureTests
 {
+    using MathNet.Numerics;
+    using MathNet.Numerics.RandomSources;
+
     [TestFixture]
     public class SortingTest
     {

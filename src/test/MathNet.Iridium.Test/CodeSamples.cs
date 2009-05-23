@@ -30,14 +30,13 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-
 using NUnit.Framework;
-
-using MathNet.Numerics;
-using MathNet.Numerics.LinearAlgebra;
 
 namespace Iridium.Test
 {
+    using MathNet.Numerics;
+    using MathNet.Numerics.LinearAlgebra;
+
     [TestFixture]
     public class CodeSamples
     {

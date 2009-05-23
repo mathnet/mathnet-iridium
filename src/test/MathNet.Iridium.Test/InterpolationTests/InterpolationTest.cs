@@ -30,16 +30,15 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-
 using NUnit.Framework;
 
-using MathNet.Numerics;
-using MathNet.Numerics.Distributions;
-using MathNet.Numerics.Interpolation;
-using MathNet.Numerics.Interpolation.Algorithms;
-
-namespace Iridium.Test
+namespace Iridium.Test.InterpolationTests
 {
+    using MathNet.Numerics;
+    using MathNet.Numerics.Distributions;
+    using MathNet.Numerics.Interpolation;
+    using MathNet.Numerics.Interpolation.Algorithms;
+
     [TestFixture]
     public class InterpolationTest
     {

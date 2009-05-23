@@ -30,15 +30,14 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-
 using NUnit.Framework;
 
-using MathNet.Numerics;
-using MathNet.Numerics.Integration;
-using MathNet.Numerics.Integration.Algorithms;
-
-namespace Iridium.Test
+namespace Iridium.Test.IntegrationTests
 {
+    using MathNet.Numerics;
+    using MathNet.Numerics.Integration;
+    using MathNet.Numerics.Integration.Algorithms;
+
     [TestFixture]
     public class IntegrationTest
     {

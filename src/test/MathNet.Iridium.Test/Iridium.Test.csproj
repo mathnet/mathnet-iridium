@@ -53,28 +53,28 @@
   <ItemGroup>
     <Compile Include="BugRegression.cs" />
     <Compile Include="CodeSamples.cs" />
-    <Compile Include="CombinatoricsTest.cs" />
-    <Compile Include="ComplexMatrixTest.cs" />
-    <Compile Include="DistributionTest.cs" />
-    <Compile Include="ExcelStatisticsTests.cs" />
-    <Compile Include="IntegrationTest.cs" />
-    <Compile Include="InterpolationTest.cs" />
-    <Compile Include="LinearAlgebraAlgorithmsTest.cs" />
-    <Compile Include="NumberTheoryTest.cs" />
+    <Compile Include="CombinatoricsTests\CombinatoricsTest.cs" />
+    <Compile Include="DistributionTests\DistributionTest.cs" />
+    <Compile Include="InfrastructureTests\ComplexTest.cs" />
+    <Compile Include="InfrastructureTests\NumberTest.cs" />
+    <Compile Include="InfrastructureTests\SerializationTest.cs" />
+    <Compile Include="InfrastructureTests\SetTest.cs" />
+    <Compile Include="InfrastructureTests\SortingTest.cs" />
+    <Compile Include="IntegrationTests\IntegrationTest.cs" />
+    <Compile Include="InterpolationTests\InterpolationTest.cs" />
+    <Compile Include="LinearAlgebraTests\ComplexMatrixTest.cs" />
+    <Compile Include="LinearAlgebraTests\LinearAlgebra.Test.cs" />
+    <Compile Include="LinearAlgebraTests\LinearAlgebraAlgorithmsTest.cs" />
+    <Compile Include="LinearAlgebraTests\MatrixTest.cs" />
+    <Compile Include="NumberTheoryTests\NumberTheoryTest.cs" />
     <Compile Include="NumericAssert.cs" />
-    <Compile Include="PolynomialTest.cs" />
-    <Compile Include="SerializationTest.cs" />
-    <Compile Include="SetTest.cs" />
-    <Compile Include="ComplexTest.cs" />
-    <Compile Include="LinearAlgebra.Test.cs" />
-    <Compile Include="MatrixTest.cs" />
+    <Compile Include="PolynomialTests\PolynomialTest.cs" />
     <Compile Include="MyStopWatch.cs" />
-    <Compile Include="SortingTest.cs" />
-    <Compile Include="SpecialFunctionsTest.cs" />
-    <Compile Include="FftTest.cs" />
-    <Compile Include="NumberTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StatisticsTest.cs" />
+    <Compile Include="SpecialFunctionsTests\ExcelStatisticsTests.cs" />
+    <Compile Include="SpecialFunctionsTests\SpecialFunctionsTest.cs" />
+    <Compile Include="StatisticsTests\StatisticsTest.cs" />
+    <Compile Include="TransformationsTests\FftTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\app\MathNet.Iridium\Library\Iridium.csproj">

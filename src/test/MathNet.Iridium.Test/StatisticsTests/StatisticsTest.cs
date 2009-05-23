@@ -30,14 +30,13 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-
-using MathNet.Numerics.Statistics;
-using MathNet.Numerics.Distributions;
-
 using NUnit.Framework;
 
-namespace Iridium.Test
+namespace Iridium.Test.StatisticsTests
 {
+    using MathNet.Numerics.Statistics;
+    using MathNet.Numerics.Distributions;
+
     [TestFixture]
     public class StatisticsTest
     {

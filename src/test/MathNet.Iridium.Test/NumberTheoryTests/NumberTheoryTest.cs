@@ -30,13 +30,12 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-
 using NUnit.Framework;
 
-using MathNet.Numerics.NumberTheory;
-
-namespace Iridium.Test
+namespace Iridium.Test.NumberTheoryTests
 {
+    using MathNet.Numerics.NumberTheory;
+
     [TestFixture]
     public class NumberTheoryTest
     {

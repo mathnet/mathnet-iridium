@@ -30,14 +30,13 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-
 using NUnit.Framework;
 
-using MathNet.Numerics.LinearAlgebra;
-using MathNet.Numerics;
-
-namespace Iridium.Test
+namespace Iridium.Test.LinearAlgebraTests
 {
+    using MathNet.Numerics;
+    using MathNet.Numerics.LinearAlgebra;
+
     /// <summary>TestMatrix tests the functionality of the 
     /// Matrix class and associated decompositions.</summary>
     /// <remarks>

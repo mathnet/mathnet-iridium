@@ -31,13 +31,12 @@ using System;
 using System.Collections.Generic;
 using System.Collections;
 using System.Text;
-
 using NUnit.Framework;
 
-using MathNet.Numerics;
-
-namespace Iridium.Test
+namespace Iridium.Test.InfrastructureTests
 {
+    using MathNet.Numerics;
+
     [TestFixture]
     public class SetTest
     {

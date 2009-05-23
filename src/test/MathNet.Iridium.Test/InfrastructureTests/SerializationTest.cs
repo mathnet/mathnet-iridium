@@ -32,15 +32,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
-
 using NUnit.Framework;
 
-using MathNet.Numerics;
-using MathNet.Numerics.Distributions;
-using MathNet.Numerics.LinearAlgebra;
-
-namespace Iridium.Test
+namespace Iridium.Test.InfrastructureTests
 {
+    using MathNet.Numerics;
+    using MathNet.Numerics.Distributions;
+    using MathNet.Numerics.LinearAlgebra;
+
     [TestFixture]
     public class SerializationTest
     {

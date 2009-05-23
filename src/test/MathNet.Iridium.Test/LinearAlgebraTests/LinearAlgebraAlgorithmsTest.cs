@@ -32,7 +32,7 @@ using System.Collections.Generic;
 using System.Text;
 using NUnit.Framework;
 
-namespace Iridium.Test
+namespace Iridium.Test.LinearAlgebraTests
 {
     using MathNet.Numerics.Distributions;
     using MathNet.Numerics.LinearAlgebra;

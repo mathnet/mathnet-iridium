@@ -30,13 +30,12 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-
 using NUnit.Framework;
 
-using MathNet.Numerics;
-
-namespace Iridium.Test
+namespace Iridium.Test.CombinatoricsTests
 {
+    using MathNet.Numerics;
+
     [TestFixture]
     public class CombinatoricsTest
     {

@@ -33,7 +33,7 @@ using System.Text;
 
 using NUnit.Framework;
 
-namespace Iridium.Test
+namespace Iridium.Test.PolynomialTests
 {
     using MathNet.Numerics;
 
