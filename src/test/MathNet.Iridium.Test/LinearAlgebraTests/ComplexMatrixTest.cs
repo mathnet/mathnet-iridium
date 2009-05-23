@@ -117,7 +117,103 @@ namespace Iridium.Test.LinearAlgebraTests
         }
 
         [Test]
-        public void TestComplexMatrix_AdditiveTranspose()
+        public void TestComplexMatrix_Transpose()
+        {
+            /* 2x3 rectangular case */
+
+            // MATLAB: trans_c = ca3x2.'
+            ComplexMatrix trans_c = new ComplexMatrix(new Complex[][] {
+                new Complex[] { 6-(12*j), 2-(4*j), 14-(28*j) },
+                new Complex[] { 0, 12-(24*j), 18-(36*j) }
+                });
+
+            NumericAssert.AreAlmostEqual(trans_c, ca3x2.Transpose(), "trans c 1");
+            Assert.That(ca3x2.Transpose(), Is.Not.SameAs(ca3x2));
+            Assert.That(ca3x2.Transpose().GetArray(), Is.Not.SameAs(ca3x2.GetArray()));
+
+            /* 2x2 square case */
+
+            // MATLAB: trans_c2 = cc2x2.'
+            ComplexMatrix trans_c2 = new ComplexMatrix(new Complex[][] {
+                new Complex[] { 8-(24*j), 10-(30*j) },
+                new Complex[] { 9-(27*j), 11-(33*j) }
+                });
+
+            NumericAssert.AreAlmostEqual(trans_c2, cc2x2.Transpose(), "trans c2 1");
+            Assert.That(cc2x2.Transpose(), Is.Not.SameAs(cc2x2));
+            Assert.That(cc2x2.Transpose().GetArray(), Is.Not.SameAs(cc2x2.GetArray()));
+
+            ComplexMatrix trans_c2_inplace = cc2x2.Clone();
+            Assert.That(trans_c2_inplace, Is.Not.SameAs(cc2x2));
+            Assert.That(trans_c2_inplace.GetArray(), Is.Not.SameAs(cc2x2.GetArray()));
+
+            Complex[][] internalArray = trans_c2_inplace.GetArray();
+            trans_c2_inplace.TransposeInplace();
+            NumericAssert.AreAlmostEqual(trans_c2, trans_c2_inplace, "trans c2 2");
+            Assert.That(trans_c2_inplace.GetArray(), Is.SameAs(internalArray));
+        }
+
+        [Test]
+        public void TestComplexMatrix_HermitianTranspose()
+        {
+            /* 2x3 rectangular case */
+
+            // MATLAB: htrans_c = ca3x2'
+            ComplexMatrix htrans_c = new ComplexMatrix(new Complex[][] {
+                new Complex[] { 6+(12*j), 2+(4*j), 14+(28*j) },
+                new Complex[] { 0, 12+(24*j), 18+(36*j) }
+                });
+
+            NumericAssert.AreAlmostEqual(htrans_c, ca3x2.HermitianTranspose(), "htrans c 1");
+            Assert.That(ca3x2.HermitianTranspose(), Is.Not.SameAs(ca3x2));
+            Assert.That(ca3x2.HermitianTranspose().GetArray(), Is.Not.SameAs(ca3x2.GetArray()));
+
+            /* 2x2 square case */
+
+            // MATLAB: htrans_c2 = cc2x2'
+            ComplexMatrix htrans_c2 = new ComplexMatrix(new Complex[][] {
+                new Complex[] { 8+(24*j), 10+(30*j) },
+                new Complex[] { 9+(27*j), 11+(33*j) }
+                });
+
+            NumericAssert.AreAlmostEqual(htrans_c2, cc2x2.HermitianTranspose(), "htrans c2 1");
+            Assert.That(cc2x2.HermitianTranspose(), Is.Not.SameAs(cc2x2));
+            Assert.That(cc2x2.HermitianTranspose().GetArray(), Is.Not.SameAs(cc2x2.GetArray()));
+
+            ComplexMatrix htrans_c2_inplace = cc2x2.Clone();
+            Assert.That(htrans_c2_inplace, Is.Not.SameAs(cc2x2));
+            Assert.That(htrans_c2_inplace.GetArray(), Is.Not.SameAs(cc2x2.GetArray()));
+
+            Complex[][] internalArray = htrans_c2_inplace.GetArray();
+            htrans_c2_inplace.HermitianTransposeInplace();
+            NumericAssert.AreAlmostEqual(htrans_c2, htrans_c2_inplace, "htrans c2 2");
+            Assert.That(htrans_c2_inplace.GetArray(), Is.SameAs(internalArray));
+        }
+
+        [Test]
+        public void TestComplexMatrix_Conjugate()
+        {
+            // MATLAB: conj_c = conj(ca3x2)
+            ComplexMatrix conj_c = new ComplexMatrix(new Complex[][] {
+                new Complex[] { 6+(12*j), 0 },
+                new Complex[] { 2+(4*j), 12+(24*j) },
+                new Complex[] { 14+(28*j), 18+(36*j) }
+                });
+
+            NumericAssert.AreAlmostEqual(conj_c, ca3x2.Conjugate(), "conj c 1");
+            Assert.That(ca3x2.Conjugate(), Is.Not.SameAs(ca3x2));
+            Assert.That(ca3x2.Conjugate().GetArray(), Is.Not.SameAs(ca3x2.GetArray()));
+
+            ComplexMatrix conj_c_inplace = ca3x2.Clone();
+            Complex[][] internalArray = conj_c_inplace.GetArray();
+            conj_c_inplace.ConjugateInplace();
+            NumericAssert.AreAlmostEqual(conj_c, conj_c_inplace, "conj c 2");
+            Assert.That(internalArray, Is.Not.SameAs(ca3x2.GetArray()));
+            Assert.That(internalArray, Is.SameAs(conj_c_inplace.GetArray()));
+        }
+
+        [Test]
+        public void TestComplexMatrix_Additive()
         {
             /*
             MATLAB:
@@ -128,11 +224,6 @@ namespace Iridium.Test.LinearAlgebraTests
             sum_cs = ca3x2 + s
             diff_cs = ca3x2 - s
             neg_c = -ca3x2
-            conj_c = conj(ca3x2)
-            trans_c = ca3x2.'
-            htrans_c = ca3x2'
-            trans_c2 = cc2x2.'
-            htrans_c2 = cc2x2'
             */
 
             // ComplexMatrix + ComplexMatrix
@@ -225,56 +316,6 @@ namespace Iridium.Test.LinearAlgebraTests
             NumericAssert.AreAlmostEqual(neg_c, neg_c_inplace.Negate(), "neg c 2");
             neg_c_inplace.NegateInplace();
             NumericAssert.AreAlmostEqual(neg_c, neg_c_inplace, "neg c 3");
-
-            // ComplexMatrix Conjugate
-            ComplexMatrix conj_c = new ComplexMatrix(new Complex[][] {
-                new Complex[] { 6+(12*j), 0 },
-                new Complex[] { 2+(4*j), 12+(24*j) },
-                new Complex[] { 14+(28*j), 18+(36*j) }
-                });
-
-            NumericAssert.AreAlmostEqual(conj_c, ca3x2.Conjugate(), "conj c 1");
-            ComplexMatrix conj_c_inplace = ca3x2.Clone();
-            conj_c_inplace.ConjugateInplace();
-            NumericAssert.AreAlmostEqual(conj_c, conj_c_inplace, "conj c 2");
-
-            // ComplexMatrix Transpose (Non-Conjugated)
-            ComplexMatrix trans_c = new ComplexMatrix(new Complex[][] {
-                new Complex[] { 6-(12*j), 2-(4*j), 14-(28*j) },
-                new Complex[] { 0, 12-(24*j), 18-(36*j) }
-                });
-
-            NumericAssert.AreAlmostEqual(trans_c, ca3x2.Transpose(), "trans c 1");
-
-            // ComplexMatrix Hermitian Transpose (Conjugated)
-            ComplexMatrix htrans_c = new ComplexMatrix(new Complex[][] {
-                new Complex[] { 6+(12*j), 2+(4*j), 14+(28*j) },
-                new Complex[] { 0, 12+(24*j), 18+(36*j) }
-                });
-
-            NumericAssert.AreAlmostEqual(htrans_c, ca3x2.HermitianTranspose(), "htrans c 1");
-
-            // ComplexMatrix Transpose (Non-Conjugated) (Square)
-            ComplexMatrix trans_c2 = new ComplexMatrix(new Complex[][] {
-                new Complex[] { 8-(24*j), 10-(30*j) },
-                new Complex[] { 9-(27*j), 11-(33*j) }
-                });
-
-            NumericAssert.AreAlmostEqual(trans_c2, cc2x2.Transpose(), "trans c2 1");
-            ComplexMatrix trans_c2_inplace = cc2x2.Clone();
-            trans_c2_inplace.TransposeInplace();
-            NumericAssert.AreAlmostEqual(trans_c2, trans_c2_inplace, "trans c2 2");
-
-            // ComplexMatrix Hermitian Transpose (Conjugated) (Square)
-            ComplexMatrix htrans_c2 = new ComplexMatrix(new Complex[][] {
-                new Complex[] { 8+(24*j), 10+(30*j) },
-                new Complex[] { 9+(27*j), 11+(33*j) }
-                });
-
-            NumericAssert.AreAlmostEqual(htrans_c2, cc2x2.HermitianTranspose(), "htrans c2 1");
-            ComplexMatrix htrans_c2_inplace = cc2x2.Clone();
-            htrans_c2_inplace.HermitianTransposeInplace();
-            NumericAssert.AreAlmostEqual(htrans_c2, htrans_c2_inplace, "htrans c2 2");
         }
 
         [Test]

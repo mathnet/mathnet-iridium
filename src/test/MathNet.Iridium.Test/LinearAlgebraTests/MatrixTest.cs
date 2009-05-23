@@ -88,14 +88,39 @@ namespace Iridium.Test.LinearAlgebraTests
         }
 
         [Test]
-        public void TestMatrix_AdditiveTranspose()
+        public void TestMatrix_Transpose()
+        {
+            /* 2x3 rectangular case */
+
+            // MATLAB: trans_m = ma3x2'
+            Matrix trans_m = new Matrix(new double[][] {
+                new double[] { 1, -1, 5 },
+                new double[] { -2, 4, 7 }
+                });
+
+            NumericAssert.AreAlmostEqual(trans_m, Matrix.Transpose(ma3x2), "trans m 1");
+            Assert.That(Matrix.Transpose(ma3x2), Is.Not.SameAs(ma3x2));
+            Assert.That(Matrix.Transpose(ma3x2).GetArray(), Is.Not.SameAs(ma3x2.GetArray()));
+
+            Matrix trans_inplace = ma3x2.Clone();
+            Assert.That(trans_inplace, Is.Not.SameAs(ma3x2));
+            Assert.That(trans_inplace.GetArray(), Is.Not.SameAs(ma3x2.GetArray()));
+
+            double[][] internalArray = trans_inplace.GetArray();
+            trans_inplace.TransposeInplace();
+            NumericAssert.AreAlmostEqual(trans_m, trans_inplace, "trans m 2");
+            // 2009-05-23: Note, this internal behavior might change in a future release:
+            Assert.That(trans_inplace.GetArray(), Is.Not.SameAs(internalArray));
+        }
+
+        [Test]
+        public void TestMatrix_Additive()
         {
             /*
             MATLAB:
             sum = ma3x2 + mb3x2
             diff = ma3x2 - mb3x2
             neg_m = -ma3x2
-            trans_m = ma3x2'
             */
 
             Matrix sum = new Matrix(new double[][] {
@@ -127,16 +152,6 @@ namespace Iridium.Test.LinearAlgebraTests
                 });
 
             NumericAssert.AreAlmostEqual(neg_m, -ma3x2, "neg 1");
-
-            Matrix trans_m = new Matrix(new double[][] {
-                new double[] { 1, -1, 5 },
-                new double[] { -2, 4, 7 }
-                });
-
-            NumericAssert.AreAlmostEqual(trans_m, Matrix.Transpose(ma3x2), "trans 1");
-            Matrix trans_inplace = ma3x2.Clone();
-            trans_inplace.TransposeInplace();
-            NumericAssert.AreAlmostEqual(trans_m, trans_inplace, "trans 2");
         }
 
         [Test]
