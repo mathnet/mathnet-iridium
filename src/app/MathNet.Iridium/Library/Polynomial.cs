@@ -41,7 +41,9 @@ namespace MathNet.Numerics
     /// that is y = c[0]*x^0+c[1]*x^1+c[2]*x^2+...</remarks>
     [Serializable]
     public class Polynomial :
-        IComparable,
+        IEquatable<Polynomial>,
+        IAlmostEquatable<Polynomial>,
+        IComparable<Polynomial>,
         ICloneable
     {
         double[] coefficients;
@@ -1037,7 +1039,7 @@ namespace MathNet.Numerics
         Equals(object obj)
         {
             Polynomial p = obj as Polynomial;
-            return object.ReferenceEquals(p, null) ? false : Equals(p);
+            return object.ReferenceEquals(p, null) ? false : this.Equals(p);
         }
 
         /// <summary>
@@ -1045,9 +1047,104 @@ namespace MathNet.Numerics
         /// </summary>
         public
         bool
-        Equals(Polynomial polynomial)
+        Equals(Polynomial other)
         {
-            return CompareTo(polynomial) == 0;
+            if(object.ReferenceEquals(other, null)
+                || order != other.Order)
+            {
+                return false;
+            }
+
+            // compare all values
+            double[] otherData = other.coefficients;
+            for(int i = 0; i < order; i++)
+            {
+                if(coefficients[i] != otherData[i])
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Returns true if two polynomials are almost equal, up to the default maximum relative error.
+        /// </summary>
+        public
+        bool
+        AlmostEquals(Polynomial other)
+        {
+            if(object.ReferenceEquals(other, null)
+                || order != other.Order)
+            {
+                return false;
+            }
+
+            // compare all values
+            double[] otherData = other.coefficients;
+            for(int i = 0; i < order; i++)
+            {
+                if(!Number.AlmostEqual(coefficients[i], otherData[i]))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Returns true if two polynomials are almost equal, up to the provided maximum relative error.
+        /// </summary>
+        public
+        bool
+        AlmostEquals(
+            Polynomial other,
+            double maximumRelativeError)
+        {
+            if(object.ReferenceEquals(other, null)
+                || order != other.Order)
+            {
+                return false;
+            }
+
+            // compare all values
+            double[] otherData = other.coefficients;
+            for(int i = 0; i < order; i++)
+            {
+                if(!Number.AlmostEqual(coefficients[i], otherData[i], maximumRelativeError))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Returns true if two polynomials are almost equal, up to the provided maximum relative error.
+        /// </summary>
+        public static
+        bool
+        AlmostEqual(
+            Polynomial u,
+            Polynomial v,
+            double maximumRelativeError)
+        {
+            return EqualityComparers.AlmostEqual(u, v, maximumRelativeError);
+        }
+
+        /// <summary>
+        /// Returns true if two polynomials are almost equal, up to the default maximum relative error.
+        /// </summary>
+        public static
+        bool
+        AlmostEqual(
+            Polynomial u,
+            Polynomial v)
+        {
+            return EqualityComparers.AlmostEqual(u, v);
         }
 
         /// <summary>
@@ -1055,7 +1152,7 @@ namespace MathNet.Numerics
         /// </summary>
         public static
         bool
-        Equals(
+        Equal(
             Polynomial polynomial1,
             Polynomial polynomial2)
         {

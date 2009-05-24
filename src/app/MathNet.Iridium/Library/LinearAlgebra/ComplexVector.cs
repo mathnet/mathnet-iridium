@@ -42,6 +42,8 @@ namespace MathNet.Numerics.LinearAlgebra
     public class ComplexVector :
         IVector<Complex>,
         IList<Complex>,
+        IEquatable<ComplexVector>,
+        IAlmostEquatable<ComplexVector>,
         ICloneable
     {
         private Complex[] _data;
@@ -1451,6 +1453,102 @@ namespace MathNet.Numerics.LinearAlgebra
         ICloneable.Clone()
         {
             return Create(_data);
+        }
+
+        /// <summary>
+        /// Indicates whether <c>obj</c> is equal to this instance.
+        /// </summary>
+        public override
+        bool
+        Equals(object obj)
+        {
+            ComplexVector v = obj as ComplexVector;
+            return object.ReferenceEquals(v, null) ? false : this.Equals(v);
+        }
+
+        /// <summary>
+        /// Indicates whether <c>other</c> is equal to this matrix.
+        /// </summary>
+        public
+        bool
+        Equals(ComplexVector other)
+        {
+            if(object.ReferenceEquals(other, null)
+                || _length != other.Length)
+            {
+                return false;
+            }
+
+            // compare all values
+            Complex[] otherData = other._data;
+            for(int i = 0; i < _data.Length; i++)
+            {
+                if(!_data[i].Equals(otherData[i]))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Returns true if two vectors are almost equal, up to the default maximum relative error.
+        /// </summary>
+        public
+        bool
+        AlmostEquals(ComplexVector other)
+        {
+            if(object.ReferenceEquals(other, null)
+                || _length != other.Length)
+            {
+                return false;
+            }
+
+            return Number.AlmostEqualNorm(Norm1(), other.Norm1(), (this - other).Norm1());
+        }
+
+        /// <summary>
+        /// Returns true if two vectors are almost equal, up to the provided maximum relative error.
+        /// </summary>
+        public
+        bool
+        AlmostEquals(
+            ComplexVector other,
+            double maximumRelativeError)
+        {
+            if(object.ReferenceEquals(other, null)
+                || _length != other.Length)
+            {
+                return false;
+            }
+
+            return Number.AlmostEqualNorm(Norm1(), other.Norm1(), (this - other).Norm1(), maximumRelativeError);
+        }
+
+        /// <summary>
+        /// Returns true if two vectors are almost equal, up to the provided maximum relative error.
+        /// </summary>
+        public static
+        bool
+        AlmostEqual(
+            ComplexVector u,
+            ComplexVector v,
+            double maximumRelativeError)
+        {
+            return EqualityComparers.AlmostEqual(u, v, maximumRelativeError);
+        }
+
+        /// <summary>
+        /// Returns true if two vectors are almost equal, up to the default maximum relative error.
+        /// </summary>
+        public static
+        bool
+        AlmostEqual(
+            ComplexVector u,
+            ComplexVector v)
+        {
+            return EqualityComparers.AlmostEqual(u, v);
         }
 
         /// <summary>

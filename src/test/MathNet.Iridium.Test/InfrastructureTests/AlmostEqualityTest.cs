@@ -113,7 +113,7 @@ namespace Iridium.Test.InfrastructureTests
             Assert.That(Number.AlmostEqual(double.PositiveInfinity, double.PositiveInfinity, 25), "Q");
         }
 
-        void TestAlmostEqualityForGenericType<T>(
+        void Helper_TestAlmostEqualityForGenericType<T>(
             T value,
             T valueClone,
             T completelyDifferentValue,
@@ -164,7 +164,7 @@ namespace Iridium.Test.InfrastructureTests
             Complex c = new Complex(1.0 + 1e+10 * Number.PositiveEpsilonOf(1.0), 2.0);
             Complex d = new Complex(1.0 + 2 * Number.PositiveEpsilonOf(1.0), 2.0);
 
-            TestAlmostEqualityForGenericType(a1, a2, b, c, d);
+            Helper_TestAlmostEqualityForGenericType(a1, a2, b, c, d);
 
             // Wrapper
             Assert.That(Complex.AlmostEqual(a1, c), Is.False);
@@ -194,7 +194,7 @@ namespace Iridium.Test.InfrastructureTests
             Matrix c = a1 * (1.0 + (1e+10 * Number.PositiveEpsilonOf(1.0)));
             Matrix d = a1 * (1.0 + (2 * Number.PositiveEpsilonOf(1.0)));
 
-            TestAlmostEqualityForGenericType(a1, a2, b, c, d);
+            Helper_TestAlmostEqualityForGenericType(a1, a2, b, c, d);
 
             // Wrapper
             Assert.That(Matrix.AlmostEqual(a1, c), Is.False);
@@ -219,7 +219,7 @@ namespace Iridium.Test.InfrastructureTests
             ComplexMatrix c = a1 * (1.0 + (1e+10 * Number.PositiveEpsilonOf(1.0)));
             ComplexMatrix d = a1 * (1.0 + (2 * Number.PositiveEpsilonOf(1.0)));
 
-            TestAlmostEqualityForGenericType(a1, a2, b, c, d);
+            Helper_TestAlmostEqualityForGenericType(a1, a2, b, c, d);
 
             // Wrapper
             Assert.That(ComplexMatrix.AlmostEqual(a1, c), Is.False);
@@ -238,6 +238,88 @@ namespace Iridium.Test.InfrastructureTests
             Assert.That(a1.HermitianTranspose(), Is.Not.EqualTo(a1));
             Assert.That(EqualityComparers.AlmostEqual(a1, a1.HermitianTranspose()), Is.False);
             Assert.That(EqualityComparers.AlmostEqual(a1, a1.HermitianTranspose(), 1e-10), Is.False);
+        }
+
+        [Test, Repeat(5)]
+        public void TestAlmostEquals_Vector()
+        {
+            Vector a1 = Vector.Random(3, new ContinuousUniformDistribution());
+            Vector a2 = a1.Clone();
+            Vector b = -a1;
+            Vector c = a1 * (1.0 + (1e+10 * Number.PositiveEpsilonOf(1.0)));
+            Vector d = a1 * (1.0 + (2 * Number.PositiveEpsilonOf(1.0)));
+
+            Helper_TestAlmostEqualityForGenericType(a1, a2, b, c, d);
+
+            // Wrapper
+            Assert.That(Vector.AlmostEqual(a1, c), Is.False);
+            Assert.That(Vector.AlmostEqual(a1, c, 1e-10), Is.False);
+            Assert.That(Vector.AlmostEqual(a1, c, 1e-2), Is.True);
+
+            // reference type -> no boxing
+            Assert.That(a1, Is.SameAs(a1));
+        }
+
+        [Test, Repeat(5)]
+        public void TestAlmostEquals_ComplexVector()
+        {
+            IContinuousGenerator dist = new ContinuousUniformDistribution();
+            ComplexVector a1 = ComplexVector.Create(Vector.Random(3, dist), Vector.Random(3, dist));
+            ComplexVector a2 = a1.Clone();
+            ComplexVector b = -a1;
+            ComplexVector c = a1 * (1.0 + (1e+10 * Number.PositiveEpsilonOf(1.0)));
+            ComplexVector d = a1 * (1.0 + (2 * Number.PositiveEpsilonOf(1.0)));
+
+            Helper_TestAlmostEqualityForGenericType(a1, a2, b, c, d);
+
+            // Wrapper
+            Assert.That(ComplexVector.AlmostEqual(a1, c), Is.False);
+            Assert.That(ComplexVector.AlmostEqual(a1, c, 1e-10), Is.False);
+            Assert.That(ComplexVector.AlmostEqual(a1, c, 1e-2), Is.True);
+
+            // reference type -> no boxing
+            Assert.That(a1, Is.SameAs(a1));
+        }
+
+        [Test, Repeat(5)]
+        public void TestAlmostEquals_Polynomial()
+        {
+            Polynomial a1 = new Polynomial(Vector.Random(5, new ContinuousUniformDistribution()));
+            Polynomial a2 = a1.Clone();
+            Polynomial b = -a1;
+            Polynomial c = a1 * (1.0 + (1e+10 * Number.PositiveEpsilonOf(1.0)));
+            Polynomial d = a1 * (1.0 + (2 * Number.PositiveEpsilonOf(1.0)));
+
+            Helper_TestAlmostEqualityForGenericType(a1, a2, b, c, d);
+
+            // Wrapper
+            Assert.That(Polynomial.AlmostEqual(a1, c), Is.False);
+            Assert.That(Polynomial.AlmostEqual(a1, c, 1e-10), Is.False);
+            Assert.That(Polynomial.AlmostEqual(a1, c, 1e-2), Is.True);
+
+            // reference type -> no boxing
+            Assert.That(a1, Is.SameAs(a1));
+        }
+
+        [Test, Repeat(5)]
+        public void TestAlmostEquals_ComplexPolynomial()
+        {
+            IContinuousGenerator dist = new ContinuousUniformDistribution();
+            ComplexPolynomial a1 = new ComplexPolynomial(ComplexVector.Create(Vector.Random(5, dist), Vector.Random(5, dist)));
+            ComplexPolynomial a2 = a1.Clone();
+            ComplexPolynomial b = -a1;
+            ComplexPolynomial c = a1 * (1.0 + (1e+10 * Number.PositiveEpsilonOf(1.0)));
+            ComplexPolynomial d = a1 * (1.0 + (2 * Number.PositiveEpsilonOf(1.0)));
+
+            Helper_TestAlmostEqualityForGenericType(a1, a2, b, c, d);
+
+            // Wrapper
+            Assert.That(ComplexPolynomial.AlmostEqual(a1, c), Is.False);
+            Assert.That(ComplexPolynomial.AlmostEqual(a1, c, 1e-10), Is.False);
+            Assert.That(ComplexPolynomial.AlmostEqual(a1, c, 1e-2), Is.True);
+
+            // reference type -> no boxing
+            Assert.That(a1, Is.SameAs(a1));
         }
     }
 }

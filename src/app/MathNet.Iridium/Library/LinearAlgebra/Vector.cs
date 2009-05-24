@@ -47,6 +47,8 @@ namespace MathNet.Numerics.LinearAlgebra
     public class Vector :
         IVector<double>,
         IList<double>,
+        IEquatable<Vector>,
+        IAlmostEquatable<Vector>,
         ICloneable
     {
         private double[] _data;
@@ -1107,20 +1109,91 @@ namespace MathNet.Numerics.LinearAlgebra
         }
 
         /// <summary>
-        /// Returns true if two vectors are almost equal (with some given relative accuracy).
+        /// Indicates whether <c>obj</c> is equal to this instance.
+        /// </summary>
+        public override
+        bool
+        Equals(object obj)
+        {
+            Vector v = obj as Vector;
+            return object.ReferenceEquals(v, null) ? false : this.Equals(v);
+        }
+
+        /// <summary>
+        /// Indicates whether <c>other</c> is equal to this matrix.
+        /// </summary>
+        public
+        bool
+        Equals(Vector other)
+        {
+            if(object.ReferenceEquals(other, null)
+                || _length != other.Length)
+            {
+                return false;
+            }
+
+            // compare all values
+            double[] otherData = other._data;
+            for(int i = 0; i < _data.Length; i++)
+            {
+                if(_data[i] != otherData[i])
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Returns true if two vectors are almost equal, up to the default maximum relative error.
+        /// </summary>
+        public
+        bool
+        AlmostEquals(Vector other)
+        {
+            if(object.ReferenceEquals(other, null)
+                || _length != other.Length)
+            {
+                return false;
+            }
+
+            return Number.AlmostEqualNorm(Norm1(), other.Norm1(), (this - other).Norm1());
+        }
+
+        /// <summary>
+        /// Returns true if two vectors are almost equal, up to the provided maximum relative error.
+        /// </summary>
+        public
+        bool
+        AlmostEquals(
+            Vector other,
+            double maximumRelativeError)
+        {
+            if(object.ReferenceEquals(other, null)
+                || _length != other.Length)
+            {
+                return false;
+            }
+
+            return Number.AlmostEqualNorm(Norm1(), other.Norm1(), (this - other).Norm1(), maximumRelativeError);
+        }
+
+        /// <summary>
+        /// Returns true if two vectors are almost equal, up to the provided maximum relative error.
         /// </summary>
         public static
         bool
         AlmostEqual(
             Vector u,
             Vector v,
-            double relativeAccuracy)
+            double maximumRelativeError)
         {
-            return Number.AlmostEqualNorm(u.Norm1(), v.Norm1(), (u - v).Norm1(), relativeAccuracy);
+            return EqualityComparers.AlmostEqual(u, v, maximumRelativeError);
         }
 
         /// <summary>
-        /// Returns true if two vectors are almost equal.
+        /// Returns true if two vectors are almost equal, up to the default maximum relative error.
         /// </summary>
         public static
         bool
@@ -1128,7 +1201,7 @@ namespace MathNet.Numerics.LinearAlgebra
             Vector u,
             Vector v)
         {
-            return Number.AlmostEqualNorm(u.Norm1(), v.Norm1(), (u - v).Norm1(), 10 * Number.DefaultRelativeAccuracy);
+            return EqualityComparers.AlmostEqual(u, v);
         }
 
         /// <summary>
