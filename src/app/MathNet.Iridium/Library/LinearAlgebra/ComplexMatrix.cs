@@ -41,6 +41,8 @@ namespace MathNet.Numerics.LinearAlgebra
     [Serializable]
     public class ComplexMatrix :
         IMatrix<Complex>,
+        IEquatable<ComplexMatrix>,
+        IAlmostEquatable<ComplexMatrix>,
         ICloneable
     {
         int _rowCount;
@@ -2996,6 +2998,110 @@ namespace MathNet.Numerics.LinearAlgebra
         ICloneable.Clone()
         {
             return Clone();
+        }
+
+        /// <summary>
+        /// Indicates whether <c>obj</c> is equal to this instance.
+        /// </summary>
+        public override
+        bool
+        Equals(object obj)
+        {
+            ComplexMatrix m = obj as ComplexMatrix;
+            return object.ReferenceEquals(m, null) ? false : this.Equals(m);
+        }
+
+        /// <summary>
+        /// Indicates whether <c>other</c> is equal to this matrix.
+        /// </summary>
+        public
+        bool
+        Equals(ComplexMatrix other)
+        {
+            if(object.ReferenceEquals(other, null)
+                || _rowCount != other.RowCount
+                || _columnCount != other.ColumnCount)
+            {
+                return false;
+            }
+
+            // compare all values
+            Complex[][] otherData = other._data;
+            for(int i = 0; i < _data.Length; i++)
+            {
+                Complex[] x = _data[i];
+                Complex[] y = otherData[i];
+                for(int j = 0; j < x.Length; j++)
+                {
+                    if(!x[j].Equals(y[j]))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+        
+        /// <summary>
+        /// Returns true if two matrices are almost equal, up to the default maximum relative error.
+        /// </summary>
+        public
+        bool
+        AlmostEquals(ComplexMatrix other)
+        {
+            if(object.ReferenceEquals(other, null)
+                || _rowCount != other.RowCount
+                || _columnCount != other.ColumnCount)
+            {
+                return false;
+            }
+
+            return Number.AlmostEqualNorm(Norm1(), other.Norm1(), (this - other).Norm1());
+        }
+
+        /// <summary>
+        /// Returns true if two matrices are almost equal, up to the provided maximum relative error.
+        /// </summary>
+        public
+        bool
+        AlmostEquals(
+            ComplexMatrix other,
+            double maximumRelativeError)
+        {
+            if(object.ReferenceEquals(other, null)
+                || _rowCount != other.RowCount
+                || _columnCount != other.ColumnCount)
+            {
+                return false;
+            }
+
+            return Number.AlmostEqualNorm(Norm1(), other.Norm1(), (this - other).Norm1(), maximumRelativeError);
+        }
+
+        /// <summary>
+        /// Returns true if two matrices are almost equal, up to the provided maximum relative error.
+        /// </summary>
+        public static
+        bool
+        AlmostEqual(
+            ComplexMatrix x,
+            ComplexMatrix y,
+            double maximumRelativeError)
+        {
+            return EqualityComparers.AlmostEqual(x, y, maximumRelativeError);
+        }
+
+        /// <summary>
+        /// Returns true if two matrices are almost equal, up to the default maximum relative error.
+        /// </summary>
+        public static
+        bool
+        AlmostEqual(
+            ComplexMatrix x,
+            ComplexMatrix y)
+        {
+            return EqualityComparers.AlmostEqual(x, y);
         }
 
         /// <summary>

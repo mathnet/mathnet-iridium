@@ -185,38 +185,6 @@ namespace Iridium.Test.InfrastructureTests
         }
 
         [Test]
-        public void TestAlmostEqual()
-        {
-            IFormatProvider format = System.Globalization.CultureInfo.InvariantCulture;
-
-            double max = double.MaxValue;
-            double min = double.MinValue;
-
-            Assert.That(Number.AlmostEqual(0.0, 0.0, 0), "A");
-            Assert.That(Number.AlmostEqual(0.0, 0.0, 50), "B");
-            Assert.That(Number.AlmostEqual(max, max, 0), "C");
-            Assert.That(Number.AlmostEqual(min, min, 0), "D");
-
-            Assert.That(!Number.AlmostEqual(0.0, 0.0 + double.Epsilon, 0), "E");
-            Assert.That(Number.AlmostEqual(0.0, 0.0 + double.Epsilon, 1), "F");
-
-            Assert.That(!Number.AlmostEqual(max, max - (2 * Number.EpsilonOf(max)), 0), "G");
-            Assert.That(!Number.AlmostEqual(max, max - (2 * Number.EpsilonOf(max)), 1), "H");
-            Assert.That(Number.AlmostEqual(max, max - (2 * Number.EpsilonOf(max)), 2), "I");
-
-            Assert.That(Convert.ToDouble("3.170404", format) == 3.170404, "J");
-            Assert.That(Convert.ToDouble("4.170404", format) != 4.170404, "K");
-
-            Assert.That(Number.AlmostEqual(Convert.ToDouble("3.170404", format), 3.170404, 0), "L");
-            Assert.That(!Number.AlmostEqual(Convert.ToDouble("4.170404", format), 4.170404, 0), "M");
-            Assert.That(Number.AlmostEqual(Convert.ToDouble("4.170404", format), 4.170404, 1), "N");
-
-            Assert.That(!Number.AlmostEqual(double.NaN, double.NaN, 25), "O");
-            Assert.That(!Number.AlmostEqual(double.PositiveInfinity, double.NegativeInfinity, 25), "P");
-            Assert.That(Number.AlmostEqual(double.PositiveInfinity, double.PositiveInfinity, 25), "Q");
-        }
-
-        [Test]
         public void TestCoerceZero()
         {
             Assert.That(Number.CoerceZero(0d), Is.EqualTo(0.0), "A1");

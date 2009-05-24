@@ -92,6 +92,7 @@
     <Compile Include="EqualityComparers.cs" />
     <Compile Include="Equations\ScalarIterator.cs" />
     <Compile Include="Equations\Solver.cs" />
+    <Compile Include="IAlmostEquatable.cs" />
     <Compile Include="Integration\Algorithms\DoubleExponentialTransformation.cs" />
     <Compile Include="Integration\Algorithms\SimpsonRule.cs" />
     <Compile Include="Integration\Algorithms\TrapeziumRule.cs" />

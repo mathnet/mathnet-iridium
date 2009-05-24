@@ -55,6 +55,7 @@
     <Compile Include="CodeSamples.cs" />
     <Compile Include="CombinatoricsTests\CombinatoricsTest.cs" />
     <Compile Include="DistributionTests\DistributionTest.cs" />
+    <Compile Include="InfrastructureTests\AlmostEqualityTest.cs" />
     <Compile Include="InfrastructureTests\ComplexTest.cs" />
     <Compile Include="InfrastructureTests\NumberTest.cs" />
     <Compile Include="InfrastructureTests\SerializationTest.cs" />

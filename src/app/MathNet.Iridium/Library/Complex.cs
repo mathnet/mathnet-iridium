@@ -77,7 +77,10 @@ namespace MathNet.Numerics
     /// </p>
     /// </remarks>
     [Serializable]
-    public struct Complex : IEquatable<Complex>, IComparable<Complex>
+    public struct Complex :
+        IEquatable<Complex>,
+        IAlmostEquatable<Complex>,
+        IComparable<Complex>
     {
         #region Complex comparers
 
@@ -629,7 +632,7 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// Indicates wherer <paramref name="other"/> is almost equal to this complex number.
+        /// Indicates wherer <paramref name="other"/> is almost equal to this complex number, up to the default maximum relative error.
         /// </summary>
         public
         bool
@@ -642,18 +645,43 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// Indicates wherer <paramref name="other"/> is almost equal to this complex number, according to the specified relative accuracy.
+        /// Indicates wherer <paramref name="other"/> is almost equal to this complex number, up to the provided maximum relative error.
         /// </summary>
         public
         bool
         AlmostEquals(
             Complex other,
-            double relativeAccuracy)
+            double maximumRelativeError)
         {
             return !IsNaN
                 && !other.IsNaN
-                && Number.AlmostEqual(real, other.real, relativeAccuracy)
-                && Number.AlmostEqual(imag, other.imag, relativeAccuracy);
+                && Number.AlmostEqual(real, other.real, maximumRelativeError)
+                && Number.AlmostEqual(imag, other.imag, maximumRelativeError);
+        }
+
+        /// <summary>
+        /// Returns true if two complex numbers are almost equal, up to the provided maximum relative error.
+        /// </summary>
+        public static
+        bool
+        AlmostEqual(
+            Complex x,
+            Complex y,
+            double maximumRelativeError)
+        {
+            return x.AlmostEquals(y, maximumRelativeError);
+        }
+
+        /// <summary>
+        /// Returns true if two complex numbers are almost equal, up to the default maximum relative error.
+        /// </summary>
+        public static
+        bool
+        AlmostEqual(
+            Complex x,
+            Complex y)
+        {
+            return x.AlmostEquals(y);
         }
 
         /// <summary>

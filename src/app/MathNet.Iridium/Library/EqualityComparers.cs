@@ -40,6 +40,53 @@ namespace MathNet.Numerics
     public static class EqualityComparers
     {
         /// <summary>
+        /// True if two instances of T are almost equal, up to the default maximum relative error.
+        /// </summary>
+        public static
+        bool
+        AlmostEqual<T>(
+            T x,
+            T y)
+        where T : IAlmostEquatable<T>
+        {
+            if(object.ReferenceEquals(x, y))
+            {
+                return true;
+            }
+
+            if(object.ReferenceEquals(x, null) || object.ReferenceEquals(y, null))
+            {
+                return false;
+            }
+
+            return x.AlmostEquals(y);
+        }
+
+        /// <summary>
+        /// True if two instances of T are almost equal, up to the provided maximum relative error.
+        /// </summary>
+        public static
+        bool
+        AlmostEqual<T>(
+            T x,
+            T y,
+            double maximumRelativeError)
+        where T : IAlmostEquatable<T>
+        {
+            if(object.ReferenceEquals(x, y))
+            {
+                return true;
+            }
+
+            if(object.ReferenceEquals(x, null) || object.ReferenceEquals(y, null))
+            {
+                return false;
+            }
+
+            return x.AlmostEquals(y, maximumRelativeError);
+        }
+
+        /// <summary>
         /// Create an equality comparer for real floating point numbers with a custom maximum relative error.
         /// </summary>
         /// <param name="maximumRelativeError">Maximum relative error of the two numbers.</param>

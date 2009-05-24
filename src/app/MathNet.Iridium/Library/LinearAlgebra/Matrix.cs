@@ -51,6 +51,8 @@ namespace MathNet.Numerics.LinearAlgebra
     [Serializable]
     public class Matrix :
         IMatrix<double>,
+        IEquatable<Matrix>,
+        IAlmostEquatable<Matrix>,
         ICloneable
     {
         int _rowCount;
@@ -2496,28 +2498,107 @@ namespace MathNet.Numerics.LinearAlgebra
         }
 
         /// <summary>
-        /// Returns true if two matrices are almost equal (with some given relative accuracy).
+        /// Indicates whether <c>obj</c> is equal to this instance.
         /// </summary>
-        public static
+        public override
         bool
-        AlmostEqual(
-            Matrix X,
-            Matrix Y,
-            double relativeAccuracy)
+        Equals(object obj)
         {
-            return Number.AlmostEqualNorm(X.Norm1(), Y.Norm1(), (X - Y).Norm1(), relativeAccuracy);
+            Matrix m = obj as Matrix;
+            return object.ReferenceEquals(m, null) ? false : this.Equals(m);
         }
 
         /// <summary>
-        /// Returns true if two matrices are almost equal.
+        /// Indicates whether <c>other</c> is equal to this matrix.
+        /// </summary>
+        public
+        bool
+        Equals(Matrix other)
+        {
+            if(object.ReferenceEquals(other, null)
+                || _rowCount != other.RowCount
+                || _columnCount != other.ColumnCount)
+            {
+                return false;
+            }
+
+            // compare all values
+            double[][] otherData = other._data;
+            for(int i = 0; i < _data.Length; i++)
+            {
+                double[] x = _data[i];
+                double[] y = otherData[i];
+                for(int j = 0; j < x.Length; j++)
+                {
+                    if(x[j] != y[j])
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// Returns true if two matrices are almost equal, up to the default maximum relative error.
+        /// </summary>
+        public
+        bool
+        AlmostEquals(Matrix other)
+        {
+            if(object.ReferenceEquals(other, null)
+                || _rowCount != other.RowCount
+                || _columnCount != other.ColumnCount)
+            {
+                return false;
+            }
+
+            return Number.AlmostEqualNorm(Norm1(), other.Norm1(), (this - other).Norm1());
+        }
+
+        /// <summary>
+        /// Returns true if two matrices are almost equal, up to the provided maximum relative error.
+        /// </summary>
+        public
+        bool
+        AlmostEquals(
+            Matrix other,
+            double maximumRelativeError)
+        {
+            if(object.ReferenceEquals(other, null)
+                || _rowCount != other.RowCount
+                || _columnCount != other.ColumnCount)
+            {
+                return false;
+            }
+
+            return Number.AlmostEqualNorm(Norm1(), other.Norm1(), (this - other).Norm1(), maximumRelativeError);
+        }
+
+        /// <summary>
+        /// Returns true if two matrices are almost equal, up to the provided maximum relative error.
         /// </summary>
         public static
         bool
         AlmostEqual(
-            Matrix X,
-            Matrix Y)
+            Matrix x,
+            Matrix y,
+            double maximumRelativeError)
         {
-            return Number.AlmostEqualNorm(X.Norm1(), Y.Norm1(), (X - Y).Norm1(), 10 * Number.DefaultRelativeAccuracy);
+            return EqualityComparers.AlmostEqual(x, y, maximumRelativeError);
+        }
+
+        /// <summary>
+        /// Returns true if two matrices are almost equal, up to the default maximum relative error.
+        /// </summary>
+        public static
+        bool
+        AlmostEqual(
+            Matrix x,
+            Matrix y)
+        {
+            return EqualityComparers.AlmostEqual(x, y);
         }
 
         /// <summary>
