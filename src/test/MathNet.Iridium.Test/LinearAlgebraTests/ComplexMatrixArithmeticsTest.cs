@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------
-// <copyright file="ComplexMatrixTest.cs" company="Math.NET Project">
+// <copyright file="ComplexMatrixArithmeticsTest.cs" company="Math.NET Project">
 //    Copyright (c) 2002-2009, Christoph Rüegg.
 //    All Right Reserved.
 // </copyright>
@@ -39,7 +39,7 @@ namespace Iridium.Test.LinearAlgebraTests
     using MathNet.Numerics.LinearAlgebra;
 
     [TestFixture]
-    public class ComplexMatrixTest
+    public class ComplexMatrixArithmeticsTest
     {
         Complex j = Complex.I;
         Complex s = new Complex(1, 1);
@@ -51,7 +51,7 @@ namespace Iridium.Test.LinearAlgebraTests
         ComplexVector cv2;
 
         [SetUp]
-        public void TestComplexMatrix_Setup()
+        public void Setup()
         {
             /*
             MATLAB:

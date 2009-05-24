@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------
-// <copyright file="MatrixTest.cs" company="Math.NET Project">
+// <copyright file="MatrixArithmeticsTest.cs" company="Math.NET Project">
 //    Copyright (c) 2002-2009, Christoph Rüegg, Kevin Whitefoot.
 //    All Right Reserved.
 // </copyright>
@@ -39,12 +39,12 @@ namespace Iridium.Test.LinearAlgebraTests
     using MathNet.Numerics.LinearAlgebra;
 
     [TestFixture]
-    public class MatrixTest
+    public class MatrixArithmeticsTest
     {
         Matrix ma3x2, mb3x2, mc2x2, md2x4;
 
         [SetUp]
-        public void TestMatrix_Setup()
+        public void Setup()
         {
             /*
             MATLAB:
