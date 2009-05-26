@@ -57,8 +57,8 @@ namespace Iridium.Test.StatisticsTests
                 accumulator.Add(gaussian.NextDouble());
             }
 
-            NumericAssert.AreAlmostEqual(0, accumulator.Mean, 0.2, "Mean of (0,1)");
-            NumericAssert.AreAlmostEqual(1, accumulator.Variance, 0.5, "Variance of (0,1)");
+            Assert.That(accumulator.Mean, NumericIs.AlmostEqualTo((double) 0, 0.2), "Mean of (0,1)");
+            Assert.That(accumulator.Variance, NumericIs.AlmostEqualTo((double) 1, 0.5), "Variance of (0,1)");
 
             // Test around 10^9, potential stability issues
             accumulator.Clear();
@@ -68,8 +68,8 @@ namespace Iridium.Test.StatisticsTests
                 accumulator.Add(gaussian.NextDouble());
             }
 
-            NumericAssert.AreAlmostEqual(1e+9, accumulator.Mean, 0.2, "Mean of (1e+9,1)");
-            NumericAssert.AreAlmostEqual(1, accumulator.Variance, 0.5, "Variance of (1e+9,1)");
+            Assert.That(accumulator.Mean, NumericIs.AlmostEqualTo(1e+9, 0.2), "Mean of (1e+9,1)");
+            Assert.That(accumulator.Variance, NumericIs.AlmostEqualTo((double) 1, 0.5), "Variance of (1e+9,1)");
         }
 
         [Test]
@@ -82,23 +82,23 @@ namespace Iridium.Test.StatisticsTests
                 accumulator.Add(i);
             }
 
-            NumericAssert.AreAlmostEqual(5, accumulator.Mean, "A Mean");
-            NumericAssert.AreAlmostEqual(11, accumulator.Variance, "A Variance");
-            NumericAssert.AreAlmostEqual(55, accumulator.Sum, "A Sum");
+            Assert.That(accumulator.Mean, NumericIs.AlmostEqualTo((double) 5), "A Mean");
+            Assert.That(accumulator.Variance, NumericIs.AlmostEqualTo((double) 11), "A Variance");
+            Assert.That(accumulator.Sum, NumericIs.AlmostEqualTo((double) 55), "A Sum");
 
             accumulator.Remove(9);
             accumulator.Remove(4);
 
-            NumericAssert.AreAlmostEqual(14d / 3, accumulator.Mean, "B Mean");
-            NumericAssert.AreAlmostEqual(23d / 2, accumulator.Variance, "B Variance");
-            NumericAssert.AreAlmostEqual(42, accumulator.Sum, "B Sum");
+            Assert.That(accumulator.Mean, NumericIs.AlmostEqualTo(14d / 3), "B Mean");
+            Assert.That(accumulator.Variance, NumericIs.AlmostEqualTo(23d / 2), "B Variance");
+            Assert.That(accumulator.Sum, NumericIs.AlmostEqualTo((double) 42), "B Sum");
 
             accumulator.Add(9);
             accumulator.Add(4);
 
-            NumericAssert.AreAlmostEqual(5, accumulator.Mean, "C Mean");
-            NumericAssert.AreAlmostEqual(11, accumulator.Variance, "C Variance");
-            NumericAssert.AreAlmostEqual(55, accumulator.Sum, "C Sum");
+            Assert.That(accumulator.Mean, NumericIs.AlmostEqualTo((double) 5), "C Mean");
+            Assert.That(accumulator.Variance, NumericIs.AlmostEqualTo((double) 11), "C Variance");
+            Assert.That(accumulator.Sum, NumericIs.AlmostEqualTo((double) 55), "C Sum");
         }
 
         [Test]
@@ -115,9 +115,9 @@ namespace Iridium.Test.StatisticsTests
             // Test around 10^9, potential stability issues
             NormalDistribution gaussian = new NormalDistribution(1e+9, 2);
 
-            NumericAssert.AreAlmostEqual(1e+9, DescriptiveStatistics.Mean(gaussian.EnumerateDoubles(10000)), 0.2, "Mean of (1e+9,2)");
-            NumericAssert.AreAlmostEqual(4, DescriptiveStatistics.Variance(gaussian.EnumerateDoubles(10000)), 0.5, "Variance of (1e+9,2)");
-            NumericAssert.AreAlmostEqual(2, DescriptiveStatistics.StandardDeviation(gaussian.EnumerateDoubles(10000)), 0.5, "StdDev of (1e+9,2)");
+            Assert.That(DescriptiveStatistics.Mean(gaussian.EnumerateDoubles(10000)), NumericIs.AlmostEqualTo(1e+9, 0.2), "Mean of (1e+9,2)");
+            Assert.That(DescriptiveStatistics.Variance(gaussian.EnumerateDoubles(10000)), NumericIs.AlmostEqualTo((double) 4, 0.5), "Variance of (1e+9,2)");
+            Assert.That(DescriptiveStatistics.StandardDeviation(gaussian.EnumerateDoubles(10000)), NumericIs.AlmostEqualTo((double) 2, 0.5), "StdDev of (1e+9,2)");
         }
 
         [Test]

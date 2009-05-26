@@ -49,14 +49,14 @@ namespace Iridium.Test
             Complex minusOne = -Complex.One;
             Complex piI = minusOne.NaturalLogarithm();
 
-            NumericAssert.AreAlmostEqual(0.0, piI.Real, "Re{ln(-1)} = 0");
-            NumericAssert.AreAlmostEqual(Constants.Pi, piI.Imag, "Im{ln(-1)} = Pi");
+            Assert.That(piI.Real, NumericIs.AlmostEqualTo(0.0), "Re{ln(-1)} = 0");
+            Assert.That(piI.Imag, NumericIs.AlmostEqualTo(Constants.Pi), "Im{ln(-1)} = Pi");
 
             Complex zero = Complex.Zero;
             Complex lnZero = zero.NaturalLogarithm();
 
             Assert.That(lnZero.Real, Is.EqualTo(double.NegativeInfinity), "Re{ln(0)} = -infinity");
-            NumericAssert.AreAlmostEqual(0, lnZero.Imag, "Im{ln(0)} = 0");
+            Assert.That(lnZero.Imag, NumericIs.AlmostEqualTo((double) 0), "Im{ln(0)} = 0");
         }
 
         [Test]
@@ -70,9 +70,9 @@ namespace Iridium.Test
 
             Matrix inv1a = cd1.Solve(i);
             Matrix test1a = m1 * inv1a;
-            NumericAssert.AreAlmostEqual(i, test1a, "1A");
+            Assert.That(test1a, NumericIs.AlmostEqualTo(i), "1A");
             Matrix inv1b = m1.Inverse();
-            NumericAssert.AreAlmostEqual(inv1a, inv1b, "1B");
+            Assert.That(inv1b, NumericIs.AlmostEqualTo(inv1a), "1B");
 
             double[][] pvals2 = { new double[] { 25, -5, 10 }, new double[] { -5, 17, 10 }, new double[] { 10, 10, 62 } };
             Matrix m2 = new Matrix(pvals2);
@@ -80,17 +80,17 @@ namespace Iridium.Test
 
             Matrix inv2a = cd2.Solve(i);
             Matrix test2a = m2 * inv2a;
-            NumericAssert.AreAlmostEqual(i, test2a, "2A");
+            Assert.That(test2a, NumericIs.AlmostEqualTo(i), "2A");
             Matrix inv2b = m2.Inverse();
-            NumericAssert.AreAlmostEqual(inv2a, inv2b, "2B");
+            Assert.That(inv2b, NumericIs.AlmostEqualTo(inv2a), "2B");
         }
 
         [Test]
         public void IRID107_ComplexPowerAtZero()
         {
             Complex zeroPowTwo = Complex.Zero.Power(2);
-            NumericAssert.AreAlmostEqual(0d, zeroPowTwo.Real, "Re{(0)^(2)} = 0");
-            NumericAssert.AreAlmostEqual(0d, zeroPowTwo.Imag, "Im{(0)^(2)} = 0");
+            Assert.That(zeroPowTwo.Real, NumericIs.AlmostEqualTo(0d), "Re{(0)^(2)} = 0");
+            Assert.That(zeroPowTwo.Imag, NumericIs.AlmostEqualTo(0d), "Im{(0)^(2)} = 0");
         }
 
         [Test]
@@ -109,7 +109,7 @@ namespace Iridium.Test
             }
            
             pia.Prepare(sl);
-            NumericAssert.AreAlmostEqual(0.9622, pia.Extrapolate(12), 1e-3, "extrapolate(12)");
+            Assert.That(pia.Extrapolate(12), NumericIs.AlmostEqualTo(0.9622, 1e-3), "extrapolate(12)");
         }
 
         [Test]
@@ -137,8 +137,8 @@ namespace Iridium.Test
                 new double[] { 0.0265993197732062, -0.114057602060568, -0.0159589740025151 }
                 });
 
-            NumericAssert.AreAlmostEqual(aInverse, a.Inverse(), "A");
-            NumericAssert.AreAlmostEqual(Matrix.Transpose(aInverse), Matrix.Transpose(a).Inverse(), "B");
+            Assert.That(a.Inverse(), NumericIs.AlmostEqualTo(aInverse, 1e-14), "A");
+            Assert.That(Matrix.Transpose(a).Inverse(), NumericIs.AlmostEqualTo(Matrix.Transpose(aInverse), 1e-14), "B");
         }
 
         [Test]
@@ -250,7 +250,7 @@ namespace Iridium.Test
             // Verify the eigen values
             ComplexVector eigenValues = m.EigenValues;
             Assert.That(eigenValues.Length, Is.EqualTo(12), "Eigenvalue Length");
-            NumericAssert.AreAlmostEqual(expectedEigenValues, eigenValues, 1e-13, "Eigenvalue Values");
+            Assert.That(eigenValues, NumericIs.AlmostEqualTo(expectedEigenValues, 1e-13), "Eigenvalue Values");
 
             // verify the eigen vectors, except the first 4 (since their eigen values are 0)
             Matrix eigenVectors = m.EigenVectors;
@@ -273,7 +273,7 @@ namespace Iridium.Test
                 }
 
                 // Compare
-                NumericAssert.AreAlmostEqual(a, b, 1e-11, "Eigenvector Values: " + i.ToString());
+                Assert.That(b, NumericIs.AlmostEqualTo(a, 1e-11), "Eigenvector Values: " + i.ToString());
             }
         }
 
@@ -300,12 +300,12 @@ namespace Iridium.Test
         [Test]
         public void IRID204_GammaRegularizedSmallA()
         {
-            NumericAssert.AreAlmostEqual(.97815275356248035867, Fn.GammaRegularized(0.1, 1.0625), 1e-13, "A");
-            NumericAssert.AreAlmostEqual(.99800133196409378795, Fn.GammaRegularized(0.01, 1.0625), 1e-13, "B");
-            NumericAssert.AreAlmostEqual(.99980203148024635861, Fn.GammaRegularized(0.001, 1.0625), 1e-13, "C");
-            NumericAssert.AreAlmostEqual(.99998022216513016030, Fn.GammaRegularized(0.0001, 1.0625), 1e-13, "D");
+            Assert.That(Fn.GammaRegularized(0.1, 1.0625), NumericIs.AlmostEqualTo(.97815275356248035867, 1e-13), "A");
+            Assert.That(Fn.GammaRegularized(0.01, 1.0625), NumericIs.AlmostEqualTo(.99800133196409378795, 1e-13), "B");
+            Assert.That(Fn.GammaRegularized(0.001, 1.0625), NumericIs.AlmostEqualTo(.99980203148024635861, 1e-13), "C");
+            Assert.That(Fn.GammaRegularized(0.0001, 1.0625), NumericIs.AlmostEqualTo(.99998022216513016030, 1e-13), "D");
 
-            NumericAssert.AreAlmostEqual(.99667704526159905093, Fn.GammaRegularized(0.016512683231958761, 1.0625), 1e-13, "X");
+            Assert.That(Fn.GammaRegularized(0.016512683231958761, 1.0625), NumericIs.AlmostEqualTo(.99667704526159905093, 1e-13), "X");
         }
 
         [Test]

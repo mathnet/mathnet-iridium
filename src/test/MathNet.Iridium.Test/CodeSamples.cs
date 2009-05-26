@@ -46,7 +46,7 @@ namespace Iridium.Test
             int[] numbers = new int[] { 1, 2, 3, 4, 5 };
             int count = numbers.Length;
 
-            NumericAssert.AreAlmostEqual(120.0, Combinatorics.Permutations(count), "perm(5)");
+            Assert.That(Combinatorics.Permutations(count), NumericIs.AlmostEqualTo(120.0), "perm(5)");
 
             int[] permutation = new int[count];
             Combinatorics.RandomShuffle(numbers, permutation);
@@ -61,16 +61,16 @@ namespace Iridium.Test
                 });
 
             ComplexVector eigenValues = m.EigenValues;
-            NumericAssert.AreAlmostEqual(1.0, eigenValues[0].Real, "Re{eigenvalueA}");
-            NumericAssert.AreAlmostEqual(0.0, eigenValues[0].Imag, "Im{eigenvalueA}");
-            NumericAssert.AreAlmostEqual(-2.0, eigenValues[1].Real, "Re{eigenvalueB}");
-            NumericAssert.AreAlmostEqual(0.0, eigenValues[1].Imag, "Im{eigenvalueB}");
+            Assert.That(eigenValues[0].Real, NumericIs.AlmostEqualTo(1.0), "Re{eigenvalueA}");
+            Assert.That(eigenValues[0].Imag, NumericIs.AlmostEqualTo(0.0), "Im{eigenvalueA}");
+            Assert.That(eigenValues[1].Real, NumericIs.AlmostEqualTo(-2.0), "Re{eigenvalueB}");
+            Assert.That(eigenValues[1].Imag, NumericIs.AlmostEqualTo(0.0), "Im{eigenvalueB}");
 
             Matrix eigenVectors = m.EigenVectors;
-            NumericAssert.AreAlmostEqual(.8944271910, eigenVectors[0, 0], 1e-9, "eigenvectorA[0]");
-            NumericAssert.AreAlmostEqual(.4472135955, eigenVectors[1, 0], 1e-9, "eigenvectorA[1]");
-            NumericAssert.AreAlmostEqual(6.708203936, eigenVectors[0, 1], 1e-9, "eigenvectorB[0]");
-            NumericAssert.AreAlmostEqual(4.472135956, eigenVectors[1, 1], 1e-9, "eigenvectorB[1]");
+            Assert.That(eigenVectors[0, 0], NumericIs.AlmostEqualTo(.8944271910, 1e-9), "eigenvectorA[0]");
+            Assert.That(eigenVectors[1, 0], NumericIs.AlmostEqualTo(.4472135955, 1e-9), "eigenvectorA[1]");
+            Assert.That(eigenVectors[0, 1], NumericIs.AlmostEqualTo(6.708203936, 1e-9), "eigenvectorB[0]");
+            Assert.That(eigenVectors[1, 1], NumericIs.AlmostEqualTo(4.472135956, 1e-9), "eigenvectorB[1]");
         }
 
         [Test]
@@ -103,7 +103,7 @@ namespace Iridium.Test
             // Verify that the polynomial fits with less than 10% error for all given value pairs.
             for(int i = 0; i < x.Length; i++)
             {
-                NumericAssert.AreAlmostEqual(y[i], polynomial.Evaluate(x[i]), 0.1, i.ToString());
+                Assert.That(polynomial.Evaluate(x[i]), NumericIs.AlmostEqualTo(y[i], 0.1), i.ToString());
             }
         }
     }

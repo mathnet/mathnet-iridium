@@ -74,7 +74,8 @@ namespace Iridium.Test.InfrastructureTests
             Complex after = SerializeDeserialize(before);
 
             Assert.That(after, Is.Not.EqualTo(default(Complex)), "Not Null");
-            Assert.That(after, Is.EqualTo(before).Using(EqualityComparers.ForComplex()), "Equal");
+            Assert.That(after, Is.EqualTo(before), "Equal");
+            Assert.That(after, NumericIs.AlmostEqualTo(before), "Almost Equal");
         }
 
         [Test, Repeat(3)]
@@ -85,6 +86,7 @@ namespace Iridium.Test.InfrastructureTests
 
             Assert.That(after, Is.Not.Null, "Not Null");
             Assert.That(after, Is.EqualTo(before), "Equal");
+            Assert.That(after, NumericIs.AlmostEqualTo(before), "Almost Equal");
         }
 
         [Test, Repeat(3)]
@@ -95,6 +97,7 @@ namespace Iridium.Test.InfrastructureTests
 
             Assert.That(after, Is.Not.Null, "Not Null");
             Assert.That(after, Is.EqualTo(before), "Equal");
+            Assert.That(after, NumericIs.AlmostEqualTo(before), "Almost Equal");
         }
 
         [Test, Repeat(3)]
@@ -104,7 +107,8 @@ namespace Iridium.Test.InfrastructureTests
             Matrix after = SerializeDeserialize(before);
 
             Assert.That(after, Is.Not.Null, "Not Null");
-            Assert.That(after, Is.EqualTo(before).Using(EqualityComparers.ForMatrix()), "Equal");
+            Assert.That(after, Is.EqualTo(before), "Equal");
+            Assert.That(after, NumericIs.AlmostEqualTo(before), "Almost Equal");
         }
 
         [Test, Repeat(3)]
@@ -114,7 +118,8 @@ namespace Iridium.Test.InfrastructureTests
             ComplexMatrix after = SerializeDeserialize(before);
 
             Assert.That(after, Is.Not.Null, "Not Null");
-            Assert.That(after, Is.EqualTo(before).Using(EqualityComparers.ForComplexMatrix()), "Equal");
+            Assert.That(after, Is.EqualTo(before), "Equal");
+            Assert.That(after, NumericIs.AlmostEqualTo(before), "Almost Equal");
         }
 
         [Test, Repeat(3)]
@@ -125,6 +130,7 @@ namespace Iridium.Test.InfrastructureTests
 
             Assert.That(after, Is.Not.Null, "Not Null");
             Assert.That(after, Is.EqualTo(before), "Equal");
+            Assert.That(after, NumericIs.AlmostEqualTo(before), "Almost Equal");
         }
 
         [Test, Repeat(3)]
@@ -135,6 +141,7 @@ namespace Iridium.Test.InfrastructureTests
 
             Assert.That(after, Is.Not.Null, "Not Null");
             Assert.That(after, Is.EqualTo(before), "Equal");
+            Assert.That(after, NumericIs.AlmostEqualTo(before), "Almost Equal");
         }
     }
 }

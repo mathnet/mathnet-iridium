@@ -51,10 +51,10 @@ namespace Iridium.Test.LinearAlgebraTests
                 Vector v = Vector.Random(2, gaussian);
                 Matrix rotation = Orthogonal.Rotation(v);
                 Vector res = rotation * v;
-                NumericAssert.AreAlmostEqual(Matrix.Identity(2, 2), Matrix.Transpose(rotation) * rotation, "orthogonal rotation matrix");
-                NumericAssert.AreAlmostEqual(1, rotation.Norm2(), "rotation matrix norm");
-                NumericAssert.AreAlmostEqual(v.Norm(), Math.Abs(res[0]), 1e-12, "res(1)");
-                NumericAssert.AreAlmostEqual(0, res[1], 1e-12, "res(2)");
+                Assert.That(Matrix.Transpose(rotation) * rotation, NumericIs.AlmostEqualTo(Matrix.Identity(2, 2)), "orthogonal rotation matrix");
+                Assert.That(rotation.Norm2(), NumericIs.AlmostEqualTo((double) 1), "rotation matrix norm");
+                Assert.That(Math.Abs(res[0]), NumericIs.AlmostEqualTo(v.Norm(), 1e-12), "res(1)");
+                Assert.That(res[1], NumericIs.AlmostEqualTo((double) 0, 1e-12), "res(2)");
             }
         }
 
@@ -67,11 +67,11 @@ namespace Iridium.Test.LinearAlgebraTests
                 ComplexVector v = new ComplexVector(new Complex[] { Complex.Random(gaussian), Complex.Random(gaussian) });
                 ComplexMatrix rotation = Orthogonal.Rotation(v);
                 ComplexVector res = rotation * v;
-                NumericAssert.AreAlmostEqual(ComplexMatrix.Identity(2, 2), rotation.HermitianTranspose() * rotation, "unitary rotation matrix");
+                Assert.That(rotation.HermitianTranspose() * rotation, NumericIs.AlmostEqualTo(ComplexMatrix.Identity(2, 2)), "unitary rotation matrix");
                 Assert.That(rotation[0, 0].IsReal, "c1 real");
                 Assert.That(rotation[1, 1].IsReal, "c2 real");
-                NumericAssert.AreAlmostEqual(v.Norm(), res[0].Modulus, 1e-12, "res(1)");
-                NumericAssert.AreAlmostEqual(0, res[1], 1e-12, "res(2)");
+                Assert.That(res[0].Modulus, NumericIs.AlmostEqualTo(v.Norm(), 1e-12), "res(1)");
+                Assert.That(res[1], NumericIs.AlmostEqualTo((Complex) 0, 1e-12), "res(2)");
             }
         }
 
@@ -84,12 +84,12 @@ namespace Iridium.Test.LinearAlgebraTests
                 Vector v = Vector.Random(4, gaussian);
                 Matrix reflection = Orthogonal.Reflection(v);
                 Vector res = reflection * v;
-                NumericAssert.AreAlmostEqual(Matrix.Identity(4, 4), Matrix.Transpose(reflection) * reflection, "orthogonal reflection matrix");
-                NumericAssert.AreAlmostEqual(1, reflection.Norm2(), "reflection matrix norm");
-                NumericAssert.AreAlmostEqual(v.Norm(), Math.Abs(res[0]), 1e-12, "res(1)");
-                NumericAssert.AreAlmostEqual(0, res[1], 1e-12, "res(2)");
-                NumericAssert.AreAlmostEqual(0, res[2], 1e-12, "res(3)");
-                NumericAssert.AreAlmostEqual(0, res[3], 1e-12, "res(4)");
+                Assert.That(Matrix.Transpose(reflection) * reflection, NumericIs.AlmostEqualTo(Matrix.Identity(4, 4)), "orthogonal reflection matrix");
+                Assert.That(reflection.Norm2(), NumericIs.AlmostEqualTo((double) 1), "reflection matrix norm");
+                Assert.That(Math.Abs(res[0]), NumericIs.AlmostEqualTo(v.Norm(), 1e-12), "res(1)");
+                Assert.That(res[1], NumericIs.AlmostEqualTo((double) 0, 1e-12), "res(2)");
+                Assert.That(res[2], NumericIs.AlmostEqualTo((double) 0, 1e-12), "res(3)");
+                Assert.That(res[3], NumericIs.AlmostEqualTo((double) 0, 1e-12), "res(4)");
             }
         }
 
@@ -102,15 +102,15 @@ namespace Iridium.Test.LinearAlgebraTests
                 ComplexVector v = new ComplexVector(new Complex[] { Complex.Random(gaussian), Complex.Random(gaussian), Complex.Random(gaussian), Complex.Random(gaussian) });
                 ComplexMatrix reflection = Orthogonal.Reflection(v);
                 ComplexVector res = reflection * v;
-                NumericAssert.AreAlmostEqual(ComplexMatrix.Identity(4, 4), reflection.HermitianTranspose() * reflection, "orthogonal reflection matrix");
+                Assert.That(reflection.HermitianTranspose() * reflection, NumericIs.AlmostEqualTo(ComplexMatrix.Identity(4, 4)), "orthogonal reflection matrix");
                 Assert.That(reflection[0, 0].IsReal, "c1 real");
                 Assert.That(reflection[1, 1].IsReal, "c2 real");
                 Assert.That(reflection[2, 2].IsReal, "c3 real");
                 Assert.That(reflection[3, 3].IsReal, "c4 real");
-                NumericAssert.AreAlmostEqual(v.Norm(), res[0].Modulus, 1e-12, "res(1)");
-                NumericAssert.AreAlmostEqual(0, res[1], 1e-12, "res(2)");
-                NumericAssert.AreAlmostEqual(0, res[2], 1e-12, "res(3)");
-                NumericAssert.AreAlmostEqual(0, res[3], 1e-12, "res(4)");
+                Assert.That(res[0].Modulus, NumericIs.AlmostEqualTo(v.Norm(), 1e-12), "res(1)");
+                Assert.That(res[1], NumericIs.AlmostEqualTo((Complex) 0, 1e-12), "res(2)");
+                Assert.That(res[2], NumericIs.AlmostEqualTo((Complex) 0, 1e-12), "res(3)");
+                Assert.That(res[3], NumericIs.AlmostEqualTo((Complex) 0, 1e-12), "res(4)");
             }
         }
     }

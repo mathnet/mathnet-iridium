@@ -1132,7 +1132,7 @@ namespace MathNet.Numerics
             Polynomial v,
             double maximumRelativeError)
         {
-            return EqualityComparers.AlmostEqual(u, v, maximumRelativeError);
+            return Number.AlmostEqual(u, v, maximumRelativeError);
         }
 
         /// <summary>
@@ -1144,7 +1144,7 @@ namespace MathNet.Numerics
             Polynomial u,
             Polynomial v)
         {
-            return EqualityComparers.AlmostEqual(u, v);
+            return Number.AlmostEqual(u, v);
         }
 
         /// <summary>
@@ -1153,15 +1153,15 @@ namespace MathNet.Numerics
         public static
         bool
         Equal(
-            Polynomial polynomial1,
-            Polynomial polynomial2)
+            Polynomial u,
+            Polynomial v)
         {
-            if(object.ReferenceEquals(polynomial1, null))
+            if(object.ReferenceEquals(u, null))
             {
-                return object.ReferenceEquals(polynomial2, null);
+                return object.ReferenceEquals(v, null);
             }
 
-            return polynomial1.Equals(polynomial2);
+            return u.Equals(v);
         }
 
         /// <summary>

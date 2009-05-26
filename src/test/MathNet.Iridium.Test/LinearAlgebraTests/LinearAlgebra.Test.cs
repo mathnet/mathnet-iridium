@@ -152,8 +152,8 @@ namespace Iridium.Test.LinearAlgebraTests
             Matrix X1 = A1.SolveRobust(B1);
 
             // [vermorel] Values have been computed with LAD function of Systat 12
-            NumericAssert.AreAlmostEqual(1.2, X1[0, 0], "#A00 Unexpected robust regression result.");
-            NumericAssert.AreAlmostEqual(0.4, X1[1, 0], "#A01 Unexpected robust regression result.");
+            Assert.That(X1[0, 0], NumericIs.AlmostEqualTo(1.2), "#A00 Unexpected robust regression result.");
+            Assert.That(X1[1, 0], NumericIs.AlmostEqualTo(0.4), "#A01 Unexpected robust regression result.");
 
             Matrix A2 = Matrix.Create(
                 new double[6, 3] {
@@ -178,9 +178,9 @@ namespace Iridium.Test.LinearAlgebraTests
             Matrix X2 = A2.SolveRobust(B2);
 
             // [vermorel] Values have been computed with LAD function of Systat 12
-            NumericAssert.AreAlmostEqual(0.667, X2[0, 0], 1e-3, "#A02 Unexpected robust regression result.");
-            NumericAssert.AreAlmostEqual(1.0, X2[1, 0], 1e-5, "#A03 Unexpected robust regression result.");
-            NumericAssert.AreAlmostEqual(-0.167, X2[2, 0], 1e-2, "#A04 Unexpected robust regression result.");
+            Assert.That(X2[0, 0], NumericIs.AlmostEqualTo(0.667, 1e-3), "#A02 Unexpected robust regression result.");
+            Assert.That(X2[1, 0], NumericIs.AlmostEqualTo(1.0, 1e-5), "#A03 Unexpected robust regression result.");
+            Assert.That(X2[2, 0], NumericIs.AlmostEqualTo(-0.167, 1e-2), "#A04 Unexpected robust regression result.");
 
             Matrix A3 = Matrix.Create(
                 new double[10, 4] {
@@ -213,10 +213,10 @@ namespace Iridium.Test.LinearAlgebraTests
             Matrix X3 = A3.SolveRobust(B3);
 
             // [vermorel] Values have been computed with LAD function of Systat 12
-            NumericAssert.AreAlmostEqual(-0.104, X3[0, 0], 1e-2, "#A05 Unexpected robust regression result.");
-            NumericAssert.AreAlmostEqual(-0.216, X3[1, 0], 1e-2, "#A06 Unexpected robust regression result.");
-            NumericAssert.AreAlmostEqual(-0.618, X3[2, 0], 1e-3, "#A07 Unexpected robust regression result.");
-            NumericAssert.AreAlmostEqual(0.238, X3[3, 0], 1e-3, "#A08 Unexpected robust regression result.");
+            Assert.That(X3[0, 0], NumericIs.AlmostEqualTo(-0.104, 1e-2), "#A05 Unexpected robust regression result.");
+            Assert.That(X3[1, 0], NumericIs.AlmostEqualTo(-0.216, 1e-2), "#A06 Unexpected robust regression result.");
+            Assert.That(X3[2, 0], NumericIs.AlmostEqualTo(-0.618, 1e-3), "#A07 Unexpected robust regression result.");
+            Assert.That(X3[3, 0], NumericIs.AlmostEqualTo(0.238, 1e-3), "#A08 Unexpected robust regression result.");
         }
 
         /// <summary>
@@ -240,7 +240,7 @@ namespace Iridium.Test.LinearAlgebraTests
                 {
                     for(int j = 0; j < matrix.ColumnCount; j++)
                     {
-                        NumericAssert.AreAlmostEqual(matrix[i, j], product[i, j], 1e-10, "#A00");
+                        Assert.That(product[i, j], NumericIs.AlmostEqualTo(matrix[i, j], 1e-10), "#A00");
                     }
                 }
             }
@@ -310,7 +310,7 @@ namespace Iridium.Test.LinearAlgebraTests
 
             avals[0][0] = columnwise[0];
             I = new Matrix(ivals);
-            NumericAssert.AreAlmostEqual(I, Matrix.Identity(3, 4), "Identity");
+            Assert.That(Matrix.Identity(3, 4), NumericIs.AlmostEqualTo(I), "Identity");
 
             /***** Testing access methods *****/
 
@@ -343,7 +343,7 @@ namespace Iridium.Test.LinearAlgebraTests
 
             barray = B.Clone();
             Assert.That(barray, Is.Not.SameAs(avals), "getArrayCopy");
-            NumericAssert.AreAlmostEqual(new Matrix(barray), B, "getArrayCopy II");
+            Assert.That(B, NumericIs.AlmostEqualTo(new Matrix(barray)), "getArrayCopy II");
 
             ////double[] bpacked = B.ColumnPackedCopy;
             ////try
@@ -379,25 +379,25 @@ namespace Iridium.Test.LinearAlgebraTests
             Assert.That(delegate() { M = B.GetMatrix(ib, ie, jb, je + B.ColumnCount + 1); }, Throws.TypeOf<IndexOutOfRangeException>());
 
             M = B.GetMatrix(ib, ie, jb, je);
-            NumericAssert.AreAlmostEqual(SUB, M, "GetMatrix(int,int,int,int)");
+            Assert.That(M, NumericIs.AlmostEqualTo(SUB), "GetMatrix(int,int,int,int)");
 
             Assert.That(delegate() { M = B.GetMatrix(ib, ie, badcolumnindexset); }, Throws.TypeOf<IndexOutOfRangeException>());
             Assert.That(delegate() { M = B.GetMatrix(ib, ie + B.RowCount + 1, columnindexset); }, Throws.TypeOf<IndexOutOfRangeException>());
 
             M = B.GetMatrix(ib, ie, columnindexset);
-            NumericAssert.AreAlmostEqual(SUB, M, "GetMatrix(int,int,int[])");
+            Assert.That(M, NumericIs.AlmostEqualTo(SUB), "GetMatrix(int,int,int[])");
 
             Assert.That(delegate() { M = B.GetMatrix(badrowindexset, jb, je); }, Throws.TypeOf<IndexOutOfRangeException>());
             Assert.That(delegate() { M = B.GetMatrix(rowindexset, jb, je + B.ColumnCount + 1); }, Throws.TypeOf<IndexOutOfRangeException>());
 
             M = B.GetMatrix(rowindexset, jb, je);
-            NumericAssert.AreAlmostEqual(SUB, M, "GetMatrix(int[],int,int)");
+            Assert.That(M, NumericIs.AlmostEqualTo(SUB), "GetMatrix(int[],int,int)");
 
             Assert.That(delegate() { M = B.GetMatrix(badrowindexset, columnindexset); }, Throws.TypeOf<IndexOutOfRangeException>());
             Assert.That(delegate() { M = B.GetMatrix(rowindexset, badcolumnindexset); }, Throws.TypeOf<IndexOutOfRangeException>());
 
             M = B.GetMatrix(rowindexset, columnindexset);
-            NumericAssert.AreAlmostEqual(SUB, M, "GetMatrix(int[],int[])");
+            Assert.That(M, NumericIs.AlmostEqualTo(SUB), "GetMatrix(int[],int[])");
 
             // Various set methods:
             Assert.That(delegate() { B[B.RowCount, B.ColumnCount - 1] = 0.0; }, Throws.TypeOf<IndexOutOfRangeException>());
@@ -405,7 +405,7 @@ namespace Iridium.Test.LinearAlgebraTests
 
             B[ib, jb] = 0.0;
             tmp = B[ib, jb];
-            NumericAssert.AreAlmostEqual(tmp, 0.0, "set(int,int,double)");
+            Assert.That(0.0, NumericIs.AlmostEqualTo(tmp), "set(int,int,double)");
 
             M = new Matrix(2, 3, 0.0);
 
@@ -413,21 +413,21 @@ namespace Iridium.Test.LinearAlgebraTests
             Assert.That(delegate() { B.SetMatrix(ib, ie, jb, je + B.ColumnCount + 1, M); }, Throws.TypeOf<IndexOutOfRangeException>());
 
             B.SetMatrix(ib, ie, jb, je, M);
-            NumericAssert.AreAlmostEqual(M - B.GetMatrix(ib, ie, jb, je), M, "SetMatrix(int,int,int,int,Matrix)");
+            Assert.That(M, NumericIs.AlmostEqualTo(M - B.GetMatrix(ib, ie, jb, je)), "SetMatrix(int,int,int,int,Matrix)");
             B.SetMatrix(ib, ie, jb, je, SUB);
 
             Assert.That(delegate() { B.SetMatrix(ib, ie + B.RowCount + 1, columnindexset, M); }, Throws.TypeOf<IndexOutOfRangeException>());
             Assert.That(delegate() { B.SetMatrix(ib, ie, badcolumnindexset, M); }, Throws.TypeOf<IndexOutOfRangeException>());
 
             B.SetMatrix(ib, ie, columnindexset, M);
-            NumericAssert.AreAlmostEqual(M - B.GetMatrix(ib, ie, columnindexset), M, "SetMatrix(int,int,int[],Matrix)");
+            Assert.That(M, NumericIs.AlmostEqualTo(M - B.GetMatrix(ib, ie, columnindexset)), "SetMatrix(int,int,int[],Matrix)");
             B.SetMatrix(ib, ie, jb, je, SUB);
 
             Assert.That(delegate() { B.SetMatrix(rowindexset, jb, je + B.ColumnCount + 1, M); }, Throws.TypeOf<IndexOutOfRangeException>());
             Assert.That(delegate() { B.SetMatrix(badrowindexset, jb, je, M); }, Throws.TypeOf<IndexOutOfRangeException>());
 
             B.SetMatrix(rowindexset, jb, je, M);
-            NumericAssert.AreAlmostEqual(M - B.GetMatrix(rowindexset, jb, je), M, "SetMatrix(int[],int,int,Matrix)");
+            Assert.That(M, NumericIs.AlmostEqualTo(M - B.GetMatrix(rowindexset, jb, je)), "SetMatrix(int[],int,int,Matrix)");
 
             B.SetMatrix(ib, ie, jb, je, SUB);
 
@@ -435,7 +435,7 @@ namespace Iridium.Test.LinearAlgebraTests
             Assert.That(delegate() { B.SetMatrix(badrowindexset, columnindexset, M); }, Throws.TypeOf<IndexOutOfRangeException>());
 
             B.SetMatrix(rowindexset, columnindexset, M);
-            NumericAssert.AreAlmostEqual(M - B.GetMatrix(rowindexset, columnindexset), M, "SetMatrix(int[],int[],Matrix)");
+            Assert.That(M, NumericIs.AlmostEqualTo(M - B.GetMatrix(rowindexset, columnindexset)), "SetMatrix(int[],int[],Matrix)");
 
             /***** Testing array-like methods *****/
 
@@ -476,18 +476,18 @@ namespace Iridium.Test.LinearAlgebraTests
 
             Assert.That(delegate() { S = A + S; }, Throws.TypeOf<ArgumentException>());
 
-            NumericAssert.AreAlmostEqual(C + B, A, "Add");
+            Assert.That(A, NumericIs.AlmostEqualTo(C + B), "Add");
 
             C = A - B;
             C.AddInplace(B);
 
             Assert.That(delegate() { A.AddInplace(S); }, Throws.TypeOf<ArgumentException>());
 
-            NumericAssert.AreAlmostEqual(C, A, "AddEquals");
+            Assert.That(A, NumericIs.AlmostEqualTo(C), "AddEquals");
 
             A = ((Matrix)R.Clone());
             A.NegateInplace();
-            NumericAssert.AreAlmostEqual(A + R, Z, "UnaryMinus");
+            Assert.That(Z, NumericIs.AlmostEqualTo(A + R), "UnaryMinus");
 
             A = (Matrix)R.Clone();
             O = new Matrix(A.RowCount, A.ColumnCount, 1.0);
@@ -495,12 +495,12 @@ namespace Iridium.Test.LinearAlgebraTests
             Assert.That(delegate() { Matrix.ArrayDivide(A, S); }, Throws.TypeOf<ArgumentException>());
 
             C = Matrix.ArrayDivide(A, R);
-            NumericAssert.AreAlmostEqual(C, O, "ArrayRightDivide");
+            Assert.That(O, NumericIs.AlmostEqualTo(C), "ArrayRightDivide");
 
             Assert.That(delegate() { A.ArrayDivide(S); }, Throws.TypeOf<ArgumentException>());
 
             A.ArrayDivide(R);
-            NumericAssert.AreAlmostEqual(A, O, "ArrayRightDivideEquals");
+            Assert.That(O, NumericIs.AlmostEqualTo(A), "ArrayRightDivideEquals");
 
             A = (Matrix)R.Clone();
             B = Matrix.Random(A.RowCount, A.ColumnCount);
@@ -509,13 +509,13 @@ namespace Iridium.Test.LinearAlgebraTests
 
             C = Matrix.ArrayMultiply(A, B);
             C.ArrayDivide(B);
-            NumericAssert.AreAlmostEqual(C, A, "arrayTimes");
+            Assert.That(A, NumericIs.AlmostEqualTo(C), "arrayTimes");
 
             Assert.That(delegate() { A.ArrayMultiply(S); }, Throws.TypeOf<ArgumentException>());
 
             A.ArrayMultiply(B);
             A.ArrayDivide(B);
-            NumericAssert.AreAlmostEqual(A, R, "ArrayMultiplyEquals");
+            Assert.That(R, NumericIs.AlmostEqualTo(A), "ArrayMultiplyEquals");
 
             /***** Testing linear algebra methods *****/
 
@@ -544,65 +544,65 @@ namespace Iridium.Test.LinearAlgebraTests
             A = new Matrix(columnwise, 3);
             T = new Matrix(tvals);
             T = Matrix.Transpose(A);
-            NumericAssert.AreAlmostEqual(Matrix.Transpose(A), T, "Transpose");
-            NumericAssert.AreAlmostEqual(A.Norm1(), columnsummax, "Norm1");
-            NumericAssert.AreAlmostEqual(A.NormInf(), rowsummax, "NormInf");
-            NumericAssert.AreAlmostEqual(A.NormF(), Math.Sqrt(sumofsquares), "NormF");
-            NumericAssert.AreAlmostEqual(A.Trace(), sumofdiagonals, "Trace");
-            NumericAssert.AreAlmostEqual(A.GetMatrix(0, A.RowCount - 1, 0, A.RowCount - 1).Determinant(), 0.0, "Determinant");
+            Assert.That(T, NumericIs.AlmostEqualTo(Matrix.Transpose(A)), "Transpose");
+            Assert.That(columnsummax, NumericIs.AlmostEqualTo(A.Norm1()), "Norm1");
+            Assert.That(rowsummax, NumericIs.AlmostEqualTo(A.NormInf()), "NormInf");
+            Assert.That(Math.Sqrt(sumofsquares), NumericIs.AlmostEqualTo(A.NormF()), "NormF");
+            Assert.That(sumofdiagonals, NumericIs.AlmostEqualTo(A.Trace()), "Trace");
+            Assert.That(0.0, NumericIs.AlmostEqualTo(A.GetMatrix(0, A.RowCount - 1, 0, A.RowCount - 1).Determinant()), "Determinant");
 
             SQ = new Matrix(square);
-            NumericAssert.AreAlmostEqual(A * Matrix.Transpose(A), SQ, "Multiply(Matrix)");
-            NumericAssert.AreAlmostEqual(0.0 * A, Z, "Multiply(double)");
+            Assert.That(SQ, NumericIs.AlmostEqualTo(A * Matrix.Transpose(A)), "Multiply(Matrix)");
+            Assert.That(Z, NumericIs.AlmostEqualTo(0.0 * A), "Multiply(double)");
 
             A = new Matrix(columnwise, 4);
             QRDecomposition QR = A.QRDecomposition;
             R = QR.R;
-            NumericAssert.AreAlmostEqual(A, QR.Q * R, "QRDecomposition");
+            Assert.That(QR.Q * R, NumericIs.AlmostEqualTo(A), "QRDecomposition");
 
             SingularValueDecomposition SVD = A.SingularValueDecomposition;
-            NumericAssert.AreAlmostEqual(A, SVD.LeftSingularVectors * (SVD.S * Matrix.Transpose(SVD.RightSingularVectors)), "SingularValueDecomposition");
+            Assert.That(SVD.LeftSingularVectors * (SVD.S * Matrix.Transpose(SVD.RightSingularVectors)), NumericIs.AlmostEqualTo(A), "SingularValueDecomposition");
 
             DEF = new Matrix(rankdef);
-            NumericAssert.AreAlmostEqual(DEF.Rank(), Math.Min(DEF.RowCount, DEF.ColumnCount) - 1, "Rank");
+            Assert.That((double) (Math.Min(DEF.RowCount, DEF.ColumnCount) - 1), NumericIs.AlmostEqualTo((double) DEF.Rank()), "Rank");
 
             B = new Matrix(condmat);
             SVD = B.SingularValueDecomposition;
             double[] singularvalues = SVD.SingularValues;
-            NumericAssert.AreAlmostEqual(B.Condition(), singularvalues[0] / singularvalues[Math.Min(B.RowCount, B.ColumnCount) - 1], "Condition");
+            Assert.That(singularvalues[0] / singularvalues[Math.Min(B.RowCount, B.ColumnCount) - 1], NumericIs.AlmostEqualTo(B.Condition()), "Condition");
 
             int n = A.ColumnCount;
             A = A.GetMatrix(0, n - 1, 0, n - 1);
             A[0, 0] = 0.0;
             LUDecomposition LU = A.LUDecomposition;
-            NumericAssert.AreAlmostEqual(A.GetMatrix(LU.Pivot, 0, n - 1), LU.L * LU.U, "LUDecomposition");
+            Assert.That(LU.L * LU.U, NumericIs.AlmostEqualTo(A.GetMatrix(LU.Pivot, 0, n - 1)), "LUDecomposition");
 
             X = A.Inverse();
-            NumericAssert.AreAlmostEqual(A * X, Matrix.Identity(3, 3), "Inverse");
+            Assert.That(Matrix.Identity(3, 3), NumericIs.AlmostEqualTo(A * X, 1e-14), "Inverse");
 
             O = new Matrix(SUB.RowCount, 1, 1.0);
             SOL = new Matrix(sqSolution);
             SQ = SUB.GetMatrix(0, SUB.RowCount - 1, 0, SUB.RowCount - 1);
-            NumericAssert.AreAlmostEqual(SQ.Solve(SOL), O, "Solve");
+            Assert.That(O, NumericIs.AlmostEqualTo(SQ.Solve(SOL)), "Solve");
 
             A = new Matrix(pvals);
             CholeskyDecomposition Chol = A.CholeskyDecomposition;
             Matrix L = Chol.TriangularFactor;
-            NumericAssert.AreAlmostEqual(A, L * Matrix.Transpose(L), "CholeskyDecomposition");
+            Assert.That(L * Matrix.Transpose(L), NumericIs.AlmostEqualTo(A), "CholeskyDecomposition");
 
             X = Chol.Solve(Matrix.Identity(3, 3));
-            NumericAssert.AreAlmostEqual(A * X, Matrix.Identity(3, 3), "CholeskyDecomposition Solve");
+            Assert.That(Matrix.Identity(3, 3), NumericIs.AlmostEqualTo(A * X), "CholeskyDecomposition Solve");
 
             EigenvalueDecomposition Eig = A.EigenvalueDecomposition;
             Matrix D = Eig.BlockDiagonal;
             Matrix V = Eig.EigenVectors;
-            NumericAssert.AreAlmostEqual(A * V, V * D, "EigenvalueDecomposition (symmetric)");
+            Assert.That(V * D, NumericIs.AlmostEqualTo(A * V), "EigenvalueDecomposition (symmetric)");
 
             A = new Matrix(evals);
             Eig = A.EigenvalueDecomposition;
             D = Eig.BlockDiagonal;
             V = Eig.EigenVectors;
-            NumericAssert.AreAlmostEqual(A * V, V * D, "EigenvalueDecomposition (nonsymmetric)");
+            Assert.That(V * D, NumericIs.AlmostEqualTo(A * V, 1e-14), "EigenvalueDecomposition (nonsymmetric)");
         }
     }
 }

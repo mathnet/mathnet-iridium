@@ -46,31 +46,27 @@ namespace Iridium.Test.LinearAlgebraTests
         [SetUp]
         public void Setup()
         {
-            /*
-            MATLAB:
-            ma3x2 = [1 -2;-1 4;5 7]
-            mb3x2 = [10 2.5;-3 -1.5;19 -6]
-            mc2x2 = [1 2;3 4]
-            md2x4 = [1 2 -3 12;3 3.1 4 2]
-            */
-
+            // MATLAB: ma3x2 = [1 -2;-1 4;5 7]
             ma3x2 = new Matrix(new double[][] {
                 new double[] { 1, -2 },
                 new double[] { -1, 4 },
                 new double[] { 5, 7 }
                 });
 
+            // MATLAB: mb3x2 = [10 2.5;-3 -1.5;19 -6]
             mb3x2 = new Matrix(new double[][] {
                 new double[] { 10, 2.5 },
                 new double[] { -3, -1.5 },
                 new double[] { 19, -6 }
                 });
 
+            // MATLAB: mc2x2 = [1 2;3 4]
             mc2x2 = new Matrix(new double[][] {
                 new double[] { 1, 2 },
                 new double[] { 3, 4 }
                 });
 
+            // MATLAB: md2x4 = [1 2 -3 12;3 3.1 4 2]
             md2x4 = new Matrix(new double[][] {
                 new double[] { 1, 2, -3, 12 },
                 new double[] { 3, 3.1, 4, 2 }
@@ -84,7 +80,10 @@ namespace Iridium.Test.LinearAlgebraTests
             Matrix ma = Matrix.Create(a);
             double[][] b = { new double[] { 1.0, 2.0 }, new double[] { 2.0, 3.0 } };
             Matrix mb = Matrix.Create(a);
-            Assert.That(ma.Equals(ma), "Matrices should be equal");
+
+            Assert.That(ma, Is.EqualTo(mb));
+            Assert.That(ma.Equals(mb), Is.True);
+            Assert.That(ma.AlmostEquals(mb), Is.True);
         }
 
         [Test]
@@ -98,7 +97,7 @@ namespace Iridium.Test.LinearAlgebraTests
                 new double[] { -2, 4, 7 }
                 });
 
-            NumericAssert.AreAlmostEqual(trans_m, Matrix.Transpose(ma3x2), "trans m 1");
+            Assert.That(Matrix.Transpose(ma3x2), NumericIs.AlmostEqualTo(trans_m), "trans m 1");
             Assert.That(Matrix.Transpose(ma3x2), Is.Not.SameAs(ma3x2));
             Assert.That(Matrix.Transpose(ma3x2).GetArray(), Is.Not.SameAs(ma3x2.GetArray()));
 
@@ -108,7 +107,7 @@ namespace Iridium.Test.LinearAlgebraTests
 
             double[][] internalArray = trans_inplace.GetArray();
             trans_inplace.TransposeInplace();
-            NumericAssert.AreAlmostEqual(trans_m, trans_inplace, "trans m 2");
+            Assert.That(trans_inplace, NumericIs.AlmostEqualTo(trans_m), "trans m 2");
             // 2009-05-23: Note, this internal behavior might change in a future release:
             Assert.That(trans_inplace.GetArray(), Is.Not.SameAs(internalArray));
         }
@@ -129,10 +128,10 @@ namespace Iridium.Test.LinearAlgebraTests
                 new double[] { 24, 1 }
                 });
 
-            NumericAssert.AreAlmostEqual(sum, ma3x2 + mb3x2, "sum 1");
+            Assert.That(ma3x2 + mb3x2, NumericIs.AlmostEqualTo(sum), "sum 1");
             Matrix sum_inplace = ma3x2.Clone();
             sum_inplace.AddInplace(mb3x2);
-            NumericAssert.AreAlmostEqual(sum, sum_inplace, "sum 2");
+            Assert.That(sum_inplace, NumericIs.AlmostEqualTo(sum), "sum 2");
 
             Matrix diff = new Matrix(new double[][] {
                 new double[] { -9, -4.5 },
@@ -140,10 +139,10 @@ namespace Iridium.Test.LinearAlgebraTests
                 new double[] { -14, 13 }
                 });
 
-            NumericAssert.AreAlmostEqual(diff, ma3x2 - mb3x2, "diff 1");
+            Assert.That(ma3x2 - mb3x2, NumericIs.AlmostEqualTo(diff), "diff 1");
             Matrix diff_inplace = ma3x2.Clone();
             diff_inplace.SubtractInplace(mb3x2);
-            NumericAssert.AreAlmostEqual(diff, diff_inplace, "diff 2");
+            Assert.That(diff_inplace, NumericIs.AlmostEqualTo(diff), "diff 2");
 
             Matrix neg_m = new Matrix(new double[][] {
                 new double[] { -1, 2 },
@@ -151,7 +150,7 @@ namespace Iridium.Test.LinearAlgebraTests
                 new double[] { -5, -7 }
                 });
 
-            NumericAssert.AreAlmostEqual(neg_m, -ma3x2, "neg 1");
+            Assert.That(-ma3x2, NumericIs.AlmostEqualTo(neg_m), "neg 1");
         }
 
         [Test]
@@ -169,8 +168,8 @@ namespace Iridium.Test.LinearAlgebraTests
                 new double[] { 26, 31.7, 13, 74 }
                 });
 
-            NumericAssert.AreAlmostEqual(prod, ma3x2 * md2x4, "prod 1");
-            NumericAssert.AreAlmostEqual(prod, ma3x2.Multiply(md2x4), "prod 2");
+            Assert.That(ma3x2 * md2x4, NumericIs.AlmostEqualTo(prod), "prod 1");
+            Assert.That(ma3x2.Multiply(md2x4), NumericIs.AlmostEqualTo(prod), "prod 2");
 
             Matrix prod_s = new Matrix(new double[][] {
                 new double[] { 2, -4 },
@@ -178,10 +177,10 @@ namespace Iridium.Test.LinearAlgebraTests
                 new double[] { 10, 14 }
                 });
 
-            NumericAssert.AreAlmostEqual(prod_s, ma3x2 * 2, "prod s 1");
+            Assert.That(ma3x2 * 2, NumericIs.AlmostEqualTo(prod_s), "prod s 1");
             Matrix prod_s_inplace = ma3x2.Clone();
             prod_s_inplace.MultiplyInplace(2);
-            NumericAssert.AreAlmostEqual(prod_s, prod_s_inplace, "prod s 2");
+            Assert.That(prod_s_inplace, NumericIs.AlmostEqualTo(prod_s), "prod s 2");
         }
 
         [Test]
@@ -216,15 +215,15 @@ namespace Iridium.Test.LinearAlgebraTests
                 });
 
             Vector P_mcv = new Vector(new double[] { 1, 0 });
-            NumericAssert.AreAlmostEqual(L_mc, LU.L, "real LU L-matrix");
-            NumericAssert.AreAlmostEqual(U_mc, LU.U, "real LU U-matrix");
-            NumericAssert.AreAlmostEqual(P_mc, LU.PermutationMatrix, "real LU permutation matrix");
-            NumericAssert.AreAlmostEqual(P_mcv, LU.PivotVector, "real LU pivot");
-            NumericAssert.AreAlmostEqual(P_mcv, Array.ConvertAll(LU.Pivot, int2double), "real LU pivot II");
-            NumericAssert.AreAlmostEqual(-2, LU.Determinant(), "real LU determinant");
-            NumericAssert.AreAlmostEqual(-2, mc2x2.Determinant(), "real LU determinant II");
+            Assert.That(LU.L, NumericIs.AlmostEqualTo(L_mc), "real LU L-matrix");
+            Assert.That(LU.U, NumericIs.AlmostEqualTo(U_mc), "real LU U-matrix");
+            Assert.That(LU.PermutationMatrix, NumericIs.AlmostEqualTo(P_mc), "real LU permutation matrix");
+            Assert.That(LU.PivotVector, NumericIs.AlmostEqualTo(P_mcv), "real LU pivot");
+            Assert.That((Vector) Array.ConvertAll(LU.Pivot, int2double), NumericIs.AlmostEqualTo(P_mcv), "real LU pivot II");
+            Assert.That(LU.Determinant(), NumericIs.AlmostEqualTo((double) (-2)), "real LU determinant");
+            Assert.That(mc2x2.Determinant(), NumericIs.AlmostEqualTo((double) (-2)), "real LU determinant II");
             Assert.That(LU.IsNonSingular, "real LU non-singular");
-            NumericAssert.AreAlmostEqual(LU.PermutationMatrix * mc2x2, LU.L * LU.U, "real LU product");
+            Assert.That(LU.L * LU.U, NumericIs.AlmostEqualTo(LU.PermutationMatrix * mc2x2), "real LU product");
 
             Matrix mc2x2h = Matrix.Transpose(mc2x2);
             LUDecomposition LUH = mc2x2h.LUDecomposition;
@@ -244,15 +243,15 @@ namespace Iridium.Test.LinearAlgebraTests
                 });
 
             Vector P_mchv = new Vector(new double[] { 1, 0 });
-            NumericAssert.AreAlmostEqual(L_mch, LUH.L, "real LU L-matrix (H)");
-            NumericAssert.AreAlmostEqual(U_mch, LUH.U, "real LU U-matrix (H)");
-            NumericAssert.AreAlmostEqual(P_mch, LUH.PermutationMatrix, "real LU permutation matrix (H)");
-            NumericAssert.AreAlmostEqual(P_mchv, LUH.PivotVector, "real LU pivot (H)");
-            NumericAssert.AreAlmostEqual(P_mchv, Array.ConvertAll(LUH.Pivot, int2double), "real LU pivot II (H)");
-            NumericAssert.AreAlmostEqual(-2, LUH.Determinant(), "real LU determinant (H)");
-            NumericAssert.AreAlmostEqual(-2, mc2x2h.Determinant(), "real LU determinant II (H)");
+            Assert.That(LUH.L, NumericIs.AlmostEqualTo(L_mch), "real LU L-matrix (H)");
+            Assert.That(LUH.U, NumericIs.AlmostEqualTo(U_mch), "real LU U-matrix (H)");
+            Assert.That(LUH.PermutationMatrix, NumericIs.AlmostEqualTo(P_mch), "real LU permutation matrix (H)");
+            Assert.That(LUH.PivotVector, NumericIs.AlmostEqualTo(P_mchv), "real LU pivot (H)");
+            Assert.That((Vector) Array.ConvertAll(LUH.Pivot, int2double), NumericIs.AlmostEqualTo(P_mchv), "real LU pivot II (H)");
+            Assert.That(LUH.Determinant(), NumericIs.AlmostEqualTo((double) (-2)), "real LU determinant (H)");
+            Assert.That(mc2x2h.Determinant(), NumericIs.AlmostEqualTo((double) (-2)), "real LU determinant II (H)");
             Assert.That(LUH.IsNonSingular, "real LU non-singular (H)");
-            NumericAssert.AreAlmostEqual(LUH.PermutationMatrix * mc2x2h, LUH.L * LUH.U, "real LU product (H)");
+            Assert.That(LUH.L * LUH.U, NumericIs.AlmostEqualTo(LUH.PermutationMatrix * mc2x2h), "real LU product (H)");
         }
 
         [Test]
@@ -289,12 +288,12 @@ namespace Iridium.Test.LinearAlgebraTests
                 new double[] { 0.08012826184670, 0.07917266861796, 0.12309456479807, 0.01090084127596 }
                 });
 
-            NumericAssert.AreAlmostEqual(Q_mdh, QRH.Q, "real QR Q-matrix (H)");
-            NumericAssert.AreAlmostEqual(R_mdh, QRH.R, "real QR R-matrix (H)");
-            NumericAssert.AreAlmostEqual(md2x4h, QRH.Q * QRH.R, "real QR product (H)");
-            NumericAssert.AreAlmostEqual(Matrix.Identity(2, 2), Matrix.Transpose(QRH.Q) * QRH.Q, "real QR QHQ=I (H)");
-            NumericAssert.AreAlmostEqual(PInv_mdh, QRH.Solve(Matrix.Identity(4, 4)), 1e-13, "real QR Solve/Pseudoinverse (H)");
-            NumericAssert.AreAlmostEqual(PInv_mdh, md2x4h.Inverse(), 1e-13, "real pseudoinverse (H)");
+            Assert.That(QRH.Q, NumericIs.AlmostEqualTo(Q_mdh, 1e-14), "real QR Q-matrix (H)");
+            Assert.That(QRH.R, NumericIs.AlmostEqualTo(R_mdh), "real QR R-matrix (H)");
+            Assert.That(QRH.Q * QRH.R, NumericIs.AlmostEqualTo(md2x4h), "real QR product (H)");
+            Assert.That(Matrix.Transpose(QRH.Q) * QRH.Q, NumericIs.AlmostEqualTo(Matrix.Identity(2, 2)), "real QR QHQ=I (H)");
+            Assert.That(QRH.Solve(Matrix.Identity(4, 4)), NumericIs.AlmostEqualTo(PInv_mdh, 1e-13), "real QR Solve/Pseudoinverse (H)");
+            Assert.That(md2x4h.Inverse(), NumericIs.AlmostEqualTo(PInv_mdh, 1e-13), "real pseudoinverse (H)");
 
             QRDecomposition QR = md2x4.QRDecomposition;
             Matrix Q_md = new Matrix(new double[][] {
@@ -314,16 +313,16 @@ namespace Iridium.Test.LinearAlgebraTests
                 new double[] { 0.07448672256297, 0.01090084127596 }
                 });
 
-            NumericAssert.AreAlmostEqual(Q_md, QR.Q, "real QR Q-matrix");
-            NumericAssert.AreAlmostEqual(R_md, QR.R, "real QR R-matrix");
-            NumericAssert.AreAlmostEqual(md2x4, QR.Q * QR.R, "real QR product");
-            NumericAssert.AreAlmostEqual(Matrix.Identity(2, 2), Matrix.Transpose(QR.Q) * QR.Q, "real QR QHQ=I");
+            Assert.That(QR.Q, NumericIs.AlmostEqualTo(Q_md, 1e-14), "real QR Q-matrix");
+            Assert.That(QR.R, NumericIs.AlmostEqualTo(R_md), "real QR R-matrix");
+            Assert.That(QR.Q * QR.R, NumericIs.AlmostEqualTo(md2x4), "real QR product");
+            Assert.That(Matrix.Transpose(QR.Q) * QR.Q, NumericIs.AlmostEqualTo(Matrix.Identity(2, 2)), "real QR QHQ=I");
             /*
             NOTE: QR.Solve won't work yet (LQ would be required instead of QR).
             Hence check the matrix Solve instead, which is supposed to compute the transposed QR in this case.
             NumericAssert.AreAlmostEqual(PInv_md, md2x4.Solve(Matrix.Identity(2, 2)), 1e-13, "real QR Solve/Pseudoinverse");
             */
-            NumericAssert.AreAlmostEqual(PInv_md, md2x4.Inverse(), 1e-13, "real pseudoinverse");
+            Assert.That(md2x4.Inverse(), NumericIs.AlmostEqualTo(PInv_md, 1e-13), "real pseudoinverse");
         }
 
         [Test]

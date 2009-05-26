@@ -89,7 +89,6 @@
     <Compile Include="Distributions\IContinuousProbabilityDistribution.cs" />
     <Compile Include="Distributions\ContinuousDistribution.cs" />
     <Compile Include="Distributions\IDiscreteProbabilityDistribution.cs" />
-    <Compile Include="EqualityComparers.cs" />
     <Compile Include="Equations\ScalarIterator.cs" />
     <Compile Include="Equations\Solver.cs" />
     <Compile Include="IAlmostEquatable.cs" />

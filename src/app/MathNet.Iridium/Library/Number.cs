@@ -31,6 +31,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
+using MathNet.Numerics.Properties;
 
 namespace MathNet.Numerics
 {
@@ -54,7 +55,7 @@ namespace MathNet.Numerics
     public static class Number
     {
         /// <summary>2^(-1074)</summary>
-        public const double SmallestNumberGreaterThanZero = double.Epsilon;
+        public const double SmallestNumberGreaterThanZero = Double.Epsilon;
 
         /// <summary>2^(-53)</summary>
         public static readonly double RelativeAccuracy = EpsilonOf(1.0);
@@ -75,9 +76,9 @@ namespace MathNet.Numerics
         double
         EpsilonOf(double value)
         {
-            if(double.IsInfinity(value) || double.IsNaN(value))
+            if(Double.IsInfinity(value) || Double.IsNaN(value))
             {
-                return double.NaN;
+                return Double.NaN;
             }
 
             long signed64 = BitConverter.DoubleToInt64Bits(value);
@@ -120,7 +121,7 @@ namespace MathNet.Numerics
         double
         Increment(double value)
         {
-            if(double.IsInfinity(value) || double.IsNaN(value))
+            if(Double.IsInfinity(value) || Double.IsNaN(value))
             {
                 return value;
             }
@@ -144,8 +145,8 @@ namespace MathNet.Numerics
 
             value = BitConverter.Int64BitsToDouble(signed64);
 
-            return double.IsNaN(value)
-                ? double.NaN
+            return Double.IsNaN(value)
+                ? Double.NaN
                 : value;
         }
 
@@ -160,7 +161,7 @@ namespace MathNet.Numerics
         double
         Decrement(double value)
         {
-            if(double.IsInfinity(value) || double.IsNaN(value))
+            if(Double.IsInfinity(value) || Double.IsNaN(value))
             {
                 return value;
             }
@@ -168,7 +169,7 @@ namespace MathNet.Numerics
             long signed64 = BitConverter.DoubleToInt64Bits(value);
             if(signed64 == 0)
             {
-                return -double.Epsilon;
+                return -Double.Epsilon;
             }
 
             if(signed64 < 0)
@@ -182,8 +183,8 @@ namespace MathNet.Numerics
 
             value = BitConverter.Int64BitsToDouble(signed64);
 
-            return double.IsNaN(value)
-                ? double.NaN
+            return Double.IsNaN(value)
+                ? Double.NaN
                 : value;
         }
 
@@ -198,14 +199,14 @@ namespace MathNet.Numerics
             double a,
             double b)
         {
-            if(double.IsNaN(a) || double.IsInfinity(a))
+            if(Double.IsNaN(a) || Double.IsInfinity(a))
             {
-                throw new ArgumentException(Properties.LocalStrings.ArgumentNotInfinityNaN, "a");
+                throw new ArgumentException(LocalStrings.ArgumentNotInfinityNaN, "a");
             }
 
-            if(double.IsNaN(b) || double.IsInfinity(b))
+            if(Double.IsNaN(b) || Double.IsInfinity(b))
             {
-                throw new ArgumentException(Properties.LocalStrings.ArgumentNotInfinityNaN, "b");
+                throw new ArgumentException(LocalStrings.ArgumentNotInfinityNaN, "b");
             }
 
             ulong ua = ToLexicographicalOrderedUInt64(a);
@@ -303,11 +304,11 @@ namespace MathNet.Numerics
         {
             if(maxNumbersBetween < 0)
             {
-                throw new ArgumentException(Properties.LocalStrings.ArgumentNotNegative, "maxNumbersBetween");
+                throw new ArgumentException(LocalStrings.ArgumentNotNegative, "maxNumbersBetween");
             }
 
             // NaN's should never equal to anything
-            if(double.IsNaN(a) || double.IsNaN(b))
+            if(Double.IsNaN(a) || Double.IsNaN(b))
             {
                 /* (a != a || b != b) */
 
@@ -320,7 +321,7 @@ namespace MathNet.Numerics
             }
 
             // false, if only one of them is infinity or they differ on the infinity sign
-            if(double.IsInfinity(a) || double.IsInfinity(b))
+            if(Double.IsInfinity(a) || Double.IsInfinity(b))
             {
                 return false;
             }
@@ -512,6 +513,53 @@ namespace MathNet.Numerics
             }
 
             return a;
+        }
+
+        /// <summary>
+        /// True if two instances of T are almost equal, up to the default maximum relative error.
+        /// </summary>
+        public static
+            bool
+            AlmostEqual<T>(
+            T x,
+            T y)
+            where T : IAlmostEquatable<T>
+        {
+            if(ReferenceEquals(x, y))
+            {
+                return true;
+            }
+
+            if(ReferenceEquals(x, null) || ReferenceEquals(y, null))
+            {
+                return false;
+            }
+
+            return x.AlmostEquals(y);
+        }
+
+        /// <summary>
+        /// True if two instances of T are almost equal, up to the provided maximum relative error.
+        /// </summary>
+        public static
+            bool
+            AlmostEqual<T>(
+            T x,
+            T y,
+            double maximumRelativeError)
+            where T : IAlmostEquatable<T>
+        {
+            if(ReferenceEquals(x, y))
+            {
+                return true;
+            }
+
+            if(ReferenceEquals(x, null) || ReferenceEquals(y, null))
+            {
+                return false;
+            }
+
+            return x.AlmostEquals(y, maximumRelativeError);
         }
     }
 }

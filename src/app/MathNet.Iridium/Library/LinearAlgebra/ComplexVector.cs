@@ -1536,7 +1536,7 @@ namespace MathNet.Numerics.LinearAlgebra
             ComplexVector v,
             double maximumRelativeError)
         {
-            return EqualityComparers.AlmostEqual(u, v, maximumRelativeError);
+            return Number.AlmostEqual(u, v, maximumRelativeError);
         }
 
         /// <summary>
@@ -1548,7 +1548,7 @@ namespace MathNet.Numerics.LinearAlgebra
             ComplexVector u,
             ComplexVector v)
         {
-            return EqualityComparers.AlmostEqual(u, v);
+            return Number.AlmostEqual(u, v);
         }
 
         /// <summary>

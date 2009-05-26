@@ -184,7 +184,7 @@ namespace Iridium.Test.InfrastructureTests
             // (i)^(1) = i
             Complex I = Complex.I;
             Complex IPowOne = I.Power(one);
-            NumericAssert.AreAlmostEqual(0d, IPowOne.Real, "Re{(i)^(1)} = 0");
+            Assert.That(IPowOne.Real, NumericIs.AlmostEqualTo(0d), "Re{(i)^(1)} = 0");
             Assert.That(IPowOne.Imag, Is.EqualTo(1d), "Im{(i)^(1)} = 1");
 
             // (1)^(-1) = 1
@@ -195,7 +195,7 @@ namespace Iridium.Test.InfrastructureTests
 
             // (i)^(-1) = -i
             Complex IPowMOne = I.Power(mOne);
-            NumericAssert.AreAlmostEqual(0d, IPowMOne.Real, "Re{(i)^(-1)} = 0");
+            Assert.That(IPowMOne.Real, NumericIs.AlmostEqualTo(0d), "Re{(i)^(-1)} = 0");
             Assert.That(IPowMOne.Imag, Is.EqualTo(-1d), "Im{(i)^(-1)} = -1");
 
             // (i)^(-i) = exp(Pi/2)

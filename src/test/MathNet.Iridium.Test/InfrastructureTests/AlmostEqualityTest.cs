@@ -123,36 +123,36 @@ namespace Iridium.Test.InfrastructureTests
         {
             // samle value
             Assert.That(value, Is.EqualTo(value));
-            Assert.That(EqualityComparers.AlmostEqual(value, value), Is.True);
-            Assert.That(EqualityComparers.AlmostEqual(value, value, 1e-10), Is.True);
+            Assert.That(Number.AlmostEqual(value, value), Is.True);
+            Assert.That(Number.AlmostEqual(value, value, 1e-10), Is.True);
 
             // default/null value
             Assert.That(value, Is.Not.EqualTo(default(T)));
-            Assert.That(EqualityComparers.AlmostEqual(value, default(T)), Is.False);
-            Assert.That(EqualityComparers.AlmostEqual(value, default(T), 1e-10), Is.False);
+            Assert.That(Number.AlmostEqual(value, default(T)), Is.False);
+            Assert.That(Number.AlmostEqual(value, default(T), 1e-10), Is.False);
 
             // samle value
             Assert.That(value, Is.EqualTo(valueClone));
             Assert.That(value, Is.Not.SameAs(valueClone));
-            Assert.That(EqualityComparers.AlmostEqual(value, valueClone), Is.True);
-            Assert.That(EqualityComparers.AlmostEqual(value, valueClone, 1e-10), Is.True);
+            Assert.That(Number.AlmostEqual(value, valueClone), Is.True);
+            Assert.That(Number.AlmostEqual(value, valueClone, 1e-10), Is.True);
 
             // completely different value
             Assert.That(value, Is.Not.EqualTo(completelyDifferentValue));
-            Assert.That(EqualityComparers.AlmostEqual(value, completelyDifferentValue), Is.False);
-            Assert.That(EqualityComparers.AlmostEqual(value, completelyDifferentValue, 1e-10), Is.False);
+            Assert.That(Number.AlmostEqual(value, completelyDifferentValue), Is.False);
+            Assert.That(Number.AlmostEqual(value, completelyDifferentValue, 1e-10), Is.False);
 
             // notably different value
             Assert.That(value, Is.Not.EqualTo(notablyDifferentValue));
-            Assert.That(EqualityComparers.AlmostEqual(value, notablyDifferentValue), Is.False);
-            Assert.That(EqualityComparers.AlmostEqual(value, notablyDifferentValue, 1e-10), Is.False);
-            Assert.That(EqualityComparers.AlmostEqual(value, notablyDifferentValue, 1e-2), Is.True);
+            Assert.That(Number.AlmostEqual(value, notablyDifferentValue), Is.False);
+            Assert.That(Number.AlmostEqual(value, notablyDifferentValue, 1e-10), Is.False);
+            Assert.That(Number.AlmostEqual(value, notablyDifferentValue, 1e-2), Is.True);
 
             // almost (but not) equal value
             Assert.That(value, Is.Not.EqualTo(almostEqualValue));
-            Assert.That(EqualityComparers.AlmostEqual(value, almostEqualValue), Is.True);
-            Assert.That(EqualityComparers.AlmostEqual(value, almostEqualValue, 1e-10), Is.True);
-            Assert.That(EqualityComparers.AlmostEqual(value, almostEqualValue, 1e-2), Is.True);
+            Assert.That(Number.AlmostEqual(value, almostEqualValue), Is.True);
+            Assert.That(Number.AlmostEqual(value, almostEqualValue, 1e-10), Is.True);
+            Assert.That(Number.AlmostEqual(value, almostEqualValue, 1e-2), Is.True);
         }
 
         [Test]
@@ -176,13 +176,13 @@ namespace Iridium.Test.InfrastructureTests
 
             // infinity
             Assert.That(a1, Is.Not.EqualTo(Complex.Infinity));
-            Assert.That(EqualityComparers.AlmostEqual(a1, Complex.Infinity), Is.False);
-            Assert.That(EqualityComparers.AlmostEqual(a1, Complex.Infinity, 1e-10), Is.False);
+            Assert.That(Number.AlmostEqual(a1, Complex.Infinity), Is.False);
+            Assert.That(Number.AlmostEqual(a1, Complex.Infinity, 1e-10), Is.False);
 
             // NaN
             Assert.That(a1, Is.Not.EqualTo(Complex.NaN));
-            Assert.That(EqualityComparers.AlmostEqual(a1, Complex.NaN), Is.False);
-            Assert.That(EqualityComparers.AlmostEqual(a1, Complex.NaN, 1e-10), Is.False);
+            Assert.That(Number.AlmostEqual(a1, Complex.NaN), Is.False);
+            Assert.That(Number.AlmostEqual(a1, Complex.NaN, 1e-10), Is.False);
         }
 
         [Test,Repeat(5)]
@@ -206,8 +206,8 @@ namespace Iridium.Test.InfrastructureTests
 
             // transpose
             Assert.That(Matrix.Transpose(a1), Is.Not.EqualTo(a1));
-            Assert.That(EqualityComparers.AlmostEqual(a1, Matrix.Transpose(a1)), Is.False);
-            Assert.That(EqualityComparers.AlmostEqual(a1, Matrix.Transpose(a1), 1e-10), Is.False);
+            Assert.That(Number.AlmostEqual(a1, Matrix.Transpose(a1)), Is.False);
+            Assert.That(Number.AlmostEqual(a1, Matrix.Transpose(a1), 1e-10), Is.False);
         }
 
         [Test,Repeat(5)]
@@ -231,13 +231,13 @@ namespace Iridium.Test.InfrastructureTests
 
             // transpose
             Assert.That(a1.Transpose(), Is.Not.EqualTo(a1));
-            Assert.That(EqualityComparers.AlmostEqual(a1, a1.Transpose()), Is.False);
-            Assert.That(EqualityComparers.AlmostEqual(a1, a1.Transpose(), 1e-10), Is.False);
+            Assert.That(Number.AlmostEqual(a1, a1.Transpose()), Is.False);
+            Assert.That(Number.AlmostEqual(a1, a1.Transpose(), 1e-10), Is.False);
 
             // hermitian transpose
             Assert.That(a1.HermitianTranspose(), Is.Not.EqualTo(a1));
-            Assert.That(EqualityComparers.AlmostEqual(a1, a1.HermitianTranspose()), Is.False);
-            Assert.That(EqualityComparers.AlmostEqual(a1, a1.HermitianTranspose(), 1e-10), Is.False);
+            Assert.That(Number.AlmostEqual(a1, a1.HermitianTranspose()), Is.False);
+            Assert.That(Number.AlmostEqual(a1, a1.HermitianTranspose(), 1e-10), Is.False);
         }
 
         [Test, Repeat(5)]

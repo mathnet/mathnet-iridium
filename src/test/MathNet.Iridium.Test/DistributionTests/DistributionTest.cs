@@ -252,8 +252,8 @@ namespace Iridium.Test.DistributionTests
             NormalDistribution source = new NormalDistribution(4.0, 2.0);
             NormalDistribution target = new NormalDistribution();
             target.EstimateDistributionParameters(source.EnumerateDoubles(1000));
-            NumericAssert.AreAlmostEqual(4.0, target.Mu, 0.1, "Normal Parameter Estimation: Mu");
-            NumericAssert.AreAlmostEqual(2.0, target.Sigma, 0.1, "Normal Parameter Estimation: Sigma");
+            Assert.That(target.Mu, NumericIs.AlmostEqualTo(4.0, 0.1), "Normal Parameter Estimation: Mu");
+            Assert.That(target.Sigma, NumericIs.AlmostEqualTo(2.0, 0.1), "Normal Parameter Estimation: Sigma");
         }
 
         [Test]
@@ -381,7 +381,7 @@ namespace Iridium.Test.DistributionTests
             RayleighDistribution source = new RayleighDistribution(4.0);
             RayleighDistribution target = new RayleighDistribution();
             target.EstimateDistributionParameters(source.EnumerateDoubles(1000));
-            NumericAssert.AreAlmostEqual(4.0, target.Sigma, 0.1, "Rayleigh Parameter Estimation: Sigma");
+            Assert.That(target.Sigma, NumericIs.AlmostEqualTo(4.0, 0.1), "Rayleigh Parameter Estimation: Sigma");
         }
 
         [Test]
@@ -399,32 +399,32 @@ namespace Iridium.Test.DistributionTests
             FisherSnedecorDistribution d = new FisherSnedecorDistribution(100, 100);
 
             // PDF - Evaluated in Maple with "stats[statevalf,pdf,fratio[100,100]](x);"
-            NumericAssert.AreAlmostEqual(0.0, d.ProbabilityDensity(0.00), "pdf(0.00)");
-            NumericAssert.AreAlmostEqual(0.1102042201e-1, d.ProbabilityDensity(0.50), 1e-9, "pdf(0.50)");
-            NumericAssert.AreAlmostEqual(0.9462174566, d.ProbabilityDensity(0.75), 1e-9, "pdf(0.75)");
-            NumericAssert.AreAlmostEqual(1.989730935, d.ProbabilityDensity(1.00), 1e-9, "pdf(1.00)");
-            NumericAssert.AreAlmostEqual(0.8553281091, d.ProbabilityDensity(1.25), 1e-9, "pdf(1.25)");
-            NumericAssert.AreAlmostEqual(0.1722918542, d.ProbabilityDensity(1.50), 1e-9, "pdf(1.50)");
-            NumericAssert.AreAlmostEqual(0.2755105502e-2, d.ProbabilityDensity(2.00), 1e-9, "pdf(2.00)");
-            NumericAssert.AreAlmostEqual(0.6858025452e-13, d.ProbabilityDensity(5.00), 1e-9, "pdf(5.00)");
+            Assert.That(d.ProbabilityDensity(0.00), NumericIs.AlmostEqualTo(0.0), "pdf(0.00)");
+            Assert.That(d.ProbabilityDensity(0.50), NumericIs.AlmostEqualTo(0.1102042201e-1, 1e-9), "pdf(0.50)");
+            Assert.That(d.ProbabilityDensity(0.75), NumericIs.AlmostEqualTo(0.9462174566, 1e-9), "pdf(0.75)");
+            Assert.That(d.ProbabilityDensity(1.00), NumericIs.AlmostEqualTo(1.989730935, 1e-9), "pdf(1.00)");
+            Assert.That(d.ProbabilityDensity(1.25), NumericIs.AlmostEqualTo(0.8553281091, 1e-9), "pdf(1.25)");
+            Assert.That(d.ProbabilityDensity(1.50), NumericIs.AlmostEqualTo(0.1722918542, 1e-9), "pdf(1.50)");
+            Assert.That(d.ProbabilityDensity(2.00), NumericIs.AlmostEqualTo(0.2755105502e-2, 1e-9), "pdf(2.00)");
+            Assert.That(d.ProbabilityDensity(5.00), NumericIs.AlmostEqualTo(0.6858025452e-13, 1e-9), "pdf(5.00)");
 
             // CDF - Evaluated in Maple with "stats[statevalf,cdr,fratio[100,100]](x);"
-            NumericAssert.AreAlmostEqual(0.0, d.CumulativeDistribution(0.00), "cdf(0.00)");
-            NumericAssert.AreAlmostEqual(0.309136863e-3, d.CumulativeDistribution(0.50), 1e-8, "cdf(0.50)");
-            NumericAssert.AreAlmostEqual(0.7602003436e-1, d.CumulativeDistribution(0.75), 1e-9, "cdf(0.75)");
-            NumericAssert.AreAlmostEqual(0.5000000000, d.CumulativeDistribution(1.00), 1e-9, "cdf(1.00)");
-            NumericAssert.AreAlmostEqual(0.8668843977, d.CumulativeDistribution(1.25), 1e-9, "cdf(1.25)");
-            NumericAssert.AreAlmostEqual(0.9780695579, d.CumulativeDistribution(1.50), 1e-9, "cdf(1.50)");
-            NumericAssert.AreAlmostEqual(0.9996908631, d.CumulativeDistribution(2.00), 1e-9, "cdf(2.00)");
-            NumericAssert.AreAlmostEqual(1.0, d.CumulativeDistribution(5.00), 1e-9, "cdf(5.00)");
+            Assert.That(d.CumulativeDistribution(0.00), NumericIs.AlmostEqualTo(0.0), "cdf(0.00)");
+            Assert.That(d.CumulativeDistribution(0.50), NumericIs.AlmostEqualTo(0.309136863e-3, 1e-8), "cdf(0.50)");
+            Assert.That(d.CumulativeDistribution(0.75), NumericIs.AlmostEqualTo(0.7602003436e-1, 1e-9), "cdf(0.75)");
+            Assert.That(d.CumulativeDistribution(1.00), NumericIs.AlmostEqualTo(0.5000000000, 1e-9), "cdf(1.00)");
+            Assert.That(d.CumulativeDistribution(1.25), NumericIs.AlmostEqualTo(0.8668843977, 1e-9), "cdf(1.25)");
+            Assert.That(d.CumulativeDistribution(1.50), NumericIs.AlmostEqualTo(0.9780695579, 1e-9), "cdf(1.50)");
+            Assert.That(d.CumulativeDistribution(2.00), NumericIs.AlmostEqualTo(0.9996908631, 1e-9), "cdf(2.00)");
+            Assert.That(d.CumulativeDistribution(5.00), NumericIs.AlmostEqualTo(1.0, 1e-9), "cdf(5.00)");
 
             FisherSnedecorDistribution dOne = new FisherSnedecorDistribution(1, 5);
             Assert.That(dOne.ProbabilityDensity(0.00), Is.EqualTo(double.PositiveInfinity), "pdf[1,5](0.00)");
-            NumericAssert.AreAlmostEqual(0.0, dOne.CumulativeDistribution(0.00), "cdf[1,5](0.00)");
+            Assert.That(dOne.CumulativeDistribution(0.00), NumericIs.AlmostEqualTo(0.0), "cdf[1,5](0.00)");
 
             FisherSnedecorDistribution dTwo = new FisherSnedecorDistribution(2, 5);
-            NumericAssert.AreAlmostEqual(1.0, dTwo.ProbabilityDensity(0.00), "pdf[2,5](0.00)");
-            NumericAssert.AreAlmostEqual(0.0, dTwo.CumulativeDistribution(0.00), "cdf[2,5](0.00)");
+            Assert.That(dTwo.ProbabilityDensity(0.00), NumericIs.AlmostEqualTo(1.0), "pdf[2,5](0.00)");
+            Assert.That(dTwo.CumulativeDistribution(0.00), NumericIs.AlmostEqualTo(0.0), "cdf[2,5](0.00)");
         }
 
         [Test]
@@ -442,26 +442,26 @@ namespace Iridium.Test.DistributionTests
             StudentsTDistribution d = new StudentsTDistribution(2);
 
             // PDF - Evaluated in Maple with "stats[statevalf,pdf,studentst[2]](x);"
-            NumericAssert.AreAlmostEqual(0.3535533906, d.ProbabilityDensity(0.0), 1e-9, "pdf(0)");
-            NumericAssert.AreAlmostEqual(0.1924500897, d.ProbabilityDensity(1.0), 1e-9, "pdf(1)");
-            NumericAssert.AreAlmostEqual(0.06804138174, d.ProbabilityDensity(2.0), 1e-9, "pdf(2)");
-            NumericAssert.AreAlmostEqual(0.02741012223, d.ProbabilityDensity(3.0), 1e-9, "pdf(3)");
-            NumericAssert.AreAlmostEqual(0.01309457002, d.ProbabilityDensity(4.0), 1e-9, "pdf(4)");
-            NumericAssert.AreAlmostEqual(0.1924500897, d.ProbabilityDensity(-1.0), 1e-9, "pdf(-1)");
-            NumericAssert.AreAlmostEqual(0.06804138174, d.ProbabilityDensity(-2.0), 1e-9, "pdf(-2)");
-            NumericAssert.AreAlmostEqual(0.02741012223, d.ProbabilityDensity(-3.0), 1e-9, "pdf(-3)");
-            NumericAssert.AreAlmostEqual(0.01309457002, d.ProbabilityDensity(-4.0), 1e-9, "pdf(-4)");
+            Assert.That(d.ProbabilityDensity(0.0), NumericIs.AlmostEqualTo(0.3535533906, 1e-9), "pdf(0)");
+            Assert.That(d.ProbabilityDensity(1.0), NumericIs.AlmostEqualTo(0.1924500897, 1e-9), "pdf(1)");
+            Assert.That(d.ProbabilityDensity(2.0), NumericIs.AlmostEqualTo(0.06804138174, 1e-9), "pdf(2)");
+            Assert.That(d.ProbabilityDensity(3.0), NumericIs.AlmostEqualTo(0.02741012223, 1e-9), "pdf(3)");
+            Assert.That(d.ProbabilityDensity(4.0), NumericIs.AlmostEqualTo(0.01309457002, 1e-9), "pdf(4)");
+            Assert.That(d.ProbabilityDensity(-1.0), NumericIs.AlmostEqualTo(0.1924500897, 1e-9), "pdf(-1)");
+            Assert.That(d.ProbabilityDensity(-2.0), NumericIs.AlmostEqualTo(0.06804138174, 1e-9), "pdf(-2)");
+            Assert.That(d.ProbabilityDensity(-3.0), NumericIs.AlmostEqualTo(0.02741012223, 1e-9), "pdf(-3)");
+            Assert.That(d.ProbabilityDensity(-4.0), NumericIs.AlmostEqualTo(0.01309457002, 1e-9), "pdf(-4)");
 
             // CDF - Evaluated in Maple with "stats[statevalf,cdf,studentst[2]](x);"
-            NumericAssert.AreAlmostEqual(0.5000000000, d.CumulativeDistribution(0.0), "cdf(0)");
-            NumericAssert.AreAlmostEqual(0.7886751346, d.CumulativeDistribution(1.0), 1e-9, "cdf(1)");
-            NumericAssert.AreAlmostEqual(0.9082482905, d.CumulativeDistribution(2.0), 1e-9, "cdf(2)");
-            NumericAssert.AreAlmostEqual(0.9522670169, d.CumulativeDistribution(3.0), 1e-9, "cdf(3)");
-            NumericAssert.AreAlmostEqual(0.9714045208, d.CumulativeDistribution(4.0), 1e-9, "cdf(4)");
-            NumericAssert.AreAlmostEqual(0.2113248654, d.CumulativeDistribution(-1.0), 1e-9, "cdf(-1)");
-            NumericAssert.AreAlmostEqual(0.09175170954, d.CumulativeDistribution(-2.0), 1e-9, "cdf(-2)");
-            NumericAssert.AreAlmostEqual(0.04773298313, d.CumulativeDistribution(-3.0), 1e-9, "cdf(-3)");
-            NumericAssert.AreAlmostEqual(0.02859547921, d.CumulativeDistribution(-4.0), 1e-9, "cdf(-4)");
+            Assert.That(d.CumulativeDistribution(0.0), NumericIs.AlmostEqualTo(0.5000000000), "cdf(0)");
+            Assert.That(d.CumulativeDistribution(1.0), NumericIs.AlmostEqualTo(0.7886751346, 1e-9), "cdf(1)");
+            Assert.That(d.CumulativeDistribution(2.0), NumericIs.AlmostEqualTo(0.9082482905, 1e-9), "cdf(2)");
+            Assert.That(d.CumulativeDistribution(3.0), NumericIs.AlmostEqualTo(0.9522670169, 1e-9), "cdf(3)");
+            Assert.That(d.CumulativeDistribution(4.0), NumericIs.AlmostEqualTo(0.9714045208, 1e-9), "cdf(4)");
+            Assert.That(d.CumulativeDistribution(-1.0), NumericIs.AlmostEqualTo(0.2113248654, 1e-9), "cdf(-1)");
+            Assert.That(d.CumulativeDistribution(-2.0), NumericIs.AlmostEqualTo(0.09175170954, 1e-9), "cdf(-2)");
+            Assert.That(d.CumulativeDistribution(-3.0), NumericIs.AlmostEqualTo(0.04773298313, 1e-9), "cdf(-3)");
+            Assert.That(d.CumulativeDistribution(-4.0), NumericIs.AlmostEqualTo(0.02859547921, 1e-9), "cdf(-4)");
         }
     }
 }

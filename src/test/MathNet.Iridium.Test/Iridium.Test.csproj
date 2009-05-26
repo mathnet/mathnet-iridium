@@ -68,7 +68,7 @@
     <Compile Include="LinearAlgebraTests\LinearAlgebraAlgorithmsTest.cs" />
     <Compile Include="LinearAlgebraTests\MatrixArithmeticsTest.cs" />
     <Compile Include="NumberTheoryTests\NumberTheoryTest.cs" />
-    <Compile Include="NumericAssert.cs" />
+    <Compile Include="NumericIs.cs" />
     <Compile Include="PolynomialTests\PolynomialTest.cs" />
     <Compile Include="MyStopWatch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

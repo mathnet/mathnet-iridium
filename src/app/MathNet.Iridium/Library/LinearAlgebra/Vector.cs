@@ -1189,7 +1189,7 @@ namespace MathNet.Numerics.LinearAlgebra
             Vector v,
             double maximumRelativeError)
         {
-            return EqualityComparers.AlmostEqual(u, v, maximumRelativeError);
+            return Number.AlmostEqual(u, v, maximumRelativeError);
         }
 
         /// <summary>
@@ -1201,7 +1201,7 @@ namespace MathNet.Numerics.LinearAlgebra
             Vector u,
             Vector v)
         {
-            return EqualityComparers.AlmostEqual(u, v);
+            return Number.AlmostEqual(u, v);
         }
 
         /// <summary>

@@ -3085,11 +3085,11 @@ namespace MathNet.Numerics.LinearAlgebra
         public static
         bool
         AlmostEqual(
-            ComplexMatrix x,
-            ComplexMatrix y,
+            ComplexMatrix u,
+            ComplexMatrix v,
             double maximumRelativeError)
         {
-            return EqualityComparers.AlmostEqual(x, y, maximumRelativeError);
+            return Number.AlmostEqual(u, v, maximumRelativeError);
         }
 
         /// <summary>
@@ -3098,10 +3098,10 @@ namespace MathNet.Numerics.LinearAlgebra
         public static
         bool
         AlmostEqual(
-            ComplexMatrix x,
-            ComplexMatrix y)
+            ComplexMatrix u,
+            ComplexMatrix v)
         {
-            return EqualityComparers.AlmostEqual(x, y);
+            return Number.AlmostEqual(u, v);
         }
 
         /// <summary>

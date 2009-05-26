@@ -108,7 +108,7 @@ namespace Iridium.Test.CombinatoricsTests
             Assert.That(Combinatorics.Permutations(8), Is.EqualTo(40320), "Perm(8)");
             Assert.That(Combinatorics.Permutations(15), Is.EqualTo(1307674368000), "Perm(15)");
             Assert.That(Combinatorics.Permutations(30), Is.EqualTo(265252859812191058636308480000000d), "Perm(30)");
-            NumericAssert.AreAlmostEqual(0.3856204824e216, Combinatorics.Permutations(128), 1e-10, "Perm(128)");
+            Assert.That(Combinatorics.Permutations(128), NumericIs.AlmostEqualTo(0.3856204824e216, 1e-10), "Perm(128)");
         }
     }
 }

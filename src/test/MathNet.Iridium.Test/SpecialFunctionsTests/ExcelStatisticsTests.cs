@@ -56,19 +56,19 @@ namespace Iridium.Test.SpecialFunctionsTests
         [Test]
         public void TestTDIST()
         {
-            NumericAssert.AreAlmostEqual(5.000000000000000E-01, TDIST(0, 2, 1), 1e-8, "A1");
-            NumericAssert.AreAlmostEqual(4.129611720298140E-01, TDIST(0.25, 2, 1), 1e-8, "B1");
-            NumericAssert.AreAlmostEqual(3.333333333480060E-01, TDIST(0.5, 2, 1), 1e-8, "C1");
-            NumericAssert.AreAlmostEqual(2.113248654306010E-01, TDIST(1, 2, 1), 1e-8, "D1");
-            NumericAssert.AreAlmostEqual(9.175170951687770E-02, TDIST(2, 2, 1), 1e-8, "E1");
-            NumericAssert.AreAlmostEqual(4.926228511229080E-03, TDIST(10, 2, 1), 1e-8, "F1");
+            Assert.That(TDIST(0, 2, 1), NumericIs.AlmostEqualTo(5.000000000000000E-01, 1e-8), "A1");
+            Assert.That(TDIST(0.25, 2, 1), NumericIs.AlmostEqualTo(4.129611720298140E-01, 1e-8), "B1");
+            Assert.That(TDIST(0.5, 2, 1), NumericIs.AlmostEqualTo(3.333333333480060E-01, 1e-8), "C1");
+            Assert.That(TDIST(1, 2, 1), NumericIs.AlmostEqualTo(2.113248654306010E-01, 1e-8), "D1");
+            Assert.That(TDIST(2, 2, 1), NumericIs.AlmostEqualTo(9.175170951687770E-02, 1e-8), "E1");
+            Assert.That(TDIST(10, 2, 1), NumericIs.AlmostEqualTo(4.926228511229080E-03, 1e-8), "F1");
 
-            NumericAssert.AreAlmostEqual(1.000000000000000E+00, TDIST(0, 2, 2), 1e-8, "A2");
-            NumericAssert.AreAlmostEqual(8.259223440596280E-01, TDIST(0.25, 2, 2), 1e-8, "B2");
-            NumericAssert.AreAlmostEqual(6.666666666960120E-01, TDIST(0.5, 2, 2), 1e-8, "C2");
-            NumericAssert.AreAlmostEqual(4.226497308612030E-01, TDIST(1, 2, 2), 1e-8, "D2");
-            NumericAssert.AreAlmostEqual(1.835034190337550E-01, TDIST(2, 2, 2), 1e-8, "E2");
-            NumericAssert.AreAlmostEqual(9.852457022458160E-03, TDIST(10, 2, 2), 1e-8, "F2");
+            Assert.That(TDIST(0, 2, 2), NumericIs.AlmostEqualTo(1.000000000000000E+00, 1e-8), "A2");
+            Assert.That(TDIST(0.25, 2, 2), NumericIs.AlmostEqualTo(8.259223440596280E-01, 1e-8), "B2");
+            Assert.That(TDIST(0.5, 2, 2), NumericIs.AlmostEqualTo(6.666666666960120E-01, 1e-8), "C2");
+            Assert.That(TDIST(1, 2, 2), NumericIs.AlmostEqualTo(4.226497308612030E-01, 1e-8), "D2");
+            Assert.That(TDIST(2, 2, 2), NumericIs.AlmostEqualTo(1.835034190337550E-01, 1e-8), "E2");
+            Assert.That(TDIST(10, 2, 2), NumericIs.AlmostEqualTo(9.852457022458160E-03, 1e-8), "F2");
         }
 
         double GAMMADIST(double x, double alpha, double beta, bool cumulative)
@@ -83,19 +83,19 @@ namespace Iridium.Test.SpecialFunctionsTests
         [Test]
         public void TestGAMMADIST()
         {
-            NumericAssert.AreAlmostEqual(0.000000000000000E+00, GAMMADIST(0, 2, 1.5, true), 1e-8, "A1");
-            NumericAssert.AreAlmostEqual(1.243798761594900E-02, GAMMADIST(0.25, 2, 1.5, true), 1e-8, "B1");
-            NumericAssert.AreAlmostEqual(4.462491913500840E-02, GAMMADIST(0.5, 2, 1.5, true), 1e-8, "C1");
-            NumericAssert.AreAlmostEqual(1.443047990137690E-01, GAMMADIST(1, 2, 1.5, true), 1e-6, "D1");
-            NumericAssert.AreAlmostEqual(3.849400091283540E-01, GAMMADIST(2, 2, 1.5, true), 1e-8, "E1");
-            NumericAssert.AreAlmostEqual(9.902431408555580E-01, GAMMADIST(10, 2, 1.5, true), 1e-8, "F1");
+            Assert.That(GAMMADIST(0, 2, 1.5, true), NumericIs.AlmostEqualTo(0.000000000000000E+00, 1e-8), "A1");
+            Assert.That(GAMMADIST(0.25, 2, 1.5, true), NumericIs.AlmostEqualTo(1.243798761594900E-02, 1e-8), "B1");
+            Assert.That(GAMMADIST(0.5, 2, 1.5, true), NumericIs.AlmostEqualTo(4.462491913500840E-02, 1e-8), "C1");
+            Assert.That(GAMMADIST(1, 2, 1.5, true), NumericIs.AlmostEqualTo(1.443047990137690E-01, 1e-6), "D1");
+            Assert.That(GAMMADIST(2, 2, 1.5, true), NumericIs.AlmostEqualTo(3.849400091283540E-01, 1e-8), "E1");
+            Assert.That(GAMMADIST(10, 2, 1.5, true), NumericIs.AlmostEqualTo(9.902431408555580E-01, 1e-8), "F1");
 
-            NumericAssert.AreAlmostEqual(0.000000000000000E+00, GAMMADIST(0, 2, 1.5, false), 1e-8, "A2");
-            NumericAssert.AreAlmostEqual(9.405352499591280E-02, GAMMADIST(0.25, 2, 1.5, false), 1e-8, "B2");
-            NumericAssert.AreAlmostEqual(1.592291801411650E-01, GAMMADIST(0.5, 2, 1.5, false), 1e-8, "C2");
-            NumericAssert.AreAlmostEqual(2.281853862562790E-01, GAMMADIST(1, 2, 1.5, false), 1e-8, "D2");
-            NumericAssert.AreAlmostEqual(2.343085672340750E-01, GAMMADIST(2, 2, 1.5, false), 1e-8, "E2");
-            NumericAssert.AreAlmostEqual(5.656150228662040E-03, GAMMADIST(10, 2, 1.5, false), 1e-8, "F2");
+            Assert.That(GAMMADIST(0, 2, 1.5, false), NumericIs.AlmostEqualTo(0.000000000000000E+00, 1e-8), "A2");
+            Assert.That(GAMMADIST(0.25, 2, 1.5, false), NumericIs.AlmostEqualTo(9.405352499591280E-02, 1e-8), "B2");
+            Assert.That(GAMMADIST(0.5, 2, 1.5, false), NumericIs.AlmostEqualTo(1.592291801411650E-01, 1e-8), "C2");
+            Assert.That(GAMMADIST(1, 2, 1.5, false), NumericIs.AlmostEqualTo(2.281853862562790E-01, 1e-8), "D2");
+            Assert.That(GAMMADIST(2, 2, 1.5, false), NumericIs.AlmostEqualTo(2.343085672340750E-01, 1e-8), "E2");
+            Assert.That(GAMMADIST(10, 2, 1.5, false), NumericIs.AlmostEqualTo(5.656150228662040E-03, 1e-8), "F2");
         }
 
         double GAMMAINV(double x, double alpha, double beta)
@@ -107,13 +107,13 @@ namespace Iridium.Test.SpecialFunctionsTests
         [Test]
         public void TestGAMMAINV()
         {
-            NumericAssert.AreAlmostEqual(0.000000000000000E+00, GAMMAINV(0, 2, 1.5), 1e-8, "A1");
-            NumericAssert.AreAlmostEqual(2.228321104302450E-01, GAMMAINV(0.01, 2, 1.5), 1e-8, "B1");
-            NumericAssert.AreAlmostEqual(1.441918172091760E+00, GAMMAINV(0.25, 2, 1.5), 1e-6, "C1");
-            NumericAssert.AreAlmostEqual(2.517520501047540E+00, GAMMAINV(0.5, 2, 1.5), 1e-8, "D1");
-            NumericAssert.AreAlmostEqual(4.038951793510970E+00, GAMMAINV(0.75, 2, 1.5), 1e-8, "E1");
-            NumericAssert.AreAlmostEqual(9.957528102138740E+00, GAMMAINV(0.99, 2, 1.5), 1e-8, "F1");
-            NumericAssert.AreAlmostEqual(1.763455683388200E+01, GAMMAINV(0.9999, 2, 1.5), 1e-8, "G1");
+            Assert.That(GAMMAINV(0, 2, 1.5), NumericIs.AlmostEqualTo(0.000000000000000E+00, 1e-8), "A1");
+            Assert.That(GAMMAINV(0.01, 2, 1.5), NumericIs.AlmostEqualTo(2.228321104302450E-01, 1e-8), "B1");
+            Assert.That(GAMMAINV(0.25, 2, 1.5), NumericIs.AlmostEqualTo(1.441918172091760E+00, 1e-6), "C1");
+            Assert.That(GAMMAINV(0.5, 2, 1.5), NumericIs.AlmostEqualTo(2.517520501047540E+00, 1e-8), "D1");
+            Assert.That(GAMMAINV(0.75, 2, 1.5), NumericIs.AlmostEqualTo(4.038951793510970E+00, 1e-8), "E1");
+            Assert.That(GAMMAINV(0.99, 2, 1.5), NumericIs.AlmostEqualTo(9.957528102138740E+00, 1e-8), "F1");
+            Assert.That(GAMMAINV(0.9999, 2, 1.5), NumericIs.AlmostEqualTo(1.763455683388200E+01, 1e-8), "G1");
         }
     }
 }
