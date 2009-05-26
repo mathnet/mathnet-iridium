@@ -46,8 +46,8 @@ namespace MathNet.Numerics
         IComparable<Polynomial>,
         ICloneable
     {
-        double[] coefficients;
-        int order;
+        double[] _coefficients;
+        int _order;
 
         /// <summary>
         /// Initializes a new instance of the Polynomial class
@@ -57,8 +57,8 @@ namespace MathNet.Numerics
         public
         Polynomial(int order)
         {
-            this.order = order;
-            this.coefficients = new double[SizeOfOrder(order)];
+            _order = order;
+            _coefficients = new double[SizeOfOrder(order)];
         }
 
         /// <summary>
@@ -69,12 +69,12 @@ namespace MathNet.Numerics
         public
         Polynomial(double[] coefficients)
         {
-            this.order = FindOrder(coefficients);
-            this.coefficients = new double[SizeOfOrder(order)];
+            _order = FindOrder(coefficients);
+            _coefficients = new double[SizeOfOrder(_order)];
             Array.Copy(
                 coefficients,
-                this.coefficients,
-                Math.Min(this.coefficients.Length, coefficients.Length));
+                _coefficients,
+                Math.Min(_coefficients.Length, coefficients.Length));
         }
 
         /// <summary>
@@ -85,12 +85,12 @@ namespace MathNet.Numerics
         public
         Polynomial(Polynomial copy)
         {
-            this.order = copy.order;
-            this.coefficients = new double[copy.coefficients.Length];
+            _order = copy._order;
+            _coefficients = new double[copy._coefficients.Length];
             Array.Copy(
-                copy.coefficients,
-                this.coefficients,
-                Math.Min(this.coefficients.Length, copy.coefficients.Length));
+                copy._coefficients,
+                _coefficients,
+                Math.Min(_coefficients.Length, copy._coefficients.Length));
         }
 
         #region Size
@@ -115,23 +115,23 @@ namespace MathNet.Numerics
         ResizeOptimalForOrder(int order)
         {
             int bestSize = SizeOfOrder(order);
-            if(bestSize == coefficients.Length)
+            if(bestSize == _coefficients.Length)
             {
                 return;
             }
 
             double[] newCoeffs = new double[bestSize];
             Array.Copy(
-                this.coefficients,
+                _coefficients,
                 newCoeffs,
-                Math.Min(this.coefficients.Length, newCoeffs.Length));
-            coefficients = newCoeffs;
+                Math.Min(_coefficients.Length, newCoeffs.Length));
+            _coefficients = newCoeffs;
         }
         
         void
         EnsureSupportForOrder(int order)
         {
-            if(coefficients.Length <= order)
+            if(_coefficients.Length <= order)
             {
                 ResizeOptimalForOrder(order);
             }
@@ -145,24 +145,24 @@ namespace MathNet.Numerics
         Normalize()
         {
             NormalizeOrder();
-            ResizeOptimalForOrder(this.order);
+            ResizeOptimalForOrder(_order);
         }
 
         void
         NormalizeOrder()
         {
-            while(coefficients[order] == 0d && order > 0)
+            while(_coefficients[_order] == 0d && _order > 0)
             {
-                order--;
+                _order--;
             }
         }
 
         void
         NormalizeOrder(int candidate)
         {
-            if(candidate > order)
+            if(candidate > _order)
             {
-                order = candidate;
+                _order = candidate;
             }
 
             NormalizeOrder();
@@ -172,7 +172,7 @@ namespace MathNet.Numerics
         FindOrder(double[] coeff)
         {
             int o = coeff.Length - 1;
-            while(coeff[o] == 0d && order > 0)
+            while(coeff[o] == 0d && _order > 0)
             {
                 o--;
             }
@@ -189,7 +189,7 @@ namespace MathNet.Numerics
         /// </summary>
         public int Size
         {
-            get { return coefficients.Length; }
+            get { return _coefficients.Length; }
         }
 
         /// <summary>
@@ -197,7 +197,7 @@ namespace MathNet.Numerics
         /// </summary>
         public int Order
         {
-            get { return order; }
+            get { return _order; }
         }
 
         /// <summary>
@@ -212,12 +212,12 @@ namespace MathNet.Numerics
                     throw new ArgumentOutOfRangeException("power", power, Properties.LocalStrings.ArgumentNotNegative);
                 }
 
-                if(power > order)
+                if(power > _order)
                 {
                     return 0d;
                 }
 
-                return coefficients[power];
+                return _coefficients[power];
             }
 
             set
@@ -227,12 +227,12 @@ namespace MathNet.Numerics
                     throw new ArgumentOutOfRangeException("power", power, Properties.LocalStrings.ArgumentNotNegative);
                 }
 
-                if(power > order)
+                if(power > _order)
                 {
                     EnsureSupportForOrder(power);
                 }
 
-                coefficients[power] = value;
+                _coefficients[power] = value;
             }
         }
 
@@ -493,14 +493,14 @@ namespace MathNet.Numerics
         void
         AddInplace(Polynomial polynomial)
         {
-            EnsureSupportForOrder(polynomial.order);
-            int len = polynomial.order + 1;
+            EnsureSupportForOrder(polynomial._order);
+            int len = polynomial._order + 1;
             for(int i = 0; i < len; i++)
             {
-                coefficients[i] += polynomial.coefficients[i];
+                _coefficients[i] += polynomial._coefficients[i];
             }
 
-            NormalizeOrder(polynomial.order);
+            NormalizeOrder(polynomial._order);
         }
 
         /// <summary>Add a real number inplace to this polynomial.</summary>
@@ -518,14 +518,14 @@ namespace MathNet.Numerics
         void
         SubtractInplace(Polynomial polynomial)
         {
-            EnsureSupportForOrder(polynomial.order);
-            int len = polynomial.order + 1;
+            EnsureSupportForOrder(polynomial._order);
+            int len = polynomial._order + 1;
             for(int i = 0; i < len; i++)
             {
-                coefficients[i] -= polynomial.coefficients[i];
+                _coefficients[i] -= polynomial._coefficients[i];
             }
 
-            NormalizeOrder(polynomial.order);
+            NormalizeOrder(polynomial._order);
         }
 
         /// <summary>Subtract a real number inplace from this polynomial.</summary>
@@ -543,9 +543,9 @@ namespace MathNet.Numerics
         void
         NegateInplace()
         {
-            for(int i = 0; i <= order; i++)
+            for(int i = 0; i <= _order; i++)
             {
-                coefficients[i] = -coefficients[i];
+                _coefficients[i] = -_coefficients[i];
             }
         }
 
@@ -557,9 +557,9 @@ namespace MathNet.Numerics
         void
         MultiplyInplace(double c0)
         {
-            for(int i = 0; i < coefficients.Length; i++)
+            for(int i = 0; i < _coefficients.Length; i++)
             {
-                coefficients[i] = c0 * coefficients[i];
+                _coefficients[i] = c0 * _coefficients[i];
             }
 
             // zero case
@@ -579,17 +579,17 @@ namespace MathNet.Numerics
                 throw new ArgumentOutOfRangeException("n", n, Properties.LocalStrings.ArgumentPositive);
             }
 
-            EnsureSupportForOrder(order + n);
-            order += n;
+            EnsureSupportForOrder(_order + n);
+            _order += n;
 
-            for(int i = order; i >= n; i--)
+            for(int i = _order; i >= n; i--)
             {
-                coefficients[i] = coefficients[i - n];
+                _coefficients[i] = _coefficients[i - n];
             }
 
             for(int i = 0; i < n; i++)
             {
-                coefficients[i] = 0;
+                _coefficients[i] = 0;
             }
         }
 
@@ -603,16 +603,16 @@ namespace MathNet.Numerics
         void
         MultiplySyntheticInplace(double c0)
         {
-            EnsureSupportForOrder(order + 1);
-            order++;
-            coefficients[order] = coefficients[order - 1];
+            EnsureSupportForOrder(_order + 1);
+            _order++;
+            _coefficients[_order] = _coefficients[_order - 1];
 
-            for(int j = order - 1; j >= 1; j--)
+            for(int j = _order - 1; j >= 1; j--)
             {
-                coefficients[j] = coefficients[j - 1] - (c0 * coefficients[j]);
+                _coefficients[j] = _coefficients[j - 1] - (c0 * _coefficients[j]);
             }
 
-            coefficients[0] *= -c0;
+            _coefficients[0] *= -c0;
         }
 
         /// <summary>
@@ -650,9 +650,9 @@ namespace MathNet.Numerics
             }
 
             double factor = 1 / c0;
-            for(int i = 0; i <= order; i++)
+            for(int i = 0; i <= _order; i++)
             {
-                coefficients[i] = coefficients[i] * factor;
+                _coefficients[i] = _coefficients[i] * factor;
             }
         }
 
@@ -674,21 +674,21 @@ namespace MathNet.Numerics
             remainder = new double[n];
             for(int i = 0; i < n; i++)
             {
-                remainder[i] = coefficients[i];
+                remainder[i] = _coefficients[i];
             }
 
-            order -= n;
-            for(int i = 0; i < order; i++)
+            _order -= n;
+            for(int i = 0; i < _order; i++)
             {
-                coefficients[i] = coefficients[i + n];
+                _coefficients[i] = _coefficients[i + n];
             }
 
-            for(int i = order; i < order + n; i++)
+            for(int i = _order; i < _order + n; i++)
             {
-                coefficients[i] = 0;
+                _coefficients[i] = 0;
             }
 
-            if((n << 2) > order)
+            if((n << 2) > _order)
             {
                 Normalize();
             }
@@ -706,13 +706,12 @@ namespace MathNet.Numerics
             double c0,
             out double remainder)
         {
-            double swap;
-            remainder = coefficients[order];
-            coefficients[order--] = 0;
-            for(int i = order; i >= 0; i--)
+            remainder = _coefficients[_order];
+            _coefficients[_order--] = 0;
+            for(int i = _order; i >= 0; i--)
             {
-                swap = coefficients[i];
-                coefficients[i] = remainder;
+                double swap = _coefficients[i];
+                _coefficients[i] = remainder;
                 remainder = swap + (c0 * remainder);
             }
 
@@ -763,31 +762,32 @@ namespace MathNet.Numerics
             if(orderMin > 3)
             {
                 int orderMax = Math.Max(Order, polynomial.Order);
-                this.EnsureSupportForOrder(orderMax);
+                EnsureSupportForOrder(orderMax);
                 polynomial.EnsureSupportForOrder(orderMax);
 
                 return MultiplyKaratsuba(
-                    this.coefficients,
-                    polynomial.coefficients,
-                    this.order,
-                    polynomial.order,
+                    _coefficients,
+                    polynomial._coefficients,
+                    _order,
+                    polynomial._order,
                     SizeOfOrder(orderMax),
                     0);
             }
 
             // Direct multipliction (slow for large orders but faster for smaller ones)
             double[] coeff = new double[1 + Order + polynomial.Order];
-            for(int i = 0; i <= order; i++)
+            for(int i = 0; i <= _order; i++)
             {
-                for(int j = 0; j <= polynomial.order; j++)
+                for(int j = 0; j <= polynomial._order; j++)
                 {
-                    coeff[i + j] += coefficients[i] * polynomial.coefficients[j];
+                    coeff[i + j] += _coefficients[i] * polynomial._coefficients[j];
                 }
             }
 
             return new Polynomial(coeff);
         }
 
+        static
         Polynomial
         MultiplyKaratsuba(
             double[] leftCoefficients,
@@ -813,14 +813,14 @@ namespace MathNet.Numerics
             }
 
             n >>= 1;
-            double[] FF = new double[n], GG = new double[n];
+            double[] ff = new double[n], gg = new double[n];
             for(int i = offset; i < n + offset; i++)
             {
-                FF[i - offset] = leftCoefficients[i] + leftCoefficients[n + i];
-                GG[i - offset] = rightCoefficients[i] + rightCoefficients[n + i];
+                ff[i - offset] = leftCoefficients[i] + leftCoefficients[n + i];
+                gg[i - offset] = rightCoefficients[i] + rightCoefficients[n + i];
             }
 
-            Polynomial FG0 = MultiplyKaratsuba(
+            Polynomial fg0 = MultiplyKaratsuba(
                 leftCoefficients,
                 rightCoefficients,
                 n - 1,
@@ -828,7 +828,7 @@ namespace MathNet.Numerics
                 n,
                 offset);
 
-            Polynomial FG1 = MultiplyKaratsuba(
+            Polynomial fg1 = MultiplyKaratsuba(
                 leftCoefficients,
                 rightCoefficients,
                 Math.Max(leftOrder - n, 0),
@@ -836,23 +836,23 @@ namespace MathNet.Numerics
                 n,
                 offset + n);
 
-            Polynomial FFGG = MultiplyKaratsuba(
-                FF,
-                GG,
+            Polynomial ffgg = MultiplyKaratsuba(
+                ff,
+                gg,
                 n - 1,
                 n - 1,
                 n,
                 0);
 
-            FFGG.SubtractInplace(FG0);
-            FFGG.SubtractInplace(FG1);
-            FFGG.MultiplyShiftInplace(n);
+            ffgg.SubtractInplace(fg0);
+            ffgg.SubtractInplace(fg1);
+            ffgg.MultiplyShiftInplace(n);
 
-            FG1.MultiplyShiftInplace(n + n);
-            FG1.AddInplace(FFGG);
-            FG1.AddInplace(FG0);
+            fg1.MultiplyShiftInplace(n + n);
+            fg1.AddInplace(ffgg);
+            fg1.AddInplace(fg0);
 
-            return FG1;
+            return fg1;
         }
 
         /// <summary>
@@ -878,10 +878,10 @@ namespace MathNet.Numerics
         double
         Evaluate(double value)
         {
-            double ret = coefficients[order];
-            for(int j = order - 1; j >= 0; j--)
+            double ret = _coefficients[_order];
+            for(int j = _order - 1; j >= 0; j--)
             {
-                ret = (ret * value) + coefficients[j];
+                ret = (ret * value) + _coefficients[j];
             }
 
             return ret;
@@ -900,12 +900,12 @@ namespace MathNet.Numerics
             double value,
             out double derivative)
         {
-            double ret = coefficients[order];
+            double ret = _coefficients[_order];
             derivative = 0d;
-            for(int j = order - 1; j >= 0; j--)
+            for(int j = _order - 1; j >= 0; j--)
             {
                 derivative = (derivative * value) + ret;
-                ret = (ret * value) + coefficients[j];
+                ret = (ret * value) + _coefficients[j];
             }
 
             return ret;
@@ -925,18 +925,17 @@ namespace MathNet.Numerics
             int derivativeOrderMax)
         {
             double[] ret = new double[derivativeOrderMax + 1];
-            ret[0] = coefficients[order];
+            ret[0] = _coefficients[_order];
 
-            int len;
-            for(int i = order - 1; i >= 0; i--)
+            for(int i = _order - 1; i >= 0; i--)
             {
-                len = Math.Min(derivativeOrderMax, coefficients.Length - 1 - i);
+                int len = Math.Min(derivativeOrderMax, _coefficients.Length - 1 - i);
                 for(int j = len; j >= 1; j--)
                 {
                     ret[j] = (ret[j] * value) + ret[j - 1];
                 }
 
-                ret[0] = (ret[0] * value) + coefficients[i];
+                ret[0] = (ret[0] * value) + _coefficients[i];
             }
 
             double factorial = 1.0;
@@ -963,7 +962,7 @@ namespace MathNet.Numerics
             StringBuilder builder = new StringBuilder();
             for(int i = Order; i >= 0; i--)
             {
-                double coeff = coefficients[i];
+                double coeff = _coefficients[i];
 
                 if(Number.AlmostZero(coeff))
                 {
@@ -1028,7 +1027,7 @@ namespace MathNet.Numerics
         int
         GetHashCode()
         {
-            return coefficients.GetHashCode();
+            return _coefficients.GetHashCode();
         }
 
         /// <summary>
@@ -1039,7 +1038,7 @@ namespace MathNet.Numerics
         Equals(object obj)
         {
             Polynomial p = obj as Polynomial;
-            return object.ReferenceEquals(p, null) ? false : this.Equals(p);
+            return ReferenceEquals(p, null) ? false : Equals(p);
         }
 
         /// <summary>
@@ -1049,17 +1048,17 @@ namespace MathNet.Numerics
         bool
         Equals(Polynomial other)
         {
-            if(object.ReferenceEquals(other, null)
-                || order != other.Order)
+            if(ReferenceEquals(other, null)
+                || _order != other.Order)
             {
                 return false;
             }
 
             // compare all values
-            double[] otherData = other.coefficients;
-            for(int i = 0; i < order; i++)
+            double[] otherData = other._coefficients;
+            for(int i = 0; i < _order; i++)
             {
-                if(coefficients[i] != otherData[i])
+                if(_coefficients[i] != otherData[i])
                 {
                     return false;
                 }
@@ -1075,17 +1074,17 @@ namespace MathNet.Numerics
         bool
         AlmostEquals(Polynomial other)
         {
-            if(object.ReferenceEquals(other, null)
-                || order != other.Order)
+            if(ReferenceEquals(other, null)
+                || _order != other.Order)
             {
                 return false;
             }
 
             // compare all values
-            double[] otherData = other.coefficients;
-            for(int i = 0; i < order; i++)
+            double[] otherData = other._coefficients;
+            for(int i = 0; i < _order; i++)
             {
-                if(!Number.AlmostEqual(coefficients[i], otherData[i]))
+                if(!Number.AlmostEqual(_coefficients[i], otherData[i]))
                 {
                     return false;
                 }
@@ -1103,17 +1102,17 @@ namespace MathNet.Numerics
             Polynomial other,
             double maximumRelativeError)
         {
-            if(object.ReferenceEquals(other, null)
-                || order != other.Order)
+            if(ReferenceEquals(other, null)
+                || _order != other.Order)
             {
                 return false;
             }
 
             // compare all values
-            double[] otherData = other.coefficients;
-            for(int i = 0; i < order; i++)
+            double[] otherData = other._coefficients;
+            for(int i = 0; i < _order; i++)
             {
-                if(!Number.AlmostEqual(coefficients[i], otherData[i], maximumRelativeError))
+                if(!Number.AlmostEqual(_coefficients[i], otherData[i], maximumRelativeError))
                 {
                     return false;
                 }
@@ -1156,9 +1155,9 @@ namespace MathNet.Numerics
             Polynomial u,
             Polynomial v)
         {
-            if(object.ReferenceEquals(u, null))
+            if(ReferenceEquals(u, null))
             {
-                return object.ReferenceEquals(v, null);
+                return ReferenceEquals(v, null);
             }
 
             return u.Equals(v);
@@ -1191,7 +1190,7 @@ namespace MathNet.Numerics
         int
         CompareTo(Polynomial polynomial)
         {
-            int i = this.Order;
+            int i = Order;
             int j = polynomial.Order;
 
             if(i > j)
@@ -1206,12 +1205,12 @@ namespace MathNet.Numerics
 
             while(i >= 0)
             {
-                if(this.coefficients[i] > polynomial.coefficients[i])
+                if(_coefficients[i] > polynomial._coefficients[i])
                 {
                     return 1;
                 }
 
-                if(this.coefficients[i] < polynomial.coefficients[i])
+                if(_coefficients[i] < polynomial._coefficients[i])
                 {
                     return -1;
                 }

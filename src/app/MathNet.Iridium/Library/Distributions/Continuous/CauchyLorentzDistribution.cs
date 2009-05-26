@@ -34,7 +34,7 @@ using System;
 
 namespace MathNet.Numerics.Distributions
 {
-    using MathNet.Numerics.RandomSources;
+    using RandomSources;
 
     /// <summary>
     /// Provides generation of cauchy distributed random numbers.
@@ -56,7 +56,6 @@ namespace MathNet.Numerics.Distributions
         /// </summary>
         public
         CauchyLorentzDistribution()
-            : base()
         {
             SetDistributionParameters(0.0, 1.0);
         }
@@ -84,7 +83,6 @@ namespace MathNet.Numerics.Distributions
         CauchyLorentzDistribution(
             double location,
             double scale)
-            : base()
         {
             SetDistributionParameters(location, scale);
         }

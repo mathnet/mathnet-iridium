@@ -46,7 +46,7 @@ namespace MathNet.Numerics.Interpolation.Algorithms
     public class RationalPoleFreeInterpolation :
         IInterpolationMethod
     {
-        BarycentricInterpolation _barycentric;
+        readonly BarycentricInterpolation _barycentric;
 
         /// <summary>
         /// Initializes a new instance of the RationalPoleFreeInterpolation class.

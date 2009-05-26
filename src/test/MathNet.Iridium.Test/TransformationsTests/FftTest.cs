@@ -27,15 +27,10 @@
 // </license>
 //-----------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Globalization;
 using NUnit.Framework;
 
 namespace Iridium.Test.TransformationsTests
 {
-    using MathNet.Numerics;
     using MathNet.Numerics.Transformations;
 
     [TestFixture]
@@ -796,8 +791,8 @@ namespace Iridium.Test.TransformationsTests
         [Test]
         public void Stress_SingleReal_1024()
         {
-            int numSamples = 1024;
-            int half = numSamples >> 1;
+            const int numSamples = 1024;
+            const int half = numSamples >> 1;
 
             double[] dataEven = new double[numSamples];
 
@@ -834,8 +829,8 @@ namespace Iridium.Test.TransformationsTests
         [Test]
         public void Stress_SingleReal_4096()
         {
-            int numSamples = 4096;
-            int half = numSamples >> 1;
+            const int numSamples = 4096;
+            const int half = numSamples >> 1;
 
             double[] dataEven = new double[numSamples];
 
@@ -872,8 +867,8 @@ namespace Iridium.Test.TransformationsTests
         [Test]
         public void Stress_SingleReal_8192()
         {
-            int numSamples = 8192;
-            int half = numSamples >> 1;
+            const int numSamples = 8192;
+            const int half = numSamples >> 1;
 
             double[] dataEven = new double[numSamples];
 
@@ -910,8 +905,8 @@ namespace Iridium.Test.TransformationsTests
         [Test]
         public void Stress_SingleReal_16384()
         {
-            int numSamples = 16384;
-            int half = numSamples >> 1;
+            const int numSamples = 16384;
+            const int half = numSamples >> 1;
 
             double[] dataEven = new double[numSamples];
 
@@ -948,8 +943,8 @@ namespace Iridium.Test.TransformationsTests
         [Test]
         public void Stress_SingleReal_65536()
         {
-            int numSamples = 65536;
-            int half = numSamples >> 1;
+            const int numSamples = 65536;
+            const int half = numSamples >> 1;
 
             double[] dataEven = new double[numSamples];
 
@@ -986,8 +981,8 @@ namespace Iridium.Test.TransformationsTests
         [Test]
         public void Stress_SingleReal_262144()
         {
-            int numSamples = 262144;
-            int half = numSamples >> 1;
+            const int numSamples = 262144;
+            const int half = numSamples >> 1;
 
             double[] dataEven = new double[numSamples];
 
@@ -1024,8 +1019,8 @@ namespace Iridium.Test.TransformationsTests
         [Test]
         public void Stress_SingleReal_1048576()
         {
-            int numSamples = 1048576;
-            int half = numSamples >> 1;
+            const int numSamples = 1048576;
+            const int half = numSamples >> 1;
 
             double[] dataEven = new double[numSamples];
 

@@ -34,7 +34,7 @@ using System;
 
 namespace MathNet.Numerics.Distributions
 {
-    using MathNet.Numerics.RandomSources;
+    using RandomSources;
 
     /// <summary>
     /// Provides generation of discrete uniformly distributed random numbers.
@@ -58,7 +58,6 @@ namespace MathNet.Numerics.Distributions
         /// </summary>
         public
         DiscreteUniformDistribution()
-            : base()
         {
             SetDistributionParameters(0, 1);
         }
@@ -86,7 +85,6 @@ namespace MathNet.Numerics.Distributions
         DiscreteUniformDistribution(
             int lowerLimit,
             int upperLimit)
-            : base()
         {
             SetDistributionParameters(lowerLimit, upperLimit);
         }
@@ -244,7 +242,7 @@ namespace MathNet.Numerics.Distributions
         int
         NextInt32()
         {
-            return this.RandomSource.Next(_a, _b + 1);
+            return RandomSource.Next(_a, _b + 1);
         }
         #endregion
     }

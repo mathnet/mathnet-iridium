@@ -51,14 +51,6 @@ namespace MathNet.Numerics.Interpolation.Algorithms
         IList<double> _w;
 
         /// <summary>
-        /// Initializes a new instance of the BarycentricInterpolation class.
-        /// </summary>
-        public
-        BarycentricInterpolation()
-        {
-        }
-
-        /// <summary>
         /// True if the alorithm supports differentiation.
         /// </summary>
         /// <seealso cref="Differentiate"/>

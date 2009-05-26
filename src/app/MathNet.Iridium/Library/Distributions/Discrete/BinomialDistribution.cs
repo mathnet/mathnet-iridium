@@ -34,7 +34,7 @@ using System;
 
 namespace MathNet.Numerics.Distributions
 {
-    using MathNet.Numerics.RandomSources;
+    using RandomSources;
 
     /// <summary>
     /// Provides generation of binomial distributed random numbers.
@@ -56,7 +56,6 @@ namespace MathNet.Numerics.Distributions
         /// </summary>
         public
         BinomialDistribution()
-            : base()
         {
             SetDistributionParameters(0.5, 1);
         }
@@ -84,7 +83,6 @@ namespace MathNet.Numerics.Distributions
         BinomialDistribution(
             double probabilityOfSuccess,
             int numberOfTrials)
-            : base()
         {
             SetDistributionParameters(probabilityOfSuccess, numberOfTrials);
         }
@@ -229,7 +227,7 @@ namespace MathNet.Numerics.Distributions
             int successes = 0;
             for(int i = 0; i < _n; i++)
             {
-                if(this.RandomSource.NextDouble() < _p)
+                if(RandomSource.NextDouble() < _p)
                 {
                     successes++;
                 }

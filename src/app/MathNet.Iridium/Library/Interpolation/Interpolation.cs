@@ -27,12 +27,11 @@
 // </license>
 //-----------------------------------------------------------------------
 
-using System;
 using System.Collections.Generic;
 
 namespace MathNet.Numerics.Interpolation
 {
-    using MathNet.Numerics.Interpolation.Algorithms;
+    using Algorithms;
 
     /// <summary>
     /// Interpolation Facade.

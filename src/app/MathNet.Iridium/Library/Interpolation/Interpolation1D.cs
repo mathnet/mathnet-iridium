@@ -36,7 +36,7 @@ namespace MathNet.Numerics.Interpolation
     /// Interpolation Characteristics
     /// </summary>
     [Obsolete]
-    public enum InterpolationMode : int
+    public enum InterpolationMode
     {
         /// <summary>
         /// Polynomial Interpolation
@@ -61,8 +61,8 @@ namespace MathNet.Numerics.Interpolation
     [Obsolete("Please use Interpolation instead. This class is obsolete and will be removed in future versions.")]
     public class InterpolationSingleDimension
     {
-        SampleList _samples;
-        IInterpolationAlgorithm _algorithm;
+        readonly SampleList _samples;
+        readonly IInterpolationAlgorithm _algorithm;
         bool _dirty = true; // delay preparation until first evaluation
 
         #region Construction

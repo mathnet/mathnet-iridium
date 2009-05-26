@@ -39,13 +39,13 @@ namespace MathNet.Numerics.SpecialFunctions.Algorithms
     {
         /// <summary>
         /// Returns the digamma (psi) function of real values (except at 0, -1, -2, ...).
-        /// Digamma is the logarithmic derivative of the <see cref="Gamma"/> function.
+        /// Digamma is the logarithmic derivative of the <see cref="Fn.Gamma"/> function.
         /// </summary>
         public static
         double
         Digamma(double x)
         {
-            double y = 0;
+            double y;
             double nz = 0.0;
             bool negative = (x <= 0);
 

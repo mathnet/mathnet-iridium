@@ -34,7 +34,7 @@ using System;
 
 namespace MathNet.Numerics.Distributions
 {
-    using MathNet.Numerics.RandomSources;
+    using RandomSources;
 
     /// <summary>
     /// Provides generation of laplace distributed random numbers.
@@ -55,7 +55,6 @@ namespace MathNet.Numerics.Distributions
         /// </summary>
         public
         LaplaceDistribution()
-            : base()
         {
             SetDistributionParameters(0.0, 1.0);
         }
@@ -83,7 +82,6 @@ namespace MathNet.Numerics.Distributions
         LaplaceDistribution(
             double location,
             double scale)
-            : base()
         {
             SetDistributionParameters(location, scale);
         }

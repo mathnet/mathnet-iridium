@@ -34,9 +34,7 @@ using System;
 
 namespace MathNet.Numerics.RandomSources
 {
-    using MathNet.Numerics.Distributions;
-
-    // TODO (cdr, 2008-03-09): Refactor (either interface or share code)
+    using Distributions;
 
     /// <summary>
     /// Declares common functionality for all random number generators.

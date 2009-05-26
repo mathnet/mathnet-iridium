@@ -29,7 +29,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using NUnit.Framework;
 
 namespace Iridium.Test.InfrastructureTests
@@ -43,12 +42,12 @@ namespace Iridium.Test.InfrastructureTests
         [Test]
         public void TestRandomTupleArraySorting()
         {
-            const int Len = 0x1 << 10;
+            const int len = 0x1 << 10;
             SystemRandomSource random = new SystemRandomSource();
 
-            int[] keys = new int[Len];
-            int[] items = new int[Len];
-            int[] keysCopy = new int[Len];
+            int[] keys = new int[len];
+            int[] items = new int[len];
+            int[] keysCopy = new int[len];
 
             for(int i = 0; i < keys.Length; i++)
             {
@@ -74,14 +73,14 @@ namespace Iridium.Test.InfrastructureTests
         [Test]
         public void TestRandomTupleListSorting()
         {
-            const int Len = 0x1 << 10;
+            const int len = 0x1 << 10;
             SystemRandomSource random = new SystemRandomSource();
 
-            List<int> keys = new List<int>(Len);
-            List<int> items = new List<int>(Len);
-            int[] keysCopy = new int[Len];
+            List<int> keys = new List<int>(len);
+            List<int> items = new List<int>(len);
+            int[] keysCopy = new int[len];
 
-            for(int i = 0; i < Len; i++)
+            for(int i = 0; i < len; i++)
             {
                 int value = random.Next();
                 keys.Add(value);
@@ -91,7 +90,7 @@ namespace Iridium.Test.InfrastructureTests
 
             Sorting.Sort(keys, items);
 
-            for(int i = 1; i < Len; i++)
+            for(int i = 1; i < len; i++)
             {
                 Assert.That(keys[i] >= keys[i - 1], "Sort Order - " + i.ToString());
                 Assert.That(items[i], Is.EqualTo(-keys[i]), "Items Permutation - " + i.ToString());
@@ -106,13 +105,13 @@ namespace Iridium.Test.InfrastructureTests
         [Test]
         public void TestRandomTripleArraySorting()
         {
-            const int Len = 0x1 << 10;
+            const int len = 0x1 << 10;
             SystemRandomSource random = new SystemRandomSource();
 
-            int[] keys = new int[Len];
-            int[] items1 = new int[Len];
-            int[] items2 = new int[Len];
-            int[] keysCopy = new int[Len];
+            int[] keys = new int[len];
+            int[] items1 = new int[len];
+            int[] items2 = new int[len];
+            int[] keysCopy = new int[len];
 
             for(int i = 0; i < keys.Length; i++)
             {
@@ -140,12 +139,12 @@ namespace Iridium.Test.InfrastructureTests
         [Test]
         public void TestAppliedSetSorting()
         {
-            const int Len = 0x1 << 10;
+            const int len = 0x1 << 10;
             SystemRandomSource random = new SystemRandomSource();
 
             Set<int> set = new Set<int>();
 
-            for(int i = 0; i < Len; i++)
+            for(int i = 0; i < len; i++)
             {
                 set.Add(random.Next());
             }

@@ -45,14 +45,14 @@ namespace MathNet.Numerics.RandomSources
         RandomSource
     {
         /// <summary>
+        /// Stores the used seed value.
+        /// </summary>
+        readonly int _seed;
+
+        /// <summary>
         /// Stores an instance of <see cref="System.Random"/> type that is used to generate random numbers.
         /// </summary>
         Random _generator;
-
-        /// <summary>
-        /// Stores the used seed value.
-        /// </summary>
-        int _seed;
 
         /// <summary>
         /// Stores an <see cref="Int32"/> used to generate up to 31 random <see cref="Boolean"/> values.

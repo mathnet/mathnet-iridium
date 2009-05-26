@@ -34,7 +34,7 @@ using System.Text;
 
 namespace MathNet.Numerics.LinearAlgebra
 {
-    using MathNet.Numerics.Distributions;
+    using Distributions;
 
     /// <summary>
     /// Real vector.
@@ -51,8 +51,8 @@ namespace MathNet.Numerics.LinearAlgebra
         IAlmostEquatable<Vector>,
         ICloneable
     {
-        private double[] _data;
-        private int _length;
+        private readonly double[] _data;
+        private readonly int _length;
 
         /// <summary>
         /// Gets dimensionality of the vector.
@@ -304,8 +304,8 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <remarks>
         /// This method has the same effect as the overloaded + operator.
         /// </remarks>
-        /// <seealso cref="AddInplace(IVector&lt;double&gt;)"/>
-        /// <seealso cref="operator + (Vector, Vector)"/>
+        /// <seealso cref="AddInplace(IVector{double})"/>
+        /// <seealso cref="operator+(Vector, Vector)"/>
         public
         Vector
         Add(IVector<double> b)
@@ -352,7 +352,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <remarks>
         /// This method changes this vector.
         /// </remarks>
-        /// <seealso cref="Add(IVector&lt;double&gt;)"/>
+        /// <seealso cref="Add(IVector{double})"/>
         /// <seealso cref="operator + (Vector, Vector)"/>
         public
         void
@@ -394,7 +394,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <remarks>
         /// This method has the same effect as the overloaded - operator.
         /// </remarks>
-        /// <seealso cref="SubtractInplace(IVector&lt;double&gt;)"/>
+        /// <seealso cref="SubtractInplace(IVector{double})"/>
         /// <seealso cref="operator - (Vector, Vector)"/>
         public
         Vector
@@ -442,7 +442,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <remarks>
         /// This method changes this vector.
         /// </remarks>
-        /// <seealso cref="Subtract(IVector&lt;double&gt;)"/>
+        /// <seealso cref="Subtract(IVector{double})"/>
         /// <seealso cref="operator - (Vector, Vector)"/>
         public
         void
@@ -1068,24 +1068,24 @@ namespace MathNet.Numerics.LinearAlgebra
 
         #region Various Helpers & Infrastructure
 
-        /// <summary>Check if size(A) == size(B) *</summary>
+        /// <summary>Check if size(u) == size(v) *</summary>
         private static
         void
         CheckMatchingVectorDimensions(
-            IVector<double> A,
-            IVector<double> B)
+            IVector<double> u,
+            IVector<double> v)
         {
-            if(null == A)
+            if(null == u)
             {
-                throw new ArgumentNullException("A");
+                throw new ArgumentNullException("u");
             }
 
-            if(null == B)
+            if(null == v)
             {
-                throw new ArgumentNullException("B");
+                throw new ArgumentNullException("v");
             }
 
-            if(A.Length != B.Length)
+            if(u.Length != v.Length)
             {
                 throw new ArgumentException(Properties.LocalStrings.ArgumentVectorsSameLengths);
             }
@@ -1116,7 +1116,7 @@ namespace MathNet.Numerics.LinearAlgebra
         Equals(object obj)
         {
             Vector v = obj as Vector;
-            return object.ReferenceEquals(v, null) ? false : this.Equals(v);
+            return ReferenceEquals(v, null) ? false : Equals(v);
         }
 
         /// <summary>
@@ -1126,7 +1126,7 @@ namespace MathNet.Numerics.LinearAlgebra
         bool
         Equals(Vector other)
         {
-            if(object.ReferenceEquals(other, null)
+            if(ReferenceEquals(other, null)
                 || _length != other.Length)
             {
                 return false;
@@ -1146,13 +1146,26 @@ namespace MathNet.Numerics.LinearAlgebra
         }
 
         /// <summary>
+        /// Serves as a hash function for this type
+        /// </summary>
+        public override
+        int
+        GetHashCode()
+        {
+            unchecked
+            {
+                return (_data.GetHashCode() * 397) ^ _length;
+            }
+        }
+
+        /// <summary>
         /// Returns true if two vectors are almost equal, up to the default maximum relative error.
         /// </summary>
         public
         bool
         AlmostEquals(Vector other)
         {
-            if(object.ReferenceEquals(other, null)
+            if(ReferenceEquals(other, null)
                 || _length != other.Length)
             {
                 return false;
@@ -1170,7 +1183,7 @@ namespace MathNet.Numerics.LinearAlgebra
             Vector other,
             double maximumRelativeError)
         {
-            if(object.ReferenceEquals(other, null)
+            if(ReferenceEquals(other, null)
                 || _length != other.Length)
             {
                 return false;

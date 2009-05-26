@@ -35,7 +35,7 @@ using System;
 
 namespace MathNet.Numerics.Distributions
 {
-    using MathNet.Numerics.RandomSources;
+    using RandomSources;
 
     /// <summary>
     /// Provides generation of geometric distributed random numbers.
@@ -58,7 +58,6 @@ namespace MathNet.Numerics.Distributions
         /// </summary>
         public
         GeometricDistribution()
-            : base()
         {
             SetDistributionParameters(0.5);
         }
@@ -84,7 +83,6 @@ namespace MathNet.Numerics.Distributions
         /// </summary>
         public
         GeometricDistribution(double probabilityOfSuccess)
-            : base()
         {
             SetDistributionParameters(probabilityOfSuccess);
         }
@@ -211,7 +209,7 @@ namespace MathNet.Numerics.Distributions
             // TODO: Implement direct transformation instead of simulation
             int samples;
 
-            for(samples = 1; this.RandomSource.NextDouble() >= _p; samples++)
+            for(samples = 1; RandomSource.NextDouble() >= _p; samples++)
             {
             }
 

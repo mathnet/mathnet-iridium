@@ -1,5 +1,5 @@
 //-----------------------------------------------------------------------
-// <copyright file="NumericAssert.cs" company="Math.NET Project">
+// <copyright file="NumericIs.cs" company="Math.NET Project">
 //    Copyright (c) 2002-2009, Christoph Rüegg.
 //    All Right Reserved.
 // </copyright>
@@ -28,17 +28,12 @@
 //-----------------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
-using System.Text;
-
-using NUnit.Framework;
 using NUnit.Framework.Constraints;
-
-using MathNet.Numerics;
-using MathNet.Numerics.LinearAlgebra;
 
 namespace Iridium.Test
 {
+    using MathNet.Numerics;
+
     /// <summary>
     /// Custom NUnit Assertion Test Constraint Factory
     /// </summary>

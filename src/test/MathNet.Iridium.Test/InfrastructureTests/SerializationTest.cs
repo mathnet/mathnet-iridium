@@ -27,11 +27,8 @@
 // </license>
 //-----------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
 using NUnit.Framework;
 
 namespace Iridium.Test.InfrastructureTests
@@ -92,7 +89,7 @@ namespace Iridium.Test.InfrastructureTests
         [Test, Repeat(3)]
         public void TestSerializeComplexVector()
         {
-            ComplexVector before = ComplexVector.Create(Vector.Random(10, _random), Vector.Random(10, _random));
+            ComplexVector before = ComplexVector.Random(10, _random);
             ComplexVector after = SerializeDeserialize(before);
 
             Assert.That(after, Is.Not.Null, "Not Null");
@@ -136,7 +133,7 @@ namespace Iridium.Test.InfrastructureTests
         [Test, Repeat(3)]
         public void TestSerializeComplexPolynomial()
         {
-            ComplexPolynomial before = new ComplexPolynomial(ComplexVector.Create(Vector.Random(10, _random), Vector.Random(10, _random)));
+            ComplexPolynomial before = new ComplexPolynomial(ComplexVector.Random(10, _random));
             ComplexPolynomial after = SerializeDeserialize(before);
 
             Assert.That(after, Is.Not.Null, "Not Null");

@@ -28,7 +28,6 @@
 //-----------------------------------------------------------------------
 
 using System;
-using System.Text;
 
 namespace MathNet.Numerics
 {
@@ -43,10 +42,10 @@ namespace MathNet.Numerics
     {
         /* TODO: testing suite for Quaternion */
 
-        readonly double qw; // real part
-        readonly double qx, qy, qz; // imaginary part
-        readonly double qabs, qnorm; // norm
-        readonly double qarg; // polar notation
+        readonly double _w; // real part
+        readonly double _x, _y, _z; // imaginary part
+        readonly double _abs, _norm; // norm
+        readonly double _arg; // polar notation
 
         /// <summary>
         /// Initializes a new instance of the Quaternion struct.
@@ -58,13 +57,13 @@ namespace MathNet.Numerics
             double imagY,
             double imagZ)
         {
-            qx = imagX;
-            qy = imagY;
-            qz = imagZ;
-            qw = real;
-            qnorm = ToNorm(real, imagX, imagY, imagZ);
-            qabs = Math.Sqrt(qnorm);
-            qarg = Math.Acos(real / qabs);
+            _x = imagX;
+            _y = imagY;
+            _z = imagZ;
+            _w = real;
+            _norm = ToNorm(real, imagX, imagY, imagZ);
+            _abs = Math.Sqrt(_norm);
+            _arg = Math.Acos(real / _abs);
         }
 
         /// <summary>
@@ -80,13 +79,13 @@ namespace MathNet.Numerics
             double norm,
             double arg)
         {
-            qx = imagX;
-            qy = imagY;
-            qz = imagZ;
-            qw = real;
-            qnorm = norm;
-            qabs = abs;
-            qarg = arg;
+            _x = imagX;
+            _y = imagY;
+            _z = imagZ;
+            _w = real;
+            _norm = norm;
+            _abs = abs;
+            _arg = arg;
         }
 
         static
@@ -127,25 +126,25 @@ namespace MathNet.Numerics
         /// <summary>Gets the real part of the quaternion.</summary>
         public double Real
         {
-            get { return qw; }
+            get { return _w; }
         }
 
         /// <summary>Gets the imaginary X part (coefficient of complex I) of the quaternion.</summary>
         public double ImagX
         {
-            get { return qx; }
+            get { return _x; }
         }
 
         /// <summary>Gets the imaginary Y part (coefficient of complex J) of the quaternion.</summary>
         public double ImagY
         {
-            get { return qy; }
+            get { return _y; }
         }
 
         /// <summary>Gets the imaginary Z part (coefficient of complex K) of the quaternion.</summary>
         public double ImagZ
         {
-            get { return qz; }
+            get { return _z; }
         }
 
         /// <summary>G
@@ -154,26 +153,26 @@ namespace MathNet.Numerics
         /// </summary>
         public double Abs
         {
-            get { return qabs; }
+            get { return _abs; }
         }
 
         /// <summary>Gets the norm ||q|| = |q|^2 of the quaternion q: the sum of the squares of the four components.</summary>
         public double Norm
         {
-            get { return qnorm; }
+            get { return _norm; }
         }
 
         /// <summary>Gets the argument phi = arg(q) of the quaternion q, such that q = r*(cos(phi) + u * sin(phi)) = r*exp(phi*u) where r is the absolute and u the unit vector of q.</summary>
         public double Arg
         {
-            get { return qarg; }
+            get { return _arg; }
         }
 
         /// <summary>True if the quaternion q is of lenght |q| = 1.</summary>
         /// <remarks>To normalize a quaternion to a length of 1, use the <see cref="Sign"/> method. All unit quaternions form a 3-sphere.</remarks>
         public bool IsUnitQuaternion
         {
-            get { return Number.AlmostEqual(qabs, 1); }
+            get { return Number.AlmostEqual(_abs, 1); }
         }
 
         /// <summary>
@@ -184,7 +183,7 @@ namespace MathNet.Numerics
         Quaternion
         Scalar()
         {
-            return new Quaternion(qw, 0, 0, 0);
+            return new Quaternion(_w, 0, 0, 0);
         }
 
         /// <summary>
@@ -194,7 +193,7 @@ namespace MathNet.Numerics
         Quaternion
         Vector()
         {
-            return new Quaternion(0, qx, qy, qz);
+            return new Quaternion(0, _x, _y, _z);
         }
 
         /// <summary>
@@ -205,7 +204,7 @@ namespace MathNet.Numerics
         Quaternion
         UnitVector()
         {
-            return ToUnitQuaternion(0, qx, qy, qz);
+            return ToUnitQuaternion(0, _x, _y, _z);
         }
 
         /// <summary>
@@ -215,7 +214,7 @@ namespace MathNet.Numerics
         Quaternion
         Sign()
         {
-            return ToUnitQuaternion(qw, qx, qy, qz);
+            return ToUnitQuaternion(_w, _x, _y, _z);
         }
 
         /////// <summary>
@@ -231,10 +230,10 @@ namespace MathNet.Numerics
         ////public Quaternion ComponentSigns()
         ////{
         ////    return new Quaternion(
-        ////        Math.Sign(qx),
-        ////        Math.Sign(qy),
-        ////        Math.Sign(qz),
-        ////        Math.Sign(qw));
+        ////        Math.Sign(_x),
+        ////        Math.Sign(_y),
+        ////        Math.Sign(_z),
+        ////        Math.Sign(_w));
         ////}
 
         #endregion
@@ -402,10 +401,10 @@ namespace MathNet.Numerics
         Add(Quaternion q)
         {
             return new Quaternion(
-                qw + q.qw,
-                qx + q.qx,
-                qy + q.qy,
-                qz + q.qz);
+                _w + q._w,
+                _x + q._x,
+                _y + q._y,
+                _z + q._z);
         }
 
         /// <summary>
@@ -416,10 +415,10 @@ namespace MathNet.Numerics
         Add(double r)
         {
             return new Quaternion(
-                qw + r,
-                qx,
-                qy,
-                qz);
+                _w + r,
+                _x,
+                _y,
+                _z);
         }
 
         /// <summary>
@@ -430,10 +429,10 @@ namespace MathNet.Numerics
         Subtract(Quaternion q)
         {
             return new Quaternion(
-                qw - q.qw,
-                qx - q.qx,
-                qy - q.qy,
-                qz - q.qz);
+                _w - q._w,
+                _x - q._x,
+                _y - q._y,
+                _z - q._z);
         }
 
         /// <summary>
@@ -444,10 +443,10 @@ namespace MathNet.Numerics
         Subtract(double r)
         {
             return new Quaternion(
-                qw - r,
-                qx,
-                qy,
-                qz);
+                _w - r,
+                _x,
+                _y,
+                _z);
         }
 
         /// <summary>
@@ -458,13 +457,13 @@ namespace MathNet.Numerics
         Negate()
         {
             return new Quaternion(
-                -qw,
-                -qx,
-                -qy,
-                -qz,
-                qabs, // abs
-                qnorm, // norm
-                Math.PI - qarg); // arg
+                -_w,
+                -_x,
+                -_y,
+                -_z,
+                _abs, // abs
+                _norm, // norm
+                Math.PI - _arg); // arg
         }
 
         /// <summary>
@@ -474,10 +473,10 @@ namespace MathNet.Numerics
         Quaternion
         Multiply(Quaternion q)
         {
-            double ci = (+qx * q.qw) + (qy * q.qz) - (qz * q.qy) + (qw * q.qx);
-            double cj = (-qx * q.qz) + (qy * q.qw) + (qz * q.qx) + (qw * q.qy);
-            double ck = (+qx * q.qy) - (qy * q.qx) + (qz * q.qw) + (qw * q.qz);
-            double cr = (-qx * q.qx) - (qy * q.qy) - (qz * q.qz) + (qw * q.qw);
+            double ci = (+_x * q._w) + (_y * q._z) - (_z * q._y) + (_w * q._x);
+            double cj = (-_x * q._z) + (_y * q._w) + (_z * q._x) + (_w * q._y);
+            double ck = (+_x * q._y) - (_y * q._x) + (_z * q._w) + (_w * q._z);
+            double cr = (-_x * q._x) - (_y * q._y) - (_z * q._z) + (_w * q._w);
             return new Quaternion(cr, ci, cj, ck);
         }
 
@@ -489,10 +488,10 @@ namespace MathNet.Numerics
         Multiply(double d)
         {
             return new Quaternion(
-                d * qw,
-                d * qx,
-                d * qy,
-                d * qz);
+                d * _w,
+                d * _x,
+                d * _y,
+                d * _z);
         }
 
         /// <summary>
@@ -521,10 +520,10 @@ namespace MathNet.Numerics
         Divide(double d)
         {
             return new Quaternion(
-                qw / d,
-                qx / d,
-                qy / d,
-                qz / d);
+                _w / d,
+                _x / d,
+                _y / d,
+                _z / d);
         }
 
         /// <summary>
@@ -534,20 +533,20 @@ namespace MathNet.Numerics
         Quaternion
         Inverse()
         {
-            if(Number.AlmostEqual(qabs, 1))
+            if(Number.AlmostEqual(_abs, 1))
             {
                 return new Quaternion(
-                    qw,
-                    -qx,
-                    -qy,
-                    -qz);
+                    _w,
+                    -_x,
+                    -_y,
+                    -_z);
             }
             
             return new Quaternion(
-                qw / qnorm,
-                -qx / qnorm,
-                -qy / qnorm,
-                -qz / qnorm);
+                _w / _norm,
+                -_x / _norm,
+                -_y / _norm,
+                -_z / _norm);
         }
 
         /// <summary>
@@ -570,13 +569,13 @@ namespace MathNet.Numerics
         Conjugate()
         {
             return new Quaternion(
-                qw,
-                -qx,
-                -qy,
-                -qz,
-                qabs,
-                qnorm,
-                qarg);
+                _w,
+                -_x,
+                -_y,
+                -_z,
+                _abs,
+                _norm,
+                _arg);
         }
         
         #endregion
@@ -600,7 +599,7 @@ namespace MathNet.Numerics
         Quaternion
         Ln()
         {
-            return UnitVector().Multiply(qarg).Add(Math.Log(qabs));
+            return UnitVector().Multiply(_arg).Add(Math.Log(_abs));
         }
 
         /// <summary>
@@ -621,8 +620,8 @@ namespace MathNet.Numerics
         Quaternion
         Exp()
         {
-            double vabs = Math.Sqrt(ToNorm(0, qx, qy, qz));
-            return UnitVector().Multiply(Math.Sin(vabs)).Add(Math.Cos(vabs)).Multiply(Math.Exp(qw));
+            double vabs = Math.Sqrt(ToNorm(0, _x, _y, _z));
+            return UnitVector().Multiply(Math.Sin(vabs)).Add(Math.Cos(vabs)).Multiply(Math.Exp(_w));
         }
 
         /// <summary>
@@ -632,8 +631,8 @@ namespace MathNet.Numerics
         Quaternion
         Pow(double power)
         {
-            double arg = power * qarg;
-            return UnitVector().Multiply(Math.Sin(arg)).Add(Math.Cos(arg)).Multiply(Math.Pow(qw, power));
+            double arg = power * _arg;
+            return UnitVector().Multiply(Math.Sin(arg)).Add(Math.Cos(arg)).Multiply(Math.Pow(_w, power));
         }
 
         /// <summary>
@@ -653,8 +652,8 @@ namespace MathNet.Numerics
         Quaternion
         Sqr()
         {
-            double arg = qarg * 2;
-            return UnitVector().Multiply(Math.Sin(arg)).Add(Math.Cos(arg)).Multiply(qw * qw);
+            double arg = _arg * 2;
+            return UnitVector().Multiply(Math.Sin(arg)).Add(Math.Cos(arg)).Multiply(_w * _w);
         }
 
         /// <summary>
@@ -664,8 +663,8 @@ namespace MathNet.Numerics
         Quaternion
         Sqrt()
         {
-            double arg = qarg * 0.5;
-            return UnitVector().Multiply(Math.Sin(arg)).Add(Math.Cos(arg)).Multiply(Math.Sqrt(qw));
+            double arg = _arg * 0.5;
+            return UnitVector().Multiply(Math.Sin(arg)).Add(Math.Cos(arg)).Multiply(Math.Sqrt(_w));
         }
 
         #endregion

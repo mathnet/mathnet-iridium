@@ -35,7 +35,7 @@ using System;
 
 namespace MathNet.Numerics.Distributions
 {
-    using MathNet.Numerics.RandomSources;
+    using RandomSources;
 
     /// <summary>
     /// Provides generation of lognormal distributed random numbers.
@@ -47,11 +47,11 @@ namespace MathNet.Numerics.Distributions
     /// </remarks>
     public sealed class LognormalDistribution : ContinuousDistribution
     {
+        readonly StandardDistribution _standard;
+
         double _mu;
         double _sigma;
         double _sigma2;
-
-        StandardDistribution _standard;
 
         #region Construction
         /// <summary>
@@ -60,9 +60,8 @@ namespace MathNet.Numerics.Distributions
         /// </summary>
         public
         LognormalDistribution()
-            : base()
         {
-            _standard = new StandardDistribution(this.RandomSource);
+            _standard = new StandardDistribution(RandomSource);
             SetDistributionParameters(0.0, 1.0);
         }
 
@@ -90,9 +89,8 @@ namespace MathNet.Numerics.Distributions
         LognormalDistribution(
             double mu,
             double sigma)
-            : base()
         {
-            _standard = new StandardDistribution(this.RandomSource);
+            _standard = new StandardDistribution(RandomSource);
             SetDistributionParameters(mu, sigma);
         }
         #endregion

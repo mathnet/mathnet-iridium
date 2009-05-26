@@ -36,7 +36,7 @@ namespace MathNet.Numerics
     [Serializable]
     internal sealed class OnDemandComputation<T>
     {
-        OnDemandCompute<T> _compute;
+        readonly OnDemandCompute<T> _compute;
 
         [NonSerialized]
         T _result;

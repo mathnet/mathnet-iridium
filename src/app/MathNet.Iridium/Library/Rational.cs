@@ -28,7 +28,6 @@
 //-----------------------------------------------------------------------
 
 using System;
-using System.Text;
 
 namespace MathNet.Numerics
 {
@@ -38,8 +37,8 @@ namespace MathNet.Numerics
     /// </summary>
     public class Rational : IComparable, ICloneable
     {
-        Polynomial numerator;
-        Polynomial denominator;
+        Polynomial _numerator;
+        Polynomial _denominator;
 
         // TODO: Implement polynomial factorization to normalize rationals
 
@@ -52,8 +51,8 @@ namespace MathNet.Numerics
             Polynomial numerator,
             Polynomial denominator)
         {
-            this.numerator = numerator.Clone();
-            this.denominator = denominator.Clone();
+            _numerator = numerator.Clone();
+            _denominator = denominator.Clone();
         }
 
         /// <summary>
@@ -65,8 +64,8 @@ namespace MathNet.Numerics
             int numeratorOrder,
             int denominatorOrder)
         {
-            numerator = new Polynomial(numeratorOrder);
-            denominator = new Polynomial(denominatorOrder);
+            _numerator = new Polynomial(numeratorOrder);
+            _denominator = new Polynomial(denominatorOrder);
         }
 
         /// <summary>
@@ -78,8 +77,8 @@ namespace MathNet.Numerics
             double[] numeratorCoefficients,
             double[] denominatorCoefficients)
         {
-            numerator = new Polynomial(numeratorCoefficients);
-            denominator = new Polynomial(denominatorCoefficients);
+            _numerator = new Polynomial(numeratorCoefficients);
+            _denominator = new Polynomial(denominatorCoefficients);
         }
 
         /// <summary>
@@ -90,8 +89,8 @@ namespace MathNet.Numerics
         public
         Rational(Rational copy)
         {
-            numerator = new Polynomial(copy.numerator);
-            denominator = new Polynomial(copy.denominator);
+            _numerator = new Polynomial(copy._numerator);
+            _denominator = new Polynomial(copy._denominator);
         }
 
         #region Accessors
@@ -103,8 +102,8 @@ namespace MathNet.Numerics
         void
         Normalize()
         {
-            numerator.Normalize();
-            denominator.Normalize();
+            _numerator.Normalize();
+            _denominator.Normalize();
         }
 
         /// <summary>
@@ -112,8 +111,8 @@ namespace MathNet.Numerics
         /// </summary>
         public Polynomial Numerator
         {
-            get { return numerator; }
-            set { numerator = value; }
+            get { return _numerator; }
+            set { _numerator = value; }
         }
 
         /// <summary>
@@ -121,8 +120,8 @@ namespace MathNet.Numerics
         /// </summary>
         public Polynomial Denominator
         {
-            get { return denominator; }
-            set { denominator = value; }
+            get { return _denominator; }
+            set { _denominator = value; }
         }
 
         /// <summary>
@@ -130,7 +129,7 @@ namespace MathNet.Numerics
         /// </summary>
         public int NumeratorOrder
         {
-            get { return numerator.Order; }
+            get { return _numerator.Order; }
         }
 
         /// <summary>
@@ -138,7 +137,7 @@ namespace MathNet.Numerics
         /// </summary>
         public int DenominatorOrder
         {
-            get { return denominator.Order; }
+            get { return _denominator.Order; }
         }
 
         #endregion
@@ -522,15 +521,15 @@ namespace MathNet.Numerics
         Rational
         Add(Rational rational)
         {
-            if(denominator.Equals(rational.denominator))
+            if(_denominator.Equals(rational._denominator))
             {
                 return new Rational(
-                    numerator + rational.numerator,
-                    denominator.Clone());
+                    _numerator + rational._numerator,
+                    _denominator.Clone());
             }
 
-            Polynomial num = (numerator * rational.denominator) + (rational.numerator * denominator);
-            Polynomial denom = denominator * rational.denominator;
+            Polynomial num = (_numerator * rational._denominator) + (rational._numerator * _denominator);
+            Polynomial denom = _denominator * rational._denominator;
             return new Rational(num, denom);
         }
 
@@ -542,7 +541,7 @@ namespace MathNet.Numerics
         void
         AddInplace(Polynomial polynomial)
         {
-            numerator.AddInplace(denominator * polynomial);
+            _numerator.AddInplace(_denominator * polynomial);
         }
 
         /// <summary>
@@ -553,7 +552,7 @@ namespace MathNet.Numerics
         void
         AddInplace(double n)
         {
-            numerator.AddInplace(denominator * n);
+            _numerator.AddInplace(_denominator * n);
         }
 
         /// <summary>
@@ -564,15 +563,15 @@ namespace MathNet.Numerics
         Rational
         Subtract(Rational rational)
         {
-            if(denominator.Equals(rational.denominator))
+            if(_denominator.Equals(rational._denominator))
             {
                 return new Rational(
-                    numerator - rational.numerator,
-                    denominator.Clone());
+                    _numerator - rational._numerator,
+                    _denominator.Clone());
             }
 
-            Polynomial num = (numerator * rational.denominator) - (rational.numerator * denominator);
-            Polynomial denom = denominator * rational.denominator;
+            Polynomial num = (_numerator * rational._denominator) - (rational._numerator * _denominator);
+            Polynomial denom = _denominator * rational._denominator;
             return new Rational(num, denom);
         }
 
@@ -584,7 +583,7 @@ namespace MathNet.Numerics
         void
         SubtractInplace(Polynomial polynomial)
         {
-            numerator.SubtractInplace(denominator * polynomial);
+            _numerator.SubtractInplace(_denominator * polynomial);
         }
 
         /// <summary>
@@ -595,7 +594,7 @@ namespace MathNet.Numerics
         void
         SubtractInplace(double n)
         {
-            numerator.SubtractInplace(denominator * n);
+            _numerator.SubtractInplace(_denominator * n);
         }
 
         /// <summary>
@@ -605,7 +604,7 @@ namespace MathNet.Numerics
         void
         NegateInplace()
         {
-            numerator.NegateInplace();
+            _numerator.NegateInplace();
         }
 
         /// <summary>
@@ -617,8 +616,8 @@ namespace MathNet.Numerics
         Multiply(Rational rational)
         {
             return new Rational(
-                numerator * rational.numerator,
-                denominator * rational.denominator);
+                _numerator * rational._numerator,
+                _denominator * rational._denominator);
         }
 
         /// <summary>
@@ -630,8 +629,8 @@ namespace MathNet.Numerics
         Multiply(Polynomial polynomial)
         {
             return new Rational(
-                numerator * polynomial,
-                denominator.Clone());
+                _numerator * polynomial,
+                _denominator.Clone());
         }
 
         /// <summary>
@@ -642,7 +641,7 @@ namespace MathNet.Numerics
         void
         MultiplyInplace(double n)
         {
-            numerator.MultiplyInplace(n);
+            _numerator.MultiplyInplace(n);
         }
 
         /// <summary>
@@ -654,8 +653,8 @@ namespace MathNet.Numerics
         Divide(Rational rational)
         {
             return new Rational(
-                numerator * rational.denominator,
-                denominator * rational.numerator);
+                _numerator * rational._denominator,
+                _denominator * rational._numerator);
         }
 
         /// <summary>
@@ -667,8 +666,8 @@ namespace MathNet.Numerics
         Divide(Polynomial polynomial)
         {
             return new Rational(
-                numerator.Clone(),
-                denominator * polynomial);
+                _numerator.Clone(),
+                _denominator * polynomial);
         }
 
         /// <summary>
@@ -679,7 +678,7 @@ namespace MathNet.Numerics
         void
         DivideInplace(double n)
         {
-            denominator.MultiplyInplace(n);
+            _denominator.MultiplyInplace(n);
         }
 
         /// <summary>
@@ -689,9 +688,9 @@ namespace MathNet.Numerics
         void
         InvertInplace()
         {
-            Polynomial temp = denominator;
-            denominator = numerator;
-            numerator = temp;
+            Polynomial temp = _denominator;
+            _denominator = _numerator;
+            _numerator = temp;
         }
 
         #endregion
@@ -711,7 +710,7 @@ namespace MathNet.Numerics
             the formula here below is accurate iff the Rational cannot be 'simplified'
             */
 
-            return numerator.Evaluate(value) / denominator.Evaluate(value);
+            return _numerator.Evaluate(value) / _denominator.Evaluate(value);
         }
 
         #endregion
@@ -725,7 +724,7 @@ namespace MathNet.Numerics
         string
         ToString(string baseVariable)
         {
-            return "(" + numerator.ToString(baseVariable) + ")/(" + denominator.ToString(baseVariable) + ")";
+            return "(" + _numerator.ToString(baseVariable) + ")/(" + _denominator.ToString(baseVariable) + ")";
         }
 
         /// <summary>
@@ -749,7 +748,7 @@ namespace MathNet.Numerics
         int
         GetHashCode()
         {
-            return numerator.GetHashCode() ^ denominator.GetHashCode();
+            return _numerator.GetHashCode() ^ _denominator.GetHashCode();
         }
 
         /// <summary>
@@ -774,8 +773,8 @@ namespace MathNet.Numerics
         bool
         Equals(Rational rational)
         {
-            return numerator.Equals(rational.numerator)
-                && denominator.Equals(rational.denominator);
+            return _numerator.Equals(rational._numerator)
+                && _denominator.Equals(rational._denominator);
         }
 
         /// <summary>
@@ -816,10 +815,10 @@ namespace MathNet.Numerics
         int
         CompareTo(Rational rational)
         {
-            int n = numerator.CompareTo(rational.numerator);
+            int n = _numerator.CompareTo(rational._numerator);
             if(n == 0)
             {
-                n = denominator.CompareTo(rational.denominator);
+                n = _denominator.CompareTo(rational._denominator);
             }
 
             return n;

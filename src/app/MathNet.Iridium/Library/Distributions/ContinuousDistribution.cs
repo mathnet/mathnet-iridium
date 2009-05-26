@@ -35,7 +35,7 @@ using System.Collections.Generic;
 
 namespace MathNet.Numerics.Distributions
 {
-    using MathNet.Numerics.RandomSources;
+    using RandomSources;
 
     /// <summary>
     /// Declares common functionality for all continuous random number
@@ -70,7 +70,7 @@ namespace MathNet.Numerics.Distributions
         {
             if(random == null)
             {
-                throw new ArgumentNullException("generator", Properties.LocalStrings.ArgumentNull("generator"));
+                throw new ArgumentNullException("random", Properties.LocalStrings.ArgumentNull("generator"));
             }
 
             _random = random;

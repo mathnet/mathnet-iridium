@@ -28,8 +28,6 @@
 //-----------------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace MathNet.Numerics.RandomSources.OjectModel
 {
@@ -43,25 +41,25 @@ namespace MathNet.Numerics.RandomSources.OjectModel
         /// Represents the multiplier that computes a double-precision floating point number greater than or equal to 0.0 
         ///   and less than 1.0 when it gets applied to a nonnegative 32-bit signed integer.
         /// </summary>
-        const double Int32ToDoubleMultiplier = 1.0 / ((double)Int32.MaxValue + 1.0);
+        const double Int32ToDoubleMultiplier = 1.0 / (Int32.MaxValue + 1.0);
 
         /// <summary>
         /// Represents the multiplier that computes a double-precision floating point number greater than or equal to 0.0 
         ///   and less than 1.0 when it gets applied to a nonnegative 64-bit signed integer.
         /// </summary>
-        const double Int64ToDoubleMultiplier = 1.0 / ((double)Int64.MaxValue + 1.0);
+        const double Int64ToDoubleMultiplier = 1.0 / (Int64.MaxValue + 1.0);
 
         /// <summary>
         /// Represents the multiplier that computes a double-precision floating point number greater than or equal to 0.0 
         ///   and less than 1.0  when it gets applied to a 32-bit unsigned integer.
         /// </summary>
-        const double UInt32ToDoubleMultiplier = 1.0 / ((double)UInt32.MaxValue + 1.0);
+        const double UInt32ToDoubleMultiplier = 1.0 / (UInt32.MaxValue + 1.0);
 
         /// <summary>
         /// Represents the multiplier that computes a double-precision floating point number greater than or equal to 0.0 
         ///   and less than 1.0  when it gets applied to a 64-bit unsigned integer.
         /// </summary>
-        const double UInt64ToDoubleMultiplier = 1.0 / ((double)UInt64.MaxValue + 1.0);
+        const double UInt64ToDoubleMultiplier = 1.0 / (UInt64.MaxValue + 1.0);
 
         /// <summary>
         /// Stores an <see cref="Int32"/> used to generate up to 31 random <see cref="Boolean"/> values.
@@ -189,7 +187,7 @@ namespace MathNet.Numerics.RandomSources.OjectModel
                     Properties.LocalStrings.ArgumentOutOfRangeGreaterEqual("maxValue", 0));
             }
 
-            return (int)((double)(int)(NextFullRangeUInt32() >> 1) * Int32ToDoubleMultiplier * (double)maxValue);
+            return (int)((int)(NextFullRangeUInt32() >> 1) * Int32ToDoubleMultiplier * maxValue);
         }
 
         /// <summary>
@@ -229,14 +227,13 @@ namespace MathNet.Numerics.RandomSources.OjectModel
                 // The range is greater than Int32.MaxValue, so we have to use slower floating point arithmetic.
                 // Also all 32 random bits (uint) have to be used which again is slower (See comment in NextDouble()).
                 return minValue + (int)
-                    ((double)NextFullRangeUInt32() * UInt32ToDoubleMultiplier * ((double)maxValue - (double)minValue));
+                    (NextFullRangeUInt32() * UInt32ToDoubleMultiplier * ((double)maxValue - (double)minValue));
             }
             else
             {
                 // 31 random bits (int) will suffice which allows us to shift and cast to an int before the first multiplication and gain better performance.
                 // See comment in NextDouble().
-                return minValue + (int)
-                    ((double)(int)(NextFullRangeUInt32() >> 1) * Int32ToDoubleMultiplier * (double)range);
+                return minValue + (int)((int)(NextFullRangeUInt32() >> 1) * Int32ToDoubleMultiplier * range);
             }
         }
 
@@ -275,7 +272,7 @@ namespace MathNet.Numerics.RandomSources.OjectModel
         double
         NextDouble()
         {
-            return (double)(long)(NextFullRangeUInt64() >> 1) * Int64ToDoubleMultiplier;
+            return (long)(NextFullRangeUInt64() >> 1) * Int64ToDoubleMultiplier;
         }
 
         /// <summary>
@@ -304,7 +301,7 @@ namespace MathNet.Numerics.RandomSources.OjectModel
                     Properties.LocalStrings.ArgumentOutOfRangeGreaterEqual("maxValue", 0));
             }
 
-            return (double)(long)(NextFullRangeUInt64() >> 1) * Int64ToDoubleMultiplier * maxValue;
+            return (long)(NextFullRangeUInt64() >> 1) * Int64ToDoubleMultiplier * maxValue;
         }
 
         /// <summary>
@@ -353,7 +350,7 @@ namespace MathNet.Numerics.RandomSources.OjectModel
                 throw new ArgumentException(Properties.LocalStrings.ArgumentRangeLessEqual("minValue", "maxValue", "Double.MaxValue"));
             }
 
-            return minValue + ((double)(long)(NextFullRangeUInt64() >> 1) * Int64ToDoubleMultiplier * range);
+            return minValue + ((long)(NextFullRangeUInt64() >> 1) * Int64ToDoubleMultiplier * range);
         }
 
         /// <summary>

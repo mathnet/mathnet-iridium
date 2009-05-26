@@ -34,7 +34,7 @@ using System;
 
 namespace MathNet.Numerics.Distributions
 {
-    using MathNet.Numerics.RandomSources;
+    using RandomSources;
 
     /// <summary>
     /// Provides generation of pareto distributed random numbers.
@@ -48,7 +48,7 @@ namespace MathNet.Numerics.Distributions
     {
         double _location;
         double _shape;
-        double helper1;
+        double _helper1;
 
         #region Construction
         /// <summary>
@@ -57,7 +57,6 @@ namespace MathNet.Numerics.Distributions
         /// </summary>
         public
         ParetoDistribution()
-            : base()
         {
             SetDistributionParameters(1.0, 1.0);
         }
@@ -85,7 +84,6 @@ namespace MathNet.Numerics.Distributions
         ParetoDistribution(
             double location,
             double shape)
-            : base()
         {
             SetDistributionParameters(location, shape);
         }
@@ -126,7 +124,7 @@ namespace MathNet.Numerics.Distributions
 
             _location = location;
             _shape = shape;
-            helper1 = 1.0 / shape;
+            _helper1 = 1.0 / shape;
         }
 
         /// <summary>
@@ -255,7 +253,7 @@ namespace MathNet.Numerics.Distributions
         double
         NextDouble()
         {
-            return _location / Math.Pow(1.0 - this.RandomSource.NextDouble(), this.helper1);
+            return _location / Math.Pow(1.0 - this.RandomSource.NextDouble(), this._helper1);
         }
         #endregion
     }

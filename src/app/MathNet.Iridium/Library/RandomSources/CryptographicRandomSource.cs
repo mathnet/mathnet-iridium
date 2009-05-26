@@ -32,7 +32,7 @@ using System.Security.Cryptography;
 
 namespace MathNet.Numerics.RandomSources
 {
-    using MathNet.Numerics.RandomSources.OjectModel;
+    using OjectModel;
 
     /// <summary>
     /// Represents a cryptographically strong pseudo-random number generator.
@@ -47,7 +47,7 @@ namespace MathNet.Numerics.RandomSources
         /// <summary>
         /// Stores an instance of <see cref="System.Random"/> type that is used to generate random numbers.
         /// </summary>
-        RNGCryptoServiceProvider _generator;
+        readonly RNGCryptoServiceProvider _generator;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CryptographicRandomSource"/> class.

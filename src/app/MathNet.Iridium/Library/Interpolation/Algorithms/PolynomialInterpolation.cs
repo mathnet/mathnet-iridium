@@ -58,14 +58,6 @@ namespace MathNet.Numerics.Interpolation.Algorithms
         IList<double> _x;
 
         /// <summary>
-        /// Initializes a new instance of the PolynomialInterpolation class.
-        /// </summary>
-        public
-        PolynomialInterpolation()
-        {
-        }
-
-        /// <summary>
         /// True if the alorithm supports differentiation.
         /// </summary>
         /// <seealso cref="Differentiate"/>

@@ -27,8 +27,6 @@
 // </license>
 //-----------------------------------------------------------------------
 
-using System;
-
 namespace MathNet.Numerics
 {
     /// <summary>

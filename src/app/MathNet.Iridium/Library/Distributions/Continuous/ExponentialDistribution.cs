@@ -34,7 +34,7 @@ using System;
 
 namespace MathNet.Numerics.Distributions
 {
-    using MathNet.Numerics.RandomSources;
+    using RandomSources;
 
     /// <summary>
     /// Pseudo-random generation of exponentially distributed deviates.
@@ -66,7 +66,6 @@ namespace MathNet.Numerics.Distributions
         /// </summary>
         public
         ExponentialDistribution()
-            : base()
         {
             SetDistributionParameters(1.0);
         }
@@ -92,7 +91,6 @@ namespace MathNet.Numerics.Distributions
         /// </summary>
         public
         ExponentialDistribution(double rate)
-            : base()
         {
             SetDistributionParameters(rate);
         }

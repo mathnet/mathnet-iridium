@@ -39,7 +39,7 @@ namespace MathNet.Numerics.Transformations
     /// </summary>
     public class ComplexFourierTransformation
     {
-        InternalFFT _fft;
+        readonly InternalFFT _fft;
         TransformationConvention _convention;
 
         /// <summary>
@@ -209,7 +209,7 @@ namespace MathNet.Numerics.Transformations
         {
             if(Fn.CeilingToPowerOf2(samples.Length) != samples.Length)
             {
-                throw new ArgumentException(Properties.LocalStrings.ArgumentPowerOfTwo, "samplePairs");
+                throw new ArgumentException(Properties.LocalStrings.ArgumentPowerOfTwo, "samples");
             }
 
             double[] samplePairs = new double[samples.Length << 1];

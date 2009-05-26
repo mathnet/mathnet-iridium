@@ -28,13 +28,10 @@
 //-----------------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 using NUnit.Framework;
 
 namespace Iridium.Test.InterpolationTests
 {
-    using MathNet.Numerics;
     using MathNet.Numerics.Distributions;
     using MathNet.Numerics.Interpolation;
     using MathNet.Numerics.Interpolation.Algorithms;
@@ -225,7 +222,7 @@ namespace Iridium.Test.InterpolationTests
             t = new double[40];
             x = new double[40];
 
-            double step = 10.0 / 39.0;
+            const double step = 10.0 / 39.0;
             for(int i = 0; i < t.Length; i++)
             {
                 double tt = -5 + (i * step);
@@ -530,9 +527,9 @@ namespace Iridium.Test.InterpolationTests
             }
         }
 
-        void BuildLinearCase(int start, int stop, out double[] x, out double[] y, out double[] xtest, out double[] ytest)
+        static void BuildLinearCase(int start, int stop, out double[] x, out double[] y, out double[] xtest, out double[] ytest)
         {
-            const double YOffset = 2.0;
+            const double yOffset = 2.0;
             int samples = stop - start + 1;
             ContinuousUniformDistribution uniform = new ContinuousUniformDistribution();
 
@@ -543,7 +540,7 @@ namespace Iridium.Test.InterpolationTests
             {
                 int z = start + i;
                 x[i] = z;
-                y[i] = z + YOffset; // arbitrary small y-axis offset
+                y[i] = z + yOffset; // arbitrary small y-axis offset
             }
 
             // build linear test vectors randomly between the sample points
@@ -553,7 +550,7 @@ namespace Iridium.Test.InterpolationTests
             {
                 xtest[0] = start - uniform.NextDouble();
                 xtest[1] = start + uniform.NextDouble();
-                ytest[0] = ytest[1] = start + YOffset;
+                ytest[0] = ytest[1] = start + yOffset;
             }
             else
             {
@@ -561,7 +558,7 @@ namespace Iridium.Test.InterpolationTests
                 {
                     double z = (i - 1) + uniform.NextDouble();
                     xtest[i] = z;
-                    ytest[i] = z + YOffset;
+                    ytest[i] = z + yOffset;
                 }
             }
         }

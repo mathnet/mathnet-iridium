@@ -31,7 +31,7 @@ using System;
 
 namespace MathNet.Numerics.Distributions
 {
-    using MathNet.Numerics.RandomSources;
+    using RandomSources;
 
     /// <summary>
     /// Provides generation of levy skew alpha-stable distributed random numbers.
@@ -60,7 +60,6 @@ namespace MathNet.Numerics.Distributions
         /// </summary>
         public
         StableDistribution()
-            : base()
         {
             SetDistributionParameters(0.0, 1.0, 1.0, 0.0);
             InitDistributions();
@@ -96,7 +95,6 @@ namespace MathNet.Numerics.Distributions
             double scale,
             double exponent,
             double skewness)
-            : base()
         {
             SetDistributionParameters(location, scale, exponent, skewness);
             InitDistributions();
@@ -351,13 +349,11 @@ namespace MathNet.Numerics.Distributions
                 double factor2 = Math.Pow(Math.Cos(randTheta - angle) / randW, (1 - _exponent) / _exponent);
                 return _factor * factor1 * factor2;
             }
-            else
-            {
-                double part1 = Constants.Pi_2 + (_skewness * randTheta);
-                double summand = part1 * Math.Tan(randTheta);
-                double subtrahend = _skewness * Math.Log(Constants.Pi_2 * randW * Math.Cos(randTheta) / part1);
-                return (2.0 / Math.PI) * (summand - subtrahend);
-            }
+
+            double part1 = Constants.Pi_2 + (_skewness * randTheta);
+            double summand = part1 * Math.Tan(randTheta);
+            double subtrahend = _skewness * Math.Log(Constants.Pi_2 * randW * Math.Cos(randTheta) / part1);
+            return (2.0 / Math.PI) * (summand - subtrahend);
         }
         #endregion
     }

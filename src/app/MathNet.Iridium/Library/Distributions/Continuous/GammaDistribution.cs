@@ -34,7 +34,7 @@ using System;
 
 namespace MathNet.Numerics.Distributions
 {
-    using MathNet.Numerics.RandomSources;
+    using RandomSources;
 
     /// <summary>
     /// Provides generation of gamma distributed random numbers.
@@ -60,7 +60,6 @@ namespace MathNet.Numerics.Distributions
         /// </summary>
         public
         GammaDistribution()
-            : base()
         {
             SetDistributionParameters(1.0, 1.0);
         }
@@ -88,7 +87,6 @@ namespace MathNet.Numerics.Distributions
         GammaDistribution(
             double alpha,
             double theta)
-            : base()
         {
             SetDistributionParameters(alpha, theta);
         }
@@ -247,8 +245,8 @@ namespace MathNet.Numerics.Distributions
             double xi, eta, gen1, gen2;
             do
             {
-                gen1 = 1.0 - this.RandomSource.NextDouble();
-                gen2 = 1.0 - this.RandomSource.NextDouble();
+                gen1 = 1.0 - RandomSource.NextDouble();
+                gen2 = 1.0 - RandomSource.NextDouble();
                 if(gen1 <= _helper2)
                 {
                     xi = Math.Pow(gen1 / _helper2, 1.0 / _helper1);
@@ -264,7 +262,7 @@ namespace MathNet.Numerics.Distributions
 
             for(int i = 1; i <= _alpha; i++)
             {
-                xi -= Math.Log(this.RandomSource.NextDouble());
+                xi -= Math.Log(RandomSource.NextDouble());
             }
 
             return xi * _theta;

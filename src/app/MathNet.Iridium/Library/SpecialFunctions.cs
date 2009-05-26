@@ -34,7 +34,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 using MathNet.Numerics.SpecialFunctions.Algorithms;
 
@@ -786,62 +785,62 @@ namespace MathNet.Numerics
         {
             if(x < -1.0 || x > 1.0)
             {
-                throw new ArgumentOutOfRangeException("p", x, Properties.LocalStrings.ArgumentInIntervalXYInclusive(-1, 1));
+                throw new ArgumentOutOfRangeException("x", x, Properties.LocalStrings.ArgumentInIntervalXYInclusive(-1, 1));
             }
 
             x = 0.5 * (x + 1.0);
 
             // Define break-points.
-            double plow = 0.02425;
-            double phigh = 1 - plow;
+            const double Plow = 0.02425;
+            const double Phigh = 1 - Plow;
 
             double q;
 
             // Rational approximation for lower region:
-            if(x < plow)
+            if(x < Plow)
             {
                 q = Math.Sqrt(-2 * Math.Log(x));
-                return ((((((((((erfinv_c[0] * q) + erfinv_c[1]) * q) + erfinv_c[2]) * q) + erfinv_c[3]) * q) + erfinv_c[4]) * q) + erfinv_c[5]) /
-                    ((((((((erfinv_d[0] * q) + erfinv_d[1]) * q) + erfinv_d[2]) * q) + erfinv_d[3]) * q) + 1)
+                return ((((((((((ErfInvC[0] * q) + ErfInvC[1]) * q) + ErfInvC[2]) * q) + ErfInvC[3]) * q) + ErfInvC[4]) * q) + ErfInvC[5]) /
+                    ((((((((ErfInvD[0] * q) + ErfInvD[1]) * q) + ErfInvD[2]) * q) + ErfInvD[3]) * q) + 1)
                     * Constants.Sqrt1_2;
             }
 
             // Rational approximation for upper region:
-            if(phigh < x)
+            if(Phigh < x)
             {
                 q = Math.Sqrt(-2 * Math.Log(1 - x));
-                return -((((((((((erfinv_c[0] * q) + erfinv_c[1]) * q) + erfinv_c[2]) * q) + erfinv_c[3]) * q) + erfinv_c[4]) * q) + erfinv_c[5]) /
-                    ((((((((erfinv_d[0] * q) + erfinv_d[1]) * q) + erfinv_d[2]) * q) + erfinv_d[3]) * q) + 1)
+                return -((((((((((ErfInvC[0] * q) + ErfInvC[1]) * q) + ErfInvC[2]) * q) + ErfInvC[3]) * q) + ErfInvC[4]) * q) + ErfInvC[5]) /
+                    ((((((((ErfInvD[0] * q) + ErfInvD[1]) * q) + ErfInvD[2]) * q) + ErfInvD[3]) * q) + 1)
                     * Constants.Sqrt1_2;
             }
 
             // Rational approximation for central region:
             q = x - 0.5;
             double r = q * q;
-            return ((((((((((erfinv_a[0] * r) + erfinv_a[1]) * r) + erfinv_a[2]) * r) + erfinv_a[3]) * r) + erfinv_a[4]) * r) + erfinv_a[5]) * q /
-                ((((((((((erfinv_b[0] * r) + erfinv_b[1]) * r) + erfinv_b[2]) * r) + erfinv_b[3]) * r) + erfinv_b[4]) * r) + 1)
+            return ((((((((((ErfInvA[0] * r) + ErfInvA[1]) * r) + ErfInvA[2]) * r) + ErfInvA[3]) * r) + ErfInvA[4]) * r) + ErfInvA[5]) * q /
+                ((((((((((ErfInvB[0] * r) + ErfInvB[1]) * r) + ErfInvB[2]) * r) + ErfInvB[3]) * r) + ErfInvB[4]) * r) + 1)
                 * Constants.Sqrt1_2;
         }
 
-        private static double[] erfinv_a = {
+        private static readonly double[] ErfInvA = {
             -3.969683028665376e+01, 2.209460984245205e+02,
             -2.759285104469687e+02, 1.383577518672690e+02,
             -3.066479806614716e+01, 2.506628277459239e+00
             };
 
-        private static double[] erfinv_b = {
+        private static readonly double[] ErfInvB = {
             -5.447609879822406e+01, 1.615858368580409e+02,
             -1.556989798598866e+02, 6.680131188771972e+01,
             -1.328068155288572e+01
             };
 
-        private static double[] erfinv_c = {
+        private static readonly double[] ErfInvC = {
             -7.784894002430293e-03, -3.223964580411365e-01,
             -2.400758277161838e+00, -2.549732539343734e+00,
             4.374664141464968e+00, 2.938163982698783e+00
             };
 
-        private static double[] erfinv_d = {
+        private static readonly double[] ErfInvD = {
             7.784695709041462e-03, 3.224671290700398e-01,
             2.445134137142996e+00, 3.754408661907416e+00
             };

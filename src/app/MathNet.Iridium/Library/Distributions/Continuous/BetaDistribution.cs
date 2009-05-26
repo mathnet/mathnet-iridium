@@ -34,7 +34,7 @@ using System;
 
 namespace MathNet.Numerics.Distributions
 {
-    using MathNet.Numerics.RandomSources;
+    using RandomSources;
 
     /// <summary>
     /// Provides generation of beta distributed random numbers.
@@ -46,12 +46,12 @@ namespace MathNet.Numerics.Distributions
     /// </remarks>
     public sealed class BetaDistribution : ContinuousDistribution
     {
+        readonly GammaDistribution _gammaAlpha;
+        readonly GammaDistribution _gammaBeta;
+
         double _alpha;
         double _beta;
         double _lnbetaAlphaBeta;
-
-        GammaDistribution _gammaAlpha;
-        GammaDistribution _gammaBeta;
 
         #region Construction
         /// <summary>
@@ -60,10 +60,9 @@ namespace MathNet.Numerics.Distributions
         /// </summary>
         public
         BetaDistribution()
-            : base()
         {
-            _gammaAlpha = new GammaDistribution(this.RandomSource);
-            _gammaBeta = new GammaDistribution(this.RandomSource);
+            _gammaAlpha = new GammaDistribution(RandomSource);
+            _gammaBeta = new GammaDistribution(RandomSource);
             SetDistributionParameters(1.0, 1.0);
         }
 
@@ -92,10 +91,9 @@ namespace MathNet.Numerics.Distributions
         BetaDistribution(
             double alpha,
             double beta)
-            : base()
         {
-            _gammaAlpha = new GammaDistribution(this.RandomSource);
-            _gammaBeta = new GammaDistribution(this.RandomSource);
+            _gammaAlpha = new GammaDistribution(RandomSource);
+            _gammaBeta = new GammaDistribution(RandomSource);
             SetDistributionParameters(alpha, beta);
         }
         #endregion

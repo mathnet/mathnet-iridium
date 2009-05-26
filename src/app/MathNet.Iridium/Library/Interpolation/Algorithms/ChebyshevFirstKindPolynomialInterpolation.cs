@@ -46,7 +46,7 @@ namespace MathNet.Numerics.Interpolation.Algorithms
     public class ChebyshevFirstKindPolynomialInterpolation :
         IInterpolationMethod
     {
-        BarycentricInterpolation _barycentric;
+        readonly BarycentricInterpolation _barycentric;
         double _transformSummand;
         double _transformFactor;
 

@@ -32,7 +32,7 @@ using System;
 
 namespace MathNet.Numerics.Distributions
 {
-    using MathNet.Numerics.RandomSources;
+    using RandomSources;
 
     /// <summary>
     /// Pseudo-random generation of standard distributed deviates.
@@ -67,7 +67,6 @@ namespace MathNet.Numerics.Distributions
         /// </summary>
         public
         StandardDistribution()
-            : base()
         {
         }
 
@@ -187,27 +186,24 @@ namespace MathNet.Numerics.Distributions
                 _extraNormal = null;
                 return extraNormalCpy;
             }
-            else
+
+            // Generating two new gaussian deviates
+            double rsq, v1, v2;
+
+            // We need a non-zero random point inside the unit circle.
+            do
             {
-                /* Generating two new gaussian deviates */
-
-                double fac, rsq, v1, v2;
-
-                // We need a non-zero random point inside the unit circle.
-                do
-                {
-                    v1 = (2.0 * this.RandomSource.NextDouble()) - 1.0;
-                    v2 = (2.0 * this.RandomSource.NextDouble()) - 1.0;
-                    rsq = (v1 * v1) + (v2 * v2);
-                }
-                while(rsq > 1.0 || rsq == 0);
-
-                // Make the Box-Muller transformation
-                fac = Math.Sqrt(-2.0 * Math.Log(rsq) / rsq);
-
-                _extraNormal = v1 * fac;
-                return v2 * fac;
+                v1 = (2.0 * RandomSource.NextDouble()) - 1.0;
+                v2 = (2.0 * RandomSource.NextDouble()) - 1.0;
+                rsq = (v1 * v1) + (v2 * v2);
             }
+            while(rsq > 1.0 || rsq == 0);
+
+            // Make the Box-Muller transformation
+            double fac = Math.Sqrt(-2.0 * Math.Log(rsq) / rsq);
+
+            _extraNormal = v1 * fac;
+            return v2 * fac;
         }
         #endregion
     }

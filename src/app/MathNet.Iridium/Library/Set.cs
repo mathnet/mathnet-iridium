@@ -191,7 +191,7 @@ namespace MathNet.Numerics
         /// </summary>
         public event EventHandler<SetChangedEventArgs<T>> OnSetChanged;
         
-        ReadOnlySet<T> readonlyWrapper;
+        ReadOnlySet<T> _readonlyWrapper;
 
         /// <summary>
         /// Initializes a new instance of the Set class.
@@ -272,12 +272,12 @@ namespace MathNet.Numerics
         {
             get
             {
-                if(readonlyWrapper == null)
+                if(_readonlyWrapper == null)
                 {
-                    readonlyWrapper = CreateNewReadOnlyWrapper(Items);
+                    _readonlyWrapper = CreateNewReadOnlyWrapper(Items);
                 }
 
-                return readonlyWrapper;
+                return _readonlyWrapper;
             }
         }
 

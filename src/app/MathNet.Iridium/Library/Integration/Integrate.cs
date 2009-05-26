@@ -27,20 +27,16 @@
 // </license>
 //-----------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-using System.Text;
-
 namespace MathNet.Numerics.Integration
 {
-    using MathNet.Numerics.Integration.Algorithms;
+    using Algorithms;
 
     /// <summary>
     /// Numeric Integration (Quadrature).
     /// </summary>
     public static class Integrate
     {
-        static DoubleExponentialTransformation det = new DoubleExponentialTransformation();
+        static readonly DoubleExponentialTransformation Det = new DoubleExponentialTransformation();
 
         /// <summary>
         /// Approximation of the definite interval of an analytic smooth function on a closed interval.
@@ -57,7 +53,7 @@ namespace MathNet.Numerics.Integration
             double intervalEnd,
             double targetAbsoluteError)
         {
-            return det.Integrate(
+            return Det.Integrate(
                 f,
                 intervalBegin,
                 intervalEnd,
@@ -77,7 +73,7 @@ namespace MathNet.Numerics.Integration
             double intervalBegin,
             double intervalEnd)
         {
-            return det.Integrate(
+            return Det.Integrate(
                 f,
                 intervalBegin,
                 intervalEnd,

@@ -28,8 +28,6 @@
 //-----------------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 using NUnit.Framework;
 
 namespace Iridium.Test.InfrastructureTests
@@ -65,9 +63,9 @@ namespace Iridium.Test.InfrastructureTests
         [Test]
         public void TestFrameworkValueTypeEquality()
         {
-            int one1 = 1;
-            int one2 = 1;
-            int two = 2;
+            const int one1 = 1;
+            const int one2 = 1;
+            const int two = 2;
 
             // remember, boxing!
             Assert.That(object.ReferenceEquals(one1, one1), Is.False);
@@ -86,8 +84,8 @@ namespace Iridium.Test.InfrastructureTests
         {
             IFormatProvider format = System.Globalization.CultureInfo.InvariantCulture;
 
-            double max = double.MaxValue;
-            double min = double.MinValue;
+            const double max = double.MaxValue;
+            const double min = double.MinValue;
 
             Assert.That(Number.AlmostEqual(0.0, 0.0, 0), "A");
             Assert.That(Number.AlmostEqual(0.0, 0.0, 50), "B");
@@ -113,7 +111,7 @@ namespace Iridium.Test.InfrastructureTests
             Assert.That(Number.AlmostEqual(double.PositiveInfinity, double.PositiveInfinity, 25), "Q");
         }
 
-        void Helper_TestAlmostEqualityForGenericType<T>(
+        static void Helper_TestAlmostEqualityForGenericType<T>(
             T value,
             T valueClone,
             T completelyDifferentValue,
@@ -263,8 +261,7 @@ namespace Iridium.Test.InfrastructureTests
         [Test, Repeat(5)]
         public void TestAlmostEquals_ComplexVector()
         {
-            IContinuousGenerator dist = new ContinuousUniformDistribution();
-            ComplexVector a1 = ComplexVector.Create(Vector.Random(3, dist), Vector.Random(3, dist));
+            ComplexVector a1 = ComplexVector.Random(3, new ContinuousUniformDistribution());
             ComplexVector a2 = a1.Clone();
             ComplexVector b = -a1;
             ComplexVector c = a1 * (1.0 + (1e+10 * Number.PositiveEpsilonOf(1.0)));
@@ -304,8 +301,7 @@ namespace Iridium.Test.InfrastructureTests
         [Test, Repeat(5)]
         public void TestAlmostEquals_ComplexPolynomial()
         {
-            IContinuousGenerator dist = new ContinuousUniformDistribution();
-            ComplexPolynomial a1 = new ComplexPolynomial(ComplexVector.Create(Vector.Random(5, dist), Vector.Random(5, dist)));
+            ComplexPolynomial a1 = new ComplexPolynomial(ComplexVector.Random(5, new ContinuousUniformDistribution()));
             ComplexPolynomial a2 = a1.Clone();
             ComplexPolynomial b = -a1;
             ComplexPolynomial c = a1 * (1.0 + (1e+10 * Number.PositiveEpsilonOf(1.0)));

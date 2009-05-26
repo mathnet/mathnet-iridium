@@ -1294,7 +1294,7 @@ namespace MathNet.Numerics.LinearAlgebra
             double yr,
             double yi)
         {
-            /* TODO (cdr, 2008-03-11): Refactor */
+            /* TODO (ruegg, 2008-03-11): Refactor */
 
             double r, d;
             if(Math.Abs(yr) > Math.Abs(yi))

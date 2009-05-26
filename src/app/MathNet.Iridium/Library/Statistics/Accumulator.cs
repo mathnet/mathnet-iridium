@@ -67,21 +67,21 @@ namespace MathNet.Numerics.Statistics
         /// <summary>
         /// Sum of the values added to the accumulator.
         /// </summary>
-        private double sum;
+        private double _sum;
 
         /// <summary>
         /// Sum of the square of the values added to the accumulator.
         /// </summary>
-        private double squaredSum;
+        private double _squaredSum;
 
         /// <summary>
         /// Number of values added to the accumulator.
         /// </summary>
-        private int count;
+        private int _count;
 
         // Variables required for numerically more stable way of computing the mean and variance:
-        private double mean;
-        private double varianceSum;
+        private double _mean;
+        private double _varianceSum;
 
         /// <summary>
         /// Initializes a new instance of the Accumulator class.
@@ -125,21 +125,21 @@ namespace MathNet.Numerics.Statistics
         /// </summary>
         public void Add(double value)
         {
-            sum += value;
-            squaredSum += value * value;
+            _sum += value;
+            _squaredSum += value * value;
 
-            count++;
+            _count++;
 
-            if(count == 1)
+            if(_count == 1)
             {
-                mean = value;
-                varianceSum = 0;
+                _mean = value;
+                _varianceSum = 0;
             }
             else
             {
-                double meanPrevious = mean;
-                mean = meanPrevious + ((value - meanPrevious) / count);
-                varianceSum = varianceSum + ((value - meanPrevious) * (value - mean));
+                double meanPrevious = _mean;
+                _mean = meanPrevious + ((value - meanPrevious) / _count);
+                _varianceSum = _varianceSum + ((value - meanPrevious) * (value - _mean));
             }
         }
 
@@ -187,11 +187,11 @@ namespace MathNet.Numerics.Statistics
         /// </summary>
         public void Clear()
         {
-            sum = 0;
-            squaredSum = 0;
-            mean = 0;
-            varianceSum = 0;
-            count = 0;
+            _sum = 0;
+            _squaredSum = 0;
+            _mean = 0;
+            _varianceSum = 0;
+            _count = 0;
         }
 
         /// <summary>
@@ -205,19 +205,19 @@ namespace MathNet.Numerics.Statistics
         /// </remarks>
         public void Remove(double value)
         {
-            if(count <= 0)
+            if(_count <= 0)
             {
                 throw new InvalidOperationException(Properties.LocalStrings.InvalidOperationAccumulatorEmpty);
             }
 
-            sum -= value;
-            squaredSum -= value * value;
+            _sum -= value;
+            _squaredSum -= value * value;
 
-            double meanPrevious = mean;
-            mean = ((meanPrevious * count) - value) / (count - 1);
-            varianceSum = varianceSum - ((value - mean) * (value - meanPrevious));
+            double meanPrevious = _mean;
+            _mean = ((meanPrevious * _count) - value) / (_count - 1);
+            _varianceSum = _varianceSum - ((value - _mean) * (value - meanPrevious));
 
-            count--;
+            _count--;
         }
 
         /// <summary>
@@ -265,7 +265,7 @@ namespace MathNet.Numerics.Statistics
         /// </summary>
         public int Count
         {
-            get { return count; }
+            get { return _count; }
         }
 
         /// <summary>
@@ -273,7 +273,7 @@ namespace MathNet.Numerics.Statistics
         /// </summary>
         public double Sum
         {
-            get { return sum; }
+            get { return _sum; }
         }
 
         /// <summary>
@@ -281,7 +281,7 @@ namespace MathNet.Numerics.Statistics
         /// </summary>
         public double SquaredSum
         {
-            get { return squaredSum; }
+            get { return _squaredSum; }
         }
 
         /// <summary>
@@ -291,12 +291,12 @@ namespace MathNet.Numerics.Statistics
         {
             get
             {
-                if(count <= 0)
+                if(_count <= 0)
                 {
                     throw new InvalidOperationException(Properties.LocalStrings.InvalidOperationAccumulatorEmpty);
                 }
 
-                return mean;
+                return _mean;
             }
         }
 
@@ -307,12 +307,12 @@ namespace MathNet.Numerics.Statistics
         {
             get
             {
-                if(count <= 0)
+                if(_count <= 0)
                 {
                     throw new InvalidOperationException(Properties.LocalStrings.InvalidOperationAccumulatorEmpty);
                 }
 
-                return squaredSum / count;
+                return _squaredSum / _count;
             }
         }
 
@@ -323,12 +323,12 @@ namespace MathNet.Numerics.Statistics
         {
             get
             {
-                if(count <= 0)
+                if(_count <= 0)
                 {
                     throw new InvalidOperationException(Properties.LocalStrings.InvalidOperationAccumulatorEmpty);
                 }
 
-                return varianceSum / (count - 1);
+                return _varianceSum / (_count - 1);
             }
         }
 
@@ -351,12 +351,12 @@ namespace MathNet.Numerics.Statistics
         {
             get
             {
-                if(count <= 0)
+                if(_count <= 0)
                 {
                     throw new InvalidOperationException(Properties.LocalStrings.InvalidOperationAccumulatorEmpty);
                 }
 
-                return Sigma / Math.Sqrt(count);
+                return Sigma / Math.Sqrt(_count);
             }
         }
     }

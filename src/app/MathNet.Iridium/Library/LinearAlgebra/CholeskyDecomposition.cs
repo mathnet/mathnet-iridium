@@ -51,7 +51,7 @@ namespace MathNet.Numerics.LinearAlgebra
         readonly bool _isSymmetricPositiveDefinite;
 
         /// <summary>Array for internal storage of decomposition.</summary>
-        Matrix _l;
+        readonly Matrix _l;
 
         /// <summary>
         /// Initializes a new instance of the CholeskyDecomposition class,

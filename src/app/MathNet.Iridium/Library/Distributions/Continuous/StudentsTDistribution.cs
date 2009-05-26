@@ -31,7 +31,7 @@ using System;
 
 namespace MathNet.Numerics.Distributions
 {
-    using MathNet.Numerics.RandomSources;
+    using RandomSources;
 
     /// <summary>
     /// Provides generation of student's t-distributed random numbers.
@@ -42,14 +42,14 @@ namespace MathNet.Numerics.Distributions
     /// </remarks>
     public sealed class StudentsTDistribution : ContinuousDistribution
     {
+        readonly StandardDistribution _standardDistribution;
+        readonly ChiSquareDistribution _chiSquareDistribution;
+
         int _degreesOfFreedom;
 
         double _factor;
         double _exponent;
         double _summand;
-
-        StandardDistribution _standardDistribution;
-        ChiSquareDistribution _chiSquareDistribution;
 
         #region Construction
 
@@ -59,7 +59,6 @@ namespace MathNet.Numerics.Distributions
         /// </summary>
         public
         StudentsTDistribution()
-            : base()
         {
             _standardDistribution = new StandardDistribution(RandomSource);
             _chiSquareDistribution = new ChiSquareDistribution(RandomSource);
@@ -90,7 +89,6 @@ namespace MathNet.Numerics.Distributions
         /// <param name="degreesOfFreedom">nu-parameter</param>
         public
         StudentsTDistribution(int degreesOfFreedom)
-            : base()
         {
             _standardDistribution = new StandardDistribution(RandomSource);
             _chiSquareDistribution = new ChiSquareDistribution(RandomSource);

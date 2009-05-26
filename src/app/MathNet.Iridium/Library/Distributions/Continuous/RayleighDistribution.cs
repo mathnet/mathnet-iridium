@@ -32,7 +32,7 @@ using System.Collections.Generic;
 
 namespace MathNet.Numerics.Distributions
 {
-    using MathNet.Numerics.RandomSources;
+    using RandomSources;
 
     /// <summary>
     /// Rayleigh distribution, including density functions and pseudo-random Rayleigh number generation.
@@ -56,7 +56,6 @@ namespace MathNet.Numerics.Distributions
         /// </summary>
         public
         RayleighDistribution()
-            : base()
         {
             SetDistributionParameters(1.0);
         }
@@ -82,7 +81,6 @@ namespace MathNet.Numerics.Distributions
         /// </summary>
         public
         RayleighDistribution(double sigma)
-            : base()
         {
             SetDistributionParameters(sigma);
         }

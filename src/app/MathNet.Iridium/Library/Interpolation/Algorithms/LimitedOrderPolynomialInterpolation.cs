@@ -180,8 +180,6 @@ namespace MathNet.Numerics.Interpolation.Algorithms
             double[] c = new double[_effectiveOrder];
             double[] d = new double[_effectiveOrder];
             int ns = closestIndex - offset;
-            double den, ho, hp;
-            double x = 0;
 
             if(Number.AlmostEqual(_samples.GetT(closestIndex), t))
             {
@@ -194,14 +192,14 @@ namespace MathNet.Numerics.Interpolation.Algorithms
                 d[i] = c[i];
             }
 
-            x = _samples.GetX(offset + ns--);
+            double x = _samples.GetX(offset + ns--);
             for(int level = 1; level < _effectiveOrder; level++)
             {
                 for(int i = 0; i < _effectiveOrder - level; i++)
                 {
-                    ho = _samples.GetT(offset + i) - t;
-                    hp = _samples.GetT(offset + i + level) - t;
-                    den = (c[i + 1] - d[i]) / (ho - hp);
+                    double ho = _samples.GetT(offset + i) - t;
+                    double hp = _samples.GetT(offset + i + level) - t;
+                    double den = (c[i + 1] - d[i]) / (ho - hp);
                     d[i] = hp * den;
                     c[i] = ho * den;
                 }

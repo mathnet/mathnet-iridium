@@ -35,7 +35,7 @@ using System;
 
 namespace MathNet.Numerics.Distributions
 {
-    using MathNet.Numerics.RandomSources;
+    using RandomSources;
 
     /// <summary>
     /// Provides generation of hypergeometric distributed random numbers.
@@ -59,7 +59,6 @@ namespace MathNet.Numerics.Distributions
         /// </summary>
         public
         HypergeometricDistribution()
-            : base()
         {
             SetDistributionParameters(2, 1, 1);
         }
@@ -88,7 +87,6 @@ namespace MathNet.Numerics.Distributions
             int populationSize,
             int favoredItems,
             int numberOfSamples)
-            : base()
         {
             SetDistributionParameters(populationSize, favoredItems, numberOfSamples);
         }
@@ -140,7 +138,7 @@ namespace MathNet.Numerics.Distributions
             _N = populationSize;
             _M = favoredItems;
             _n = numberOfSamples;
-            _p = (double)favoredItems / (double)populationSize;
+            _p = favoredItems / (double)populationSize;
         }
 
         /// <summary>
@@ -241,15 +239,12 @@ namespace MathNet.Numerics.Distributions
         double
         CumulativeDistribution(double x)
         {
-            double cdf;
-            double pdf;
-
-            pdf = Math.Exp(Fn.BinomialCoefficientLn(_N - _M, _n) - Fn.BinomialCoefficientLn(_N, _n));
-            cdf = pdf;
+            double pdf = Math.Exp(Fn.BinomialCoefficientLn(_N - _M, _n) - Fn.BinomialCoefficientLn(_N, _n));
+            double cdf = pdf;
 
             for(int xx = 0; xx <= x - 1; xx++)
             {
-                pdf *= (double)((_M - xx) * (_n - xx)) / (double)((xx + 1) * (_N - _M - _n + xx + 1));
+                pdf *= (_M - xx) * (_n - xx) / (double)((xx + 1) * (_N - _M - _n + xx + 1));
                 cdf += pdf;
             }
 

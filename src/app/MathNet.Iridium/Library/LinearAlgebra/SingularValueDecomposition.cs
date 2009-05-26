@@ -722,7 +722,7 @@ namespace MathNet.Numerics.LinearAlgebra
         double
         Norm2()
         {
-            // TODO (cdr, 2008-03-11): Change to property
+            // TODO (ruegg, 2008-03-11): Change to property
             return _singular[0];
         }
 
@@ -732,7 +732,7 @@ namespace MathNet.Numerics.LinearAlgebra
         double
         Condition()
         {
-            // TODO (cdr, 2008-03-11): Change to property
+            // TODO (ruegg, 2008-03-11): Change to property
             return _singular[0] / _singular[Math.Min(m, n) - 1];
         }
 
@@ -741,7 +741,7 @@ namespace MathNet.Numerics.LinearAlgebra
         int
         Rank()
         {
-            // TODO (cdr, 2008-03-11): Change to property
+            // TODO (ruegg, 2008-03-11): Change to property
             return _rankOnDemand.Compute();
         }
 

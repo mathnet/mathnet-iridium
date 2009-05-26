@@ -28,8 +28,6 @@
 //-----------------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 using NUnit.Framework;
 
 namespace Iridium.Test.InfrastructureTests
@@ -83,11 +81,11 @@ namespace Iridium.Test.InfrastructureTests
         [Test]
         public void TestIncrementDecrementStep()
         {
-            double x0 = 1e-100;
-            double x1 = 1e+0;
-            double x2 = 1e+100;
-            double x3 = 1e+200;
-            double x4 = -1e+100;
+            const double x0 = 1e-100;
+            const double x1 = 1e+0;
+            const double x2 = 1e+100;
+            const double x3 = 1e+200;
+            const double x4 = -1e+100;
 
             double y0 = Number.Increment(x0) - x0;
             double y1 = Number.Increment(x1) - x1;

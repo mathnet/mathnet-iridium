@@ -30,11 +30,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace MathNet.Numerics
 {
-    using MathNet.Numerics.RandomSources;
+    using RandomSources;
 
     /// <summary>
     /// Static DoublePrecision Combinatorics Helper Class
@@ -134,16 +133,21 @@ namespace MathNet.Numerics
 
         private struct IndexedValue : IComparable<IndexedValue>
         {
-            internal int Index;
-            internal double Value;
+            readonly int _index;
+            readonly double _value;
 
             public
             IndexedValue(
                 int index,
                 double value)
             {
-                this.Index = index;
-                this.Value = value;
+                _index = index;
+                _value = value;
+            }
+
+            public int Index
+            {
+                get { return _index; }
             }
 
             public
@@ -151,7 +155,7 @@ namespace MathNet.Numerics
             CompareTo(
                 IndexedValue other)
             {
-                return this.Value.CompareTo(other.Value);
+                return _value.CompareTo(other._value);
             }
         }
 
@@ -163,7 +167,7 @@ namespace MathNet.Numerics
         {
             if(n < 0)
             {
-                throw new ArgumentOutOfRangeException("size", n, Properties.LocalStrings.ArgumentNotNegative);
+                throw new ArgumentOutOfRangeException("n", n, Properties.LocalStrings.ArgumentNotNegative);
             }
 
             IndexedValue[] indexedValues = new IndexedValue[n];
@@ -223,17 +227,15 @@ namespace MathNet.Numerics
 
                 return selection;
             }
-            else 
-            {
-                // based on permutation
-                int[] permutation = RandomPermutation(n);
-                for(int i = 0; i < k; i++)
-                {
-                    selection[permutation[i]] = true;
-                }
 
-                return selection;
+            // based on permutation
+            int[] permutation = RandomPermutation(n);
+            for(int i = 0; i < k; i++)
+            {
+                selection[permutation[i]] = true;
             }
+
+            return selection;
         }
 
         /// <summary>Randomly selects k of n elements with repetition but without order.</summary>

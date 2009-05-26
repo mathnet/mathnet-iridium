@@ -243,7 +243,7 @@ namespace MathNet.Numerics.LinearAlgebra
         double
         Determinant()
         {
-            // TODO (cdr, 2008-03-11): Change to property
+            // TODO (ruegg, 2008-03-11): Change to property
             return _determinantOnDemand.Compute();
         }
 

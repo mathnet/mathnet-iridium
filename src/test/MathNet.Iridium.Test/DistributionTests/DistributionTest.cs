@@ -27,21 +27,17 @@
 // </license>
 //-----------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-using System.Text;
 using NUnit.Framework;
 
 namespace Iridium.Test.DistributionTests
 {
-    using MathNet.Numerics;
     using MathNet.Numerics.Distributions;
 
     public sealed class DistributionShape
     {
         readonly double _scale, _offset;
         readonly int _buckets;
-        int[] _shape;
+        readonly int[] _shape;
         int _underflow, _overflow;
 
         private DistributionShape(int buckets, double scale, double offset)
@@ -121,7 +117,7 @@ namespace Iridium.Test.DistributionTests
         }
 
         private void TestContinuousDistributionShape(
-            ContinuousDistribution distribution,
+            IContinuousGenerator distribution,
             double min,
             double max,
             double[] expectedShape,
@@ -143,7 +139,7 @@ namespace Iridium.Test.DistributionTests
             Assert.That(shape.Overflow * scale, Is.EqualTo(expectedOverflow).Within(absoluteAccuracy), message + " Overflow");
             for(int i = 0; i < expectedShape.Length; i++)
             {
-                Assert.That(shape[i] * scale, Is.EqualTo(expectedShape[i]).Within(absoluteAccuracy), message + " Bucket " + i.ToString());
+                Assert.That(shape[i] * scale, Is.EqualTo(expectedShape[i]).Within(absoluteAccuracy), message + " Bucket " + i);
             }
         }
 

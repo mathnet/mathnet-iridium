@@ -28,8 +28,6 @@
 //-----------------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 using NUnit.Framework;
 
 namespace Iridium.Test.NumberTheoryTests
@@ -84,14 +82,14 @@ namespace Iridium.Test.NumberTheoryTests
             int lastRadix = (int)Math.Floor(Math.Sqrt(Int32.MaxValue));
             for(int i = 0; i <= lastRadix; i++)
             {
-                Assert.That(IntegerTheory.IsPerfectSquare(i * i), i.ToString() + "^2 (+)");
+                Assert.That(IntegerTheory.IsPerfectSquare(i * i), i + "^2 (+)");
             }
 
             // Test 1-offset from all known squares
             for(int i = 2; i <= lastRadix; i++)
             {
-                Assert.That(!IntegerTheory.IsPerfectSquare((i * i) - 1), i.ToString() + "^2-1 (-)");
-                Assert.That(!IntegerTheory.IsPerfectSquare((i * i) + 1), i.ToString() + "^2+1 (-)");
+                Assert.That(!IntegerTheory.IsPerfectSquare((i * i) - 1), i + "^2-1 (-)");
+                Assert.That(!IntegerTheory.IsPerfectSquare((i * i) + 1), i + "^2+1 (-)");
             }
 
             // Selected Cases
@@ -113,15 +111,15 @@ namespace Iridium.Test.NumberTheoryTests
             for(int i = 0; i < 32; i++)
             {
                 long t = ((long)1) << i;
-                Assert.That(IntegerTheory.IsPerfectSquare(t * t), t.ToString() + "^2 (+)");
+                Assert.That(IntegerTheory.IsPerfectSquare(t * t), t + "^2 (+)");
             }
 
             // Test 1-offset from all known squares
             for(int i = 1; i < 32; i++)
             {
                 long t = ((long)1) << i;
-                Assert.That(!IntegerTheory.IsPerfectSquare((t * t) - 1), t.ToString() + "^2-1 (-)");
-                Assert.That(!IntegerTheory.IsPerfectSquare((t * t) + 1), t.ToString() + "^2+1 (-)");
+                Assert.That(!IntegerTheory.IsPerfectSquare((t * t) - 1), t + "^2-1 (-)");
+                Assert.That(!IntegerTheory.IsPerfectSquare((t * t) + 1), t + "^2+1 (-)");
             }
 
             // Selected Cases

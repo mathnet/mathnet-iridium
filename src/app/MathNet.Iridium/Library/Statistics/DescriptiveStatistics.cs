@@ -307,10 +307,8 @@ namespace MathNet.Numerics.Statistics
             {
                 return OrderSelect(samples, left, b - 1, order);
             }
-            else
-            {
-                return OrderSelect(samples, b + 1, right, order - k);
-            }
+
+            return OrderSelect(samples, b + 1, right, order - k);
         }
     }
 }

@@ -29,9 +29,6 @@
 //-----------------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Globalization;
 using NUnit.Framework;
 
 namespace Iridium.Test.LinearAlgebraTests
@@ -456,7 +453,7 @@ namespace Iridium.Test.LinearAlgebraTests
         ////    TestMatrix_NxN(4000, 1e-9, false);
         ////}
 
-        private void TestMatrix_NxN(int n, double epsilon, bool show)
+        private static void TestMatrix_NxN(int n, double epsilon, bool show)
         {
             Random r = new Random();
             double[][] a = Matrix.CreateMatrixData(n, n);
@@ -478,7 +475,7 @@ namespace Iridium.Test.LinearAlgebraTests
         }
 
         // Calculate right hand side and then solve for x, show all matrices on console out.
-        private void TestMatrix(double[][] a, double[][] x, double epsilon, bool show)
+        private static void TestMatrix(double[][] a, double[][] x, double epsilon, bool show)
         {
             Matrix ma = Matrix.Create(a);
             Matrix mx = Matrix.Create(x);
@@ -503,7 +500,7 @@ namespace Iridium.Test.LinearAlgebraTests
         /*Test a given solution by calculating b and then solving for x.
         Shows only the elapsed time on console out so that we can use 
         matrices too large to print.*/
-        private Matrix TestMatrix_Solutions(Matrix ma, Matrix mx, double epsilon, bool showB)
+        private static Matrix TestMatrix_Solutions(Matrix ma, Matrix mx, double epsilon, bool showB)
         {
             Matrix mb = ma * mx;
             if(showB)
@@ -526,7 +523,7 @@ namespace Iridium.Test.LinearAlgebraTests
             return ms;
         }
 
-        private bool CompareMatrices(Matrix a, Matrix b, double epsilon)
+        private static bool CompareMatrices(Matrix a, Matrix b, double epsilon)
         {
             Matrix c = a - b;
             for(int i = 0; i < c.RowCount; i++)

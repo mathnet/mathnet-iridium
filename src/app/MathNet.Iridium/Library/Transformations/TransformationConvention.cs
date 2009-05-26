@@ -28,8 +28,6 @@
 //-----------------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace MathNet.Numerics.Transformations
 {
@@ -37,7 +35,7 @@ namespace MathNet.Numerics.Transformations
     /// FFT Convention
     /// </summary>
     [Flags]
-    public enum TransformationConvention : int
+    public enum TransformationConvention
     {
         // FLAGS:
 

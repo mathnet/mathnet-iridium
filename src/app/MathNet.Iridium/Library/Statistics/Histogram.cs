@@ -44,21 +44,21 @@ namespace MathNet.Numerics.Statistics
         /// <summary>
         /// Contains all the <c>Bucket</c>s of the <c>Histogram</c>.
         /// </summary>
-        ArrayList buckets;
+        readonly ArrayList _buckets;
 
         /// <summary>
         /// Indicates whether the elements of <c>buckets</c> are
         /// currently sorted.
         /// </summary>
-        bool areBucketsSorted;
+        bool _areBucketsSorted;
 
         /// <summary>
         /// Initializes a new instance of the Histogram class.
         /// </summary>
         public Histogram()
         {
-            buckets = new ArrayList();
-            areBucketsSorted = true;
+            _buckets = new ArrayList();
+            _areBucketsSorted = true;
         }
 
         /// <summary>
@@ -66,8 +66,8 @@ namespace MathNet.Numerics.Statistics
         /// </summary>
         public void Add(Bucket bucket)
         {
-            buckets.Add(bucket);
-            areBucketsSorted = false;
+            _buckets.Add(bucket);
+            _areBucketsSorted = false;
         }
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace MathNet.Numerics.Statistics
         public Bucket GetContainerOf(double v)
         {
             LazySort();
-            return (Bucket)buckets[buckets.BinarySearch(v, Bucket.DefaultPointComparer)];
+            return (Bucket)_buckets[_buckets.BinarySearch(v, Bucket.DefaultPointComparer)];
         }
 
         /// <summary>
@@ -86,7 +86,7 @@ namespace MathNet.Numerics.Statistics
         public int GetContainerIndexOf(double v)
         {
             LazySort();
-            int index = buckets.BinarySearch(v, Bucket.DefaultPointComparer);
+            int index = _buckets.BinarySearch(v, Bucket.DefaultPointComparer);
 
             if(index < 0)
             {
@@ -101,28 +101,28 @@ namespace MathNet.Numerics.Statistics
         /// </summary>
         public void JoinBuckets()
         {
-            if(buckets.Count == 0)
+            if(_buckets.Count == 0)
             {
                 throw new ArgumentException(Properties.LocalStrings.InvalidOperationHistogramEmpty);
             }
 
             LazySort();
-            for(int i = 0; i < buckets.Count - 2; i++)
+            for(int i = 0; i < _buckets.Count - 2; i++)
             {
-                double middle = (((Bucket)buckets[i]).UpperBound
-                    + ((Bucket)buckets[i + 1]).LowerBound) / 2;
+                double middle = (((Bucket)_buckets[i]).UpperBound
+                    + ((Bucket)_buckets[i + 1]).LowerBound) / 2;
 
-                ((Bucket)buckets[i]).UpperBound = middle;
-                ((Bucket)buckets[i + 1]).LowerBound = middle;
+                ((Bucket)_buckets[i]).UpperBound = middle;
+                ((Bucket)_buckets[i + 1]).LowerBound = middle;
             }
         }
 
         private void LazySort()
         {
-            if(!areBucketsSorted)
+            if(!_areBucketsSorted)
             {
-                buckets.Sort();
-                areBucketsSorted = true;
+                _buckets.Sort();
+                _areBucketsSorted = true;
             }
         }
 
@@ -131,7 +131,7 @@ namespace MathNet.Numerics.Statistics
         /// </summary>
         public void Sort()
         {
-            buckets.Sort();
+            _buckets.Sort();
         }
 
         /// <summary>
@@ -142,13 +142,13 @@ namespace MathNet.Numerics.Statistics
             get
             {
                 LazySort();
-                return (Bucket)buckets[index];
+                return (Bucket)_buckets[index];
             }
 
             set
             {
                 LazySort();
-                buckets[index] = value;
+                _buckets[index] = value;
             }
         }
 
@@ -157,7 +157,7 @@ namespace MathNet.Numerics.Statistics
         /// </summary>
         public int Count
         {
-            get { return buckets.Count; }
+            get { return _buckets.Count; }
         }
 
         /// <summary>
@@ -168,7 +168,7 @@ namespace MathNet.Numerics.Statistics
             get
             {
                 double totalDepth = 0;
-                for(int i = 0; i < this.Count; i++)
+                for(int i = 0; i < Count; i++)
                 {
                     totalDepth += this[i].Depth;
                 }
@@ -183,7 +183,7 @@ namespace MathNet.Numerics.Statistics
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            foreach(Bucket b in buckets)
+            foreach(Bucket b in _buckets)
             {
                 sb.Append(b.ToString());
             }
@@ -587,9 +587,9 @@ namespace MathNet.Numerics.Statistics
             /// in the bucket.</returns>
             public int Compare(object obj1, object obj2)
             {
-                Bucket bucket = null;
-                double val = 0;
-                int unit = 0;
+                Bucket bucket;
+                double val;
+                int unit;
 
                 if(obj1 is Bucket)
                 {
@@ -604,12 +604,12 @@ namespace MathNet.Numerics.Statistics
                     unit = -1;
                 }
 
-                if(bucket.upperBound < val)
+                if(bucket._upperBound < val)
                 {
                     return -unit;
                 }
 
-                if(bucket.lowerBound <= val)
+                if(bucket._lowerBound <= val)
                 {
                     return 0;
                 }
@@ -618,16 +618,16 @@ namespace MathNet.Numerics.Statistics
             }
         }
 
-        static PointComparer pointComparer = new PointComparer();
+        static readonly PointComparer pointComparer = new PointComparer();
 
         /// <summary>Lower boundary of the <c>Bucket</c>.</summary>
-        double lowerBound;
+        double _lowerBound;
 
         /// <summary>Upper boundary of the <c>Bucket</c>.</summary>
-        double upperBound;
+        double _upperBound;
 
         /// <summary>Number of points inside the <c>Bucket</c>.</summary>
-        double depth;
+        double _depth;
 
         /// <summary>
         /// Initializes a new instance of the Bucket class.
@@ -638,8 +638,8 @@ namespace MathNet.Numerics.Statistics
                 lowerBound <= upperBound,
                 "lowerBound should be smaller than the upperBound.");
 
-            this.lowerBound = lowerBound;
-            this.upperBound = upperBound;
+            _lowerBound = lowerBound;
+            _upperBound = upperBound;
         }
 
         /// <summary>
@@ -647,9 +647,9 @@ namespace MathNet.Numerics.Statistics
         /// </summary>
         public Bucket(double lowerBound, double upperBound, double depth)
         {
-            this.lowerBound = lowerBound;
-            this.upperBound = upperBound;
-            this.depth = depth;
+            _lowerBound = lowerBound;
+            _upperBound = upperBound;
+            _depth = depth;
         }
 
         /// <summary>
@@ -658,9 +658,9 @@ namespace MathNet.Numerics.Statistics
         /// </summary>
         private Bucket(Bucket bucket)
         {
-            this.lowerBound = bucket.lowerBound;
-            this.upperBound = bucket.upperBound;
-            this.depth = bucket.depth;
+            _lowerBound = bucket._lowerBound;
+            _upperBound = bucket._upperBound;
+            _depth = bucket._depth;
         }
 
         /// <summary>
@@ -668,8 +668,8 @@ namespace MathNet.Numerics.Statistics
         /// </summary>
         public double LowerBound
         {
-            get { return lowerBound; }
-            set { lowerBound = value; }
+            get { return _lowerBound; }
+            set { _lowerBound = value; }
         }
 
         /// <summary>
@@ -677,8 +677,8 @@ namespace MathNet.Numerics.Statistics
         /// </summary>
         public double UpperBound
         {
-            get { return upperBound; }
-            set { upperBound = value; }
+            get { return _upperBound; }
+            set { _upperBound = value; }
         }
 
         /// <summary>
@@ -686,7 +686,7 @@ namespace MathNet.Numerics.Statistics
         /// </summary>
         public double Width
         {
-            get { return upperBound - lowerBound; }
+            get { return _upperBound - _lowerBound; }
         }
 
         /// <summary>
@@ -694,8 +694,8 @@ namespace MathNet.Numerics.Statistics
         /// </summary>
         public double Depth
         {
-            get { return depth; }
-            set { depth = value; }
+            get { return _depth; }
+            set { _depth = value; }
         }
 
         /// <summary>
@@ -714,17 +714,17 @@ namespace MathNet.Numerics.Statistics
             Bucket bucket = (Bucket)bkt;
 
             Debug.Assert(
-                this.upperBound <= bucket.lowerBound
-                || this.lowerBound >= bucket.upperBound,
+                _upperBound <= bucket._lowerBound
+                || _lowerBound >= bucket._upperBound,
                 "Could not compare two intersecting buckets.");
 
-            if(Number.AlmostZero(this.Width) && Number.AlmostZero(bucket.Width)
-                && Number.AlmostEqual(this.lowerBound, bucket.lowerBound))
+            if(Number.AlmostZero(Width) && Number.AlmostZero(bucket.Width)
+                && Number.AlmostEqual(_lowerBound, bucket._lowerBound))
             {
                 return 0;
             }
 
-            if(bucket.upperBound - this.lowerBound <= 0)
+            if(bucket._upperBound - _lowerBound <= 0)
             {
                 return 1;
             }
@@ -751,9 +751,9 @@ namespace MathNet.Numerics.Statistics
             }
 
             Bucket b = (Bucket)obj;
-            return Number.AlmostEqual(this.lowerBound, b.lowerBound)
-                && Number.AlmostEqual(this.upperBound, b.upperBound)
-                && Number.AlmostEqual(this.depth, b.depth);
+            return Number.AlmostEqual(_lowerBound, b._lowerBound)
+                && Number.AlmostEqual(_upperBound, b._upperBound)
+                && Number.AlmostEqual(_depth, b._depth);
         }
 
         /// <summary>
@@ -761,9 +761,9 @@ namespace MathNet.Numerics.Statistics
         /// </summary>
         public override int GetHashCode()
         {
-            return lowerBound.GetHashCode()
-                ^ upperBound.GetHashCode()
-                ^ depth.GetHashCode();
+            return _lowerBound.GetHashCode()
+                ^ _upperBound.GetHashCode()
+                ^ _depth.GetHashCode();
         }
 
         /// <summary>
@@ -772,7 +772,7 @@ namespace MathNet.Numerics.Statistics
         /// <returns></returns>
         public override string ToString()
         {
-            return "[" + this.lowerBound + ";" + this.upperBound + "]";
+            return "[" + _lowerBound + ";" + _upperBound + "]";
         }
     }
 }

@@ -32,7 +32,7 @@ using System;
 
 namespace MathNet.Numerics.Distributions
 {
-    using MathNet.Numerics.RandomSources;
+    using RandomSources;
 
     /// <summary>
     /// Non-uniform discrete random distribution.
@@ -73,7 +73,6 @@ namespace MathNet.Numerics.Distributions
         /// </summary>
         public
         ArbitraryDistribution()
-            : base()
         {
             SetDistributionParameters(0, 1.0);
         }
@@ -101,7 +100,6 @@ namespace MathNet.Numerics.Distributions
         ArbitraryDistribution(
             int offset,
             params double[] probabilityMass)
-            : base()
         {
             SetDistributionParameters(offset, probabilityMass);
         }
@@ -303,7 +301,7 @@ namespace MathNet.Numerics.Distributions
         int
         NextInt32()
         {
-            double rnd = this.RandomSource.NextDouble();
+            double rnd = RandomSource.NextDouble();
             if(rnd >= _cdf[_n - 1])
             {
                 return _last;

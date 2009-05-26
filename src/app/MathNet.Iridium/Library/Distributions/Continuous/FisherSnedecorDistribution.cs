@@ -31,7 +31,7 @@ using System;
 
 namespace MathNet.Numerics.Distributions
 {
-    using MathNet.Numerics.RandomSources;
+    using RandomSources;
 
     /// <summary>
     /// Provides generation of F-distributed random numbers.
@@ -43,15 +43,15 @@ namespace MathNet.Numerics.Distributions
     public sealed class FisherSnedecorDistribution :
         ContinuousDistribution
     {
+        readonly ChiSquareDistribution _chiSquaredAlpha;
+        readonly ChiSquareDistribution _chiSquaredBeta;
+
         int _alpha;
         int _beta;
         double _alphabeta;
         double _pdfScaleLn;
         double _pdfExponent1;
         double _pdfExponent2;
-
-        ChiSquareDistribution _chiSquaredAlpha;
-        ChiSquareDistribution _chiSquaredBeta;
 
         #region Construction
         /// <summary>
@@ -60,10 +60,9 @@ namespace MathNet.Numerics.Distributions
         /// </summary>
         public
         FisherSnedecorDistribution()
-            : base()
         {
-            _chiSquaredAlpha = new ChiSquareDistribution(this.RandomSource);
-            _chiSquaredBeta = new ChiSquareDistribution(this.RandomSource);
+            _chiSquaredAlpha = new ChiSquareDistribution(RandomSource);
+            _chiSquaredBeta = new ChiSquareDistribution(RandomSource);
             SetDistributionParameters(1, 1);
         }
 
@@ -92,10 +91,9 @@ namespace MathNet.Numerics.Distributions
         FisherSnedecorDistribution(
             int alpha,
             int beta)
-            : base()
         {
-            _chiSquaredAlpha = new ChiSquareDistribution(this.RandomSource);
-            _chiSquaredBeta = new ChiSquareDistribution(this.RandomSource);
+            _chiSquaredAlpha = new ChiSquareDistribution(RandomSource);
+            _chiSquaredBeta = new ChiSquareDistribution(RandomSource);
             SetDistributionParameters(alpha, beta);
         }
         #endregion
@@ -160,7 +158,7 @@ namespace MathNet.Numerics.Distributions
             double alphaHalf = 0.5 * alpha;
             double betaHalf = 0.5 * beta;
 
-            _alphabeta = (double)beta / (double)alpha;
+            _alphabeta = beta / (double)alpha;
 
             _pdfScaleLn =
                 (alphaHalf * Math.Log(alpha))
@@ -216,7 +214,7 @@ namespace MathNet.Numerics.Distributions
                     return double.NaN;
                 }
 
-                return (double)_beta / ((double)_beta - 2.0d);
+                return _beta / (_beta - 2.0);
             }
         }
 
@@ -243,7 +241,7 @@ namespace MathNet.Numerics.Distributions
                 int m = 2 * (_beta * _beta) * (_alpha + _beta - 2);
                 int betam2 = _beta - 2;
                 int n = _alpha * betam2 * betam2 * (_beta - 4);
-                return (double)m / (double)n;
+                return m / (double)n;
             }
         }
 

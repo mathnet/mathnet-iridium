@@ -51,14 +51,6 @@ namespace MathNet.Numerics.Interpolation.Algorithms
         int _n;
 
         /// <summary>
-        /// Initializes a new instance of the SplineInterpolation class.
-        /// </summary>
-        public
-        SplineInterpolation()
-        {
-        }
-
-        /// <summary>
         /// True if the alorithm supports differentiation.
         /// </summary>
         /// <seealso cref="Differentiate"/>

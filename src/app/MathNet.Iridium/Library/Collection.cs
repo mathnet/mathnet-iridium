@@ -36,15 +36,8 @@ namespace MathNet.Numerics
     /// The class <c>Collection</c> contains several utilities performing
     /// some basic collection operations (like union, intersection...).
     /// </summary>
-    public sealed class Collection
+    public static class Collection
     {
-        /// <summary>
-        /// Prevents a default instance of the Collection class from being created.
-        /// </summary>
-        private Collection()
-        {
-        }
-
         /// <summary>
         /// The class <c>ConcatCollection</c> is used to perform the 
         /// mathematical concatenation between two collections.
@@ -54,77 +47,79 @@ namespace MathNet.Numerics
         {
             private sealed class ConcatEnumerator : IEnumerator
             {
-                private IEnumerator enumerator1, enumerator2;
+                readonly IEnumerator _enumerator1;
+                readonly IEnumerator _enumerator2;
 
-                private bool isEnumator1Current;
+                bool _isEnumator1Current;
 
                 public ConcatEnumerator(ConcatCollection union)
                 {
-                    this.enumerator1 = union.c1.GetEnumerator();
-                    this.enumerator2 = union.c2.GetEnumerator();
-                    this.isEnumator1Current = true;
+                    _enumerator1 = union._c1.GetEnumerator();
+                    _enumerator2 = union._c2.GetEnumerator();
+                    _isEnumator1Current = true;
                 }
 
                 public void Reset()
                 {
-                    enumerator1.Reset();
-                    enumerator2.Reset();
-                    isEnumator1Current = true;
+                    _enumerator1.Reset();
+                    _enumerator2.Reset();
+                    _isEnumator1Current = true;
                 }
 
                 public object Current
                 {
                     get
                     {
-                        if(isEnumator1Current)
+                        if(_isEnumator1Current)
                         {
-                            return enumerator1.Current;
+                            return _enumerator1.Current;
                         }
                         
-                        return enumerator2.Current;
+                        return _enumerator2.Current;
                     }
                 }
 
                 public bool MoveNext()
                 {
-                    if(isEnumator1Current && enumerator1.MoveNext())
+                    if(_isEnumator1Current && _enumerator1.MoveNext())
                     {
                         return true;
                     }
 
-                    isEnumator1Current = false;
-                    return enumerator2.MoveNext();
+                    _isEnumator1Current = false;
+                    return _enumerator2.MoveNext();
                 }
             }
 
-            private ICollection c1, c2;
+            readonly ICollection _c1;
+            readonly ICollection _c2;
 
             public ConcatCollection(ICollection c1, ICollection c2)
             {
-                this.c1 = c1;
-                this.c2 = c2;
+                _c1 = c1;
+                _c2 = c2;
             }
 
             public bool IsSynchronized
             {
-                get { return c1.IsSynchronized && c2.IsSynchronized; }
+                get { return _c1.IsSynchronized && _c2.IsSynchronized; }
             }
 
             public int Count
             {
-                get { return c1.Count + c2.Count; }
+                get { return _c1.Count + _c2.Count; }
             }
 
             public void CopyTo(Array array, int index)
             {
                 int indexArray = index;
 
-                foreach(object obj in c1)
+                foreach(object obj in _c1)
                 {
                     array.SetValue(obj, indexArray++);
                 }
 
-                foreach(object obj in c2)
+                foreach(object obj in _c2)
                 {
                     array.SetValue(obj, indexArray++);
                 }
@@ -132,7 +127,7 @@ namespace MathNet.Numerics
 
             public object SyncRoot
             {
-                get { return c1.SyncRoot; }
+                get { return _c1.SyncRoot; }
             }
 
             public IEnumerator GetEnumerator()
@@ -149,7 +144,7 @@ namespace MathNet.Numerics
         [Obsolete("Use Set<T>.Intersect() instead.", false)]
         private sealed class InterCollection : ICollection
         {
-            private ArrayList intersection;
+            private readonly ArrayList _intersection;
 
             public InterCollection(ICollection c1, ICollection c2)
             {
@@ -171,44 +166,44 @@ namespace MathNet.Numerics
                 }
 
                 // building the intersection
-                intersection = new ArrayList();
+                _intersection = new ArrayList();
                 foreach(object obj in c2)
                 {
                     if(table.Contains(obj))
                     {
-                        intersection.Add(obj);
+                        _intersection.Add(obj);
                         table.Remove(obj);
                     }
                 }
 
-                intersection.TrimToSize();
+                _intersection.TrimToSize();
             }
 
             #region ICollection Members
 
             public IEnumerator GetEnumerator()
             {
-                return intersection.GetEnumerator();
+                return _intersection.GetEnumerator();
             }
 
             public bool IsSynchronized
             {
-                get { return intersection.IsSynchronized; }
+                get { return _intersection.IsSynchronized; }
             }
 
             public int Count
             {
-                get { return intersection.Count; }
+                get { return _intersection.Count; }
             }
 
             public void CopyTo(Array array, int index)
             {
-                intersection.CopyTo(array, index);
+                _intersection.CopyTo(array, index);
             }
 
             public object SyncRoot
             {
-                get { return intersection.SyncRoot; }
+                get { return _intersection.SyncRoot; }
             }
 
             #endregion
@@ -221,7 +216,7 @@ namespace MathNet.Numerics
         [Obsolete("Use Set<T>.Union() instead.", false)]
         private sealed class UnionCollection : ICollection
         {
-            private ArrayList union;
+            private readonly ArrayList _union;
 
             public UnionCollection(ICollection c1, ICollection c2)
             {
@@ -244,44 +239,44 @@ namespace MathNet.Numerics
                 }
 
                 // building the union
-                union = new ArrayList(Math.Max(table1.Count, table2.Count));
-                union.AddRange(table1.Keys);
+                _union = new ArrayList(Math.Max(table1.Count, table2.Count));
+                _union.AddRange(table1.Keys);
                 foreach(object obj in c2)
                 {
                     if(!table1.Contains(obj))
                     {
-                        union.Add(obj);
+                        _union.Add(obj);
                     }
                 }
 
-                union.TrimToSize();
+                _union.TrimToSize();
             }
 
             #region ICollection Members
 
             public bool IsSynchronized
             {
-                get { return union.IsSynchronized; }
+                get { return _union.IsSynchronized; }
             }
 
             public int Count
             {
-                get { return union.Count; }
+                get { return _union.Count; }
             }
 
             public void CopyTo(Array array, int index)
             {
-                union.CopyTo(array, index);
+                _union.CopyTo(array, index);
             }
 
             public IEnumerator GetEnumerator()
             {
-                return union.GetEnumerator();
+                return _union.GetEnumerator();
             }
 
             public object SyncRoot
             {
-                get { return union.SyncRoot; }
+                get { return _union.SyncRoot; }
             }
 
             #endregion
@@ -295,7 +290,7 @@ namespace MathNet.Numerics
         [Obsolete("Use Set<T>.Subtract() instead.", false)]
         private sealed class MinusCollection : ICollection
         {
-            private ArrayList minus;
+            private readonly ArrayList _minus;
 
             public MinusCollection(ICollection c1, ICollection c2)
             {
@@ -318,43 +313,43 @@ namespace MathNet.Numerics
                 }
 
                 // building minus collection
-                minus = new ArrayList(Math.Max(c1.Count - c2.Count, 10));
+                _minus = new ArrayList(Math.Max(c1.Count - c2.Count, 10));
                 foreach(object obj in table1.Keys)
                 {
                     if(!table2.Contains(obj))
                     {
-                        minus.Add(obj);
+                        _minus.Add(obj);
                     }
                 }
 
-                minus.TrimToSize();
+                _minus.TrimToSize();
             }
 
             #region ICollection Members
 
             public bool IsSynchronized
             {
-                get { return minus.IsSynchronized; }
+                get { return _minus.IsSynchronized; }
             }
 
             public int Count
             {
-                get { return minus.Count; }
+                get { return _minus.Count; }
             }
 
             public void CopyTo(Array array, int index)
             {
-                minus.CopyTo(array, index);
+                _minus.CopyTo(array, index);
             }
 
             public IEnumerator GetEnumerator()
             {
-                return minus.GetEnumerator();
+                return _minus.GetEnumerator();
             }
 
             public object SyncRoot
             {
-                get { return minus.SyncRoot; }
+                get { return _minus.SyncRoot; }
             }
 
             #endregion

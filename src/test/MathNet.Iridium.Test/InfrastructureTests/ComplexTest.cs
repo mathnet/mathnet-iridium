@@ -28,8 +28,6 @@
 //-----------------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Globalization;
 using NUnit.Framework;
 
@@ -276,8 +274,8 @@ namespace Iridium.Test.InfrastructureTests
             Assert.That(onPlus2IDivthreePlus4I.Imag, Is.EqualTo(2d / 25d), "Im{(1+2I)/(3+4I)} = 2/25");
 
             // (big+big*I)/(2*big+2*big*I)
-            double big1 = double.MaxValue / 4;
-            double big2 = double.MaxValue / 2;
+            const double big1 = double.MaxValue / 4;
+            const double big2 = double.MaxValue / 2;
             Complex big1PlusBig1I = new Complex(big1, big1);
             Complex big2PlusBig2I = new Complex(big2, big2);
             Complex big1PlusBig1IDivBig2PlusBig2I = big1PlusBig1I / big2PlusBig2I;

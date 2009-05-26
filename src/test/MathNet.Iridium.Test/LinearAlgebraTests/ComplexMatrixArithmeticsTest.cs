@@ -27,10 +27,6 @@
 // </license>
 //-----------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Globalization;
 using NUnit.Framework;
 
 namespace Iridium.Test.LinearAlgebraTests
@@ -41,8 +37,8 @@ namespace Iridium.Test.LinearAlgebraTests
     [TestFixture]
     public class ComplexMatrixArithmeticsTest
     {
-        Complex j = Complex.I;
-        Complex s = new Complex(1, 1);
+        readonly Complex j = Complex.I;
+        readonly Complex s = new Complex(1, 1);
         Matrix ma3x2, mb3x2, mc2x2, md2x4;
         ComplexMatrix ra3x2, rb3x2, rc2x2, rd2x4;
         ComplexMatrix ia3x2, ib3x2, ic2x2, id2x4;

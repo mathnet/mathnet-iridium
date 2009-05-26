@@ -34,7 +34,7 @@ using System;
 
 namespace MathNet.Numerics.Distributions
 {
-    using MathNet.Numerics.RandomSources;
+    using RandomSources;
     
     /// <summary>
     /// Provides generation of bernoulli distributed random numbers.
@@ -55,7 +55,6 @@ namespace MathNet.Numerics.Distributions
         /// </summary>
         public
         BernoulliDistribution()
-            : base()
         {
             SetDistributionParameters(0.5);
         }
@@ -81,7 +80,6 @@ namespace MathNet.Numerics.Distributions
         /// </summary>
         public
         BernoulliDistribution(double probabilityOfSuccess)
-            : base()
         {
             SetDistributionParameters(probabilityOfSuccess);
         }

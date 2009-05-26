@@ -34,7 +34,7 @@ using System;
 
 namespace MathNet.Numerics.Distributions
 {
-    using MathNet.Numerics.RandomSources;
+    using RandomSources;
 
     /// <summary>
     /// Provides generation of chi-square distributed random numbers.
@@ -45,10 +45,10 @@ namespace MathNet.Numerics.Distributions
     /// </remarks>
     public sealed class ChiSquareDistribution : ContinuousDistribution
     {
+        readonly StandardDistribution _standard;
+
         int _degreesOfFreedom;
         double _lngammaDegreesOfFreedomHalf;
-
-        StandardDistribution _standard;
 
         #region Construction
         /// <summary>
@@ -57,9 +57,8 @@ namespace MathNet.Numerics.Distributions
         /// </summary>
         public
         ChiSquareDistribution()
-            : base()
         {
-            _standard = new StandardDistribution(this.RandomSource);
+            _standard = new StandardDistribution(RandomSource);
             SetDistributionParameters(1);
         }
 
@@ -85,9 +84,8 @@ namespace MathNet.Numerics.Distributions
         /// </summary>
         public
         ChiSquareDistribution(int degreesOfFreedom)
-            : base()
         {
-            _standard = new StandardDistribution(this.RandomSource);
+            _standard = new StandardDistribution(RandomSource);
             SetDistributionParameters(degreesOfFreedom);
         }
         #endregion

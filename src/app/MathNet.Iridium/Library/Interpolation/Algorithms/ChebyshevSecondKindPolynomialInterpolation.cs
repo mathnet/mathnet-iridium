@@ -46,7 +46,7 @@ namespace MathNet.Numerics.Interpolation.Algorithms
     public class ChebyshevSecondKindPolynomialInterpolation :
         IInterpolationMethod
     {
-        BarycentricInterpolation _barycentric;
+        readonly BarycentricInterpolation _barycentric;
         double _transformSummand;
         double _transformFactor;
 
@@ -110,14 +110,13 @@ namespace MathNet.Numerics.Interpolation.Algorithms
             _transformFactor = 2.0 / (b - a);
 
             // trigonometric recurrence
-            double a0 = 0.0;
             double delta = Math.PI / (x.Count - 1);
             double alpha = Math.Sin(delta / 2);
             alpha = 2 * alpha * alpha;
             double beta = Math.Sin(delta);
 
-            double ca = Math.Cos(a0);
-            double sa = Math.Sin(a0);
+            double ca = 1.0; // cos(a0)
+            double sa = 0.0; // sin(a0)
             double sign = 1.0;
 
             // construct chebyshev points and barycentric weights

@@ -34,7 +34,7 @@ using System;
 
 namespace MathNet.Numerics.Distributions
 {
-    using MathNet.Numerics.RandomSources;
+    using RandomSources;
 
     /// <summary>
     /// Provides generation of chi distributed random numbers.
@@ -45,11 +45,11 @@ namespace MathNet.Numerics.Distributions
     /// </remarks>
     public sealed class ChiDistribution : ContinuousDistribution
     {
+        readonly StandardDistribution _standard;
+
         int _degreesOfFreedom;
         double _lngammaDegreesOfFreedomHalf;
         double? _mean;
-
-        StandardDistribution _standard;
 
         #region Construction
         /// <summary>
@@ -58,9 +58,8 @@ namespace MathNet.Numerics.Distributions
         /// </summary>
         public
         ChiDistribution()
-            : base()
         {
-            _standard = new StandardDistribution(this.RandomSource);
+            _standard = new StandardDistribution(RandomSource);
             SetDistributionParameters(1);
         }
 
@@ -86,9 +85,8 @@ namespace MathNet.Numerics.Distributions
         /// </summary>
         public
         ChiDistribution(int degreesOfFreedom)
-            : base()
         {
-            _standard = new StandardDistribution(this.RandomSource);
+            _standard = new StandardDistribution(RandomSource);
             SetDistributionParameters(degreesOfFreedom);
         }
         #endregion

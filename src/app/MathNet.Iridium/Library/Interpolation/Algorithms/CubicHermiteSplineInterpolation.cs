@@ -46,7 +46,7 @@ namespace MathNet.Numerics.Interpolation.Algorithms
     public class CubicHermiteSplineInterpolation :
         IInterpolationMethod
     {
-        SplineInterpolation _spline;
+        readonly SplineInterpolation _spline;
 
         /// <summary>
         /// Initializes a new instance of the CubicHermiteSplineInterpolation class.

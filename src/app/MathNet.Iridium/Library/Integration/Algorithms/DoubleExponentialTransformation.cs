@@ -32,7 +32,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace MathNet.Numerics.Integration.Algorithms
 {
@@ -44,12 +43,12 @@ namespace MathNet.Numerics.Integration.Algorithms
     {
         const int NumberOfMaximumLevels = 10;
 
-        TrapeziumRule trapezium = new TrapeziumRule();
-        IEnumerable<double[]> levelAbcissas;
-        IEnumerable<double[]> levelWeights;
+        readonly TrapeziumRule _trapezium = new TrapeziumRule();
+        IEnumerable<double[]> _levelAbcissas;
+        IEnumerable<double[]> _levelWeights;
 
         #region Precomputed Abcissas and Weights
-        static double[][] precomputedAbcissas = new double[][] {
+        static readonly double[][] PrecomputedAbcissas = new double[][] {
             new double[] {
                 0.00000000000000000000,
                 0.95136796407274694574,
@@ -252,7 +251,7 @@ namespace MathNet.Numerics.Integration.Algorithms
                 0.99999999999992987953 }
             };
 
-        static double[][] precomputedWeights = new double[][] {
+        static readonly double[][] PrecomputedWeights = new double[][] {
             new double[] {
                 1.5707963267948966192,
                 0.230022394514788685,
@@ -467,18 +466,18 @@ namespace MathNet.Numerics.Integration.Algorithms
             double intervalEnd,
             double targetRelativeError)
         {
-            if(levelAbcissas == null)
+            if(_levelAbcissas == null)
             {
-                levelAbcissas = ProvideLevelAbcissas();
-                levelWeights = ProvideLevelWeights();
+                _levelAbcissas = ProvideLevelAbcissas();
+                _levelWeights = ProvideLevelWeights();
             }
 
-            return trapezium.IntegrateAdaptiveTransformedOdd(
+            return _trapezium.IntegrateAdaptiveTransformedOdd(
                 f,
                 intervalBegin,
                 intervalEnd,
-                levelAbcissas,
-                levelWeights,
+                _levelAbcissas,
+                _levelWeights,
                 1,
                 targetRelativeError);
         }
@@ -507,9 +506,9 @@ namespace MathNet.Numerics.Integration.Algorithms
         double[]
         EvaluateAbcissas(int level)
         {
-            if(level < precomputedAbcissas.Length)
+            if(level < PrecomputedAbcissas.Length)
             {
-                return precomputedAbcissas[level];
+                return PrecomputedAbcissas[level];
             }
 
             double step = level <= 1 ? 1.0 : (1.0 / (2 << (level - 2)));
@@ -533,9 +532,9 @@ namespace MathNet.Numerics.Integration.Algorithms
         double[]
         EvaluateWeights(int level)
         {
-            if(level < precomputedWeights.Length)
+            if(level < PrecomputedWeights.Length)
             {
-                return precomputedWeights[level];
+                return PrecomputedWeights[level];
             }
 
             double step = level <= 1 ? 1.0 : (1.0 / (2 << (level - 2)));

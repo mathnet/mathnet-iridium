@@ -31,7 +31,7 @@ using System;
 
 namespace MathNet.Numerics.Distributions
 {
-    using MathNet.Numerics.RandomSources;
+    using RandomSources;
 
     // TODO: NUnit test for ZipfGenerator
     /* Note: ZipfGenerator seems to returns value that are really
@@ -56,7 +56,7 @@ namespace MathNet.Numerics.Distributions
     /// </remarks>
     public sealed class ZipfDistribution
     {
-        RandomSource random;
+        readonly RandomSource random;
 
         private double skew;
 

@@ -43,7 +43,7 @@ namespace MathNet.Numerics.Interpolation.Algorithms
     public class AkimaSplineInterpolation :
         IInterpolationMethod
     {
-        CubicHermiteSplineInterpolation _hermiteSpline;
+        readonly CubicHermiteSplineInterpolation _hermiteSpline;
 
         /// <summary>
         /// Initializes a new instance of the AkimaSplineInterpolation class.

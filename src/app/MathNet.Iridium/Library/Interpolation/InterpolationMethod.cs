@@ -27,9 +27,6 @@
 // </license>
 //-----------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-
 namespace MathNet.Numerics.Interpolation
 {
     /// <summary>

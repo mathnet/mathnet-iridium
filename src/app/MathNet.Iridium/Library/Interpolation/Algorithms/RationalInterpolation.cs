@@ -46,17 +46,6 @@ namespace MathNet.Numerics.Interpolation.Algorithms
         IList<double> _x;
 
         /// <summary>
-        /// Initializes a new instance of the RationalInterpolation class.
-        /// </summary>
-        /// <remarks>
-        /// This algorithm neither supports differentiation nor interation.
-        /// </remarks>
-        public
-        RationalInterpolation()
-        {
-        }
-
-        /// <summary>
         /// True if the alorithm supports differentiation.
         /// </summary>
         /// <seealso cref="Differentiate"/>

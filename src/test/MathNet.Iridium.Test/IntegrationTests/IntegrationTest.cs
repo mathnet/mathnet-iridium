@@ -28,13 +28,10 @@
 //-----------------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 using NUnit.Framework;
 
 namespace Iridium.Test.IntegrationTests
 {
-    using MathNet.Numerics;
     using MathNet.Numerics.Integration;
     using MathNet.Numerics.Integration.Algorithms;
 
@@ -45,7 +42,7 @@ namespace Iridium.Test.IntegrationTests
         private const double StartA = 0;
         private const double StopA = 10;
 
-        private double TargetFunctionA(double x)
+        private static double TargetFunctionA(double x)
         {
             // f(x) = exp(-x/5) (2 + sin(2 * x))
             return Math.Exp(-x / 5) * (2 + Math.Sin(2 * x));
@@ -54,9 +51,15 @@ namespace Iridium.Test.IntegrationTests
         [Test]
         public void TestPortal()
         {
-            Assert.That(Integrate.OnClosedInterval(TargetFunctionA, StartA, StopA), NumericIs.AlmostEqualTo(TargetAreaA, 1e-5), "Basic");
+            Assert.That(
+                Integrate.OnClosedInterval(TargetFunctionA, StartA, StopA),
+                NumericIs.AlmostEqualTo(TargetAreaA, 1e-5),
+                "Basic");
 
-            Assert.That(Integrate.OnClosedInterval(TargetFunctionA, StartA, StopA, 1e-10), NumericIs.AlmostEqualTo(TargetAreaA, 1e-10), "Basic Target 1e-10");
+            Assert.That(
+                Integrate.OnClosedInterval(TargetFunctionA, StartA, StopA, 1e-10),
+                NumericIs.AlmostEqualTo(TargetAreaA, 1e-10),
+                "Basic Target 1e-10");
         }
 
         [Test]
@@ -64,23 +67,50 @@ namespace Iridium.Test.IntegrationTests
         {
             TrapeziumRule algorithm = new TrapeziumRule();
 
-            Assert.That(algorithm.IntegrateTwoPoint(TargetFunctionA, StartA, StopA), NumericIs.AlmostEqualTo(TargetAreaA, 2.5e-1), "Direct (1 Partition)");
+            Assert.That(
+                algorithm.IntegrateTwoPoint(TargetFunctionA, StartA, StopA),
+                NumericIs.AlmostEqualTo(TargetAreaA, 2.5e-1),
+                "Direct (1 Partition)");
 
-            Assert.That(algorithm.IntegrateComposite(TargetFunctionA, StartA, StopA, 1), NumericIs.AlmostEqualTo(TargetAreaA, 2.5e-1), "Composite 1 Partition");
+            Assert.That(
+                algorithm.IntegrateComposite(TargetFunctionA, StartA, StopA, 1),
+                NumericIs.AlmostEqualTo(TargetAreaA, 2.5e-1),
+                "Composite 1 Partition");
 
-            Assert.That(algorithm.IntegrateComposite(TargetFunctionA, StartA, StopA, 5), NumericIs.AlmostEqualTo(TargetAreaA, 1e-1), "Composite 5 Partitions");
+            Assert.That(
+                algorithm.IntegrateComposite(TargetFunctionA, StartA, StopA, 5),
+                NumericIs.AlmostEqualTo(TargetAreaA, 1e-1),
+                "Composite 5 Partitions");
 
-            Assert.That(algorithm.IntegrateComposite(TargetFunctionA, StartA, StopA, 10), NumericIs.AlmostEqualTo(TargetAreaA, 2e-2), "Composite 10 Partitions");
+            Assert.That(
+                algorithm.IntegrateComposite(TargetFunctionA, StartA, StopA, 10),
+                NumericIs.AlmostEqualTo(TargetAreaA, 2e-2),
+                "Composite 10 Partitions");
 
-            Assert.That(algorithm.IntegrateComposite(TargetFunctionA, StartA, StopA, 50), NumericIs.AlmostEqualTo(TargetAreaA, 6e-4), "Composite 50 Partitions");
+            Assert.That(
+                algorithm.IntegrateComposite(TargetFunctionA, StartA, StopA, 50),
+                NumericIs.AlmostEqualTo(TargetAreaA, 6e-4),
+                "Composite 50 Partitions");
 
-            Assert.That(algorithm.IntegrateComposite(TargetFunctionA, StartA, StopA, 1000), NumericIs.AlmostEqualTo(TargetAreaA, 1.5e-6), "Composite 1000 Partitions");
+            Assert.That(
+                algorithm.IntegrateComposite(TargetFunctionA, StartA, StopA, 1000),
+                NumericIs.AlmostEqualTo(TargetAreaA, 1.5e-6),
+                "Composite 1000 Partitions");
 
-            Assert.That(algorithm.IntegrateAdaptive(TargetFunctionA, StartA, StopA, 1e-1), NumericIs.AlmostEqualTo(TargetAreaA, 1e-1), "Adaptive Target 1e-1");
+            Assert.That(
+                algorithm.IntegrateAdaptive(TargetFunctionA, StartA, StopA, 1e-1),
+                NumericIs.AlmostEqualTo(TargetAreaA, 1e-1),
+                "Adaptive Target 1e-1");
 
-            Assert.That(algorithm.IntegrateAdaptive(TargetFunctionA, StartA, StopA, 1e-5), NumericIs.AlmostEqualTo(TargetAreaA, 1e-5), "Adaptive Target 1e-5");
+            Assert.That(
+                algorithm.IntegrateAdaptive(TargetFunctionA, StartA, StopA, 1e-5),
+                NumericIs.AlmostEqualTo(TargetAreaA, 1e-5),
+                "Adaptive Target 1e-5");
 
-            Assert.That(algorithm.IntegrateAdaptive(TargetFunctionA, StartA, StopA, 1e-10), NumericIs.AlmostEqualTo(TargetAreaA, 1e-10), "Adaptive Target 1e-10");
+            Assert.That(
+                algorithm.IntegrateAdaptive(TargetFunctionA, StartA, StopA, 1e-10),
+                NumericIs.AlmostEqualTo(TargetAreaA, 1e-10),
+                "Adaptive Target 1e-10");
         }
 
         [Test]
@@ -88,17 +118,35 @@ namespace Iridium.Test.IntegrationTests
         {
             SimpsonRule algorithm = new SimpsonRule();
 
-            Assert.That(algorithm.IntegrateThreePoint(TargetFunctionA, StartA, StopA), NumericIs.AlmostEqualTo(TargetAreaA, 1.7e-1), "Direct (2 Partitions)");
+            Assert.That(
+                algorithm.IntegrateThreePoint(TargetFunctionA, StartA, StopA),
+                NumericIs.AlmostEqualTo(TargetAreaA, 1.7e-1),
+                "Direct (2 Partitions)");
 
-            Assert.That(algorithm.IntegrateComposite(TargetFunctionA, StartA, StopA, 2), NumericIs.AlmostEqualTo(TargetAreaA, 1.7e-1), "Composite 2 Partitions");
+            Assert.That(
+                algorithm.IntegrateComposite(TargetFunctionA, StartA, StopA, 2),
+                NumericIs.AlmostEqualTo(TargetAreaA, 1.7e-1),
+                "Composite 2 Partitions");
 
-            Assert.That(algorithm.IntegrateComposite(TargetFunctionA, StartA, StopA, 6), NumericIs.AlmostEqualTo(TargetAreaA, 1.2e-1), "Composite 6 Partitions");
+            Assert.That(
+                algorithm.IntegrateComposite(TargetFunctionA, StartA, StopA, 6),
+                NumericIs.AlmostEqualTo(TargetAreaA, 1.2e-1),
+                "Composite 6 Partitions");
 
-            Assert.That(algorithm.IntegrateComposite(TargetFunctionA, StartA, StopA, 10), NumericIs.AlmostEqualTo(TargetAreaA, 8e-3), "Composite 10 Partitions");
+            Assert.That(
+                algorithm.IntegrateComposite(TargetFunctionA, StartA, StopA, 10),
+                NumericIs.AlmostEqualTo(TargetAreaA, 8e-3),
+                "Composite 10 Partitions");
 
-            Assert.That(algorithm.IntegrateComposite(TargetFunctionA, StartA, StopA, 50), NumericIs.AlmostEqualTo(TargetAreaA, 8e-6), "Composite 50 Partitions");
+            Assert.That(
+                algorithm.IntegrateComposite(TargetFunctionA, StartA, StopA, 50),
+                NumericIs.AlmostEqualTo(TargetAreaA, 8e-6),
+                "Composite 50 Partitions");
 
-            Assert.That(algorithm.IntegrateComposite(TargetFunctionA, StartA, StopA, 1000), NumericIs.AlmostEqualTo(TargetAreaA, 5e-11), "Composite 1000 Partitions");
+            Assert.That(
+                algorithm.IntegrateComposite(TargetFunctionA, StartA, StopA, 1000),
+                NumericIs.AlmostEqualTo(TargetAreaA, 5e-11),
+                "Composite 1000 Partitions");
         }
 
         [Test]
@@ -106,9 +154,15 @@ namespace Iridium.Test.IntegrationTests
         {
             DoubleExponentialTransformation det = new DoubleExponentialTransformation();
 
-            Assert.That(det.Integrate(TargetFunctionA, StartA, StopA, 1e-5), NumericIs.AlmostEqualTo(TargetAreaA, 1e-5), "Adaptive Target 1e-5");
+            Assert.That(
+                det.Integrate(TargetFunctionA, StartA, StopA, 1e-5),
+                NumericIs.AlmostEqualTo(TargetAreaA, 1e-5),
+                "Adaptive Target 1e-5");
 
-            Assert.That(det.Integrate(TargetFunctionA, StartA, StopA, 1e-10), NumericIs.AlmostEqualTo(TargetAreaA, 1e-10), "Adaptive Target 1e-10");
+            Assert.That(
+                det.Integrate(TargetFunctionA, StartA, StopA, 1e-10),
+                NumericIs.AlmostEqualTo(TargetAreaA, 1e-10),
+                "Adaptive Target 1e-10");
         }
     }
 }

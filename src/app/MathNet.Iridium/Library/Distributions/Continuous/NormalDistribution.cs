@@ -32,8 +32,8 @@ using System.Collections.Generic;
 
 namespace MathNet.Numerics.Distributions
 {
-    using MathNet.Numerics.RandomSources;
-    using MathNet.Numerics.Statistics;
+    using RandomSources;
+    using Statistics;
 
     /// <summary>
     /// Pseudo-random generation of normal distributed deviates.
@@ -59,10 +59,10 @@ namespace MathNet.Numerics.Distributions
     /// </remarks>
     public sealed class NormalDistribution : ContinuousDistribution
     {
+        readonly StandardDistribution _standard;
+
         double _mu;
         double _sigma;
-
-        StandardDistribution _standard;
 
         #region Construction
 
@@ -72,9 +72,8 @@ namespace MathNet.Numerics.Distributions
         /// </summary>
         public
         NormalDistribution()
-            : base()
         {
-            _standard = new StandardDistribution(this.RandomSource);
+            _standard = new StandardDistribution(RandomSource);
             SetDistributionParameters(0.0, 1.0);
         }
 
@@ -102,9 +101,8 @@ namespace MathNet.Numerics.Distributions
         NormalDistribution(
             double mu,
             double sigma)
-            : base()
         {
-            _standard = new StandardDistribution(this.RandomSource);
+            _standard = new StandardDistribution(RandomSource);
             SetDistributionParameters(mu, sigma);
         }
 

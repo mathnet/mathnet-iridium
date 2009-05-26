@@ -103,7 +103,7 @@ namespace MathNet.Numerics.SpecialFunctions.Algorithms
             double q2 = z * x;
             double ans = p2 / q2;
 
-            double error = 0;
+            double error;
 
             do
             {

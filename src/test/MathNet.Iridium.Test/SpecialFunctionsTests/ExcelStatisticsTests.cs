@@ -28,8 +28,6 @@
 //-----------------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 using NUnit.Framework;
 
 namespace Iridium.Test.SpecialFunctionsTests
@@ -39,7 +37,7 @@ namespace Iridium.Test.SpecialFunctionsTests
     [TestFixture]
     public class ExcelStatisticsTests
     {
-        double TDIST(double x, int degrees_freedom, int tails)
+        static double TDIST(double x, int degrees_freedom, int tails)
         {
             StudentsTDistribution dist = new StudentsTDistribution(degrees_freedom);
             switch(tails)
@@ -71,7 +69,7 @@ namespace Iridium.Test.SpecialFunctionsTests
             Assert.That(TDIST(10, 2, 2), NumericIs.AlmostEqualTo(9.852457022458160E-03, 1e-8), "F2");
         }
 
-        double GAMMADIST(double x, double alpha, double beta, bool cumulative)
+        static double GAMMADIST(double x, double alpha, double beta, bool cumulative)
         {
             GammaDistribution dist = new GammaDistribution(alpha, beta);
 
@@ -98,7 +96,7 @@ namespace Iridium.Test.SpecialFunctionsTests
             Assert.That(GAMMADIST(10, 2, 1.5, false), NumericIs.AlmostEqualTo(5.656150228662040E-03, 1e-8), "F2");
         }
 
-        double GAMMAINV(double x, double alpha, double beta)
+        static double GAMMAINV(double x, double alpha, double beta)
         {
             GammaDistribution dist = new GammaDistribution(alpha, beta);
             return dist.InverseCumulativeDistribution(x);

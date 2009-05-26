@@ -159,8 +159,6 @@ namespace MathNet.Numerics.Interpolation
             double[] c = new double[_effectiveOrder];
             double[] d = new double[_effectiveOrder];
             int ns = closestIndex - offset;
-            double den, ho, hp;
-            double x = 0;
             error = 0;
 
             if(_samples.GetT(closestIndex) == t)
@@ -174,18 +172,18 @@ namespace MathNet.Numerics.Interpolation
                 d[i] = c[i] + Tiny; // prevent rare zero-over-zero condition
             }
 
-            x = _samples.GetX(offset + ns--);
+            double x = _samples.GetX(offset + ns--);
             for(int level = 1; level < _effectiveOrder; level++)
             {
                 for(int i = 0; i < _effectiveOrder - level; i++)
                 {
-                    hp = _samples.GetT(offset + i + level) - t;
-                    ho = (_samples.GetT(offset + i) - t) * d[i] / hp;
+                    double hp = _samples.GetT(offset + i + level) - t;
+                    double ho = (_samples.GetT(offset + i) - t) * d[i] / hp;
 
-                    den = ho - c[i + 1];
+                    double den = ho - c[i + 1];
                     if(den == 0)
                     {
-                        // TODO (cdr, 2006-06-09): Check sign (positive or negative infinity?)
+                        // TODO (ruegg, 2006-06-09): Check sign (positive or negative infinity?)
                         error = 0;
                         return double.PositiveInfinity; // or is it NegativeInfinity?
                     }

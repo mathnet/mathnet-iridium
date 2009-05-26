@@ -28,9 +28,6 @@
 //-----------------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Globalization;
 using NUnit.Framework;
 
 namespace Iridium.Test.SpecialFunctionsTests

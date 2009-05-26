@@ -35,7 +35,7 @@ using System;
 
 namespace MathNet.Numerics.Distributions
 {
-    using MathNet.Numerics.RandomSources;
+    using RandomSources;
 
     /// <summary>
     /// Provides generation of triangular distributed random numbers.
@@ -50,7 +50,7 @@ namespace MathNet.Numerics.Distributions
         double _a;
         double _b;
         double _c;
-        double _diff, _lowerPart, _upperPart, helper3, helper4;
+        double _diff, _lowerPart, _upperPart, _helper3, _helper4;
 
         #region Construction
         /// <summary>
@@ -59,7 +59,6 @@ namespace MathNet.Numerics.Distributions
         /// </summary>
         public
         TriangularDistribution()
-            : base()
         {
             SetDistributionParameters(0.0, 1.0, 0.5);
         }
@@ -88,7 +87,6 @@ namespace MathNet.Numerics.Distributions
             double lowerLimit,
             double upperLimit,
             double center)
-            : base()
         {
             SetDistributionParameters(lowerLimit, upperLimit, center);
         }
@@ -150,8 +148,8 @@ namespace MathNet.Numerics.Distributions
             _diff = upperLimit - lowerLimit;
             _lowerPart = center - lowerLimit;
             _upperPart = upperLimit - center;
-            this.helper3 = Math.Sqrt(this._lowerPart * this._diff);
-            this.helper4 = Math.Sqrt(upperLimit - center);
+            _helper3 = Math.Sqrt(_lowerPart * _diff);
+            _helper4 = Math.Sqrt(upperLimit - center);
         }
 
         /// <summary>
@@ -295,15 +293,13 @@ namespace MathNet.Numerics.Distributions
         double
         NextDouble()
         {
-            double genNum = this.RandomSource.NextDouble();
+            double genNum = RandomSource.NextDouble();
             if(genNum <= _lowerPart / _diff)
             {
-                return _a + (Math.Sqrt(genNum) * this.helper3);
+                return _a + (Math.Sqrt(genNum) * _helper3);
             }
-            else
-            {
-                return _b - (Math.Sqrt((genNum * _diff) - _lowerPart) * this.helper4);
-            }
+
+            return _b - (Math.Sqrt((genNum * _diff) - _lowerPart) * _helper4);
         }
         #endregion
     }

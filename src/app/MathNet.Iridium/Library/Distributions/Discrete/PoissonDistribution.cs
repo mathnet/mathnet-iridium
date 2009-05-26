@@ -35,7 +35,7 @@ using System;
 
 namespace MathNet.Numerics.Distributions
 {
-    using MathNet.Numerics.RandomSources;
+    using RandomSources;
 
     /// <summary>
     /// Pseudo-random generation of poisson distributed deviates.
@@ -67,7 +67,6 @@ namespace MathNet.Numerics.Distributions
         /// </summary>
         public
         PoissonDistribution()
-            : base()
         {
             SetDistributionParameters(1.0);
         }
@@ -93,7 +92,6 @@ namespace MathNet.Numerics.Distributions
         /// </summary>
         public
         PoissonDistribution(double lambda)
-            : base()
         {
             SetDistributionParameters(lambda);
         }
@@ -222,7 +220,7 @@ namespace MathNet.Numerics.Distributions
         NextInt32()
         {
             int count = 0;
-            for(double product = this.RandomSource.NextDouble(); product >= _helper1; product *= this.RandomSource.NextDouble())
+            for(double product = RandomSource.NextDouble(); product >= _helper1; product *= RandomSource.NextDouble())
             {
                 count++;
             }

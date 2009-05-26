@@ -28,18 +28,15 @@
 //-----------------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
-using System.Text;
-
 using NUnit.Framework;
-
-using MathNet.Numerics;
-using MathNet.Numerics.LinearAlgebra;
-using MathNet.Numerics.Interpolation;
-using MathNet.Numerics.Distributions;
 
 namespace Iridium.Test
 {
+    using MathNet.Numerics;
+    using MathNet.Numerics.LinearAlgebra;
+    using MathNet.Numerics.Interpolation;
+    using MathNet.Numerics.Distributions;
+
     [TestFixture]
     public class BugRegression
     {

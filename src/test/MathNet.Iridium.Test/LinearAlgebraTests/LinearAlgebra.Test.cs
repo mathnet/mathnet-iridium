@@ -28,13 +28,10 @@
 //-----------------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 using NUnit.Framework;
 
 namespace Iridium.Test.LinearAlgebraTests
 {
-    using MathNet.Numerics;
     using MathNet.Numerics.LinearAlgebra;
 
     /// <summary>TestMatrix tests the functionality of the 
@@ -63,7 +60,7 @@ namespace Iridium.Test.LinearAlgebraTests
     [TestFixture]
     public class LinearAlgebraTests
     {
-        private static Random random = new Random();
+        private static readonly Random random = new Random();
 
         [Test]
         public void MultiplyByDiagonal()
@@ -220,7 +217,7 @@ namespace Iridium.Test.LinearAlgebraTests
         }
 
         /// <summary>
-        /// Testing the method <see cref="Matrix.SVD"/>.
+        /// Testing the method <see cref="Matrix.SingularValueDecomposition"/>.
         /// </summary>
         [Test]
         public void SingularValueDecomposition()

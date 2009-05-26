@@ -69,13 +69,18 @@ namespace MathNet.Numerics.RandomSources
         /// Represents the multiplier that computes a double-precision floating point number greater than or equal to 0.0 
         ///   and less than 1.0 when it gets applied to a nonnegative 32-bit signed integer.
         /// </summary>
-        const double IntToDoubleMultiplier = 1.0 / ((double)Int32.MaxValue + 1.0);
+        const double IntToDoubleMultiplier = 1.0 / (Int32.MaxValue + 1.0);
 
         /// <summary>
         /// Represents the multiplier that computes a double-precision floating point number greater than or equal to 0.0 
         ///   and less than 1.0  when it gets applied to a 32-bit unsigned integer.
         /// </summary>
-        const double UIntToDoubleMultiplier = 1.0 / ((double)UInt32.MaxValue + 1.0);
+        const double UIntToDoubleMultiplier = 1.0 / (UInt32.MaxValue + 1.0);
+
+        /// <summary>
+        /// Stores the used seed value.
+        /// </summary>
+        readonly uint _seed;
 
         /// <summary>
         /// Stores the last but three unsigned random number. 
@@ -96,11 +101,6 @@ namespace MathNet.Numerics.RandomSources
         /// Stores the last generated unsigned random number. 
         /// </summary>
         uint _w;
-
-        /// <summary>
-        /// Stores the used seed value.
-        /// </summary>
-        uint _seed;
 
         /// <summary>
         /// Stores an <see cref="UInt32"/> used to generate up to 32 random <see cref="Boolean"/> values.
@@ -266,10 +266,8 @@ namespace MathNet.Numerics.RandomSources
             {
                 return Next();
             }
-            else
-            {
-                return result;
-            }
+
+            return result;
         }
 
         /// <summary>
@@ -307,7 +305,7 @@ namespace MathNet.Numerics.RandomSources
 
             // The shift operation and extra int cast before the first multiplication give better performance.
             // See comment in NextDouble().
-            return (int)((double)(int)(w >> 1) * IntToDoubleMultiplier * (double)maxValue);
+            return (int)((int)(w >> 1) * IntToDoubleMultiplier * maxValue);
         }
 
         /// <summary>
@@ -354,13 +352,13 @@ namespace MathNet.Numerics.RandomSources
                 // The range is greater than Int32.MaxValue, so we have to use slower floating point arithmetic.
                 // Also all 32 random bits (uint) have to be used which again is slower (See comment in NextDouble()).
                 return minValue + (int)
-                    ((double)w * UIntToDoubleMultiplier * ((double)maxValue - (double)minValue));
+                    (w * UIntToDoubleMultiplier * ((double)maxValue - (double)minValue));
             }
             else
             {
                 // 31 random bits (int) will suffice which allows us to shift and cast to an int before the first multiplication and gain better performance.
                 // See comment in NextDouble().
-                return minValue + (int)((double)(int)(w >> 1) * IntToDoubleMultiplier * (double)range);
+                return minValue + (int)((int)(w >> 1) * IntToDoubleMultiplier * range);
             }
         }
 
@@ -387,7 +385,7 @@ namespace MathNet.Numerics.RandomSources
             // Casting a double from an int is a lot faster than from an uint and the extra shift operation 
             //   and cast to an int are very fast (the allocated bits remain the same), so overall there's 
             //   a significant performance improvement.
-            return (double)(int)(w >> 1) * IntToDoubleMultiplier;
+            return (int)(w >> 1) * IntToDoubleMultiplier;
         }
 
         /// <summary>
@@ -425,7 +423,7 @@ namespace MathNet.Numerics.RandomSources
 
             // The shift operation and extra int cast before the first multiplication give better performance.
             // See comment in NextDouble().
-            return (double)(int)(w >> 1) * IntToDoubleMultiplier * maxValue;
+            return (int)(w >> 1) * IntToDoubleMultiplier * maxValue;
         }
 
         /// <summary>
@@ -483,7 +481,7 @@ namespace MathNet.Numerics.RandomSources
 
             // The shift operation and extra int cast before the first multiplication give better performance.
             // See comment in NextDouble().
-            return minValue + ((double)(int)(w >> 1) * IntToDoubleMultiplier * range);
+            return minValue + ((int)(w >> 1) * IntToDoubleMultiplier * range);
         }
 
         /// <summary>

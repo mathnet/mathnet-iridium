@@ -39,7 +39,7 @@ namespace MathNet.Numerics.Transformations
     /// </summary>
     public class RealFourierTransformation
     {
-        InternalFFT _fft;
+        readonly InternalFFT _fft;
         TransformationConvention _convention;
 
         /// <summary>
@@ -181,17 +181,15 @@ namespace MathNet.Numerics.Transformations
             fftReal2 = new double[numSamples];
             fftImag2 = new double[numSamples];
 
-            double h1r, h2i, h2r, h1i;
-
             fftReal1[0] = complex[0];
             fftReal2[0] = complex[1];
             fftImag1[0] = fftImag2[0] = 0d;
             for(int i = 1, j = 2; j <= numSamples; i++, j += 2)
             {
-                h1r = 0.5 * (complex[j] + complex[length - j]);
-                h1i = 0.5 * (complex[j + 1] - complex[length + 1 - j]);
-                h2r = 0.5 * (complex[j + 1] + complex[length + 1 - j]);
-                h2i = -0.5 * (complex[j] - complex[length - j]);
+                double h1r = 0.5 * (complex[j] + complex[length - j]);
+                double h1i = 0.5 * (complex[j + 1] - complex[length + 1 - j]);
+                double h2r = 0.5 * (complex[j + 1] + complex[length + 1 - j]);
+                double h2i = -0.5 * (complex[j] - complex[length - j]);
 
                 fftReal1[i] = h1r;
                 fftImag1[i] = h1i;
@@ -311,17 +309,15 @@ namespace MathNet.Numerics.Transformations
             fftReal = new double[length];
             fftImag = new double[length];
 
-            double h1r, h2i, h2r, h1i;
-
             fftImag[0] = fftImag[numSamples] = 0d;
             fftReal[0] = complex[0] + complex[1];
             fftReal[numSamples] = complex[0] - complex[1];
             for(int i = 1, j = 2; j <= numSamples; i++, j += 2)
             {
-                h1r = 0.5 * (complex[j] + complex[length - j]);
-                h1i = 0.5 * (complex[j + 1] - complex[length + 1 - j]);
-                h2r = 0.5 * (complex[j + 1] + complex[length + 1 - j]);
-                h2i = -0.5 * (complex[j] - complex[length - j]);
+                double h1r = 0.5 * (complex[j] + complex[length - j]);
+                double h1i = 0.5 * (complex[j + 1] - complex[length + 1 - j]);
+                double h2r = 0.5 * (complex[j + 1] + complex[length + 1 - j]);
+                double h2i = -0.5 * (complex[j] - complex[length - j]);
 
                 fftReal[i] = h1r + (wr * h2r) + (wi * h2i);
                 fftImag[i] = h1i + (wr * h2i) - (wi * h2r);
@@ -374,18 +370,16 @@ namespace MathNet.Numerics.Transformations
 
             samples = new double[length];
 
-            double h1r, h2i, h2r, h1i;
-
             // TODO: may be 1 <--> 0 swapped?
             samples[1] = 0.5 * (fftReal[0] - fftReal[numSamples]);
             samples[0] = 0.5 * (fftReal[0] + fftReal[numSamples]);
 
             for(int i = 1, j = 2; j <= numSamples; i++, j += 2)
             {
-                h1r = 0.5 * (fftReal[i] + fftReal[numSamples - i]);
-                h1i = 0.5 * (fftImag[i] - fftImag[numSamples - i]);
-                h2r = -0.5 * (fftImag[i] + fftImag[numSamples - i]);
-                h2i = 0.5 * (fftReal[i] - fftReal[numSamples - i]);
+                double h1r = 0.5 * (fftReal[i] + fftReal[numSamples - i]);
+                double h1i = 0.5 * (fftImag[i] - fftImag[numSamples - i]);
+                double h2r = -0.5 * (fftImag[i] + fftImag[numSamples - i]);
+                double h2i = 0.5 * (fftReal[i] - fftReal[numSamples - i]);
 
                 samples[j] = h1r + (wr * h2r) + (wi * h2i);
                 samples[j + 1] = h1i + (wr * h2i) - (wi * h2r);

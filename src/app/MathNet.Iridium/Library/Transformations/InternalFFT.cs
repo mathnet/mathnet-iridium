@@ -31,9 +31,6 @@
 //-----------------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Text;
 
 namespace MathNet.Numerics.Transformations
 {
@@ -47,9 +44,9 @@ namespace MathNet.Numerics.Transformations
         const int MaxBits = 20;
         const int MinBits = 0;
 
-        int[][] _reversedBitsLookup = new int[MaxBits][];
-        double[,][] _realCoefficients = new double[MaxBits + 1, 2][];
-        double[,][] _imagCoefficients = new double[MaxBits + 1, 2][];
+        readonly int[][] _reversedBitsLookup = new int[MaxBits][];
+        readonly double[,][] _realCoefficients = new double[MaxBits + 1, 2][];
+        readonly double[,][] _imagCoefficients = new double[MaxBits + 1, 2][];
 
         public
         void
@@ -72,13 +69,13 @@ namespace MathNet.Numerics.Transformations
             TransformationConvention convention)
         {
             int rank = dimensions.Length;
-            int n, nprev = 1, step, stride;
+            int nprev = 1;
 
             for(int idim = rank - 1; idim >= 0; idim--)
             {
-                n = dimensions[idim];
-                step = nprev << 1; // complex numbers as pairs
-                stride = n * step;
+                int n = dimensions[idim];
+                int step = nprev << 1; // complex numbers as pairs
+                int stride = n * step;
 
                 ReorderSamplesMultiDim(samples, stride, step);
                 DanielsonLanczosTransformMultiDim(samples, stride, step, forward, convention);
@@ -179,23 +176,23 @@ namespace MathNet.Numerics.Transformations
             BuildCoefficientsForLevels(levels);
             double expSignConvention = (convention & TransformationConvention.InverseExponent) > 0 ? -1d : 1d;
 
-            int N = 2;
+            int n = 2;
             for(int level = 1; level <= levels; level++)
             {
-                int M = N;
-                N <<= 1;
+                int m = n;
+                n <<= 1;
 
                 double[] realCosine = RealCosineCoefficients(level, forward);
                 double[] imagSine = ImaginarySineCoefficients(level, forward);
 
-                for(int j = 0, jj = 0; jj < M; j++, jj += 2)
+                for(int j = 0, jj = 0; jj < m; j++, jj += 2)
                 {
                     double uR = realCosine[j];
                     double uI = expSignConvention * imagSine[j];
 
-                    for(int even = jj; even < samples.Length; even += N)
+                    for(int even = jj; even < samples.Length; even += n)
                     {
-                        int odd = even + M;
+                        int odd = even + m;
 
                         double re = samples[odd];
                         double im = samples[odd + 1];
@@ -231,25 +228,25 @@ namespace MathNet.Numerics.Transformations
             BuildCoefficientsForLevels(levels);
             double expSignConvention = (convention & TransformationConvention.InverseExponent) > 0 ? -1d : 1d;
 
-            int N = step;
+            int n = step;
             for(int level = 1; level <= levels; level++)
             {
-                int M = N;
-                N <<= 1;
+                int m = n;
+                n <<= 1;
 
                 double[] realCosine = RealCosineCoefficients(level, forward);
                 double[] imagSine = ImaginarySineCoefficients(level, forward);
 
-                for(int j = 0, jj = 0; jj < M; j++, jj += step)
+                for(int j = 0, jj = 0; jj < m; j++, jj += step)
                 {
                     double uR = realCosine[j];
                     double uI = expSignConvention * imagSine[j];
 
                     for(int i = jj; i < jj + step; i += 2)
                     {
-                        for(int even = i; even < samples.Length; even += N)
+                        for(int even = i; even < samples.Length; even += n)
                         {
-                            int odd = even + M;
+                            int odd = even + m;
 
                             double re = samples[odd];
                             double im = samples[odd + 1];
@@ -388,35 +385,36 @@ namespace MathNet.Numerics.Transformations
                 return;
             }
 
-            int M = 1;
-            double uRealFw, uImagFw, uRealBw, uImagBw, angle, wRreal, wImag, uwI;
-            for(int level = 1; level <= levels; level++, M <<= 1)
+            int m = 1;
+            for(int level = 1; level <= levels; level++, m <<= 1)
             {
                 if(_realCoefficients[level, 0] != null)
                 {
                     continue;
                 }
 
-                uRealFw = uRealBw = 1;
-                uImagFw = uImagBw = 0;
+                double uRealFw = 1;
+                double uRealBw = 1;
+                double uImagFw = 0;
+                double uImagBw = 0;
 
-                angle = Constants.Pi / M;
-                wRreal = Trig.Cosine(angle);
-                wImag = Trig.Sine(angle);
+                double angle = Constants.Pi / m;
+                double wRreal = Trig.Cosine(angle);
+                double wImag = Trig.Sine(angle);
 
-                double[] realForward = new double[M];
-                double[] imagForward = new double[M];
-                double[] realBackward = new double[M];
-                double[] imagBackward = new double[M];
+                double[] realForward = new double[m];
+                double[] imagForward = new double[m];
+                double[] realBackward = new double[m];
+                double[] imagBackward = new double[m];
 
-                for(int i = 0; i < M; i++)
+                for(int i = 0; i < m; i++)
                 {
                     realForward[i] = uRealFw;
                     imagForward[i] = uImagFw;
                     realBackward[i] = uRealBw;
                     imagBackward[i] = uImagBw;
 
-                    uwI = (uImagFw * wRreal) - (uRealFw * wImag);
+                    double uwI = (uImagFw * wRreal) - (uRealFw * wImag);
                     uRealFw = (uRealFw * wRreal) + (uImagFw * wImag);
                     uImagFw = uwI;
 

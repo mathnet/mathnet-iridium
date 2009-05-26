@@ -28,9 +28,6 @@
 //-----------------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using System.Text;
 using MathNet.Numerics.Properties;
 
 namespace MathNet.Numerics
@@ -339,7 +336,7 @@ namespace MathNet.Numerics
         /// <param name="maximumRelativeError">The relative accuracy required for being almost equal.</param>
         /// <returns>
         /// True if <paramref name="a"/> and <paramref name="b"/> are almost equal up to a maximum
-        /// relative error of <paramref name="relativeAccuracy"/>, False otherwise.
+        /// relative error of <paramref name="maximumRelativeError"/>, False otherwise.
         /// </returns>
         public static
         bool
@@ -386,7 +383,7 @@ namespace MathNet.Numerics
         /// <param name="maximumRelativeError">The relative accuracy required for being almost equal.</param>
         /// <returns>
         /// True if <paramref name="a"/> and <paramref name="b"/> are almost equal up to a maximum
-        /// relative error of <paramref name="relativeAccuracy"/>, False otherwise.
+        /// relative error of <paramref name="maximumRelativeError"/>, False otherwise.
         /// </returns>
         public static
         bool
@@ -453,7 +450,7 @@ namespace MathNet.Numerics
         /// <param name="a">The real number to check for being almost zero.</param>
         /// <param name="maximumAbsoluteError">The absolute threshold for <paramref name="a"/> to consider it as zero.</param>
         /// <returns>
-        /// True if |<paramref name="a"/>| is smaller than <paramref name="absoluteAccuracy"/>, False otherwise.
+        /// True if |<paramref name="a"/>| is smaller than <paramref name="maximumAbsoluteError"/>, False otherwise.
         /// </returns>
         public static
         bool
@@ -483,7 +480,7 @@ namespace MathNet.Numerics
         /// </summary>
         /// <param name="a">The real number to coerce to zero, if it is almost zero.</param>
         /// <param name="maximumAbsoluteError">The absolute threshold for <paramref name="a"/> to consider it as zero.</param>
-        /// <returns>Zero if |<paramref name="a"/>| is smaller than <paramref name="absoluteAccuracy"/>, <paramref name="a"/> otherwise.</returns>
+        /// <returns>Zero if |<paramref name="a"/>| is smaller than <paramref name="maximumAbsoluteError"/>, <paramref name="a"/> otherwise.</returns>
         public static
         double
         CoerceZero(

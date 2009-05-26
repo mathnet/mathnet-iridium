@@ -33,7 +33,7 @@ using System.Text;
 
 namespace MathNet.Numerics.LinearAlgebra
 {
-    using MathNet.Numerics.Distributions;
+    using Distributions;
 
     /// <summary>
     /// Complex Vector.
@@ -46,8 +46,8 @@ namespace MathNet.Numerics.LinearAlgebra
         IAlmostEquatable<ComplexVector>,
         ICloneable
     {
-        private Complex[] _data;
-        private int _length;
+        private readonly Complex[] _data;
+        private readonly int _length;
 
         /// <summary>
         /// Gets dimensionality of the vector.
@@ -204,7 +204,31 @@ namespace MathNet.Numerics.LinearAlgebra
             return new ComplexVector(newData);
         }
 
-        // TODO: Add Random Vector Generations Methods here
+        /// <summary>
+        /// Generates vector with random elements
+        /// </summary>
+        /// <param name="n">Dimensionality of vector.</param>
+        /// <param name="randomDistribution">Continuous Random Distribution or Source</param>
+        /// <returns>
+        /// An n-dimensional vector with random elements distributed according
+        /// to the specified random distribution.
+        /// </returns>
+        public static
+        ComplexVector
+        Random(
+            int n,
+            IContinuousGenerator randomDistribution)
+        {
+            Complex[] data = new Complex[n];
+            for(int i = 0; i < data.Length; i++)
+            {
+                data[i] = Complex.Random(
+                    randomDistribution,
+                    randomDistribution);
+            }
+
+            return new ComplexVector(data);
+        }
 
         /// <summary>
         /// Generates an n-dimensional vector filled with 1.
@@ -321,7 +345,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <remarks>
         /// This method has the same effect as the overloaded + operator.
         /// </remarks>
-        /// <seealso cref="AddInplace(IVector&lt;Complex&gt;)"/>
+        /// <seealso cref="AddInplace(IVector{Complex})"/>
         /// <seealso cref="operator + (ComplexVector, ComplexVector)"/>
         public
         ComplexVector
@@ -348,7 +372,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <remarks>
         /// This method has the same effect as the overloaded + operator.
         /// </remarks>
-        /// <seealso cref="AddInplace(IVector&lt;double&gt;)"/>
+        /// <seealso cref="AddInplace(IVector{double})"/>
         /// <seealso cref="operator + (ComplexVector, Vector)"/>
         public
         ComplexVector
@@ -396,7 +420,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <remarks>
         /// This method changes this vector.
         /// </remarks>
-        /// <seealso cref="Add(IVector&lt;Complex&gt;)"/>
+        /// <seealso cref="Add(IVector{Complex})"/>
         /// <seealso cref="operator + (ComplexVector, ComplexVector)"/>
         public
         void
@@ -416,7 +440,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <remarks>
         /// This method changes this vector.
         /// </remarks>
-        /// <seealso cref="Add(IVector&lt;double&gt;)"/>
+        /// <seealso cref="Add(IVector{double})"/>
         /// <seealso cref="operator + (ComplexVector, Vector)"/>
         public
         void
@@ -458,7 +482,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <remarks>
         /// This method has the same effect as the overloaded - operator.
         /// </remarks>
-        /// <seealso cref="SubtractInplace(IVector&lt;Complex&gt;)"/>
+        /// <seealso cref="SubtractInplace(IVector{Complex})"/>
         /// <seealso cref="operator - (ComplexVector, ComplexVector)"/>
         public
         ComplexVector
@@ -485,7 +509,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <remarks>
         /// This method has the same effect as the overloaded - operator.
         /// </remarks>
-        /// <seealso cref="SubtractInplace(IVector&lt;double&gt;)"/>
+        /// <seealso cref="SubtractInplace(IVector{double})"/>
         /// <seealso cref="operator - (ComplexVector, Vector)"/>
         public
         ComplexVector
@@ -533,7 +557,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <remarks>
         /// This method changes this vector.
         /// </remarks>
-        /// <seealso cref="Subtract(IVector&lt;Complex&gt;)"/>
+        /// <seealso cref="Subtract(IVector{Complex})"/>
         /// <seealso cref="operator - (ComplexVector, ComplexVector)"/>
         public
         void
@@ -553,7 +577,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <remarks>
         /// This method changes this vector.
         /// </remarks>
-        /// <seealso cref="Subtract(IVector&lt;double&gt;)"/>
+        /// <seealso cref="Subtract(IVector{double})"/>
         /// <seealso cref="operator - (ComplexVector, Vector)"/>
         public
         void
@@ -717,7 +741,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <returns>
         /// Scalar ret = sum(u[i] * conj(v[i]))
         /// </returns>
-        /// <seealso cref="ScalarMultiply(IVector&lt;Complex&gt;)"/>
+        /// <seealso cref="ScalarMultiply(IVector{Complex})"/>
         /// <seealso cref="operator * (ComplexVector, ComplexVector)"/>
         public static
         Complex
@@ -742,7 +766,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <returns>
         /// Scalar ret = sum(u[i] * v[i])
         /// </returns>
-        /// <seealso cref="ScalarMultiply(IVector&lt;double&gt;)"/>
+        /// <seealso cref="ScalarMultiply(IVector{double})"/>
         /// <seealso cref="operator * (ComplexVector, Vector)"/>
         public static
         Complex
@@ -771,7 +795,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <remarks>
         /// This method has the same effect as the overloaded * operator.
         /// </remarks>
-        /// <seealso cref="ScalarProduct(IVector&lt;Complex&gt;,IVector&lt;Complex&gt;)"/>
+        /// <seealso cref="ScalarProduct(IVector{Complex},IVector{Complex})"/>
         /// <seealso cref="operator * (ComplexVector, ComplexVector)"/>
         public
         Complex
@@ -790,7 +814,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <remarks>
         /// This method has the same effect as the overloaded * operator.
         /// </remarks>
-        /// <seealso cref="ScalarProduct(IVector&lt;Complex&gt;,IVector&lt;double&gt;)"/>
+        /// <seealso cref="ScalarProduct(IVector{Complex},IVector{double})"/>
         /// <seealso cref="operator * (ComplexVector, Vector)"/>
         public
         Complex
@@ -888,8 +912,8 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <returns>
         /// Vector ret[i] = u[i] * v[i]
         /// </returns>
-        /// <seealso cref="ArrayMultiply(IVector&lt;Complex&gt;)"/>
-        /// <seealso cref="ArrayMultiplyInplace(IVector&lt;Complex&gt;)"/>
+        /// <seealso cref="ArrayMultiply(IVector{Complex})"/>
+        /// <seealso cref="ArrayMultiplyInplace(IVector{Complex})"/>
         public static
         ComplexVector
         ArrayProduct(
@@ -913,8 +937,8 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <returns>
         /// Vector ret[i] = u[i] * v[i]
         /// </returns>
-        /// <seealso cref="ArrayMultiply(IVector&lt;double&gt;)"/>
-        /// <seealso cref="ArrayMultiplyInplace(IVector&lt;double&gt;)"/>
+        /// <seealso cref="ArrayMultiply(IVector{double})"/>
+        /// <seealso cref="ArrayMultiplyInplace(IVector{double})"/>
         public static
         ComplexVector
         ArrayProduct(
@@ -938,8 +962,8 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <returns>
         /// Vector ret[i] = this[i] * b[i]
         /// </returns>
-        /// <seealso cref="ArrayProduct(IVector&lt;Complex&gt;,IVector&lt;Complex&gt;)"/>
-        /// <seealso cref="ArrayMultiplyInplace(IVector&lt;Complex&gt;)"/>
+        /// <seealso cref="ArrayProduct(IVector{Complex},IVector{Complex})"/>
+        /// <seealso cref="ArrayMultiplyInplace(IVector{Complex})"/>
         public
         ComplexVector
         ArrayMultiply(IVector<Complex> b)
@@ -953,8 +977,8 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <returns>
         /// Vector ret[i] = this[i] * b[i]
         /// </returns>
-        /// <seealso cref="ArrayProduct(IVector&lt;Complex&gt;,IVector&lt;double&gt;)"/>
-        /// <seealso cref="ArrayMultiplyInplace(IVector&lt;double&gt;)"/>
+        /// <seealso cref="ArrayProduct(IVector{Complex},IVector{double})"/>
+        /// <seealso cref="ArrayMultiplyInplace(IVector{double})"/>
         public
         ComplexVector
         ArrayMultiply(IVector<double> b)
@@ -968,8 +992,8 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <remarks>
         /// This method changes this vector.
         /// </remarks>
-        /// <seealso cref="ArrayProduct(IVector&lt;Complex&gt;,IVector&lt;Complex&gt;)"/>
-        /// <seealso cref="ArrayMultiply(IVector&lt;Complex&gt;)"/>
+        /// <seealso cref="ArrayProduct(IVector{Complex},IVector{Complex})"/>
+        /// <seealso cref="ArrayMultiply(IVector{Complex})"/>
         public
         void
         ArrayMultiplyInplace(IVector<Complex> b)
@@ -988,8 +1012,8 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <remarks>
         /// This method changes this vector.
         /// </remarks>
-        /// <seealso cref="ArrayProduct(IVector&lt;Complex&gt;,IVector&lt;double&gt;)"/>
-        /// <seealso cref="ArrayMultiply(IVector&lt;double&gt;)"/>
+        /// <seealso cref="ArrayProduct(IVector{Complex},IVector{double})"/>
+        /// <seealso cref="ArrayMultiply(IVector{double})"/>
         public
         void
         ArrayMultiplyInplace(IVector<double> b)
@@ -1045,8 +1069,8 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <returns>
         /// Vector ret[i] = u[i] / v[i]
         /// </returns>
-        /// <seealso cref="ArrayDivide(IVector&lt;Complex&gt;)"/>
-        /// <seealso cref="ArrayDivideInplace(IVector&lt;Complex&gt;)"/>
+        /// <seealso cref="ArrayDivide(IVector{Complex})"/>
+        /// <seealso cref="ArrayDivideInplace(IVector{Complex})"/>
         public static
         ComplexVector
         ArrayQuotient(
@@ -1070,8 +1094,8 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <returns>
         /// Vector ret[i] = u[i] / v[i]
         /// </returns>
-        /// <seealso cref="ArrayDivide(IVector&lt;double&gt;)"/>
-        /// <seealso cref="ArrayDivideInplace(IVector&lt;double&gt;)"/>
+        /// <seealso cref="ArrayDivide(IVector{double})"/>
+        /// <seealso cref="ArrayDivideInplace(IVector{double})"/>
         public static
         ComplexVector
         ArrayQuotient(
@@ -1095,8 +1119,8 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <returns>
         /// Vector ret[i] = this[i] / b[i]
         /// </returns>
-        /// <seealso cref="ArrayQuotient(IVector&lt;Complex&gt;,IVector&lt;Complex&gt;)"/>
-        /// <seealso cref="ArrayDivideInplace(IVector&lt;Complex&gt;)"/>
+        /// <seealso cref="ArrayQuotient(IVector{Complex},IVector{Complex})"/>
+        /// <seealso cref="ArrayDivideInplace(IVector{Complex})"/>
         public
         ComplexVector
         ArrayDivide(IVector<Complex> b)
@@ -1110,8 +1134,8 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <returns>
         /// Vector ret[i] = this[i] / b[i]
         /// </returns>
-        /// <seealso cref="ArrayQuotient(IVector&lt;Complex&gt;,IVector&lt;double&gt;)"/>
-        /// <seealso cref="ArrayDivideInplace(IVector&lt;double&gt;)"/>
+        /// <seealso cref="ArrayQuotient(IVector{Complex},IVector{double})"/>
+        /// <seealso cref="ArrayDivideInplace(IVector{double})"/>
         public
         ComplexVector
         ArrayDivide(IVector<double> b)
@@ -1125,8 +1149,8 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <remarks>
         /// This method changes this vector.
         /// </remarks>
-        /// <seealso cref="ArrayQuotient(IVector&lt;Complex&gt;,IVector&lt;Complex&gt;)"/>
-        /// <seealso cref="ArrayDivide(IVector&lt;Complex&gt;)"/>
+        /// <seealso cref="ArrayQuotient(IVector{Complex},IVector{Complex})"/>
+        /// <seealso cref="ArrayDivide(IVector{Complex})"/>
         public
         void
         ArrayDivideInplace(IVector<Complex> b)
@@ -1145,8 +1169,8 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <remarks>
         /// This method changes this vector.
         /// </remarks>
-        /// <seealso cref="ArrayQuotient(IVector&lt;Complex&gt;,IVector&lt;double&gt;)"/>
-        /// <seealso cref="ArrayDivide(IVector&lt;double&gt;)"/>
+        /// <seealso cref="ArrayQuotient(IVector{Complex},IVector{double})"/>
+        /// <seealso cref="ArrayDivide(IVector{double})"/>
         public
         void
         ArrayDivideInplace(IVector<double> b)
@@ -1165,7 +1189,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <returns>
         /// Vector ret[i] = mapping(this[i])
         /// </returns>
-        /// <seealso cref="ArrayMapInplace(Converter&lt;Complex,Complex&gt;)"/>
+        /// <seealso cref="ArrayMapInplace(Converter{Complex,Complex})"/>
         public
         ComplexVector
         ArrayMap(Converter<Complex, Complex> mapping)
@@ -1185,7 +1209,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <remarks>
         /// This method changes this vector.
         /// </remarks>
-        /// <seealso cref="ArrayMap(Converter&lt;Complex,Complex&gt;)"/>
+        /// <seealso cref="ArrayMap(Converter{Complex,Complex})"/>
         public
         void
         ArrayMapInplace(Converter<Complex, Complex> mapping)
@@ -1392,47 +1416,47 @@ namespace MathNet.Numerics.LinearAlgebra
 
         #region Various Helpers & Infrastructure
 
-        /// <summary>Check if size(A) == size(B) *</summary>
+        /// <summary>Check if size(u) == size(v) *</summary>
         private static
         void
         CheckMatchingVectorDimensions(
-            IVector<Complex> A,
-            IVector<Complex> B)
+            IVector<Complex> u,
+            IVector<Complex> v)
         {
-            if(null == A)
+            if(null == u)
             {
-                throw new ArgumentNullException("A");
+                throw new ArgumentNullException("u");
             }
 
-            if(null == B)
+            if(null == v)
             {
-                throw new ArgumentNullException("B");
+                throw new ArgumentNullException("v");
             }
 
-            if(A.Length != B.Length)
+            if(u.Length != v.Length)
             {
                 throw new ArgumentException(Properties.LocalStrings.ArgumentVectorsSameLengths);
             }
         }
 
-        /// <summary>Check if size(A) == size(B) *</summary>
+        /// <summary>Check if size(u) == size(v) *</summary>
         private static
         void
         CheckMatchingVectorDimensions(
-            IVector<Complex> A,
-            IVector<double> B)
+            IVector<Complex> u,
+            IVector<double> v)
         {
-            if(null == A)
+            if(null == u)
             {
-                throw new ArgumentNullException("A");
+                throw new ArgumentNullException("u");
             }
 
-            if(null == B)
+            if(null == v)
             {
-                throw new ArgumentNullException("B");
+                throw new ArgumentNullException("v");
             }
 
-            if(A.Length != B.Length)
+            if(u.Length != v.Length)
             {
                 throw new ArgumentException(Properties.LocalStrings.ArgumentVectorsSameLengths);
             }
@@ -1463,7 +1487,7 @@ namespace MathNet.Numerics.LinearAlgebra
         Equals(object obj)
         {
             ComplexVector v = obj as ComplexVector;
-            return object.ReferenceEquals(v, null) ? false : this.Equals(v);
+            return ReferenceEquals(v, null) ? false : Equals(v);
         }
 
         /// <summary>
@@ -1473,7 +1497,7 @@ namespace MathNet.Numerics.LinearAlgebra
         bool
         Equals(ComplexVector other)
         {
-            if(object.ReferenceEquals(other, null)
+            if(ReferenceEquals(other, null)
                 || _length != other.Length)
             {
                 return false;
@@ -1493,13 +1517,26 @@ namespace MathNet.Numerics.LinearAlgebra
         }
 
         /// <summary>
+        /// Serves as a hash function for this type
+        /// </summary>
+        public override
+        int
+        GetHashCode()
+        {
+            unchecked
+            {
+                return (_data.GetHashCode() * 397) ^ _length;
+            }
+        }
+
+        /// <summary>
         /// Returns true if two vectors are almost equal, up to the default maximum relative error.
         /// </summary>
         public
         bool
         AlmostEquals(ComplexVector other)
         {
-            if(object.ReferenceEquals(other, null)
+            if(ReferenceEquals(other, null)
                 || _length != other.Length)
             {
                 return false;
@@ -1517,7 +1554,7 @@ namespace MathNet.Numerics.LinearAlgebra
             ComplexVector other,
             double maximumRelativeError)
         {
-            if(object.ReferenceEquals(other, null)
+            if(ReferenceEquals(other, null)
                 || _length != other.Length)
             {
                 return false;

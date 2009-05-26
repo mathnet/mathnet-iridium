@@ -35,7 +35,7 @@ using System.Text;
 
 namespace MathNet.Numerics
 {
-    using MathNet.Numerics.Distributions;
+    using Distributions;
 
     /// <summary>
     /// Complex numbers class.
@@ -108,9 +108,9 @@ namespace MathNet.Numerics
             }
         }
 
-        private static IComparer realImaginaryComparer;
-        private static IComparer modulusArgumentComparer;
-        private static IComparer argumentModulusComparer;
+        private static IComparer _realImaginaryComparer;
+        private static IComparer _modulusArgumentComparer;
+        private static IComparer _argumentModulusComparer;
 
         /// <summary>
         /// Gets the lexicographical comparer based on <c>(real, imaginary)</c>. 
@@ -119,12 +119,12 @@ namespace MathNet.Numerics
         {
             get
             {
-                if(realImaginaryComparer == null)
+                if(_realImaginaryComparer == null)
                 {
-                    realImaginaryComparer = new RealImaginaryLexComparer();
+                    _realImaginaryComparer = new RealImaginaryLexComparer();
                 }
 
-                return realImaginaryComparer;
+                return _realImaginaryComparer;
             }
         }
 
@@ -135,12 +135,12 @@ namespace MathNet.Numerics
         {
             get
             {
-                if(modulusArgumentComparer == null)
+                if(_modulusArgumentComparer == null)
                 {
-                    modulusArgumentComparer = new ModulusArgumentLexComparer();
+                    _modulusArgumentComparer = new ModulusArgumentLexComparer();
                 }
 
-                return modulusArgumentComparer;
+                return _modulusArgumentComparer;
             }
         }
 
@@ -151,19 +151,19 @@ namespace MathNet.Numerics
         {
             get
             {
-                if(argumentModulusComparer == null)
+                if(_argumentModulusComparer == null)
                 {
-                    argumentModulusComparer = new ArgumentModulusLexComparer();
+                    _argumentModulusComparer = new ArgumentModulusLexComparer();
                 }
 
-                return argumentModulusComparer;
+                return _argumentModulusComparer;
             }
         }
 
         #endregion
 
-        double real;
-        double imag;
+        double _real;
+        double _imag;
 
         #region Constructors and Constants
 
@@ -174,8 +174,8 @@ namespace MathNet.Numerics
         public
         Complex(double real, double imag)
         {
-            this.real = real;
-            this.imag = imag;
+            _real = real;
+            _imag = imag;
         }
 
         /// <summary>
@@ -283,7 +283,7 @@ namespace MathNet.Numerics
         /// </summary>
         public bool IsZero
         {
-            get { return Number.AlmostZero(real) && Number.AlmostZero(imag); }
+            get { return Number.AlmostZero(_real) && Number.AlmostZero(_imag); }
         }
 
         /// <summary>
@@ -299,7 +299,7 @@ namespace MathNet.Numerics
         /// </summary>
         public bool IsOne
         {
-            get { return Number.AlmostEqual(real, 1) && Number.AlmostZero(imag); }
+            get { return Number.AlmostEqual(_real, 1) && Number.AlmostZero(_imag); }
         }
 
         /// <summary>
@@ -315,7 +315,7 @@ namespace MathNet.Numerics
         /// </summary>
         public bool IsI
         {
-            get { return Number.AlmostZero(real) && Number.AlmostEqual(imag, 1); }
+            get { return Number.AlmostZero(_real) && Number.AlmostEqual(_imag, 1); }
         }
 
         /// <summary>
@@ -332,7 +332,7 @@ namespace MathNet.Numerics
         /// </summary>
         public bool IsNaN
         {
-            get { return double.IsNaN(real) || double.IsNaN(imag); }
+            get { return double.IsNaN(_real) || double.IsNaN(_imag); }
         }
 
         /// <summary>
@@ -361,7 +361,7 @@ namespace MathNet.Numerics
         /// </remarks>
         public bool IsInfinity
         {
-            get { return double.IsInfinity(real) || double.IsInfinity(imag); }
+            get { return double.IsInfinity(_real) || double.IsInfinity(_imag); }
         }
 
         /// <summary>
@@ -369,7 +369,7 @@ namespace MathNet.Numerics
         /// </summary>
         public bool IsReal
         {
-            get { return Number.AlmostZero(imag); }
+            get { return Number.AlmostZero(_imag); }
         }
 
         /// <summary>
@@ -377,7 +377,7 @@ namespace MathNet.Numerics
         /// </summary>
         public bool IsRealNonNegative
         {
-            get { return Number.AlmostZero(imag) && real >= 0; }
+            get { return Number.AlmostZero(_imag) && _real >= 0; }
         }
 
         /// <summary>
@@ -385,7 +385,7 @@ namespace MathNet.Numerics
         /// </summary>
         public bool IsImaginary
         {
-            get { return Number.AlmostZero(real); }
+            get { return Number.AlmostZero(_real); }
         }
 
         #endregion
@@ -398,8 +398,8 @@ namespace MathNet.Numerics
         /// <seealso cref="Imag"/>
         public double Real
         {
-            get { return real; }
-            set { real = value; }
+            get { return _real; }
+            set { _real = value; }
         }
 
         /// <summary>
@@ -408,8 +408,8 @@ namespace MathNet.Numerics
         /// <seealso cref="Real"/>
         public double Imag
         {
-            get { return imag; }
-            set { imag = value; }
+            get { return _imag; }
+            set { _imag = value; }
         }
 
         /// <summary>
@@ -427,7 +427,7 @@ namespace MathNet.Numerics
         {
             get
             {
-                return Math.Sqrt((real * real) + (imag * imag));
+                return Math.Sqrt((_real * _real) + (_imag * _imag));
             }
 
             set
@@ -442,21 +442,21 @@ namespace MathNet.Numerics
 
                 if(double.IsInfinity(value))
                 {
-                    real = value;
-                    imag = value;
+                    _real = value;
+                    _imag = value;
                 }
                 else
                 {
                     if(IsZero)
                     {
-                        real = value;
-                        imag = 0;
+                        _real = value;
+                        _imag = 0;
                     }
                     else
                     {
-                        double factor = value / Math.Sqrt((real * real) + (imag * imag));
-                        real *= factor;
-                        imag *= factor;
+                        double factor = value / Math.Sqrt((_real * _real) + (_imag * _imag));
+                        _real *= factor;
+                        _imag *= factor;
                     }
                 }
             }
@@ -477,7 +477,7 @@ namespace MathNet.Numerics
         {
             get
             {
-                return (real * real) + (imag * imag);
+                return (_real * _real) + (_imag * _imag);
             }
 
             set
@@ -492,21 +492,21 @@ namespace MathNet.Numerics
 
                 if(double.IsInfinity(value))
                 {
-                    real = value;
-                    imag = value;
+                    _real = value;
+                    _imag = value;
                 }
                 else
                 {
                     if(IsZero)
                     {
-                        real = Math.Sqrt(value);
-                        imag = 0;
+                        _real = Math.Sqrt(value);
+                        _imag = 0;
                     }
                     else
                     {
-                        double factor = value / ((real * real) + (imag * imag));
-                        real *= factor;
-                        imag *= factor;
+                        double factor = value / ((_real * _real) + (_imag * _imag));
+                        _real *= factor;
+                        _imag *= factor;
                     }
                 }
             }
@@ -524,7 +524,7 @@ namespace MathNet.Numerics
         {
             get
             {
-                if(IsReal && real < 0)
+                if(IsReal && _real < 0)
                 {
                     return Math.PI;
                 }
@@ -534,14 +534,14 @@ namespace MathNet.Numerics
                     return 0;
                 }
 
-                return Math.Atan2(imag, real);
+                return Math.Atan2(_imag, _real);
             }
 
             set
             {
                 double modulus = Modulus;
-                real = Math.Cos(value) * modulus;
-                imag = Math.Sin(value) * modulus;
+                _real = Math.Cos(value) * modulus;
+                _imag = Math.Sin(value) * modulus;
             }
         }
 
@@ -552,34 +552,34 @@ namespace MathNet.Numerics
         {
             get
             {
-                if(double.IsPositiveInfinity(real) && double.IsPositiveInfinity(imag))
+                if(double.IsPositiveInfinity(_real) && double.IsPositiveInfinity(_imag))
                 {
                     return new Complex(Constants.Sqrt1_2, Constants.Sqrt1_2);
                 }
 
-                if(double.IsPositiveInfinity(real) && double.IsNegativeInfinity(imag))
+                if(double.IsPositiveInfinity(_real) && double.IsNegativeInfinity(_imag))
                 {
                     return new Complex(Constants.Sqrt1_2, -Constants.Sqrt1_2);
                 }
 
-                if(double.IsNegativeInfinity(real) && double.IsPositiveInfinity(imag))
+                if(double.IsNegativeInfinity(_real) && double.IsPositiveInfinity(_imag))
                 {
                     return new Complex(-Constants.Sqrt1_2, -Constants.Sqrt1_2);
                 }
 
-                if(double.IsNegativeInfinity(real) && double.IsNegativeInfinity(imag))
+                if(double.IsNegativeInfinity(_real) && double.IsNegativeInfinity(_imag))
                 {
                     return new Complex(-Constants.Sqrt1_2, Constants.Sqrt1_2);
                 }
 
                 // don't replace this with "Modulus"!
-                double mod = Fn.Hypot(real, imag);
+                double mod = Fn.Hypot(_real, _imag);
                 if(mod == 0)
                 {
-                    return Complex.One;
+                    return One;
                 }
 
-                return new Complex(real / mod, imag / mod);
+                return new Complex(_real / mod, _imag / mod);
             }
         }
 
@@ -602,7 +602,7 @@ namespace MathNet.Numerics
         /// </remarks>
         public Complex Conjugate
         {
-            get { return new Complex(real, -imag); }
+            get { return new Complex(_real, -_imag); }
             set { this = value.Conjugate; }
         }
 
@@ -615,7 +615,7 @@ namespace MathNet.Numerics
         bool
         Equals(object obj)
         {
-            return (obj is Complex) && this.Equals((Complex)obj);
+            return (obj is Complex) && Equals((Complex)obj);
         }
 
         /// <summary>
@@ -627,8 +627,8 @@ namespace MathNet.Numerics
         {
             return !IsNaN
                 && !other.IsNaN
-                && (real == other.real)
-                && (imag == other.imag);
+                && (_real == other._real)
+                && (_imag == other._imag);
         }
 
         /// <summary>
@@ -640,8 +640,8 @@ namespace MathNet.Numerics
         {
             return !IsNaN
                 && !other.IsNaN
-                && Number.AlmostEqual(real, other.real)
-                && Number.AlmostEqual(imag, other.imag);
+                && Number.AlmostEqual(_real, other._real)
+                && Number.AlmostEqual(_imag, other._imag);
         }
 
         /// <summary>
@@ -655,8 +655,8 @@ namespace MathNet.Numerics
         {
             return !IsNaN
                 && !other.IsNaN
-                && Number.AlmostEqual(real, other.real, maximumRelativeError)
-                && Number.AlmostEqual(imag, other.imag, maximumRelativeError);
+                && Number.AlmostEqual(_real, other._real, maximumRelativeError)
+                && Number.AlmostEqual(_imag, other._imag, maximumRelativeError);
         }
 
         /// <summary>
@@ -691,7 +691,7 @@ namespace MathNet.Numerics
         int
         GetHashCode()
         {
-            return real.GetHashCode() ^ (-imag.GetHashCode());
+            return _real.GetHashCode() ^ (-_imag.GetHashCode());
         }
 
         /// <summary>
@@ -779,7 +779,7 @@ namespace MathNet.Numerics
         /// </summary>
         public static Complex operator -(Complex subtrahend)
         {
-            return new Complex(-subtrahend.real, -subtrahend.imag);
+            return new Complex(-subtrahend._real, -subtrahend._imag);
         }
 
         /// <summary>
@@ -787,7 +787,7 @@ namespace MathNet.Numerics
         /// </summary>
         public static Complex operator +(Complex summand1, Complex summand2)
         {
-            return new Complex(summand1.real + summand2.real, summand1.imag + summand2.imag);
+            return new Complex(summand1._real + summand2._real, summand1._imag + summand2._imag);
         }
 
         /// <summary>
@@ -795,7 +795,7 @@ namespace MathNet.Numerics
         /// </summary>
         public static Complex operator -(Complex minuend, Complex subtrahend)
         {
-            return new Complex(minuend.real - subtrahend.real, minuend.imag - subtrahend.imag);
+            return new Complex(minuend._real - subtrahend._real, minuend._imag - subtrahend._imag);
         }
 
         /// <summary>
@@ -803,7 +803,7 @@ namespace MathNet.Numerics
         /// </summary>
         public static Complex operator +(Complex summand1, double summand2)
         {
-            return new Complex(summand1.real + summand2, summand1.imag);
+            return new Complex(summand1._real + summand2, summand1._imag);
         }
 
         /// <summary>
@@ -811,7 +811,7 @@ namespace MathNet.Numerics
         /// </summary>
         public static Complex operator -(Complex minuend, double subtrahend)
         {
-            return new Complex(minuend.real - subtrahend, minuend.imag);
+            return new Complex(minuend._real - subtrahend, minuend._imag);
         }
 
         /// <summary>
@@ -819,7 +819,7 @@ namespace MathNet.Numerics
         /// </summary>
         public static Complex operator +(double summand1, Complex summand2)
         {
-            return new Complex(summand2.real + summand1, summand2.imag);
+            return new Complex(summand2._real + summand1, summand2._imag);
         }
 
         /// <summary>
@@ -827,7 +827,7 @@ namespace MathNet.Numerics
         /// </summary>
         public static Complex operator -(double minuend, Complex subtrahend)
         {
-            return new Complex(minuend - subtrahend.real, -subtrahend.imag);
+            return new Complex(minuend - subtrahend._real, -subtrahend._imag);
         }
 
         /// <summary>
@@ -835,7 +835,7 @@ namespace MathNet.Numerics
         /// </summary>
         public static Complex operator *(Complex multiplicand, Complex multiplier)
         {
-            return new Complex((multiplicand.real * multiplier.real) - (multiplicand.imag * multiplier.imag), (multiplicand.real * multiplier.imag) + (multiplicand.imag * multiplier.real));
+            return new Complex((multiplicand._real * multiplier._real) - (multiplicand._imag * multiplier._imag), (multiplicand._real * multiplier._imag) + (multiplicand._imag * multiplier._real));
         }
 
         /// <summary>
@@ -843,7 +843,7 @@ namespace MathNet.Numerics
         /// </summary>
         public static Complex operator *(double multiplicand, Complex multiplier)
         {
-            return new Complex(multiplier.real * multiplicand, multiplier.imag * multiplicand);
+            return new Complex(multiplier._real * multiplicand, multiplier._imag * multiplicand);
         }
 
         /// <summary>
@@ -851,7 +851,7 @@ namespace MathNet.Numerics
         /// </summary>
         public static Complex operator *(Complex multiplicand, double multiplier)
         {
-            return new Complex(multiplicand.real * multiplier, multiplicand.imag * multiplier);
+            return new Complex(multiplicand._real * multiplier, multiplicand._imag * multiplier);
         }
 
         /// <summary>
@@ -861,24 +861,24 @@ namespace MathNet.Numerics
         {
             if(divisor.IsZero)
             {
-                return Complex.Infinity;
+                return Infinity;
             }
 
-            if(Math.Abs(divisor.real) >= Math.Abs(divisor.imag))
+            if(Math.Abs(divisor._real) >= Math.Abs(divisor._imag))
             {
-                double r = divisor.imag / divisor.real;
-                double den = divisor.real + (r * divisor.imag);
+                double r = divisor._imag / divisor._real;
+                double den = divisor._real + (r * divisor._imag);
                 return new Complex(
-                    (dividend.real + (dividend.imag * r)) / den,
-                    (dividend.imag - (dividend.real * r)) / den);
+                    (dividend._real + (dividend._imag * r)) / den,
+                    (dividend._imag - (dividend._real * r)) / den);
             }
             else
             {
-                double r = divisor.real / divisor.imag;
-                double den = divisor.imag + (r * divisor.real);
+                double r = divisor._real / divisor._imag;
+                double den = divisor._imag + (r * divisor._real);
                 return new Complex(
-                    ((dividend.real * r) + dividend.imag) / den,
-                    ((dividend.imag * r) - dividend.real) / den);
+                    ((dividend._real * r) + dividend._imag) / den,
+                    ((dividend._imag * r) - dividend._real) / den);
             }
         }
 
@@ -889,21 +889,21 @@ namespace MathNet.Numerics
         {
             if(divisor.IsZero)
             {
-                return Complex.Infinity;
+                return Infinity;
             }
 
-            if(Math.Abs(divisor.real) >= Math.Abs(divisor.imag))
+            if(Math.Abs(divisor._real) >= Math.Abs(divisor._imag))
             {
-                double r = divisor.imag / divisor.real;
-                double den = divisor.real + (r * divisor.imag);
+                double r = divisor._imag / divisor._real;
+                double den = divisor._real + (r * divisor._imag);
                 return new Complex(
                     dividend / den,
                     -dividend * r / den);
             }
             else
             {
-                double r = divisor.real / divisor.imag;
-                double den = divisor.imag + (r * divisor.real);
+                double r = divisor._real / divisor._imag;
+                double den = divisor._imag + (r * divisor._real);
                 return new Complex(
                     dividend * r / den,
                     -dividend / den);
@@ -917,10 +917,10 @@ namespace MathNet.Numerics
         {
             if(Number.AlmostZero(divisor))
             {
-                return Complex.Infinity;
+                return Infinity;
             }
 
-            return new Complex(dividend.real / divisor, dividend.imag / divisor);
+            return new Complex(dividend._real / divisor, dividend._imag / divisor);
         }
 
         /// <summary>
@@ -944,12 +944,12 @@ namespace MathNet.Numerics
         {
             if(IsReal)
             {
-                return new Complex(Trig.Sine(real), 0d);
+                return new Complex(Trig.Sine(_real), 0d);
             }
 
             return new Complex(
-                Trig.Sine(real) * Trig.HyperbolicCosine(imag),
-                Trig.Cosine(real) * Trig.HyperbolicSine(imag));
+                Trig.Sine(_real) * Trig.HyperbolicCosine(_imag),
+                Trig.Cosine(_real) * Trig.HyperbolicSine(_imag));
         }
 
         /// <summary>
@@ -961,12 +961,12 @@ namespace MathNet.Numerics
         {
             if(IsReal)
             {
-                return new Complex(Trig.Cosine(real), 0d);
+                return new Complex(Trig.Cosine(_real), 0d);
             }
 
             return new Complex(
-                Trig.Cosine(real) * Trig.HyperbolicCosine(imag),
-                -Trig.Sine(real) * Trig.HyperbolicSine(imag));
+                Trig.Cosine(_real) * Trig.HyperbolicCosine(_imag),
+                -Trig.Sine(_real) * Trig.HyperbolicSine(_imag));
         }
 
         /// <summary>
@@ -978,16 +978,16 @@ namespace MathNet.Numerics
         {
             if(IsReal)
             {
-                return new Complex(Trig.Tangent(real), 0d);
+                return new Complex(Trig.Tangent(_real), 0d);
             }
 
-            double cosr = Trig.Cosine(real);
-            double sinhi = Trig.HyperbolicSine(imag);
+            double cosr = Trig.Cosine(_real);
+            double sinhi = Trig.HyperbolicSine(_imag);
             double denom = (cosr * cosr) + (sinhi * sinhi);
 
             return new Complex(
-                Trig.Sine(real) * cosr / denom,
-                sinhi * Trig.HyperbolicCosine(imag) / denom);
+                Trig.Sine(_real) * cosr / denom,
+                sinhi * Trig.HyperbolicCosine(_imag) / denom);
         }
 
         /// <summary>
@@ -999,16 +999,16 @@ namespace MathNet.Numerics
         {
             if(IsReal)
             {
-                return new Complex(Trig.Cotangent(real), 0d);
+                return new Complex(Trig.Cotangent(_real), 0d);
             }
 
-            double sinr = Trig.Sine(real);
-            double sinhi = Trig.HyperbolicSine(imag);
+            double sinr = Trig.Sine(_real);
+            double sinhi = Trig.HyperbolicSine(_imag);
             double denom = (sinr * sinr) + (sinhi * sinhi);
 
             return new Complex(
-                sinr * Trig.Cosine(real) / denom,
-                -sinhi * Trig.HyperbolicCosine(imag) / denom);
+                sinr * Trig.Cosine(_real) / denom,
+                -sinhi * Trig.HyperbolicCosine(_imag) / denom);
         }
 
         /// <summary>
@@ -1020,16 +1020,16 @@ namespace MathNet.Numerics
         {
             if(IsReal)
             {
-                return new Complex(Trig.Secant(real), 0d);
+                return new Complex(Trig.Secant(_real), 0d);
             }
 
-            double cosr = Trig.Cosine(real);
-            double sinhi = Trig.HyperbolicSine(imag);
+            double cosr = Trig.Cosine(_real);
+            double sinhi = Trig.HyperbolicSine(_imag);
             double denom = (cosr * cosr) + (sinhi * sinhi);
 
             return new Complex(
-                cosr * Trig.HyperbolicCosine(imag) / denom,
-                Trig.Sine(real) * sinhi / denom);
+                cosr * Trig.HyperbolicCosine(_imag) / denom,
+                Trig.Sine(_real) * sinhi / denom);
         }
 
         /// <summary>
@@ -1041,16 +1041,16 @@ namespace MathNet.Numerics
         {
             if(IsReal)
             {
-                return new Complex(Trig.Cosecant(real), 0d);
+                return new Complex(Trig.Cosecant(_real), 0d);
             }
 
-            double sinr = Trig.Sine(real);
-            double sinhi = Trig.HyperbolicSine(imag);
+            double sinr = Trig.Sine(_real);
+            double sinhi = Trig.HyperbolicSine(_imag);
             double denom = (sinr * sinr) + (sinhi * sinhi);
 
             return new Complex(
-                sinr * Trig.HyperbolicCosine(imag) / denom,
-                -Trig.Cosine(real) * sinhi / denom);
+                sinr * Trig.HyperbolicCosine(_imag) / denom,
+                -Trig.Cosine(_real) * sinhi / denom);
         }
 
         #endregion
@@ -1064,7 +1064,7 @@ namespace MathNet.Numerics
         Complex
         InverseSine()
         {
-            return -Complex.I * ((1 - this.Square()).SquareRoot() + (Complex.I * this)).NaturalLogarithm();
+            return -I * ((1 - Square()).SquareRoot() + (I * this)).NaturalLogarithm();
         }
 
         /// <summary>
@@ -1074,7 +1074,7 @@ namespace MathNet.Numerics
         Complex
         InverseCosine()
         {
-            return -Complex.I * (this + (Complex.I * (1 - this.Square()).SquareRoot())).NaturalLogarithm();
+            return -I * (this + (I * (1 - Square()).SquareRoot())).NaturalLogarithm();
         }
 
         /// <summary>
@@ -1084,7 +1084,7 @@ namespace MathNet.Numerics
         Complex
         InverseTangent()
         {
-            Complex iz = new Complex(-imag, real); // I*this
+            Complex iz = new Complex(-_imag, _real); // I*this
             return new Complex(0, 0.5) * ((1 - iz).NaturalLogarithm() - (1 + iz).NaturalLogarithm());
         }
 
@@ -1095,7 +1095,7 @@ namespace MathNet.Numerics
         Complex
         InverseCotangent()
         {
-            Complex iz = new Complex(-imag, real); // I*this
+            Complex iz = new Complex(-_imag, _real); // I*this
             return (new Complex(0, 0.5) * ((1 + iz).NaturalLogarithm() - (1 - iz).NaturalLogarithm())) + (Math.PI / 2);
         }
 
@@ -1107,7 +1107,7 @@ namespace MathNet.Numerics
         InverseSecant()
         {
             Complex inv = 1 / this;
-            return -Complex.I * (inv + (Complex.I * (1 - inv.Square()).SquareRoot())).NaturalLogarithm();
+            return -I * (inv + (I * (1 - inv.Square()).SquareRoot())).NaturalLogarithm();
         }
 
         /// <summary>
@@ -1118,7 +1118,7 @@ namespace MathNet.Numerics
         InverseCosecant()
         {
             Complex inv = 1 / this;
-            return -Complex.I * ((Complex.I * inv) + (1 - inv.Square()).SquareRoot()).NaturalLogarithm();
+            return -I * ((I * inv) + (1 - inv.Square()).SquareRoot()).NaturalLogarithm();
         }
 
         #endregion
@@ -1134,12 +1134,12 @@ namespace MathNet.Numerics
         {
             if(IsReal)
             {
-                return new Complex(Trig.HyperbolicSine(real), 0d);
+                return new Complex(Trig.HyperbolicSine(_real), 0d);
             }
 
             return new Complex(
-                Trig.HyperbolicSine(real) * Trig.Cosine(imag),
-                Trig.HyperbolicCosine(real) * Trig.Sine(imag));
+                Trig.HyperbolicSine(_real) * Trig.Cosine(_imag),
+                Trig.HyperbolicCosine(_real) * Trig.Sine(_imag));
         }
 
         /// <summary>
@@ -1151,12 +1151,12 @@ namespace MathNet.Numerics
         {
             if(IsReal)
             {
-                return new Complex(Trig.HyperbolicCosine(real), 0d);
+                return new Complex(Trig.HyperbolicCosine(_real), 0d);
             }
 
             return new Complex(
-                Trig.HyperbolicCosine(real) * Trig.Cosine(imag),
-                Trig.HyperbolicSine(real) * Trig.Sine(imag));
+                Trig.HyperbolicCosine(_real) * Trig.Cosine(_imag),
+                Trig.HyperbolicSine(_real) * Trig.Sine(_imag));
         }
 
         /// <summary>
@@ -1168,16 +1168,16 @@ namespace MathNet.Numerics
         {
             if(IsReal)
             {
-                return new Complex(Trig.HyperbolicTangent(real), 0d);
+                return new Complex(Trig.HyperbolicTangent(_real), 0d);
             }
 
-            double cosi = Trig.Cosine(imag);
-            double sinhr = Trig.HyperbolicSine(real);
+            double cosi = Trig.Cosine(_imag);
+            double sinhr = Trig.HyperbolicSine(_real);
             double denom = (cosi * cosi) + (sinhr * sinhr);
 
             return new Complex(
-                Trig.HyperbolicCosine(real) * sinhr / denom,
-                cosi * Trig.Sine(imag) / denom);
+                Trig.HyperbolicCosine(_real) * sinhr / denom,
+                cosi * Trig.Sine(_imag) / denom);
         }
 
         /// <summary>
@@ -1189,16 +1189,16 @@ namespace MathNet.Numerics
         {
             if(IsReal)
             {
-                return new Complex(Trig.HyperbolicCotangent(real), 0d);
+                return new Complex(Trig.HyperbolicCotangent(_real), 0d);
             }
 
-            double sini = Trig.Sine(imag);
-            double sinhr = Trig.HyperbolicSine(real);
+            double sini = Trig.Sine(_imag);
+            double sinhr = Trig.HyperbolicSine(_real);
             double denom = (sini * sini) + (sinhr * sinhr);
 
             return new Complex(
-                sinhr * Trig.HyperbolicCosine(real) / denom,
-                sini * Trig.Cosine(imag) / denom);
+                sinhr * Trig.HyperbolicCosine(_real) / denom,
+                sini * Trig.Cosine(_imag) / denom);
         }
 
         /// <summary>
@@ -1210,10 +1210,10 @@ namespace MathNet.Numerics
         {
             if(IsReal)
             {
-                return new Complex(Trig.HyperbolicSecant(real), 0d);
+                return new Complex(Trig.HyperbolicSecant(_real), 0d);
             }
 
-            Complex exp = this.Exponential();
+            Complex exp = Exponential();
             return 2 * exp / (exp.Square() + 1);
         }
 
@@ -1226,10 +1226,10 @@ namespace MathNet.Numerics
         {
             if(IsReal)
             {
-                return new Complex(Trig.HyperbolicCosecant(real), 0d);
+                return new Complex(Trig.HyperbolicCosecant(_real), 0d);
             }
 
-            Complex exp = this.Exponential();
+            Complex exp = Exponential();
             return 2 * exp / (exp.Square() - 1);
         }
 
@@ -1244,7 +1244,7 @@ namespace MathNet.Numerics
         Complex
         InverseHyperbolicSine()
         {
-            return (this + (this.Square() + 1).SquareRoot()).NaturalLogarithm();
+            return (this + (Square() + 1).SquareRoot()).NaturalLogarithm();
         }
 
         /// <summary>
@@ -1310,15 +1310,15 @@ namespace MathNet.Numerics
         Complex
         Exponential()
         {
-            double exp = Math.Exp(real);
+            double exp = Math.Exp(_real);
             if(IsReal)
             {
                 return new Complex(exp, 0d);
             }
 
             return new Complex(
-                exp * Trig.Cosine(imag),
-                exp * Trig.Sine(imag));
+                exp * Trig.Cosine(_imag),
+                exp * Trig.Sine(_imag));
         }
 
         /// <summary>
@@ -1330,7 +1330,7 @@ namespace MathNet.Numerics
         {
             if(IsRealNonNegative)
             {
-                return new Complex(Math.Log(real), 0d);
+                return new Complex(Math.Log(_real), 0d);
             }
 
             return new Complex(
@@ -1349,12 +1349,12 @@ namespace MathNet.Numerics
             {
                 if(exponent.IsZero)
                 {
-                    return Complex.One;
+                    return One;
                 }
 
                 if(exponent.Real > 0)
                 {
-                    return Complex.Zero;
+                    return Zero;
                 }
 
                 if(exponent.Real < 0)
@@ -1367,7 +1367,7 @@ namespace MathNet.Numerics
                     return new Complex(double.PositiveInfinity, double.PositiveInfinity);
                 }
 
-                return Complex.NaN;
+                return NaN;
             }
 
             return (exponent * NaturalLogarithm()).Exponential();
@@ -1392,12 +1392,12 @@ namespace MathNet.Numerics
         {
             if(IsReal)
             {
-                return new Complex(real * real, 0d);
+                return new Complex(_real * _real, 0d);
             }
 
             return new Complex(
-                (real * real) - (imag * imag),
-                2 * real * imag);
+                (_real * _real) - (_imag * _imag),
+                2 * _real * _imag);
         }
 
         /// <summary>
@@ -1409,21 +1409,21 @@ namespace MathNet.Numerics
         {
             if(IsRealNonNegative)
             {
-                return new Complex(Math.Sqrt(real), 0d);
+                return new Complex(Math.Sqrt(_real), 0d);
             }
 
             double mod = Modulus;
 
-            if(imag > 0 || (imag == 0 && real < 0))
+            if(_imag > 0 || (_imag == 0 && _real < 0))
             {
                 return new Complex(
-                    Constants.Sqrt1_2 * Math.Sqrt(mod + real),
-                    Constants.Sqrt1_2 * Math.Sqrt(mod - real));
+                    Constants.Sqrt1_2 * Math.Sqrt(mod + _real),
+                    Constants.Sqrt1_2 * Math.Sqrt(mod - _real));
             }
 
             return new Complex(
-                Constants.Sqrt1_2 * Math.Sqrt(mod + real),
-                -Constants.Sqrt1_2 * Math.Sqrt(mod - real));
+                Constants.Sqrt1_2 * Math.Sqrt(mod + _real),
+                -Constants.Sqrt1_2 * Math.Sqrt(mod - _real));
         }
 
         #endregion
@@ -1490,66 +1490,64 @@ namespace MathNet.Numerics
 
             if(IsReal)
             {
-                return real.ToString(numberFormat);
+                return _real.ToString(numberFormat);
             }
 
             // note: there's a difference between the negative sign and the subtraction operator!
             if(IsImaginary)
             {
-                if(Number.AlmostEqual(imag, 1))
+                if(Number.AlmostEqual(_imag, 1))
                 {
                     return "I";
                 }
 
-                if(Number.AlmostEqual(imag, -1))
+                if(Number.AlmostEqual(_imag, -1))
                 {
                     return numberFormat.NegativeSign + "I";
                 }
 
-                if(imag < 0)
+                if(_imag < 0)
                 {
-                    return numberFormat.NegativeSign + "I*" + (-imag).ToString(numberFormat);
+                    return numberFormat.NegativeSign + "I*" + (-_imag).ToString(numberFormat);
                 }
 
-                return "I*" + imag.ToString(numberFormat);
+                return "I*" + _imag.ToString(numberFormat);
             }
-            else
+
+            if(Number.AlmostEqual(_imag, 1))
             {
-                if(Number.AlmostEqual(imag, 1))
-                {
-                    return real.ToString(numberFormat) + "+I";
-                }
-
-                if(Number.AlmostEqual(imag, -1))
-                {
-                    return real.ToString(numberFormat) + "-I";
-                }
-
-                if(imag < 0)
-                {
-                    return real.ToString(numberFormat) + "-I*"
-                       + (-imag).ToString(numberFormat);
-                }
-
-                return real.ToString() + "+I*" + imag.ToString(numberFormat);
+                return _real.ToString(numberFormat) + "+I";
             }
+
+            if(Number.AlmostEqual(_imag, -1))
+            {
+                return _real.ToString(numberFormat) + "-I";
+            }
+
+            if(_imag < 0)
+            {
+                return _real.ToString(numberFormat) + "-I*"
+                       + (-_imag).ToString(numberFormat);
+            }
+
+            return _real + "+I*" + _imag.ToString(numberFormat);
         }
 
         private sealed class ComplexParser
         {
-            Complex complex;
-            int cursor; // = 0;
-            string source;
-            NumberFormatInfo numberFormat;
+            Complex _complex;
+            int _cursor; // = 0;
+            readonly string _source;
+            readonly NumberFormatInfo _numberFormat;
 
             public
             ComplexParser(
                 string complex,
                 NumberFormatInfo numberFormat)
             {
-                this.numberFormat = numberFormat;
-                this.source = complex.ToLower().Trim();
-                this.complex = ScanComplex();
+                _numberFormat = numberFormat;
+                _source = complex.ToLower().Trim();
+                _complex = ScanComplex();
             }
 
             #region Infrastructure
@@ -1557,19 +1555,19 @@ namespace MathNet.Numerics
             char
             Consume()
             {
-                return source[cursor++];
+                return _source[_cursor++];
             }
 
             char LookAheadCharacterOrNull
             {
                 get
                 {
-                    if(cursor >= source.Length)
+                    if(_cursor >= _source.Length)
                     {
                         return '\0';
                     }
                     
-                    return source[cursor];
+                    return _source[_cursor];
                 }
             }
 
@@ -1577,12 +1575,12 @@ namespace MathNet.Numerics
             {
                 get
                 {
-                    if(cursor >= source.Length)
+                    if(_cursor >= _source.Length)
                     {
                         throw new ArgumentException(Properties.LocalStrings.ArgumentParseComplexNumber, "complex");
                     }
                     
-                    return source[cursor];
+                    return _source[_cursor];
                 }
             }
 
@@ -1593,19 +1591,19 @@ namespace MathNet.Numerics
             Complex
             ScanComplex()
             {
-                if(source.Equals("i"))
+                if(_source.Equals("i"))
                 {
-                    return Complex.I;
+                    return I;
                 }
 
-                if(source.Equals(numberFormat.NaNSymbol.ToLower()))
+                if(_source.Equals(_numberFormat.NaNSymbol.ToLower()))
                 {
-                    return Complex.NaN;
+                    return NaN;
                 }
 
-                if(source.Equals("infinity") || source.Equals("infty"))
+                if(_source.Equals("infinity") || _source.Equals("infty"))
                 {
-                    return Complex.Infinity;
+                    return Infinity;
                 }
 
                 ScanSkipWhitespace();
@@ -1688,10 +1686,8 @@ namespace MathNet.Numerics
                 {
                     return new Complex(0d, part);
                 }
-                else
-                {
-                    return new Complex(part, 0d);
-                }
+
+                return new Complex(part, 0d);
             }
 
             double
@@ -1711,7 +1707,7 @@ namespace MathNet.Numerics
                 if(IsDecimal(LookAheadCharacterOrNull))
                 {
                     Consume();
-                    sb.Append(numberFormat.NumberDecimalSeparator);
+                    sb.Append(_numberFormat.NumberDecimalSeparator);
                     ScanInteger(sb);
                 }
 
@@ -1731,7 +1727,7 @@ namespace MathNet.Numerics
                 return double.Parse(
                     sb.ToString(),
                     NumberStyles.AllowDecimalPoint | NumberStyles.AllowExponent | NumberStyles.AllowLeadingSign,
-                    numberFormat);
+                    _numberFormat);
             }
 
             void
@@ -1751,7 +1747,7 @@ namespace MathNet.Numerics
             void
             ScanSkipWhitespace()
             {
-                while(cursor < source.Length && !IsNotWhiteSpace(LookAheadCharacter))
+                while(_cursor < _source.Length && !IsNotWhiteSpace(LookAheadCharacter))
                 {
                     Consume();
                 }
@@ -1771,20 +1767,20 @@ namespace MathNet.Numerics
             bool
             IsNumber(char c)
             {
-                // TODO: consider using numberFormat.NativeDigits
+                // TODO: consider using _numberFormat.NativeDigits
                 return c >= '0' && c <= '9';
             }
             
             bool
             IsDecimal(char c)
             {
-                return numberFormat.NumberDecimalSeparator.Equals(c.ToString());
+                return _numberFormat.NumberDecimalSeparator.Equals(c.ToString());
             }
 
             bool
             IsGroup(char c)
             {
-                return numberFormat.NumberGroupSeparator.Equals(c.ToString());
+                return _numberFormat.NumberGroupSeparator.Equals(c.ToString());
             }
 
             static
@@ -1804,13 +1800,13 @@ namespace MathNet.Numerics
             bool
             IsSign(char c)
             {
-                return numberFormat.PositiveSign.Equals(c.ToString()) || numberFormat.NegativeSign.Equals(c.ToString());
+                return _numberFormat.PositiveSign.Equals(c.ToString()) || _numberFormat.NegativeSign.Equals(c.ToString());
             }
 
             bool
             IsNegativeSign(char c)
             {
-                return numberFormat.NegativeSign.Equals(c.ToString());
+                return _numberFormat.NegativeSign.Equals(c.ToString());
             }
 
             static
@@ -1824,17 +1820,17 @@ namespace MathNet.Numerics
 
             public Complex Complex
             {
-                get { return complex; }
+                get { return _complex; }
             }
 
             public double Real
             {
-                get { return complex.real; }
+                get { return _complex._real; }
             }
 
             public double Imaginary
             {
-                get { return complex.imag; }
+                get { return _complex._imag; }
             }
         }
 
