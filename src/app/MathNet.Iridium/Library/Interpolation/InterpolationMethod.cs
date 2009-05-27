@@ -45,7 +45,7 @@ namespace MathNet.Numerics.Interpolation
         Interpolate(double t);
 
         /// <summary>
-        /// True if the alorithm supports differentiation.
+        /// True if the algorithm supports differentiation.
         /// </summary>
         /// <seealso cref="Differentiate"/>
         bool SupportsDifferentiation
@@ -68,7 +68,7 @@ namespace MathNet.Numerics.Interpolation
             out double second);
 
         /// <summary>
-        /// True if the alorithm supports integration.
+        /// True if the algorithm supports integration.
         /// </summary>
         /// <seealso cref="Integrate"/>
         bool SupportsIntegration
@@ -80,7 +80,7 @@ namespace MathNet.Numerics.Interpolation
         /// Definite Integrate up to point t.
         /// </summary>
         /// <param name="t">Right bound of the integration interval [a,t].</param>
-        /// <returns>Interpolated definite integeral over the interval [a,t].</returns>
+        /// <returns>Interpolated definite integral over the interval [a,t].</returns>
         /// <seealso cref="SupportsIntegration"/>
         double
         Integrate(double t);

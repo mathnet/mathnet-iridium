@@ -130,8 +130,10 @@ namespace MathNet.Numerics.Distributions
         /// Determines whether the specified parameters is valid.
         /// </summary>
         /// <returns>
-        /// <see langword="true"/> if probabilityOfSuccess is greater than or equal to 0.0, and less than or equal to 1.0,
-        /// and numberOfTrials is greater than or equal to 0; otherwise, <see langword="false"/>.
+        /// <see langword="true"/> if <paramref name="probabilityOfSuccess"/> is greater
+        /// than or equal to 0.0, and less than or equal to 1.0, and 
+        /// <paramref name="numberOfTrials"/> is greater than or equal to 0; otherwise, 
+        /// <see langword="false"/>.
         /// </returns>
         public static
         bool
@@ -216,9 +218,9 @@ namespace MathNet.Numerics.Distributions
 
         #region Generator
         /// <summary>
-        /// Returns a bernoulli distributed random number.
+        /// Returns a binomial distributed random number.
         /// </summary>
-        /// <returns>A bernoulli distributed 32-bit signed integer.</returns>
+        /// <returns>A binomial distributed 32-bit signed integer.</returns>
         public override
         int
         NextInt32()

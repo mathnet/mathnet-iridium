@@ -286,11 +286,11 @@ namespace MathNet.Numerics.RandomSources
         ///   and less than or equal to <see cref="UInt32.MaxValue"/>.
         /// </remarks>
         void
-        GenerateNUInts()
+        GenerateUInts()
         {
             int kk;
             uint y;
-            uint[] mag01 = new uint[2] { 0x0U, VectorA };
+            uint[] mag01 = new uint[] { 0x0U, VectorA };
 
             for(kk = 0; kk < N - M; kk++)
             {
@@ -325,7 +325,7 @@ namespace MathNet.Numerics.RandomSources
             if(_mti >= N)
             {
                 // generate N words at one time
-                GenerateNUInts();
+                GenerateUInts();
             }
 
             uint y = _mt[_mti++];
@@ -352,7 +352,7 @@ namespace MathNet.Numerics.RandomSources
             if(_mti >= N)
             {
                 // generate N words at one time
-                GenerateNUInts();
+                GenerateUInts();
             }
 
             uint y = _mt[_mti++];
@@ -382,7 +382,7 @@ namespace MathNet.Numerics.RandomSources
         /// </summary>
         /// <returns>
         /// A 32-bit signed integer greater than or equal to 0, and less than or equal to <see cref="Int32.MaxValue"/>; 
-        ///   that is, the range of return values includes 0 and <paramref name="Int32.MaxValue"/>.
+        ///   that is, the range of return values includes 0 and <see name="Int32.MaxValue"/>.
         /// </returns>
         public
         int
@@ -392,7 +392,7 @@ namespace MathNet.Numerics.RandomSources
             if(_mti >= N)
             {
                 // generate N words at one time
-                GenerateNUInts();
+                GenerateUInts();
             }
 
             uint y = _mt[_mti++];
@@ -411,7 +411,7 @@ namespace MathNet.Numerics.RandomSources
         /// </summary>
         /// <returns>
         /// A 32-bit signed integer greater than or equal to 0, and less than <see cref="Int32.MaxValue"/>; that is, 
-        ///   the range of return values includes 0 but not <paramref name="Int32.MaxValue"/>.
+        ///   the range of return values includes 0 but not <see name="Int32.MaxValue"/>.
         /// </returns>
         public override
         int
@@ -421,7 +421,7 @@ namespace MathNet.Numerics.RandomSources
             if(_mti >= N)
             {
                 // generate N words at one time
-                GenerateNUInts();
+                GenerateUInts();
             }
 
             uint y = _mt[_mti++];
@@ -473,7 +473,7 @@ namespace MathNet.Numerics.RandomSources
             if(_mti >= N)
             {
                 // generate N words at one time
-                GenerateNUInts();
+                GenerateUInts();
             }
 
             uint y = _mt[_mti++];
@@ -524,7 +524,7 @@ namespace MathNet.Numerics.RandomSources
             if(_mti >= N)
             {
                 // generate N words at one time
-                GenerateNUInts();
+                GenerateUInts();
             }
 
             uint y = _mt[_mti++];
@@ -540,15 +540,12 @@ namespace MathNet.Numerics.RandomSources
             {
                 // The range is greater than Int32.MaxValue, so we have to use slower floating point arithmetic.
                 // Also all 32 random bits (uint) have to be used which again is slower (See comment in NextDouble()).
-                return minValue + (int)
-                    (y * UIntToDoubleMultiplier * ((double)maxValue - (double)minValue));
+                return minValue + (int)(y * UIntToDoubleMultiplier * (maxValue - (double)minValue));
             }
-            else
-            {
-                // 31 random bits (int) will suffice which allows us to shift and cast to an int before the first multiplication and gain better performance.
-                // See comment in NextDouble().
-                return minValue + (int)((int)(y >> 1) * IntToDoubleMultiplier * range);
-            }
+
+            // 31 random bits (int) will suffice which allows us to shift and cast to an int before the first multiplication and gain better performance.
+            // See comment in NextDouble().
+            return minValue + (int)((int)(y >> 1) * IntToDoubleMultiplier * range);
         }
 
         /// <summary>
@@ -566,7 +563,7 @@ namespace MathNet.Numerics.RandomSources
             if(_mti >= N)
             {
                 // generate N words at one time
-                GenerateNUInts();
+                GenerateUInts();
             }
 
             uint y = _mt[_mti++];
@@ -615,7 +612,7 @@ namespace MathNet.Numerics.RandomSources
             if(_mti >= N)
             {
                 // generate N words at one time
-                GenerateNUInts();
+                GenerateUInts();
             }
 
             uint y = _mt[_mti++];
@@ -681,7 +678,7 @@ namespace MathNet.Numerics.RandomSources
             if(_mti >= N)
             {
                 // generate N words at one time
-                GenerateNUInts();
+                GenerateUInts();
             }
 
             uint y = _mt[_mti++];
@@ -715,7 +712,7 @@ namespace MathNet.Numerics.RandomSources
                 if(_mti >= N)
                 {
                     // generate N words at one time
-                    GenerateNUInts();
+                    GenerateUInts();
                 }
 
                 uint y = _mt[_mti++];
@@ -765,7 +762,7 @@ namespace MathNet.Numerics.RandomSources
                 if(_mti >= N)
                 {
                     // generate N words at one time
-                    GenerateNUInts();
+                    GenerateUInts();
                 }
 
                 y = _mt[_mti++];
@@ -789,7 +786,7 @@ namespace MathNet.Numerics.RandomSources
                 if(_mti >= N)
                 {
                     // generate N words at one time
-                    GenerateNUInts();
+                    GenerateUInts();
                 }
 
                 y = _mt[_mti++];

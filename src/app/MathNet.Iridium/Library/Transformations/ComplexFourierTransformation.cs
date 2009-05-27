@@ -33,7 +33,7 @@ namespace MathNet.Numerics.Transformations
 {
     /// <summary>
     /// <para>The <c>ComplexFourierTransformation</c> provides algorithms
-    /// for one, two and three dimensional fast fourier transformations
+    /// for one, two and three dimensional fast Fourier transformations
     /// (FFT) on complex vectors.</para>
     /// <para>This class caches precomputations locally, thus consider reusing/caching it.</para>
     /// </summary>

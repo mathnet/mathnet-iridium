@@ -59,7 +59,7 @@ namespace MathNet.Numerics.Interpolation
     /// This class will be removed in future versions, please use the newer interpolation scheme instead.
     /// </summary>
     [Obsolete("Please use Interpolation instead. This class is obsolete and will be removed in future versions.")]
-    public class InterpolationSingleDimension
+    public sealed class InterpolationSingleDimension
     {
         readonly SampleList _samples;
         readonly IInterpolationAlgorithm _algorithm;
@@ -225,7 +225,7 @@ namespace MathNet.Numerics.Interpolation
         /// Override this method to select custom interpolation algorithms.
         /// </summary>
         /// <param name="mode">Interpolation Mode.</param>
-        protected virtual
+        static
         IInterpolationAlgorithm
         SelectAlgorithm(InterpolationMode mode)
         {

@@ -223,7 +223,7 @@ namespace MathNet.Numerics.Distributions
         }
 
         /// <summary>
-        /// Continuous inverse of the cumulativ distribution function (icdf) of this probabilit distribution.
+        /// Continuous inverse of the cumulative distribution function (icdf) of this probability distribution.
         /// </summary>
         public
         double
@@ -242,11 +242,11 @@ namespace MathNet.Numerics.Distributions
         double
         NextDouble()
         {
-            double xi, eta, gen1, gen2;
+            double xi, eta;
             do
             {
-                gen1 = 1.0 - RandomSource.NextDouble();
-                gen2 = 1.0 - RandomSource.NextDouble();
+                double gen1 = 1.0 - RandomSource.NextDouble();
+                double gen2 = 1.0 - RandomSource.NextDouble();
                 if(gen1 <= _helper2)
                 {
                     xi = Math.Pow(gen1 / _helper2, 1.0 / _helper1);

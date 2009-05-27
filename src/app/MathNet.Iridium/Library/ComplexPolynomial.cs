@@ -328,7 +328,7 @@ namespace MathNet.Numerics
         ////}
 
         /// <summary>
-        /// Check wether a polynomial is bigger than another polynomial.
+        /// Check whether a polynomial is bigger than another polynomial.
         /// </summary>
         public static
         bool
@@ -340,7 +340,7 @@ namespace MathNet.Numerics
         }
         
         /// <summary>
-        /// Check wether a polynomial is bigger than another polynomial.
+        /// Check whether a polynomial is bigger than another polynomial.
         /// </summary>
         public static
         bool
@@ -352,7 +352,7 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// Check wether a polynomial is bigger than another polynomial.
+        /// Check whether a polynomial is bigger than another polynomial.
         /// </summary>
         public static
         bool
@@ -364,7 +364,7 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// Check wether a polynomial is smaller than another polynomial.
+        /// Check whether a polynomial is smaller than another polynomial.
         /// </summary>
         public static
         bool
@@ -376,7 +376,7 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// Check wether a polynomial is smaller than another polynomial.
+        /// Check whether a polynomial is smaller than another polynomial.
         /// </summary>
         public static
         bool
@@ -388,7 +388,7 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// Check wether a polynomial is smaller than another polynomial.
+        /// Check whether a polynomial is smaller than another polynomial.
         /// </summary>
         public static
         bool
@@ -400,7 +400,7 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// Check wether a polynomial is bigger than or equal to another polynomial.
+        /// Check whether a polynomial is bigger than or equal to another polynomial.
         /// </summary>
         public static
         bool
@@ -412,7 +412,7 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// Check wether a polynomial is bigger than or equal to another polynomial.
+        /// Check whether a polynomial is bigger than or equal to another polynomial.
         /// </summary>
         public static
         bool
@@ -424,7 +424,7 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// Check wether a polynomial is bigger than or equal to another polynomial.
+        /// Check whether a polynomial is bigger than or equal to another polynomial.
         /// </summary>
         public static
         bool
@@ -436,7 +436,7 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// Check wether a polynomial is smaller than or equal to another polynomial.
+        /// Check whether a polynomial is smaller than or equal to another polynomial.
         /// </summary>
         public static
         bool
@@ -448,7 +448,7 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// Check wether a polynomial is smaller than or equal to another polynomial.
+        /// Check whether a polynomial is smaller than or equal to another polynomial.
         /// </summary>
         public static
         bool
@@ -460,7 +460,7 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// Check wether a polynomial is smaller than or equal to another polynomial.
+        /// Check whether a polynomial is smaller than or equal to another polynomial.
         /// </summary>
         public static
         bool
@@ -878,7 +878,7 @@ namespace MathNet.Numerics
             this[0] += s;
         }
 
-        /// <summary>Subtract anoter complex polynomial inplace from this polynomial.</summary>
+        /// <summary>Subtract another complex polynomial inplace from this polynomial.</summary>
         /// <remarks>This method operates inplace and thus alters this instance.</remarks>
         public
         void

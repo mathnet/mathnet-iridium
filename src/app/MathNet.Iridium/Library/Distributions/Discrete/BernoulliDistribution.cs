@@ -37,10 +37,10 @@ namespace MathNet.Numerics.Distributions
     using RandomSources;
     
     /// <summary>
-    /// Provides generation of bernoulli distributed random numbers.
+    /// Provides generation of Bernoulli distributed random numbers.
     /// </summary>
     /// <remarks>
-    /// The bernoulli distribution generates only discrete numbers.<br />
+    /// The Bernoulli distribution generates only discrete numbers.<br />
     /// The implementation bases upon information presented on
     ///   <a href="http://en.wikipedia.org/wiki/Bernoulli_distribution">Wikipedia - Bernoulli distribution</a>.
     /// </remarks>
@@ -224,14 +224,14 @@ namespace MathNet.Numerics.Distributions
 
         #region Generator
         /// <summary>
-        /// Returns a bernoulli distributed random number.
+        /// Returns a Bernoulli distributed random number.
         /// </summary>
-        /// <returns>A bernoulli distributed 32-bit signed integer.</returns>
+        /// <returns>A Bernoulli distributed 32-bit signed integer.</returns>
         public override
         int
         NextInt32()
         {
-            if(this.RandomSource.NextDouble() < _p)
+            if(RandomSource.NextDouble() < _p)
             {
                 return 1;
             }

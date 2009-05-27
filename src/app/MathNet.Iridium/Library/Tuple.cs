@@ -43,7 +43,7 @@ namespace MathNet.Numerics
         private readonly TSecond _second;
 
         /// <summary>
-        /// Initializes a new instance of the Tuple struct.
+        /// Initializes a new instance of the Tuple.
         /// </summary>
         /// <param name="first">The first tuple value</param>
         /// <param name="second">The second tuple value</param>
@@ -70,7 +70,7 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// True if the the first values of both tuples match and the second valus of both tuples match.
+        /// True if the the first values of both tuples match and the second values of both tuples match.
         /// </summary>
         /// <param name="other">The other tuple to compare with.</param>
         public bool Equals(Tuple<TFirst, TSecond> other)

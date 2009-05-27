@@ -48,7 +48,7 @@ namespace MathNet.Numerics
         readonly double _arg; // polar notation
 
         /// <summary>
-        /// Initializes a new instance of the Quaternion struct.
+        /// Initializes a new instance of the Quaternion.
         /// </summary>
         public
         Quaternion(
@@ -67,7 +67,7 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// Initializes a new instance of the Quaternion struct.
+        /// Initializes a new instance of the Quaternion.
         /// </summary>
         internal
         Quaternion(
@@ -123,53 +123,74 @@ namespace MathNet.Numerics
 
         #region Accessors
 
-        /// <summary>Gets the real part of the quaternion.</summary>
+        /// <summary>
+        /// Gets the real part of the quaternion.
+        /// </summary>
         public double Real
         {
             get { return _w; }
         }
 
-        /// <summary>Gets the imaginary X part (coefficient of complex I) of the quaternion.</summary>
+        /// <summary>
+        /// Gets the imaginary X part (coefficient of complex I) of the quaternion.
+        /// </summary>
         public double ImagX
         {
             get { return _x; }
         }
 
-        /// <summary>Gets the imaginary Y part (coefficient of complex J) of the quaternion.</summary>
+        /// <summary>
+        /// Gets the imaginary Y part (coefficient of complex J) of the quaternion.
+        /// </summary>
         public double ImagY
         {
             get { return _y; }
         }
 
-        /// <summary>Gets the imaginary Z part (coefficient of complex K) of the quaternion.</summary>
+        /// <summary>
+        /// Gets the imaginary Z part (coefficient of complex K) of the quaternion.
+        /// </summary>
         public double ImagZ
         {
             get { return _z; }
         }
 
-        /// <summary>G
-        /// ets the standard euclidean length |q| = sqrt(||q||) of the quaternion q: the square root of the sum of the squares of the four components.
-        /// Q may then be represented as q = r*(cos(phi) + u * sin(phi)) = r*exp(phi*u) where u is the unit vector and phi the argument of q.
+        /// <summary>
+        /// Gets the standard euclidean length |q| = sqrt(||q||) of the quaternion q: the
+        /// square root of the sum of the squares of the four components. Q may then be
+        /// represented as q = r*(cos(phi) + u * sin(phi)) = r*exp(phi*u) where u is the
+        /// unit vector and phi the argument of q.
         /// </summary>
         public double Abs
         {
             get { return _abs; }
         }
 
-        /// <summary>Gets the norm ||q|| = |q|^2 of the quaternion q: the sum of the squares of the four components.</summary>
+        /// <summary>
+        /// Gets the norm ||q|| = |q|^2 of the quaternion q: the sum of the squares of the four components.
+        /// </summary>
         public double Norm
         {
             get { return _norm; }
         }
 
-        /// <summary>Gets the argument phi = arg(q) of the quaternion q, such that q = r*(cos(phi) + u * sin(phi)) = r*exp(phi*u) where r is the absolute and u the unit vector of q.</summary>
+        /// <summary>
+        /// Gets the argument phi = arg(q) of the quaternion q, such that q = r*(cos(phi) +
+        /// u * sin(phi)) = r*exp(phi*u) where r is the absolute and u the unit vector of
+        /// q.
+        /// </summary>
         public double Arg
         {
             get { return _arg; }
         }
 
-        /// <summary>True if the quaternion q is of lenght |q| = 1.</summary>
-        /// <remarks>To normalize a quaternion to a length of 1, use the <see cref="Sign"/> method. All unit quaternions form a 3-sphere.</remarks>
+        /// <summary>
+        /// True if the quaternion q is of length |q| = 1.
+        /// </summary>
+        /// <remarks>
+        /// To normalize a quaternion to a length of 1, use the <see cref="Sign"/> method.
+        /// All unit quaternions form a 3-sphere.
+        /// </remarks>
         public bool IsUnitQuaternion
         {
             get { return Number.AlmostEqual(_abs, 1); }
@@ -187,7 +208,7 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// Returns a new Quaternion q with the Vectorpart only.
+        /// Returns a new Quaternion q with the Vector part only.
         /// </summary>
         public
         Quaternion
@@ -197,7 +218,7 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// Returns a new normalized Quaternion u with the Vectorpart only, such that ||u|| = 1.
+        /// Returns a new normalized Quaternion u with the Vector part only, such that ||u|| = 1.
         /// Q may then be represented as q = r*(cos(phi) + u * sin(phi)) = r*exp(phi*u) where r is the absolute and phi the argument of q.
         /// </summary>
         public
@@ -309,7 +330,7 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// Multiplay a quaternion with a quaternion.
+        /// Multiply a quaternion with a quaternion.
         /// </summary>
         public static
         Quaternion
@@ -321,7 +342,7 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// Multiplay a floating point number with a quaternion.
+        /// Multiply a floating point number with a quaternion.
         /// </summary>
         public static
         Quaternion
@@ -422,7 +443,7 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// SUbtract a quaternion from this quaternion.
+        /// Subtract a quaternion from this quaternion.
         /// </summary>
         public
         Quaternion
@@ -508,12 +529,11 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// Multiplies a Quaterion with the inverse of a real number.
+        /// Multiplies a Quaternion with the inverse of a real number.
         /// </summary>
         /// <remarks>
-        /// Its also Possible to cast a double to a Quaternion
-        /// and make the division afterwards. But this is less
-        /// performant.
+        /// Its also possible to cast a double to a Quaternion and make the division
+        /// afterward, but that would be more expensive.
         /// </remarks>
         public
         Quaternion
@@ -593,7 +613,7 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// Natural Logrithm to base E.
+        /// Natural Logarithm to base E.
         /// </summary>
         public
         Quaternion

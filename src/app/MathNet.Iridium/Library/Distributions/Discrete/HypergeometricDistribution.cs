@@ -38,10 +38,10 @@ namespace MathNet.Numerics.Distributions
     using RandomSources;
 
     /// <summary>
-    /// Provides generation of hypergeometric distributed random numbers.
+    /// Provides generation of hyper geometric distributed random numbers.
     /// </summary>
     /// <remarks>
-    /// The hypergeometric distribution generates only discrete numbers.<br />
+    /// The hyper geometric distribution generates only discrete numbers.<br />
     /// The implementation bases upon information presented on
     ///   <a href="http://en.wikipedia.org/wiki/Hypergeometric_distribution">Wikipedia - Geometric distribution</a>.
     /// </remarks>

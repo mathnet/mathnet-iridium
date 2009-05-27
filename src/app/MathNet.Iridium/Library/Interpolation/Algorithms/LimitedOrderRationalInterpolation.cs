@@ -69,7 +69,7 @@ namespace MathNet.Numerics.Interpolation.Algorithms
         }
 
         /// <summary>
-        /// True if the alorithm supports differentiation.
+        /// True if the algorithm supports differentiation.
         /// </summary>
         /// <seealso cref="Differentiate"/>
         public bool SupportsDifferentiation
@@ -78,7 +78,7 @@ namespace MathNet.Numerics.Interpolation.Algorithms
         }
 
         /// <summary>
-        /// True if the alorithm supports integration.
+        /// True if the algorithm supports integration.
         /// </summary>
         /// <seealso cref="Integrate"/>
         public bool SupportsIntegration
@@ -87,7 +87,7 @@ namespace MathNet.Numerics.Interpolation.Algorithms
         }
 
         /// <summary>
-        /// The maxium interpolation order.
+        /// The maximum interpolation order.
         /// </summary>
         /// <seealso cref="EffectiveOrder"/>
         public int MaximumOrder
@@ -131,7 +131,7 @@ namespace MathNet.Numerics.Interpolation.Algorithms
         }
 
         /// <summary>
-        /// Precompute/optimize the algoritm for the given sample set.
+        /// Precompute/optimize the algorithm for the given sample set.
         /// </summary>
         /// <param name="t">Points t</param>
         /// <param name="x">Values x(t)</param>
@@ -145,7 +145,7 @@ namespace MathNet.Numerics.Interpolation.Algorithms
         }
 
         /// <summary>
-        /// Precompute/optimize the algoritm for the given sample set.
+        /// Precompute/optimize the algorithm for the given sample set.
         /// </summary>
         /// <param name="samples">Sample points t and values x(t).</param>
         public
@@ -267,7 +267,7 @@ namespace MathNet.Numerics.Interpolation.Algorithms
         /// Definite Integrate up to point t.
         /// </summary>
         /// <param name="t">Right bound of the integration interval [a,t].</param>
-        /// <returns>Interpolated definite integeral over the interval [a,t].</returns>
+        /// <returns>Interpolated definite integral over the interval [a,t].</returns>
         /// <seealso cref="SupportsIntegration"/>
         public
         double

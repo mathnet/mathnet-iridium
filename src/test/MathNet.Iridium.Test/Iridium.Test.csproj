@@ -77,6 +77,7 @@
     <Compile Include="SpecialFunctionsTests\SpecialFunctionsTest.cs" />
     <Compile Include="StatisticsTests\StatisticsTest.cs" />
     <Compile Include="TransformationsTests\FftTest.cs" />
+    <Compile Include="TransformationsTests\FftStressTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\app\MathNet.Iridium\Library\Iridium.csproj">

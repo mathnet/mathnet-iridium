@@ -37,7 +37,7 @@ namespace MathNet.Numerics.Distributions
     using RandomSources;
 
     /// <summary>
-    /// Provides generation of cauchy distributed random numbers.
+    /// Provides generation of Cauchy distributed random numbers.
     /// </summary>
     /// <remarks>
     /// The implementation of the <see cref="CauchyLorentzDistribution"/> type bases upon information presented on
@@ -223,14 +223,14 @@ namespace MathNet.Numerics.Distributions
 
         #region Generator
         /// <summary>
-        /// Returns a cauchy distributed floating point random number.
+        /// Returns a Cauchy distributed floating point random number.
         /// </summary>
-        /// <returns>A cauchy distributed double-precision floating point number.</returns>
+        /// <returns>A Cauchy distributed double-precision floating point number.</returns>
         public override
         double 
         NextDouble()
         {
-            return _location + (_scale * Trig.Tangent(Constants.Pi * (this.RandomSource.NextDouble() - 0.5)));
+            return _location + (_scale * Trig.Tangent(Constants.Pi * (RandomSource.NextDouble() - 0.5)));
         }
         #endregion
     }

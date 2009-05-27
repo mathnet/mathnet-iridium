@@ -135,7 +135,8 @@ namespace MathNet.Numerics.Distributions
         /// Determines whether the specified parameters is valid.
         /// </summary>
         /// <returns>
-        /// <see langword="true"/> if lowerLimit &lt;= upperLimit; otherwise, <see langword="false"/>.
+        /// <see langword="true"/> if <paramref name="lowerLimit"/> &lt;= 
+        /// <paramref name="upperLimit"/>; otherwise, <see langword="false"/>.
         /// </returns>
         public static
         bool
@@ -241,7 +242,7 @@ namespace MathNet.Numerics.Distributions
         double
         NextDouble()
         {
-            return _a + (this.RandomSource.NextDouble() * _diff);
+            return _a + (RandomSource.NextDouble() * _diff);
         }
         #endregion
     }

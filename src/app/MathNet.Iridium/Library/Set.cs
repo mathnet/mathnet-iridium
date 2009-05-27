@@ -58,7 +58,7 @@ namespace MathNet.Numerics
         /// <summary>
         /// Checks whether this set has elements that are also in <c>c</c>.
         /// </summary>
-        /// <remarks>Ingnores duplicate elements.</remarks>
+        /// <remarks>Ignores duplicate elements.</remarks>
         bool HasEqualElements(IEnumerable<T> c);
 
         /// <summary>
@@ -67,12 +67,12 @@ namespace MathNet.Numerics
         bool Exists(Predicate<T> match);
 
         /// <summary>
-        /// Check whether this set has an element witch matches the predicate, and returns it as foundItem-parameter.
+        /// Check whether this set has an element witch matches the predicate, and returns it as <paramref name="foundItem"/>-parameter.
         /// </summary>
         bool Exists(Predicate<T> match, out T foundItem);
 
         /// <summary>
-        /// Checks wether all elements of this set match the predicate.
+        /// Checks whether all elements of this set match the predicate.
         /// </summary>
         bool TrueForAll(Predicate<T> match);
 
@@ -92,12 +92,15 @@ namespace MathNet.Numerics
         int FindIndex(Predicate<T> match);
 
         /// <summary>
-        /// Finds the index (after startIndex) of an element of this set that matches the predicate.
+        /// Finds the index (after <paramref name="startIndex"/>) of an element of this set
+        /// that matches the predicate.
         /// </summary>
         int FindIndex(int startIndex, Predicate<T> match);
 
         /// <summary>
-        /// Finds the index (between startIndex and startIndex+count-1) of an element of this set that matches the predicate.
+        /// Finds the index (between <paramref name="startIndex"/> and 
+        /// <paramref name="startIndex"/>+count-1) of an element of this set that matches
+        /// the predicate.
         /// </summary>
         int FindIndex(int startIndex, int count, Predicate<T> match);
 
@@ -112,12 +115,15 @@ namespace MathNet.Numerics
         int FindLastIndex(Predicate<T> match);
 
         /// <summary>
-        /// Finds the index (after startIndex) of the last element of this set that matches the predicate.
+        /// Finds the index (after <paramref name="startIndex"/>) of the last element of
+        /// this set that matches the predicate.
         /// </summary>
         int FindLastIndex(int startIndex, Predicate<T> match);
 
         /// <summary>
-        /// Finds the index (between startIndex and startIndex+count-1) of the last element of this set that matches the predicate.
+        /// Finds the index (between <paramref name="startIndex"/> and 
+        /// <paramref name="startIndex"/>+count-1) of the last element of this set that
+        /// matches the predicate.
         /// </summary>
         int FindLastIndex(int startIndex, int count, Predicate<T> match);
 
@@ -152,7 +158,7 @@ namespace MathNet.Numerics
         void AddRangeDistinct(IEnumerable<T> range);
 
         /// <summary>
-        /// Remove al duplicate items from this set.
+        /// Remove all duplicate items from this set.
         /// </summary>
         void RemoveDuplicates();
 
@@ -179,7 +185,7 @@ namespace MathNet.Numerics
     }
 
     /// <summary>
-    /// A generic typed writeable set.
+    /// A generic typed writable set.
     /// </summary>
     public class Set<T> :
         Collection<T>,
@@ -357,7 +363,7 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// Remove al duplicate items from this set.
+        /// Remove all duplicate items from this set.
         /// </summary>
         public
         void
@@ -515,7 +521,7 @@ namespace MathNet.Numerics
         /// <summary>
         /// Checks whether this set has elements that are also in <c>c</c>.
         /// </summary>
-        /// <remarks>Ingnores duplicate elements.</remarks>
+        /// <remarks>Ignores duplicate elements.</remarks>
         public
         bool
         HasEqualElements(IEnumerable<T> c)
@@ -563,7 +569,7 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// Concatenates this set with the items of <c>c</c>, by directly modifing this set.
+        /// Concatenates this set with the items of <c>c</c>, by directly modifying this set.
         /// </summary>
         public
         void
@@ -604,7 +610,7 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// Creates the union of this set with the items of <c>c</c>, by directly modifing this set.
+        /// Creates the union of this set with the items of <c>c</c>, by directly modifying this set.
         /// </summary>
         public
         void
@@ -647,7 +653,7 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// Creates the intersection of this set with the items of <c>c</c>, by directly modifing this set.
+        /// Creates the intersection of this set with the items of <c>c</c>, by directly modifying this set.
         /// </summary>
         public
         void
@@ -720,7 +726,7 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// Creates the subtraction of this set with the items of <c>c</c>, by directly modifing this set.
+        /// Creates the subtraction of this set with the items of <c>c</c>, by directly modifying this set.
         /// </summary>
         public
         void
@@ -792,7 +798,8 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// Check whether this set has an element witch matches the predicate, and returns it as foundItem-parameter.
+        /// Check whether this set has an element witch matches the predicate, and returns
+        /// it as <paramref name="foundItem"/>-parameter.
         /// </summary>
         public
         bool
@@ -801,20 +808,19 @@ namespace MathNet.Numerics
             out T foundItem)
         {
             int idx = FindIndex(match);
+
             if(idx == -1)
             {
                 foundItem = default(T);
                 return false;
             }
-            else
-            {
-                foundItem = base[idx];
-                return true;
-            }
+
+            foundItem = base[idx];
+            return true;
         }
 
         /// <summary>
-        /// Checks wether all elements of this set match the predicate.
+        /// Checks whether all elements of this set match the predicate.
         /// </summary>
         public
         bool
@@ -890,7 +896,8 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// Finds the index (after startIndex) of an element of this set that matches the predicate.
+        /// Finds the index (after <paramref name="startIndex"/>) of an element of this set
+        /// that matches the predicate.
         /// </summary>
         public
         int
@@ -902,7 +909,9 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// Finds the index (between startIndex and startIndex+count-1) of an element of this set that matches the predicate.
+        /// Finds the index (between <paramref name="startIndex"/> and 
+        /// <paramref name="startIndex"/>+count-1) of an element of this set that matches
+        /// the predicate.
         /// </summary>
         public
         int
@@ -972,7 +981,8 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// Finds the index (after startIndex) of the last element of this set that matches the predicate.
+        /// Finds the index (after <paramref name="startIndex"/>) of the last element of
+        /// this set that matches the predicate.
         /// </summary>
         public
         int
@@ -984,7 +994,9 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// Finds the index (between startIndex and startIndex+count-1) of the last element of this set that matches the predicate.
+        /// Finds the index (between <paramref name="startIndex"/> and 
+        /// <paramref name="startIndex"/>+count-1) of the last element of this set that
+        /// matches the predicate.
         /// </summary>
         public
         int
@@ -1237,7 +1249,7 @@ namespace MathNet.Numerics
         /// <summary>
         /// Checks whether this set has elements that are also in <c>c</c>.
         /// </summary>
-        /// <remarks>Ingnores duplicate elements.</remarks>
+        /// <remarks>Ignores duplicate elements.</remarks>
         public
         bool
         HasEqualElements(IEnumerable<T> c)
@@ -1283,7 +1295,8 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// Check whether this set has an element witch matches the predicate, and returns it as foundItem-parameter.
+        /// Check whether this set has an element witch matches the predicate, and returns
+        /// it as <paramref name="foundItem"/>-parameter.
         /// </summary>
         public
         bool
@@ -1292,20 +1305,19 @@ namespace MathNet.Numerics
             out T foundItem)
         {
             int idx = FindIndex(match);
+
             if(idx == -1)
             {
                 foundItem = default(T);
                 return false;
             }
-            else
-            {
-                foundItem = base[idx];
-                return true;
-            }
+
+            foundItem = base[idx];
+            return true;
         }
 
         /// <summary>
-        /// Checks wether all elements of this set match the predicate.
+        /// Checks whether all elements of this set match the predicate.
         /// </summary>
         public
         bool
@@ -1381,7 +1393,8 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// Finds the index (after startIndex) of an element of this set that matches the predicate.
+        /// Finds the index (after <paramref name="startIndex"/>) of an element of this set
+        /// that matches the predicate.
         /// </summary>
         public
         int
@@ -1393,7 +1406,9 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// Finds the index (between startIndex and startIndex+count-1) of an element of this set that matches the predicate.
+        /// Finds the index (between <paramref name="startIndex"/> and 
+        /// <paramref name="startIndex"/>+count-1) of an element of this set that matches
+        /// the predicate.
         /// </summary>
         public
         int
@@ -1463,7 +1478,8 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// Finds the index (after startIndex) of the last element of this set that matches the predicate.
+        /// Finds the index (after <paramref name="startIndex"/>) of the last element of
+        /// this set that matches the predicate.
         /// </summary>
         public
         int
@@ -1475,7 +1491,9 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// Finds the index (between startIndex and startIndex+count-1) of the last element of this set that matches the predicate.
+        /// Finds the index (between <paramref name="startIndex"/> and 
+        /// <paramref name="startIndex"/>+count-1) of the last element of this set that
+        /// matches the predicate.
         /// </summary>
         public
         int
@@ -1599,7 +1617,7 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// Remove al duplicate items from this set.
+        /// Remove all duplicate items from this set.
         /// </summary>
         /// <remarks>
         /// This is not supported by this implementation.
@@ -1718,10 +1736,10 @@ namespace MathNet.Numerics
     public class SetChangedEventArgs<T> :
         EventArgs
     {
-        SetElementOperation op;
-        T element;
-        int indexBefore;
-        int indexAfter;
+        readonly SetElementOperation _op;
+        readonly T _element;
+        readonly int _indexBefore;
+        readonly int _indexAfter;
 
         SetChangedEventArgs(
             SetElementOperation op,
@@ -1729,14 +1747,14 @@ namespace MathNet.Numerics
             int indexBefore,
             int indexAfter)
         {
-            this.op = op;
-            this.element = element;
-            this.indexBefore = indexBefore;
-            this.indexAfter = indexAfter;
+            _op = op;
+            _element = element;
+            _indexBefore = indexBefore;
+            _indexAfter = indexAfter;
         }
 
         /// <summary>
-        /// Build changed event args when elevents have been moved inside of a set.
+        /// Build changed event args when elements have been moved inside of a set.
         /// </summary>
         /// <param name="element">The element which has been moved.</param>
         /// <param name="indexBefore">The previous index of the moved element.</param>
@@ -1752,7 +1770,7 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// Build changed event args when elevents have been added to a set.
+        /// Build changed event args when elements have been added to a set.
         /// </summary>
         /// <param name="element">The element which as been added.</param>
         /// <param name="index">The index where the element was added.</param>
@@ -1766,7 +1784,7 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// Build changed event args when elevents have been removed from a set.
+        /// Build changed event args when elements have been removed from a set.
         /// </summary>
         /// <param name="element">The element which has been removed.</param>
         /// <param name="index">The previous index of the removed element.</param>
@@ -1784,7 +1802,7 @@ namespace MathNet.Numerics
         /// </summary>
         public T Element
         {
-            get { return element; }
+            get { return _element; }
         }
 
         /// <summary>
@@ -1792,7 +1810,7 @@ namespace MathNet.Numerics
         /// </summary>
         public SetElementOperation Operation
         {
-            get { return op; }
+            get { return _op; }
         }
 
         /// <summary>
@@ -1800,7 +1818,7 @@ namespace MathNet.Numerics
         /// </summary>
         public bool ElementAdded
         {
-            get { return op == SetElementOperation.Added; }
+            get { return _op == SetElementOperation.Added; }
         }
 
         /// <summary>
@@ -1808,7 +1826,7 @@ namespace MathNet.Numerics
         /// </summary>
         public bool ElementRemoved
         {
-            get { return op == SetElementOperation.Removed; }
+            get { return _op == SetElementOperation.Removed; }
         }
 
         /// <summary>
@@ -1816,7 +1834,7 @@ namespace MathNet.Numerics
         /// </summary>
         public bool ElementMoved
         {
-            get { return op == SetElementOperation.Moved; }
+            get { return _op == SetElementOperation.Moved; }
         }
 
         /// <summary>
@@ -1824,7 +1842,7 @@ namespace MathNet.Numerics
         /// </summary>
         public int IndexBefore
         {
-            get { return indexBefore; }
+            get { return _indexBefore; }
         }
 
         /// <summary>
@@ -1832,7 +1850,7 @@ namespace MathNet.Numerics
         /// </summary>
         public int IndexAfter
         {
-            get { return indexAfter; }
+            get { return _indexAfter; }
         }
     }
 }

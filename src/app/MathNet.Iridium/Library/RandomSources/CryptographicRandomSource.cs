@@ -32,7 +32,7 @@ using System.Security.Cryptography;
 
 namespace MathNet.Numerics.RandomSources
 {
-    using OjectModel;
+    using ObjectModel;
 
     /// <summary>
     /// Represents a cryptographically strong pseudo-random number generator.

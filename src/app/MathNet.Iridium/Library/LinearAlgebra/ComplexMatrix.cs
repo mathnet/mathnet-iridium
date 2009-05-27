@@ -193,19 +193,19 @@ namespace MathNet.Numerics.LinearAlgebra
         /// Initializes a new instance of the ComplexMatrix class
         /// from a one-dimensional packed array.
         /// </summary>
-        /// <param name="vals">One-dimensional array of complex numbers, packed by columns (ala Fortran).</param>
+        /// <param name="values">One-dimensional array of complex numbers, packed by columns (ala Fortran).</param>
         /// <param name="m">Number of rows.</param>
         /// <exception cref="System.ArgumentException">Array length must be a multiple of m.</exception>
         public
         ComplexMatrix(
-            Complex[] vals,
+            Complex[] values,
             int m)
         {
             _rowCount = m;
             if(m == 0)
             {
                 _columnCount = 0;
-                if(vals.Length != 0)
+                if(values.Length != 0)
                 {
                     throw new ArgumentException(Properties.LocalStrings.ArgumentVectorLengthsMultipleOf("m"));
                 }
@@ -213,7 +213,7 @@ namespace MathNet.Numerics.LinearAlgebra
             else
             {
                 int rem;
-                _columnCount = Math.DivRem(vals.Length, m, out rem);
+                _columnCount = Math.DivRem(values.Length, m, out rem);
                 if(rem != 0)
                 {
                     throw new ArgumentException(Properties.LocalStrings.ArgumentVectorLengthsMultipleOf("m"));
@@ -226,7 +226,7 @@ namespace MathNet.Numerics.LinearAlgebra
                 Complex[] col = new Complex[_columnCount];
                 for(int j = 0; j < _columnCount; j++)
                 {
-                    col[j] = vals[i + (j * _rowCount)];
+                    col[j] = values[i + (j * _rowCount)];
                 }
 
                 _data[i] = col;
@@ -631,7 +631,7 @@ namespace MathNet.Numerics.LinearAlgebra
             return _data;
         }
 
-        /// <summary>Implicit convertion to a <c>Complex[][]</c> array.</summary>
+        /// <summary>Implicit conversion to a <c>Complex[][]</c> array.</summary>
         public static implicit
         operator Complex[][](ComplexMatrix m)
         {
@@ -639,7 +639,7 @@ namespace MathNet.Numerics.LinearAlgebra
         }
 
         /// <summary>
-        /// Explicit convertion to a <c>Complex[]</c> array of a single column matrix.
+        /// Explicit conversion to a <c>Complex[]</c> array of a single column matrix.
         /// </summary>
         /// <param name="m">Exactly one column expected.</param>
         public static explicit
@@ -660,7 +660,7 @@ namespace MathNet.Numerics.LinearAlgebra
         }
 
         /// <summary>
-        /// Excplicit conversion to a <c>Complex</c> scalar of a single column and row (1-by-1) matrix.
+        /// Explicit conversion to a <c>Complex</c> scalar of a single column and row (1-by-1) matrix.
         /// </summary>
         /// <param name="m">1-by-1 Matrix</param>
         public static explicit
@@ -842,14 +842,14 @@ namespace MathNet.Numerics.LinearAlgebra
         }
 
         /// <summary>
-        /// Gets a submatrix.
+        /// Gets a sub matrix.
         /// </summary>
         /// <param name="i0">First row index.</param>
         /// <param name="i1">Last row index (inclusive).</param>
         /// <param name="j0">First column index.</param>
         /// <param name="j1">Last column index (inclusive).</param>
         /// <returns>A(i0:i1,j0:j1)</returns>
-        /// <exception cref="System.IndexOutOfRangeException">Submatrix indices</exception>
+        /// <exception cref="System.IndexOutOfRangeException">Sub matrix indices</exception>
         public
         ComplexMatrix
         GetMatrix(
@@ -878,12 +878,12 @@ namespace MathNet.Numerics.LinearAlgebra
         }
 
         /// <summary>
-        /// Gets a submatrix.
+        /// Gets a sub matrix.
         /// </summary>
         /// <param name="r">Array of row indices.</param>
         /// <param name="c">Array of column indices.</param>
         /// <returns>A(r(:),c(:))</returns>
-        /// <exception cref="System.IndexOutOfRangeException">Submatrix indices.</exception>
+        /// <exception cref="System.IndexOutOfRangeException">Sub matrix indices.</exception>
         public
         ComplexMatrix
         GetMatrix(
@@ -910,13 +910,13 @@ namespace MathNet.Numerics.LinearAlgebra
         }
 
         /// <summary>
-        /// Get a submatrix.
+        /// Get a sub matrix.
         /// </summary>
         /// <param name="i0">First row index.</param>
         /// <param name="i1">Last row index (inclusive).</param>
         /// <param name="c">Array of column indices.</param>
         /// <returns>A(i0:i1,c(:))</returns>
-        /// <exception cref="System.IndexOutOfRangeException">Submatrix indices.</exception>
+        /// <exception cref="System.IndexOutOfRangeException">Sub matrix indices.</exception>
         public
         ComplexMatrix
         GetMatrix(
@@ -944,13 +944,13 @@ namespace MathNet.Numerics.LinearAlgebra
         }
 
         /// <summary>
-        /// Get a submatrix.
+        /// Get a sub matrix.
         /// </summary>
         /// <param name="r">Array of row indices.</param>
         /// <param name="j0">First column index.</param>
         /// <param name="j1">Last column index (inclusive).</param>
         /// <returns>A(r(:),j0:j1)</returns>
-        /// <exception cref="System.IndexOutOfRangeException">Submatrix indices.</exception>
+        /// <exception cref="System.IndexOutOfRangeException">Sub matrix indices.</exception>
         public
         ComplexMatrix
         GetMatrix(
@@ -978,14 +978,14 @@ namespace MathNet.Numerics.LinearAlgebra
         }
 
         /// <summary>
-        /// Set a submatrix.
+        /// Set a sub matrix.
         /// </summary>
         /// <param name="i0">First row index.</param>
         /// <param name="i1">Last row index (inclusive).</param>
         /// <param name="j0">First column index.</param>
         /// <param name="j1">Last column index (inclusive).</param>
         /// <param name="x">A(i0:i1,j0:j1)</param>
-        /// <exception cref="System.IndexOutOfRangeException">Submatrix indices.</exception>
+        /// <exception cref="System.IndexOutOfRangeException">Sub matrix indices.</exception>
         public
         void
         SetMatrix(
@@ -1014,12 +1014,12 @@ namespace MathNet.Numerics.LinearAlgebra
         }
 
         /// <summary>
-        /// Sets a submatrix.
+        /// Sets a sub matrix.
         /// </summary>
         /// <param name="r">Array of row indices.</param>
         /// <param name="c">Array of column indices.</param>
         /// <param name="x">A(r(:),c(:))</param>
-        /// <exception cref="System.IndexOutOfRangeException">Submatrix indices</exception>
+        /// <exception cref="System.IndexOutOfRangeException">Sub matrix indices</exception>
         public
         void
         SetMatrix(
@@ -1046,13 +1046,13 @@ namespace MathNet.Numerics.LinearAlgebra
         }
 
         /// <summary>
-        /// Sets a submatrix.
+        /// Sets a sub matrix.
         /// </summary>
         /// <param name="r">Array of row indices.</param>
         /// <param name="j0">First column index.</param>
         /// <param name="j1">Last column index (inclusive).</param>
         /// <param name="x">A(r(:),j0:j1)</param>
-        /// <exception cref="System.IndexOutOfRangeException">Submatrix indices</exception>
+        /// <exception cref="System.IndexOutOfRangeException">Sub matrix indices</exception>
         public
         void
         SetMatrix(
@@ -1080,13 +1080,13 @@ namespace MathNet.Numerics.LinearAlgebra
         }
 
         /// <summary>
-        /// Set a submatrix.
+        /// Set a sub matrix.
         /// </summary>
         /// <param name="i0">First row index.</param>
         /// <param name="i1">Last row index (inclusive).</param>
         /// <param name="c">Array of column indices.</param>
         /// <param name="x">A(i0:i1,c(:))</param>
-        /// <exception cref="System.IndexOutOfRangeException">Submatrix indices.</exception>
+        /// <exception cref="System.IndexOutOfRangeException">Sub matrix indices.</exception>
         public
         void
         SetMatrix(
@@ -1960,7 +1960,7 @@ namespace MathNet.Numerics.LinearAlgebra
         }
 
         /// <summary>
-        /// Muliply a diagonal complex matrix with this matrix. This has the same effect
+        /// Multiply a diagonal complex matrix with this matrix. This has the same effect
         /// as scaling the rows of this matrix by the scalar elements of the diagonal.
         /// </summary>
         /// <param name="diagonal">The left diagonal complex matrix.</param>
@@ -2002,7 +2002,7 @@ namespace MathNet.Numerics.LinearAlgebra
         }
 
         /// <summary>
-        /// Muliply a diagonal real matrix with this matrix. This has the same effect
+        /// Multiply a diagonal real matrix with this matrix. This has the same effect
         /// as scaling the rows of this matrix by the scalar elements of the diagonal.
         /// </summary>
         /// <param name="diagonal">The left diagonal real matrix.</param>
@@ -2044,7 +2044,7 @@ namespace MathNet.Numerics.LinearAlgebra
         }
 
         /// <summary>
-        /// Inplace muliply a complex diagonal matrix with this matrix. This has the same effect
+        /// Inplace multiply a complex diagonal matrix with this matrix. This has the same effect
         /// as scaling the rows of this matrix by the scalar elements of the diagonal.
         /// </summary>
         /// <param name="diagonal">The left diagonal complex matrix.</param>
@@ -2079,7 +2079,7 @@ namespace MathNet.Numerics.LinearAlgebra
         }
 
         /// <summary>
-        /// Inplace muliply a real diagonal matrix with this matrix. This has the same effect
+        /// Inplace multiply a real diagonal matrix with this matrix. This has the same effect
         /// as scaling the rows of this matrix by the scalar elements of the diagonal.
         /// </summary>
         /// <param name="diagonal">The left diagonal real matrix.</param>
@@ -2114,7 +2114,7 @@ namespace MathNet.Numerics.LinearAlgebra
         }
 
         /// <summary>
-        /// Muliply this matrix with a complex diagonal matrix. This has the same effect
+        /// Multiply this matrix with a complex diagonal matrix. This has the same effect
         /// as scaling the columns of this matrix by the scalar elements of the diagonal.
         /// </summary>
         /// <param name="diagonal">The right diagonal complex matrix.</param>
@@ -2155,7 +2155,7 @@ namespace MathNet.Numerics.LinearAlgebra
         }
 
         /// <summary>
-        /// Muliply this matrix with a real diagonal matrix. This has the same effect
+        /// Multiply this matrix with a real diagonal matrix. This has the same effect
         /// as scaling the columns of this matrix by the scalar elements of the diagonal.
         /// </summary>
         /// <param name="diagonal">The right diagonal real matrix.</param>
@@ -2196,7 +2196,7 @@ namespace MathNet.Numerics.LinearAlgebra
         }
 
         /// <summary>
-        /// Inplace Muliply this matrix with a complex diagonal matrix. This has the same effect
+        /// Inplace multiply this matrix with a complex diagonal matrix. This has the same effect
         /// as scaling the columns of this matrix by the scalar elements of the diagonal.
         /// </summary>
         /// <param name="diagonal">The right diagonal complex matrix.</param>
@@ -2230,7 +2230,7 @@ namespace MathNet.Numerics.LinearAlgebra
         }
 
         /// <summary>
-        /// Inplace Muliply this matrix with a real diagonal matrix. This has the same effect
+        /// Inplace multiply this matrix with a real diagonal matrix. This has the same effect
         /// as scaling the columns of this matrix by the scalar elements of the diagonal.
         /// </summary>
         /// <param name="diagonal">The right diagonal real matrix.</param>

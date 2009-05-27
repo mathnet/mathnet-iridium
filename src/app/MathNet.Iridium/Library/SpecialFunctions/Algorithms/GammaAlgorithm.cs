@@ -39,7 +39,7 @@ namespace MathNet.Numerics.SpecialFunctions.Algorithms
     {
         /// <summary>
         /// Returns the gamma function for real values (except at 0, -1, -2, ...).
-        /// For numeric stability, consider to use GammaLn for positive values.
+        /// For numeric stability, consider to use <see cref="GammaLn"/> for positive values.
         /// </summary>
         /// <returns>A value Gamma(a) for a != 0,-1,-2,...</returns>
         public static
@@ -66,7 +66,7 @@ namespace MathNet.Numerics.SpecialFunctions.Algorithms
         /// Returns the natural logarithm of the absolute of the Gamma function for real values.
         /// </summary>
         /// <remarks>Positive infinite at all non-positive integers.</remarks>
-        /// <returns>A value ln|Gamma(a)|.</returns>
+        /// <returns>A value <c>ln</c>|Gamma(a)|.</returns>
         public static
         double
         GammaLn(double x)

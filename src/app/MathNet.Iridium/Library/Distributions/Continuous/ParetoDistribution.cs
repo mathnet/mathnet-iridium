@@ -37,7 +37,7 @@ namespace MathNet.Numerics.Distributions
     using RandomSources;
 
     /// <summary>
-    /// Provides generation of pareto distributed random numbers.
+    /// Provides generation of Pareto distributed random numbers.
     /// </summary>
     /// <remarks>
     /// The implementation of the <see cref="ParetoDistribution"/> type bases upon information presented on
@@ -246,14 +246,14 @@ namespace MathNet.Numerics.Distributions
 
         #region Generator
         /// <summary>
-        /// Returns a pareto distributed floating point random number.
+        /// Returns a Pareto distributed floating point random number.
         /// </summary>
-        /// <returns>A pareto distributed double-precision floating point number.</returns>
+        /// <returns>A Pareto distributed double-precision floating point number.</returns>
         public override
         double
         NextDouble()
         {
-            return _location / Math.Pow(1.0 - this.RandomSource.NextDouble(), this._helper1);
+            return _location / Math.Pow(1.0 - RandomSource.NextDouble(), _helper1);
         }
         #endregion
     }

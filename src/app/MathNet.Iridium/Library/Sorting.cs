@@ -52,7 +52,7 @@ namespace MathNet.Numerics
         /// Sort a list of keys and items with respect to the keys, inplace.
         /// </summary>
         /// <param name="keys">List to sort.</param>
-        /// <param name="items">List to permutate the same way as the key list.</param>
+        /// <param name="items">List to permute the same way as the key list.</param>
         public static
         void
         Sort<TKey, TItem>(
@@ -66,8 +66,8 @@ namespace MathNet.Numerics
         /// Sort a list of keys, items1 and items2 with respect to the keys, inplace.
         /// </summary>
         /// <param name="keys">List to sort.</param>
-        /// <param name="items1">First list to permutate the same way as the key list.</param>
-        /// <param name="items2">Second list to permutate the same way as the key list.</param>
+        /// <param name="items1">First list to permute the same way as the key list.</param>
+        /// <param name="items2">Second list to permute the same way as the key list.</param>
         public static
         void
         Sort<TKey, TItem1, TItem2>(
@@ -155,7 +155,7 @@ namespace MathNet.Numerics
         /// Sort a list of keys and items with respect to the keys, inplace.
         /// </summary>
         /// <param name="keys">List to sort.</param>
-        /// <param name="items">List to permutate the same way as the key list.</param>
+        /// <param name="items">List to permute the same way as the key list.</param>
         /// <param name="comparer">Comparison, defining the sort order.</param>
         public static
         void
@@ -196,8 +196,8 @@ namespace MathNet.Numerics
         /// Sort a list of keys, items1 and items2 with respect to the keys, inplace.
         /// </summary>
         /// <param name="keys">List to sort.</param>
-        /// <param name="items1">First list to permutate the same way as the key list.</param>
-        /// <param name="items2">Second list to permutate the same way as the key list.</param>
+        /// <param name="items1">First list to permute the same way as the key list.</param>
+        /// <param name="items2">Second list to permute the same way as the key list.</param>
         /// <param name="comparer">Comparison, defining the sort order.</param>
         public static
         void

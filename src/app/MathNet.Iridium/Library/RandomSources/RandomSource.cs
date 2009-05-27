@@ -47,7 +47,7 @@ namespace MathNet.Numerics.RandomSources
         /// </summary>
         /// <returns>
         /// A 32-bit signed integer greater than or equal to 0, and less than <see cref="Int32.MaxValue"/>; that is, 
-        ///   the range of return values includes 0 but not <paramref name="Int32.MaxValue"/>.
+        ///   the range of return values includes 0 but not <see name="Int32.MaxValue"/>.
         /// </returns>
         /// <seealso cref="NextFullRangeInt32()"/>
         public abstract
@@ -93,7 +93,7 @@ namespace MathNet.Numerics.RandomSources
         /// </summary>
         /// <returns>
         /// A 64-bit signed integer greater than or equal to 0, and less than <see cref="Int64.MaxValue"/>; that is, 
-        /// the range of return values includes 0 but not <paramref name="Int64.MaxValue"/>.
+        /// the range of return values includes 0 but not <see name="Int64.MaxValue"/>.
         /// </returns>
         /// <seealso cref="NextFullRangeInt64()"/>
         public virtual

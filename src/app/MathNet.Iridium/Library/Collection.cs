@@ -430,7 +430,7 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// Returns the cartesian product of the two collections <c>c1</c>
+        /// Returns the Cartesian product of the two collections <c>c1</c>
         /// and <c>c2</c>.
         /// </summary>
         /// <param name="c1">Should not be null.</param>

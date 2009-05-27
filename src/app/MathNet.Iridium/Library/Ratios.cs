@@ -139,10 +139,12 @@ namespace MathNet.Numerics
         #region Power Decibel (dB)
 
         /// <summary>
-        /// Given a ratio, express it in Decibel (dB, representing a power gain, while the compared values are not powers, e.g. amplitude, ampère, volts).
+        /// Given a ratio, express it in Decibel (dB, representing a power gain, while the
+        /// compared values are not powers, e.g. amplitude, ampère, volts).
         /// </summary>
         /// <remarks>
-        /// Power Decibel indicates that the method takes care of squaring the compared values to get a power gain mesure.
+        /// Power Decibel indicates that the method takes care of squaring the compared
+        /// values to get a power gain measure.
         /// </remarks>
         public static
         double
@@ -155,7 +157,7 @@ namespace MathNet.Numerics
         /// Given an effective value and a fixed base value, express the ratio in Decibel (dB, representing a power gain, while the compared values are not powers, e.g. amplitude, ampère, volts).
         /// </summary>
         /// <remarks>
-        /// Power Decibel indicates that the method takes care of squaring the compared values to get a power gain mesure.
+        /// Power Decibel indicates that the method takes care of squaring the compared values to get a power gain measure.
         /// </remarks>
         public static
         double
@@ -170,7 +172,7 @@ namespace MathNet.Numerics
         /// Given a ratio in Decibel (dB, representing a power gain, while the compared values are not powers, e.g. amplitude, ampère, volts), evaluate the effective ratio.
         /// </summary>
         /// <remarks>
-        /// Power Decibel indicates that the method takes care of squaring the compared values to get a power gain mesure.
+        /// Power Decibel indicates that the method takes care of squaring the compared values to get a power gain measure.
         /// </remarks>
         public static
         double
@@ -183,7 +185,7 @@ namespace MathNet.Numerics
         /// Given a ratio in Decibel (dB, representing a power gain, while the compared values are not powers, e.g. amplitude, ampère, volts) and the fixed base value, evaluate the effective value.
         /// </summary>
         /// <remarks>
-        /// Power Decibel indicates that the method takes care of squaring the compared values to get a power gain mesure.
+        /// Power Decibel indicates that the method takes care of squaring the compared values to get a power gain measure.
         /// </remarks>
         public static
         double
@@ -202,7 +204,7 @@ namespace MathNet.Numerics
         /// Convert a ratio in Decibel (dB, representing a power gain, while the compared values are not powers, e.g. amplitude, ampère, volts) to Neper (Np).
         /// </summary>
         /// <remarks>
-        /// Power Decibel indicates that the method takes care of squaring the compared values to get a power gain mesure.
+        /// Power Decibel indicates that the method takes care of squaring the compared values to get a power gain measure.
         /// </remarks>
         public static
         double
@@ -215,7 +217,7 @@ namespace MathNet.Numerics
         /// Convert a ratio in Neper (Np, representing a power gain, while the compared values are not powers, e.g. amplitude, ampère, volts) to Decibel (dB).
         /// </summary>
         /// <remarks>
-        /// Power Decibel indicates that the method takes care of squaring the compared values to get a power gain mesure.
+        /// Power Decibel indicates that the method takes care of squaring the compared values to get a power gain measure.
         /// </remarks>
         public static
         double

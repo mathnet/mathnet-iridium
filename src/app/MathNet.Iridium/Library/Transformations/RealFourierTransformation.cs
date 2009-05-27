@@ -33,7 +33,7 @@ namespace MathNet.Numerics.Transformations
 {
     /// <summary>
     /// <para>The <c>RealFourierTransformation</c> provides algorithms
-    /// for one, two and three dimensional fast fourier transformations
+    /// for one, two and three dimensional fast Fourier transformations
     /// (FFT) on real vectors.</para>
     /// <para>This class caches precomputations locally, thus consider reusing/caching it.</para>
     /// </summary>
@@ -186,20 +186,20 @@ namespace MathNet.Numerics.Transformations
             fftImag1[0] = fftImag2[0] = 0d;
             for(int i = 1, j = 2; j <= numSamples; i++, j += 2)
             {
-                double h1r = 0.5 * (complex[j] + complex[length - j]);
-                double h1i = 0.5 * (complex[j + 1] - complex[length + 1 - j]);
-                double h2r = 0.5 * (complex[j + 1] + complex[length + 1 - j]);
-                double h2i = -0.5 * (complex[j] - complex[length - j]);
+                double h1Real = 0.5 * (complex[j] + complex[length - j]);
+                double h1Imag = 0.5 * (complex[j + 1] - complex[length + 1 - j]);
+                double h2Real = 0.5 * (complex[j + 1] + complex[length + 1 - j]);
+                double h2Imag = -0.5 * (complex[j] - complex[length - j]);
 
-                fftReal1[i] = h1r;
-                fftImag1[i] = h1i;
-                fftReal1[numSamples - i] = h1r;
-                fftImag1[numSamples - i] = -h1i;
+                fftReal1[i] = h1Real;
+                fftImag1[i] = h1Imag;
+                fftReal1[numSamples - i] = h1Real;
+                fftImag1[numSamples - i] = -h1Imag;
 
-                fftReal2[i] = h2r;
-                fftImag2[i] = h2i;
-                fftReal2[numSamples - i] = h2r;
-                fftImag2[numSamples - i] = -h2i;
+                fftReal2[i] = h2Real;
+                fftImag2[i] = h2Imag;
+                fftReal2[numSamples - i] = h2Real;
+                fftImag2[numSamples - i] = -h2Imag;
             }
         }
 
@@ -212,7 +212,7 @@ namespace MathNet.Numerics.Transformations
         /// <param name="fftReal2">Real part of the second vector in frequency space. Length must be a power of two.</param>
         /// <param name="fftImag2">Imaginary part of the second vector in frequency space. Length must be a power of two.</param>
         /// <param name="samples1">Output samples for the first vector.</param>
-        /// <param name="samples2">Output samples for te second vector.</param>
+        /// <param name="samples2">Output samples for the second vector.</param>
         public
         void
         TransformBackward(
@@ -314,15 +314,15 @@ namespace MathNet.Numerics.Transformations
             fftReal[numSamples] = complex[0] - complex[1];
             for(int i = 1, j = 2; j <= numSamples; i++, j += 2)
             {
-                double h1r = 0.5 * (complex[j] + complex[length - j]);
-                double h1i = 0.5 * (complex[j + 1] - complex[length + 1 - j]);
-                double h2r = 0.5 * (complex[j + 1] + complex[length + 1 - j]);
-                double h2i = -0.5 * (complex[j] - complex[length - j]);
+                double h1Real = 0.5 * (complex[j] + complex[length - j]);
+                double h1Imag = 0.5 * (complex[j + 1] - complex[length + 1 - j]);
+                double h2Real = 0.5 * (complex[j + 1] + complex[length + 1 - j]);
+                double h2Imag = -0.5 * (complex[j] - complex[length - j]);
 
-                fftReal[i] = h1r + (wr * h2r) + (wi * h2i);
-                fftImag[i] = h1i + (wr * h2i) - (wi * h2r);
-                fftReal[numSamples - i] = h1r - (wr * h2r) - (wi * h2i);
-                fftImag[numSamples - i] = -h1i + (wr * h2i) - (wi * h2r);
+                fftReal[i] = h1Real + (wr * h2Real) + (wi * h2Imag);
+                fftImag[i] = h1Imag + (wr * h2Imag) - (wi * h2Real);
+                fftReal[numSamples - i] = h1Real - (wr * h2Real) - (wi * h2Imag);
+                fftImag[numSamples - i] = -h1Imag + (wr * h2Imag) - (wi * h2Real);
 
                 // For consistency and completeness we also provide the
                 // negative spectrum, even though it's redundant in the real case.
@@ -376,15 +376,15 @@ namespace MathNet.Numerics.Transformations
 
             for(int i = 1, j = 2; j <= numSamples; i++, j += 2)
             {
-                double h1r = 0.5 * (fftReal[i] + fftReal[numSamples - i]);
-                double h1i = 0.5 * (fftImag[i] - fftImag[numSamples - i]);
-                double h2r = -0.5 * (fftImag[i] + fftImag[numSamples - i]);
-                double h2i = 0.5 * (fftReal[i] - fftReal[numSamples - i]);
+                double h1Real = 0.5 * (fftReal[i] + fftReal[numSamples - i]);
+                double h1Imag = 0.5 * (fftImag[i] - fftImag[numSamples - i]);
+                double h2Real = -0.5 * (fftImag[i] + fftImag[numSamples - i]);
+                double h2Imag = 0.5 * (fftReal[i] - fftReal[numSamples - i]);
 
-                samples[j] = h1r + (wr * h2r) + (wi * h2i);
-                samples[j + 1] = h1i + (wr * h2i) - (wi * h2r);
-                samples[length - j] = h1r - (wr * h2r) - (wi * h2i);
-                samples[length + 1 - j] = -h1i + (wr * h2i) - (wi * h2r);
+                samples[j] = h1Real + (wr * h2Real) + (wi * h2Imag);
+                samples[j + 1] = h1Imag + (wr * h2Imag) - (wi * h2Real);
+                samples[length - j] = h1Real - (wr * h2Real) - (wi * h2Imag);
+                samples[length + 1 - j] = -h1Imag + (wr * h2Imag) - (wi * h2Real);
 
                 wr = ((wtemp = wr) * wpr) - (wi * wpi) + wr;
                 wi = (wi * wpr) + (wtemp * wpi) + wi;

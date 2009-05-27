@@ -53,7 +53,6 @@ namespace MathNet.Numerics.SpecialFunctions.Algorithms
             {
                 double q = x;
                 double p = Math.Floor(q);
-                negative = true;
 
                 if(Number.AlmostEqual(p, q))
                 {

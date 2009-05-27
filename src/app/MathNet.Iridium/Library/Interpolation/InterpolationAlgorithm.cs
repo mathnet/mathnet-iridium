@@ -57,7 +57,7 @@ namespace MathNet.Numerics.Interpolation
         }
 
         /// <summary>
-        /// Precompute/optimize the algoritm for the given sample set.
+        /// Precompute/optimize the algorithm for the given sample set.
         /// </summary>
         void Prepare(SampleList samples);
 
@@ -72,7 +72,7 @@ namespace MathNet.Numerics.Interpolation
         double Extrapolate(double t);
 
         /// <summary>
-        /// True if the alorithm supports error estimation.
+        /// True if the algorithm supports error estimation.
         /// </summary>
         bool SupportErrorEstimation
         {

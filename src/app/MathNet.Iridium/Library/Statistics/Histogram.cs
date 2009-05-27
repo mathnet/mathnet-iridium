@@ -578,7 +578,7 @@ namespace MathNet.Numerics.Statistics
     {
         /// <summary>
         /// This <c>IComparer</c> performs comparisons between a
-        /// <c>double</c> and a <c>Bucket</c> objet.
+        /// <c>double</c> and a <c>Bucket</c> object.
         /// </summary>
         private sealed class PointComparer : IComparer
         {
@@ -618,7 +618,7 @@ namespace MathNet.Numerics.Statistics
             }
         }
 
-        static readonly PointComparer pointComparer = new PointComparer();
+        static readonly PointComparer _pointComparer = new PointComparer();
 
         /// <summary>Lower boundary of the <c>Bucket</c>.</summary>
         double _lowerBound;
@@ -703,7 +703,7 @@ namespace MathNet.Numerics.Statistics
         /// </summary>
         public static IComparer DefaultPointComparer
         {
-            get { return pointComparer; }
+            get { return _pointComparer; }
         }
 
         /// <summary>

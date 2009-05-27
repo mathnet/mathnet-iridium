@@ -69,7 +69,7 @@ namespace MathNet.Numerics.Interpolation
         }
 
         /// <summary>
-        /// Precompute/optimize the algoritm for the given sample set.
+        /// Precompute/optimize the algorithm for the given sample set.
         /// </summary>
         public
         void
@@ -85,7 +85,7 @@ namespace MathNet.Numerics.Interpolation
         }
 
         /// <summary>
-        /// The maxium interpolation order.
+        /// The maximum interpolation order.
         /// </summary>
         /// <seealso cref="EffectiveOrder"/>
         public int MaximumOrder
@@ -237,7 +237,7 @@ namespace MathNet.Numerics.Interpolation
         }
 
         /// <summary>
-        /// True if the alorithm supports error estimation.
+        /// True if the algorithm supports error estimation.
         /// </summary>
         /// <remarks>
         /// Always true for this algorithm.

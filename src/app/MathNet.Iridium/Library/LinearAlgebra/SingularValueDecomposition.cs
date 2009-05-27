@@ -33,7 +33,6 @@
 //-----------------------------------------------------------------------
 
 using System;
-using System.Diagnostics;
 
 namespace MathNet.Numerics.LinearAlgebra
 {
@@ -57,17 +56,17 @@ namespace MathNet.Numerics.LinearAlgebra
     [Serializable]
     public class SingularValueDecomposition
     {
-        Matrix _u;
-        Matrix _v;
+        readonly Matrix _u;
+        readonly Matrix _v;
 
         /// <summary>Array for internal storage of singular values.</summary>
-        Vector _singular;
+        readonly Vector _singular;
 
         /// <summary>Row dimensions.</summary>
-        int m;
+        readonly int _m;
 
         /// <summary>Column dimensions.</summary>
-        int n;
+        readonly int _n;
 
         /// <summary>Indicates whether all the results provided by the
         /// method or properties should be transposed.</summary>
@@ -76,7 +75,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// m &gt;= n, but in fact, it is easy to handle the case m &lt; n
         /// by transposing all the results.
         /// </remarks>
-        bool transpose;
+        readonly bool _transpose;
 
         OnDemandComputation<Matrix> _diagonalSingularValuesOnDemand;
         OnDemandComputation<int> _rankOnDemand;
@@ -100,46 +99,44 @@ namespace MathNet.Numerics.LinearAlgebra
         /// Initializes a new instance of the SingularValueDecomposition class.
         /// </summary>
         /// <remarks>Provides access to U, S and V.</remarks>
-        /// <param name="Arg">Rectangular matrix</param>
+        /// <param name="arg">Rectangular matrix</param>
         public
-        SingularValueDecomposition(Matrix Arg)
+        SingularValueDecomposition(IMatrix<double> arg)
         {
-            transpose = (Arg.RowCount < Arg.ColumnCount);
+            _transpose = (arg.RowCount < arg.ColumnCount);
 
             // Derived from LINPACK code.
             // Initialize.
-            double[][] A;
-            if(transpose)
+            double[][] a;
+            if(_transpose)
             {
                 // copy of internal data, independent of Arg
-                A = Matrix.Transpose(Arg).GetArray();
-                m = Arg.ColumnCount;
-                n = Arg.RowCount;
+                a = Matrix.Transpose(arg).GetArray();
+                _m = arg.ColumnCount;
+                _n = arg.RowCount;
             }
             else
             {
-                A = Arg.CopyToJaggedArray();
-                m = Arg.RowCount;
-                n = Arg.ColumnCount;
+                a = arg.CopyToJaggedArray();
+                _m = arg.RowCount;
+                _n = arg.ColumnCount;
             }
 
-            int nu = Math.Min(m, n);
-            double[] s = new double[Math.Min(m + 1, n)];
-            double[][] U = Matrix.CreateMatrixData(m, nu);
-            double[][] V = Matrix.CreateMatrixData(n, n);
+            int nu = Math.Min(_m, _n);
+            double[] s = new double[Math.Min(_m + 1, _n)];
+            double[][] u = Matrix.CreateMatrixData(_m, nu);
+            double[][] v = Matrix.CreateMatrixData(_n, _n);
 
-            double[] e = new double[n];
-            double[] work = new double[m];
-            bool wantu = true;
-            bool wantv = true;
+            double[] e = new double[_n];
+            double[] work = new double[_m];
 
             /*
             Reduce A to bidiagonal form, storing the diagonal elements
             in s and the super-diagonal elements in e.
             */
 
-            int nct = Math.Min(m - 1, n);
-            int nrt = Math.Max(0, Math.Min(n - 2, m));
+            int nct = Math.Min(_m - 1, _n);
+            int nrt = Math.Max(0, Math.Min(_n - 2, _m));
             for(int k = 0; k < Math.Max(nct, nrt); k++)
             {
                 if(k < nct)
@@ -149,45 +146,45 @@ namespace MathNet.Numerics.LinearAlgebra
                     // Compute 2-norm of k-th column without under/overflow.
                     s[k] = 0;
 
-                    for(int i = k; i < m; i++)
+                    for(int i = k; i < _m; i++)
                     {
-                        s[k] = Fn.Hypot(s[k], A[i][k]);
+                        s[k] = Fn.Hypot(s[k], a[i][k]);
                     }
 
                     if(s[k] != 0.0)
                     {
-                        if(A[k][k] < 0.0)
+                        if(a[k][k] < 0.0)
                         {
                             s[k] = -s[k];
                         }
 
-                        for(int i = k; i < m; i++)
+                        for(int i = k; i < _m; i++)
                         {
-                            A[i][k] /= s[k];
+                            a[i][k] /= s[k];
                         }
 
-                        A[k][k] += 1.0;
+                        a[k][k] += 1.0;
                     }
 
                     s[k] = -s[k];
                 }
 
-                for(int j = k + 1; j < n; j++)
+                for(int j = k + 1; j < _n; j++)
                 {
                     if((k < nct) & (s[k] != 0.0))
                     {
                         /* Apply the transformation */
 
                         double t = 0;
-                        for(int i = k; i < m; i++)
+                        for(int i = k; i < _m; i++)
                         {
-                            t += A[i][k] * A[i][j];
+                            t += a[i][k] * a[i][j];
                         }
 
-                        t = (-t) / A[k][k];
-                        for(int i = k; i < m; i++)
+                        t = (-t) / a[k][k];
+                        for(int i = k; i < _m; i++)
                         {
-                            A[i][j] += t * A[i][k];
+                            a[i][j] += t * a[i][k];
                         }
                     }
 
@@ -196,19 +193,19 @@ namespace MathNet.Numerics.LinearAlgebra
                     subsequent calculation of the row transformation.
                     */
 
-                    e[j] = A[k][j];
+                    e[j] = a[k][j];
                 }
 
-                if(wantu & (k < nct))
+                if(k < nct)
                 {
                     /*
                     Place the transformation in U for subsequent back
                     multiplication.
                     */
 
-                    for(int i = k; i < m; i++)
+                    for(int i = k; i < _m; i++)
                     {
-                        U[i][k] = A[i][k];
+                        u[i][k] = a[i][k];
                     }
                 }
 
@@ -219,7 +216,7 @@ namespace MathNet.Numerics.LinearAlgebra
                     // Compute 2-norm without under/overflow.
                     e[k] = 0;
 
-                    for(int i = k + 1; i < n; i++)
+                    for(int i = k + 1; i < _n; i++)
                     {
                         e[k] = Fn.Hypot(e[k], e[i]);
                     }
@@ -231,7 +228,7 @@ namespace MathNet.Numerics.LinearAlgebra
                             e[k] = -e[k];
                         }
 
-                        for(int i = k + 1; i < n; i++)
+                        for(int i = k + 1; i < _n; i++)
                         {
                             e[i] /= e[k];
                         }
@@ -241,158 +238,149 @@ namespace MathNet.Numerics.LinearAlgebra
 
                     e[k] = -e[k];
 
-                    if((k + 1 < m) & (e[k] != 0.0))
+                    if((k + 1 < _m) & (e[k] != 0.0))
                     {
                         /* Apply the transformation */
 
-                        for(int i = k + 1; i < m; i++)
+                        for(int i = k + 1; i < _m; i++)
                         {
                             work[i] = 0.0;
                         }
 
-                        for(int j = k + 1; j < n; j++)
+                        for(int j = k + 1; j < _n; j++)
                         {
-                            for(int i = k + 1; i < m; i++)
+                            for(int i = k + 1; i < _m; i++)
                             {
-                                work[i] += e[j] * A[i][j];
+                                work[i] += e[j] * a[i][j];
                             }
                         }
 
-                        for(int j = k + 1; j < n; j++)
+                        for(int j = k + 1; j < _n; j++)
                         {
                             double t = (-e[j]) / e[k + 1];
-                            for(int i = k + 1; i < m; i++)
+                            for(int i = k + 1; i < _m; i++)
                             {
-                                A[i][j] += t * work[i];
+                                a[i][j] += t * work[i];
                             }
                         }
                     }
 
-                    if(wantv)
-                    {
-                        /*
-                        Place the transformation in V for subsequent
-                        back multiplication.
-                        */
+                    /*
+                    Place the transformation in V for subsequent
+                    back multiplication.
+                    */
 
-                        for(int i = k + 1; i < n; i++)
-                        {
-                            V[i][k] = e[i];
-                        }
+                    for(int i = k + 1; i < _n; i++)
+                    {
+                        v[i][k] = e[i];
                     }
                 }
             }
 
             /* Set up the final bidiagonal matrix or order p. */
 
-            int p = Math.Min(n, m + 1);
+            int p = Math.Min(_n, _m + 1);
 
-            if(nct < n)
+            if(nct < _n)
             {
-                s[nct] = A[nct][nct];
+                s[nct] = a[nct][nct];
             }
 
-            if(m < p)
+            if(_m < p)
             {
                 s[p - 1] = 0.0;
             }
 
             if(nrt + 1 < p)
             {
-                e[nrt] = A[nrt][p - 1];
+                e[nrt] = a[nrt][p - 1];
             }
 
             e[p - 1] = 0.0;
 
             /* If required, generate U */
 
-            if(wantu)
+            for(int j = nct; j < nu; j++)
             {
-                for(int j = nct; j < nu; j++)
+                for(int i = 0; i < _m; i++)
                 {
-                    for(int i = 0; i < m; i++)
-                    {
-                        U[i][j] = 0.0;
-                    }
-
-                    U[j][j] = 1.0;
+                    u[i][j] = 0.0;
                 }
 
-                for(int k = nct - 1; k >= 0; k--)
+                u[j][j] = 1.0;
+            }
+
+            for(int k = nct - 1; k >= 0; k--)
+            {
+                if(s[k] != 0.0)
                 {
-                    if(s[k] != 0.0)
+                    for(int j = k + 1; j < nu; j++)
                     {
-                        for(int j = k + 1; j < nu; j++)
+                        double t = 0;
+                        for(int i = k; i < _m; i++)
                         {
-                            double t = 0;
-                            for(int i = k; i < m; i++)
-                            {
-                                t += U[i][k] * U[i][j];
-                            }
-
-                            t = (-t) / U[k][k];
-                            for(int i = k; i < m; i++)
-                            {
-                                U[i][j] += t * U[i][k];
-                            }
+                            t += u[i][k] * u[i][j];
                         }
 
-                        for(int i = k; i < m; i++)
+                        t = (-t) / u[k][k];
+                        for(int i = k; i < _m; i++)
                         {
-                            U[i][k] = -U[i][k];
-                        }
-
-                        U[k][k] = 1.0 + U[k][k];
-                        for(int i = 0; i < k - 1; i++)
-                        {
-                            U[i][k] = 0.0;
+                            u[i][j] += t * u[i][k];
                         }
                     }
-                    else
-                    {
-                        for(int i = 0; i < m; i++)
-                        {
-                            U[i][k] = 0.0;
-                        }
 
-                        U[k][k] = 1.0;
+                    for(int i = k; i < _m; i++)
+                    {
+                        u[i][k] = -u[i][k];
                     }
+
+                    u[k][k] = 1.0 + u[k][k];
+                    for(int i = 0; i < k - 1; i++)
+                    {
+                        u[i][k] = 0.0;
+                    }
+                }
+                else
+                {
+                    for(int i = 0; i < _m; i++)
+                    {
+                        u[i][k] = 0.0;
+                    }
+
+                    u[k][k] = 1.0;
                 }
             }
 
             /* If required, generate V */
 
-            if(wantv)
+            for(int k = _n - 1; k >= 0; k--)
             {
-                for(int k = n - 1; k >= 0; k--)
+                if((k < nrt) & (e[k] != 0.0))
                 {
-                    if((k < nrt) & (e[k] != 0.0))
+                    for(int j = k + 1; j < nu; j++)
                     {
-                        for(int j = k + 1; j < nu; j++)
+                        double t = 0;
+                        for(int i = k + 1; i < _n; i++)
                         {
-                            double t = 0;
-                            for(int i = k + 1; i < n; i++)
-                            {
-                                t += V[i][k] * V[i][j];
-                            }
+                            t += v[i][k] * v[i][j];
+                        }
 
-                            t = (-t) / V[k + 1][k];
-                            for(int i = k + 1; i < n; i++)
-                            {
-                                V[i][j] += t * V[i][k];
-                            }
+                        t = (-t) / v[k + 1][k];
+                        for(int i = k + 1; i < _n; i++)
+                        {
+                            v[i][j] += t * v[i][k];
                         }
                     }
-
-                    for(int i = 0; i < n; i++)
-                    {
-                        V[i][k] = 0.0;
-                    }
-
-                    V[k][k] = 1.0;
                 }
-            }
 
+                for(int i = 0; i < _n; i++)
+                {
+                    v[i][k] = 0.0;
+                }
+
+                v[k][k] = 1.0;
+            }
+  
             /* Main iteration loop for the singular values */
 
             int pp = p - 1;
@@ -486,14 +474,11 @@ namespace MathNet.Numerics.LinearAlgebra
                                     e[j - 1] = cs * e[j - 1];
                                 }
 
-                                if(wantv)
+                                for(int i = 0; i < _n; i++)
                                 {
-                                    for(int i = 0; i < n; i++)
-                                    {
-                                        t = (cs * V[i][j]) + (sn * V[i][p - 1]);
-                                        V[i][p - 1] = ((-sn) * V[i][j]) + (cs * V[i][p - 1]);
-                                        V[i][j] = t;
-                                    }
+                                    t = (cs * v[i][j]) + (sn * v[i][p - 1]);
+                                    v[i][p - 1] = ((-sn) * v[i][j]) + (cs * v[i][p - 1]);
+                                    v[i][j] = t;
                                 }
                             }
                         }
@@ -513,14 +498,12 @@ namespace MathNet.Numerics.LinearAlgebra
                                 s[j] = t;
                                 f = (-sn) * e[j];
                                 e[j] = cs * e[j];
-                                if(wantu)
+
+                                for(int i = 0; i < _m; i++)
                                 {
-                                    for(int i = 0; i < m; i++)
-                                    {
-                                        t = (cs * U[i][j]) + (sn * U[i][k - 1]);
-                                        U[i][k - 1] = ((-sn) * U[i][j]) + (cs * U[i][k - 1]);
-                                        U[i][j] = t;
-                                    }
+                                    t = (cs * u[i][j]) + (sn * u[i][k - 1]);
+                                    u[i][k - 1] = ((-sn) * u[i][j]) + (cs * u[i][k - 1]);
+                                    u[i][j] = t;
                                 }
                             }
                         }
@@ -574,14 +557,11 @@ namespace MathNet.Numerics.LinearAlgebra
                                 g = sn * s[j + 1];
                                 s[j + 1] = cs * s[j + 1];
 
-                                if(wantv)
+                                for(int i = 0; i < _n; i++)
                                 {
-                                    for(int i = 0; i < n; i++)
-                                    {
-                                        t = (cs * V[i][j]) + (sn * V[i][j + 1]);
-                                        V[i][j + 1] = ((-sn) * V[i][j]) + (cs * V[i][j + 1]);
-                                        V[i][j] = t;
-                                    }
+                                    t = (cs * v[i][j]) + (sn * v[i][j + 1]);
+                                    v[i][j + 1] = ((-sn) * v[i][j]) + (cs * v[i][j + 1]);
+                                    v[i][j] = t;
                                 }
 
                                 t = Fn.Hypot(f, g);
@@ -593,13 +573,13 @@ namespace MathNet.Numerics.LinearAlgebra
                                 g = sn * e[j + 1];
                                 e[j + 1] = cs * e[j + 1];
 
-                                if(wantu && (j < m - 1))
+                                if(j < _m - 1)
                                 {
-                                    for(int i = 0; i < m; i++)
+                                    for(int i = 0; i < _m; i++)
                                     {
-                                        t = (cs * U[i][j]) + (sn * U[i][j + 1]);
-                                        U[i][j + 1] = ((-sn) * U[i][j]) + (cs * U[i][j + 1]);
-                                        U[i][j] = t;
+                                        t = (cs * u[i][j]) + (sn * u[i][j + 1]);
+                                        u[i][j + 1] = ((-sn) * u[i][j]) + (cs * u[i][j + 1]);
+                                        u[i][j] = t;
                                     }
                                 }
                             }
@@ -618,12 +598,10 @@ namespace MathNet.Numerics.LinearAlgebra
                             if(s[k] <= 0.0)
                             {
                                 s[k] = (s[k] < 0.0 ? -s[k] : 0.0);
-                                if(wantv)
+
+                                for(int i = 0; i <= pp; i++)
                                 {
-                                    for(int i = 0; i <= pp; i++)
-                                    {
-                                        V[i][k] = -V[i][k];
-                                    }
+                                    v[i][k] = -v[i][k];
                                 }
                             }
 
@@ -640,23 +618,23 @@ namespace MathNet.Numerics.LinearAlgebra
                                 s[k] = s[k + 1];
                                 s[k + 1] = t;
 
-                                if(wantv && (k < n - 1))
+                                if(k < _n - 1)
                                 {
-                                    for(int i = 0; i < n; i++)
+                                    for(int i = 0; i < _n; i++)
                                     {
-                                        t = V[i][k + 1];
-                                        V[i][k + 1] = V[i][k];
-                                        V[i][k] = t;
+                                        t = v[i][k + 1];
+                                        v[i][k + 1] = v[i][k];
+                                        v[i][k] = t;
                                     }
                                 }
 
-                                if(wantu && (k < m - 1))
+                                if(k < _m - 1)
                                 {
-                                    for(int i = 0; i < m; i++)
+                                    for(int i = 0; i < _m; i++)
                                     {
-                                        t = U[i][k + 1];
-                                        U[i][k + 1] = U[i][k];
-                                        U[i][k] = t;
+                                        t = u[i][k + 1];
+                                        u[i][k + 1] = u[i][k];
+                                        u[i][k] = t;
                                     }
                                 }
 
@@ -672,16 +650,16 @@ namespace MathNet.Numerics.LinearAlgebra
             }
 
             // (vermorel) transposing the results if needed
-            if(transpose)
+            if(_transpose)
             {
                 // swaping U and V
-                double[][] T = V;
-                V = U;
-                U = T;
+                double[][] temp = v;
+                v = u;
+                u = temp;
             }
 
-            _u = new Matrix(U);
-            _v = new Matrix(V);
+            _u = new Matrix(u);
+            _v = new Matrix(v);
             _singular = new Vector(s);
 
             InitOnDemandComputations();
@@ -733,10 +711,10 @@ namespace MathNet.Numerics.LinearAlgebra
         Condition()
         {
             // TODO (ruegg, 2008-03-11): Change to property
-            return _singular[0] / _singular[Math.Min(m, n) - 1];
+            return _singular[0] / _singular[Math.Min(_m, _n) - 1];
         }
 
-        /// <summary>Effective numerical matrix rank - Number of nonnegligible singular values.</summary>
+        /// <summary>Effective numerical matrix rank - Number of non negligible singular values.</summary>
         public
         int
         Rank()
@@ -761,7 +739,7 @@ namespace MathNet.Numerics.LinearAlgebra
         int
         ComputeRank()
         {
-            double tol = Math.Max(m, n) * _singular[0] * Number.PositiveRelativeAccuracy;
+            double tol = Math.Max(_m, _n) * _singular[0] * Number.PositiveRelativeAccuracy;
             int r = 0;
 
             for(int i = 0; i < _singular.Length; i++)

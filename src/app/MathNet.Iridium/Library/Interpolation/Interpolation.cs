@@ -63,7 +63,7 @@ namespace MathNet.Numerics.Interpolation
         }
 
         /// <summary>
-        /// Create a polynomial (neville) interpolation based on arbitrary points.
+        /// Create a polynomial (Neville) interpolation based on arbitrary points.
         /// </summary>
         /// <param name="points">The sample points t. Supports both lists and arrays.</param>
         /// <param name="values">The sample point values x(t). Supports both lists and arrays.</param>
@@ -162,7 +162,7 @@ namespace MathNet.Numerics.Interpolation
 
         /// <summary>
         /// Create a natural cubic spline interpolation based on arbitrary points.
-        /// Natural splines are cubic splines with zero second derivative at the boundaries (i.e. straigth lines).
+        /// Natural splines are cubic splines with zero second derivative at the boundaries (i.e. straight lines).
         /// </summary>
         /// <param name="points">The sample points t. Supports both lists and arrays.</param>
         /// <param name="values">The sample point values x(t). Supports both lists and arrays.</param>
@@ -185,7 +185,7 @@ namespace MathNet.Numerics.Interpolation
         }
 
         /// <summary>
-        /// Create an akima cubic spline interpolation based on arbitrary points.
+        /// Create an Akima cubic spline interpolation based on arbitrary points.
         /// Akima splines are cubic splines which are stable to outliers.
         /// </summary>
         /// <param name="points">The sample points t. Supports both lists and arrays.</param>
@@ -230,7 +230,7 @@ namespace MathNet.Numerics.Interpolation
         }
 
         /// <summary>
-        /// Create a polynomial interpolation based on chebyshev (first kind) points, that is, "t(i) = 0.5*(b+a) + 0.5*(b-a)*cos(Pi*(2*i+1)/(2*n))".
+        /// Create a polynomial interpolation based on Chebyshev (first kind) points, that is, "t(i) = 0.5*(b+a) + 0.5*(b-a)*cos(Pi*(2*i+1)/(2*n))".
         /// </summary>
         /// <param name="leftBound">The left (smallest) sample point t bound.</param>
         /// <param name="rightBound">The right (biggest) sample point t bound.</param>

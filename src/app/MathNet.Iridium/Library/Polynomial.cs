@@ -265,7 +265,7 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// Check wether a polynomial is bigger than another polynomial.
+        /// Check whether a polynomial is bigger than another polynomial.
         /// </summary>
         public static
         bool
@@ -277,7 +277,7 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// Check wether a polynomial is smaller than another polynomial.
+        /// Check whether a polynomial is smaller than another polynomial.
         /// </summary>
         public static
         bool
@@ -289,7 +289,7 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// Check wether a polynomial is bigger than or equal to another polynomial.
+        /// Check whether a polynomial is bigger than or equal to another polynomial.
         /// </summary>
         public static
         bool
@@ -302,7 +302,7 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// Check wether a polynomial is smaller than or equal to another polynomial.
+        /// Check whether a polynomial is smaller than or equal to another polynomial.
         /// </summary>
         public static
         bool
@@ -512,7 +512,7 @@ namespace MathNet.Numerics
             this[0] += n;
         }
 
-        /// <summary>Subtract anoter polynomial inplace from this polynomial.</summary>
+        /// <summary>Subtract another polynomial inplace from this polynomial.</summary>
         /// <remarks>This method operates inplace and thus alters this instance.</remarks>
         public
         void
@@ -749,7 +749,7 @@ namespace MathNet.Numerics
         /// Multiply two polynomials.
         /// </summary>
         /// <remarks>
-        /// If both polynomials have an order > 3, the faster karatsuba algorithm is used.
+        /// If both polynomials have an order > 3, the faster Karatsuba algorithm is used.
         /// </remarks>
         public
         Polynomial

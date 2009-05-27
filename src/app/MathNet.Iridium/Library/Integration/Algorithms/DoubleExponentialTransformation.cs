@@ -36,7 +36,7 @@ using System.Collections.Generic;
 namespace MathNet.Numerics.Integration.Algorithms
 {
     /// <summary>
-    /// Analytic integration algortihm for smooth functions with no discontinuities
+    /// Analytic integration algorithm for smooth functions with no discontinuities
     /// or derivative discontinuities and no poles inside the interval.
     /// </summary>
     public class DoubleExponentialTransformation
@@ -48,7 +48,7 @@ namespace MathNet.Numerics.Integration.Algorithms
         IEnumerable<double[]> _levelWeights;
 
         #region Precomputed Abcissas and Weights
-        static readonly double[][] PrecomputedAbcissas = new double[][] {
+        static readonly double[][] PrecomputedAbscissas = new double[][] {
             new double[] {
                 0.00000000000000000000,
                 0.95136796407274694574,
@@ -456,7 +456,7 @@ namespace MathNet.Numerics.Integration.Algorithms
         #endregion
 
         /// <summary>
-        /// Aproximate the integral by the double exponential transformation
+        /// Approximate the integral by the double exponential transformation
         /// </summary>
         public
         double
@@ -506,9 +506,9 @@ namespace MathNet.Numerics.Integration.Algorithms
         double[]
         EvaluateAbcissas(int level)
         {
-            if(level < PrecomputedAbcissas.Length)
+            if(level < PrecomputedAbscissas.Length)
             {
-                return PrecomputedAbcissas[level];
+                return PrecomputedAbscissas[level];
             }
 
             double step = level <= 1 ? 1.0 : (1.0 / (2 << (level - 2)));

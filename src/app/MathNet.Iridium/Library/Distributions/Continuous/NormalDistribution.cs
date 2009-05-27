@@ -280,7 +280,7 @@ namespace MathNet.Numerics.Distributions
         #region Generator
 
         /// <summary>
-        /// Returns a normal/gaussian distributed floating point random number.
+        /// Returns a normal/Gaussian distributed floating point random number.
         /// </summary>
         /// <returns>A normal distributed double-precision floating point number.</returns>
         public override

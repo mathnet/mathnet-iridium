@@ -36,11 +36,11 @@ namespace Iridium.Test.TransformationsTests
     [TestFixture]
     public class FftTest
     {
-        private ComplexFourierTransformation cft;
-        private RealFourierTransformation rft;
+        private ComplexFourierTransformation _cft;
+        private RealFourierTransformation _rft;
 
         #region Compare Helpers
-        public static void RealTestTimeEven(double[] samples)
+        static void RealTestTimeEven(double[] samples)
         {
             int len = samples.Length;
             for(int i = 1; i < samples.Length; i++)
@@ -49,7 +49,7 @@ namespace Iridium.Test.TransformationsTests
             }
         }
 
-        public static void RealTestTimeOdd(double[] samples)
+        static void RealTestTimeOdd(double[] samples)
         {
             int len = samples.Length;
             for(int i = 1; i < samples.Length; i++)
@@ -60,7 +60,7 @@ namespace Iridium.Test.TransformationsTests
             Assert.That(samples[0], NumericIs.AlmostEqualTo(0.0), "Real Odd in Time Space: Periodic Continuation");
         }
 
-        public static void ComplexTestTimeEven(double[] samples)
+        static void ComplexTestTimeEven(double[] samples)
         {
             int len = samples.Length;
             for(int i = 2; i < samples.Length / 2; i += 2)
@@ -70,7 +70,7 @@ namespace Iridium.Test.TransformationsTests
             }
         }
 
-        public static void ComplexTestTimeOdd(double[] samples)
+        static void ComplexTestTimeOdd(double[] samples)
         {
             int len = samples.Length;
             for(int i = 2; i < samples.Length / 2; i += 2)
@@ -83,7 +83,7 @@ namespace Iridium.Test.TransformationsTests
             Assert.That(samples[1], NumericIs.AlmostEqualTo(0.0), "Complex Odd in Time Space: Imaginary Part: Periodic Continuation");
         }
 
-        public static void ComplexTestFreqEven(double[] samples)
+        static void ComplexTestFreqEven(double[] samples)
         {
             int len = samples.Length;
             for(int i = 0; i < samples.Length / 2; i += 2)
@@ -93,7 +93,7 @@ namespace Iridium.Test.TransformationsTests
             }
         }
 
-        public static void ComplexTestFreqOdd(double[] samples)
+        static void ComplexTestFreqOdd(double[] samples)
         {
             int len = samples.Length;
             for(int i = 0; i < samples.Length / 2; i += 2)
@@ -106,7 +106,7 @@ namespace Iridium.Test.TransformationsTests
             Assert.That(samples[1], NumericIs.AlmostEqualTo(0.0), "Complex Odd in Frequency Space: Imaginary Part: Periodic Continuation (No DC)");
         }
 
-        public static void ComplexTestRealZero(double[] samples)
+        static void ComplexTestRealZero(double[] samples)
         {
             for(int i = 0; i < samples.Length; i += 2)
             {
@@ -114,7 +114,7 @@ namespace Iridium.Test.TransformationsTests
             }
         }
 
-        public static void ComplexTestImagZero(double[] samples)
+        static void ComplexTestImagZero(double[] samples)
         {
             for(int i = 1; i < samples.Length; i += 2)
             {
@@ -123,11 +123,11 @@ namespace Iridium.Test.TransformationsTests
         }
         #endregion
 
-        [TestFixtureSetUp]
+        [SetUp]
         public void SetUp()
         {
-            cft = new ComplexFourierTransformation();
-            rft = new RealFourierTransformation();
+            _cft = new ComplexFourierTransformation();
+            _rft = new RealFourierTransformation();
         }
 
         #region Complex FFT
@@ -136,8 +136,8 @@ namespace Iridium.Test.TransformationsTests
         {
             /* h(t) real-valued even <=> H(f) real-valued even-with-offset */
 
-            int numSamples = 32;
-            int length = 2 * numSamples;
+            const int numSamples = 32;
+            const int length = 2 * numSamples;
 
             double[] data = new double[length];
 
@@ -150,8 +150,8 @@ namespace Iridium.Test.TransformationsTests
 
             ComplexTestTimeEven(data);
 
-            cft.Convention = TransformationConvention.Matlab; // so we can check MATLAB consistency
-            cft.TransformForward(data);
+            _cft.Convention = TransformationConvention.Matlab; // so we can check MATLAB consistency
+            _cft.TransformForward(data);
 
             ComplexTestImagZero(data);
             ComplexTestFreqEven(data);
@@ -179,8 +179,8 @@ namespace Iridium.Test.TransformationsTests
         {
             /* h(t) imaginary-valued even <=> H(f) imaginary-valued even-with-offset */
 
-            int numSamples = 32;
-            int length = 2 * numSamples;
+            const int numSamples = 32;
+            const int length = 2 * numSamples;
 
             double[] data = new double[length];
 
@@ -193,8 +193,8 @@ namespace Iridium.Test.TransformationsTests
 
             ComplexTestTimeEven(data);
 
-            cft.Convention = TransformationConvention.Matlab;
-            cft.TransformForward(data);
+            _cft.Convention = TransformationConvention.Matlab;
+            _cft.TransformForward(data);
 
             ComplexTestRealZero(data);
             ComplexTestFreqEven(data);
@@ -222,8 +222,8 @@ namespace Iridium.Test.TransformationsTests
         {
             /* h(t) real-valued odd <=> H(f) imaginary-valued odd-with-offset */
 
-            int numSamples = 32;
-            int length = 2 * numSamples;
+            const int numSamples = 32;
+            const int length = 2 * numSamples;
 
             double[] data = new double[length];
 
@@ -238,8 +238,8 @@ namespace Iridium.Test.TransformationsTests
 
             ComplexTestTimeOdd(data);
 
-            cft.Convention = TransformationConvention.Matlab;
-            cft.TransformForward(data);
+            _cft.Convention = TransformationConvention.Matlab;
+            _cft.TransformForward(data);
 
             ComplexTestRealZero(data);
             ComplexTestFreqOdd(data);
@@ -268,8 +268,8 @@ namespace Iridium.Test.TransformationsTests
         {
             /* h(t) imaginary-valued odd <=> H(f) real-valued odd-with-offset */
 
-            int numSamples = 32;
-            int length = 2 * numSamples;
+            const int numSamples = 32;
+            const int length = 2 * numSamples;
 
             double[] data = new double[length];
 
@@ -284,8 +284,8 @@ namespace Iridium.Test.TransformationsTests
 
             ComplexTestTimeOdd(data);
 
-            cft.Convention = TransformationConvention.Matlab;
-            cft.TransformForward(data);
+            _cft.Convention = TransformationConvention.Matlab;
+            _cft.TransformForward(data);
 
             ComplexTestImagZero(data);
             ComplexTestFreqOdd(data);
@@ -312,8 +312,8 @@ namespace Iridium.Test.TransformationsTests
         [Test]
         public void Complex_Inverse_Mix()
         {
-            int numSamples = 32;
-            int length = 2 * numSamples;
+            const int numSamples = 32;
+            const int length = 2 * numSamples;
 
             double[] data = new double[length];
 
@@ -326,8 +326,8 @@ namespace Iridium.Test.TransformationsTests
 
             data[1] = 0.0; // periodic continuation; force odd
 
-            cft.Convention = TransformationConvention.Matlab;
-            cft.TransformForward(data);
+            _cft.Convention = TransformationConvention.Matlab;
+            _cft.TransformForward(data);
 
             ComplexTestImagZero(data);
 
@@ -358,14 +358,14 @@ namespace Iridium.Test.TransformationsTests
             Assert.That(data[30 * 2], NumericIs.AlmostEqualTo(2.1627, 0.0001), "MATLAB 31");
             Assert.That(data[31 * 2], NumericIs.AlmostEqualTo(3.8723, 0.0001), "MATLAB 32");
 
-            cft.TransformBackward(data);
+            _cft.TransformBackward(data);
 
             // Compare with original samples
             for(int i = 0; i < length; i += 2)
             {
                 double z = (double)(i - numSamples) / numSamples;
-                Assert.That(data[i], NumericIs.AlmostEqualTo(1.0 / ((z * z) + 1.0), 0.00001), "Inv: Real: " + i.ToString());
-                Assert.That(data[i + 1], NumericIs.AlmostEqualTo(i == 0 ? 0.0 : z / ((z * z) + 1.0), 0.00001), "Inv: Imag: " + i.ToString());
+                Assert.That(data[i], NumericIs.AlmostEqualTo(1.0 / ((z * z) + 1.0), 0.00001), "Inv: Real: " + i);
+                Assert.That(data[i + 1], NumericIs.AlmostEqualTo(i == 0 ? 0.0 : z / ((z * z) + 1.0), 0.00001), "Inv: Imag: " + i);
             }
         }
         #endregion
@@ -374,8 +374,8 @@ namespace Iridium.Test.TransformationsTests
         [Test]
         public void Real_TwoReal_EvenOdd()
         {
-            int numSamples = 32;
-            int half = numSamples >> 1;
+            const int numSamples = 32;
+            const int half = numSamples >> 1;
 
             double[] dataEven = new double[numSamples];
             double[] dataOdd = new double[numSamples];
@@ -394,8 +394,8 @@ namespace Iridium.Test.TransformationsTests
 
             double[] evenReal, evenImag, oddReal, oddImag;
 
-            rft.Convention = TransformationConvention.Matlab;
-            rft.TransformForward(dataEven, dataOdd, out evenReal, out evenImag, out oddReal, out oddImag);
+            _rft.Convention = TransformationConvention.Matlab;
+            _rft.TransformForward(dataEven, dataOdd, out evenReal, out evenImag, out oddReal, out oddImag);
 
             /* Compare EVEN With MATLAB:
             samples_t = 1.0 ./ (([-16:1:15] ./ 16) .^ 2 + 1.0)
@@ -444,8 +444,8 @@ namespace Iridium.Test.TransformationsTests
         [Test]
         public void Real_TwoReal_Inverse()
         {
-            int numSamples = 32;
-            int half = numSamples >> 1;
+            const int numSamples = 32;
+            const int half = numSamples >> 1;
 
             double[] dataEven = new double[numSamples];
             double[] dataOdd = new double[numSamples];
@@ -465,26 +465,26 @@ namespace Iridium.Test.TransformationsTests
             double[] evenReal, evenImag, oddReal, oddImag;
 
             // Forward Transform
-            rft.Convention = TransformationConvention.Default;
-            rft.TransformForward(dataEven, dataOdd, out evenReal, out evenImag, out oddReal, out oddImag);
+            _rft.Convention = TransformationConvention.Default;
+            _rft.TransformForward(dataEven, dataOdd, out evenReal, out evenImag, out oddReal, out oddImag);
 
             // Backward Transform
             double[] dataEven2, dataOdd2;
-            rft.TransformBackward(evenReal, evenImag, oddReal, oddImag, out dataEven2, out dataOdd2);
+            _rft.TransformBackward(evenReal, evenImag, oddReal, oddImag, out dataEven2, out dataOdd2);
 
             // Compare with original samples
             for(int i = 0; i < numSamples; i += 2)
             {
-                Assert.That(dataEven[i], Is.EqualTo(dataEven2[i]).Within(0.00001), "Inv: Even: " + i.ToString());
-                Assert.That(dataOdd[i], Is.EqualTo(dataOdd2[i]).Within(0.00001), "Inv: Odd: " + i.ToString());
+                Assert.That(dataEven[i], Is.EqualTo(dataEven2[i]).Within(0.00001), "Inv: Even: " + i);
+                Assert.That(dataOdd[i], Is.EqualTo(dataOdd2[i]).Within(0.00001), "Inv: Odd: " + i);
             }
         }
 
         [Test]
         public void Real_SingleReal_EvenOdd()
         {
-            int numSamples = 32;
-            int half = numSamples >> 1;
+            const int numSamples = 32;
+            const int half = numSamples >> 1;
 
             double[] dataEven = new double[numSamples];
             double[] dataOdd = new double[numSamples];
@@ -503,9 +503,9 @@ namespace Iridium.Test.TransformationsTests
 
             double[] evenReal, evenImag, oddReal, oddImag;
 
-            rft.Convention = TransformationConvention.Matlab;
-            rft.TransformForward(dataEven, out evenReal, out evenImag);
-            rft.TransformForward(dataOdd, out oddReal, out oddImag);
+            _rft.Convention = TransformationConvention.Matlab;
+            _rft.TransformForward(dataEven, out evenReal, out evenImag);
+            _rft.TransformForward(dataOdd, out oddReal, out oddImag);
 
             /* Compare EVEN With MATLAB:
             samples_t = 1.0 ./ (([-16:1:15] ./ 16) .^ 2 + 1.0)
@@ -554,8 +554,8 @@ namespace Iridium.Test.TransformationsTests
         [Test]
         public void Real_SingleReal_Inverse()
         {
-            int numSamples = 32;
-            int half = numSamples >> 1;
+            const int numSamples = 32;
+            const int half = numSamples >> 1;
 
             double[] dataEven = new double[numSamples];
             double[] dataOdd = new double[numSamples];
@@ -575,26 +575,26 @@ namespace Iridium.Test.TransformationsTests
             double[] evenReal, evenImag, oddReal, oddImag;
 
             // Forward Transform
-            rft.Convention = TransformationConvention.Default;
-            rft.TransformForward(dataEven, out evenReal, out evenImag);
-            rft.Convention = TransformationConvention.NumericalRecipes; // to also check this one once...
-            rft.TransformForward(dataOdd, out oddReal, out oddImag);
+            _rft.Convention = TransformationConvention.Default;
+            _rft.TransformForward(dataEven, out evenReal, out evenImag);
+            _rft.Convention = TransformationConvention.NumericalRecipes; // to also check this one once...
+            _rft.TransformForward(dataOdd, out oddReal, out oddImag);
 
             // Backward Transform
             double[] dataEven2, dataOdd2;
-            rft.Convention = TransformationConvention.Default;
-            rft.TransformBackward(evenReal, evenImag, out dataEven2);
-            rft.Convention = TransformationConvention.NumericalRecipes;
-            rft.TransformBackward(oddReal, oddImag, out dataOdd2);
+            _rft.Convention = TransformationConvention.Default;
+            _rft.TransformBackward(evenReal, evenImag, out dataEven2);
+            _rft.Convention = TransformationConvention.NumericalRecipes;
+            _rft.TransformBackward(oddReal, oddImag, out dataOdd2);
 
             // Compare with original samples
             for(int i = 0; i < numSamples; i += 2)
             {
-                Assert.That(dataEven[i], Is.EqualTo(dataEven2[i]).Within(0.00001), "Inv: Even: " + i.ToString());
+                Assert.That(dataEven[i], Is.EqualTo(dataEven2[i]).Within(0.00001), "Inv: Even: " + i);
 
                 // Note: Numerical Recipes applies no scaling, 
                 // so we have to compensate this here by scaling with N/2
-                Assert.That(dataOdd[i] * half, Is.EqualTo(dataOdd2[i]).Within(0.00001), "Inv: Odd: " + i.ToString());
+                Assert.That(dataOdd[i] * half, Is.EqualTo(dataOdd2[i]).Within(0.00001), "Inv: Odd: " + i);
             }
         }
         #endregion
@@ -604,8 +604,8 @@ namespace Iridium.Test.TransformationsTests
         [Test]
         public void Complex_MultiDim_1D_Inverse_Mix()
         {
-            int numSamples = 32;
-            int length = 2 * numSamples;
+            const int numSamples = 32;
+            const int length = 2 * numSamples;
 
             int[] dims = new int[] { numSamples };
             double[] data = new double[length];
@@ -619,8 +619,8 @@ namespace Iridium.Test.TransformationsTests
 
             data[1] = 0.0; // periodic continuation; force odd
 
-            cft.Convention = TransformationConvention.Matlab;
-            cft.TransformForward(data, dims);
+            _cft.Convention = TransformationConvention.Matlab;
+            _cft.TransformForward(data, dims);
 
             ComplexTestImagZero(data);
 
@@ -651,22 +651,22 @@ namespace Iridium.Test.TransformationsTests
             Assert.That(data[30 * 2], NumericIs.AlmostEqualTo(2.1627, 0.0001), "MATLAB 31");
             Assert.That(data[31 * 2], NumericIs.AlmostEqualTo(3.8723, 0.0001), "MATLAB 32");
 
-            cft.TransformBackward(data, dims);
+            _cft.TransformBackward(data, dims);
 
             // Compare with original samples
             for(int i = 0; i < length; i += 2)
             {
                 double z = (double)(i - numSamples) / numSamples;
-                Assert.That(data[i], Is.EqualTo(1.0 / ((z * z) + 1.0)).Within(0.00001), "Inv: Real: " + i.ToString());
-                Assert.That(data[i + 1], Is.EqualTo(i == 0 ? 0.0 : z / ((z * z) + 1.0)).Within(0.00001), "Inv: Imag: " + i.ToString());
+                Assert.That(data[i], Is.EqualTo(1.0 / ((z * z) + 1.0)).Within(0.00001), "Inv: Real: " + i);
+                Assert.That(data[i + 1], Is.EqualTo(i == 0 ? 0.0 : z / ((z * z) + 1.0)).Within(0.00001), "Inv: Imag: " + i);
             }
         }
 
         [Test]
         public void Complex_MultiDim_2D_Inverse_Mix()
         {
-            int numSamples = 4;
-            int length = 2 * numSamples;
+            const int numSamples = 4;
+            const int length = 2 * numSamples;
 
             int[] dims = new int[] { 2, 2 };
             double[] data = new double[length];
@@ -679,8 +679,8 @@ namespace Iridium.Test.TransformationsTests
 
             data[1] = 0.0; // periodic continuation; force odd
 
-            cft.Convention = TransformationConvention.Matlab;
-            cft.TransformForward(data, dims);
+            _cft.Convention = TransformationConvention.Matlab;
+            _cft.TransformForward(data, dims);
 
             /* Compare With MATLAB:
             samples_t = [0, 2+2i;4,6-2i]
@@ -696,13 +696,13 @@ namespace Iridium.Test.TransformationsTests
             Assert.That(data[3 * 2], Is.EqualTo(0), "MATLAB 4");
             Assert.That(data[(3 * 2) + 1], Is.EqualTo(-4), "MATLAB 4b");
 
-            cft.TransformBackward(data, dims);
+            _cft.TransformBackward(data, dims);
 
             // Compare with original samples
             for(int i = 0; i < length; i += 2)
             {
-                Assert.That(data[i], Is.EqualTo(i), "Inv: Real: " + i.ToString());
-                Assert.That(data[i + 1], Is.EqualTo(i == 0 ? 0.0 : numSamples - i), "Inv: Imag: " + i.ToString());
+                Assert.That(data[i], Is.EqualTo(i), "Inv: Real: " + i);
+                Assert.That(data[i + 1], Is.EqualTo(i == 0 ? 0.0 : numSamples - i), "Inv: Imag: " + i);
             }
         }
 
@@ -710,18 +710,18 @@ namespace Iridium.Test.TransformationsTests
         public void Complex_MultiDim_3D_Inverse_Mix()
         {
             int[] dims = new int[] { 2, 4, 8 };
-            int ntot = 2 * 4 * 8;
-            int len = 2 * ntot;
+            const int ntot = 2 * 4 * 8;
+            const int len = 2 * ntot;
 
             double[] data = new double[len];
             for(int i = 0; i < len; i += 2)
             {
-                data[i] = (double)i;
+                data[i] = i;
                 data[i + 1] = 0.0;
             }
 
-            cft.Convention = TransformationConvention.Matlab;
-            cft.TransformForward(data, dims);
+            _cft.Convention = TransformationConvention.Matlab;
+            _cft.TransformForward(data, dims);
 
             /* Compare With MATLAB:
             M = zeros(2,4,8);
@@ -777,320 +777,15 @@ namespace Iridium.Test.TransformationsTests
             Assert.That(data[56 * 2], NumericIs.AlmostEqualTo((double) 0), "MATLAB 57");
             Assert.That(data[(56 * 2) + 1], NumericIs.AlmostEqualTo((double) 0), "MATLAB 57b");
 
-            cft.TransformBackward(data, dims);
+            _cft.TransformBackward(data, dims);
 
             // Compare with original samples
             for(int i = 0; i < len; i += 2)
             {
-                Assert.That(data[i], NumericIs.AlmostEqualTo((double)i), "Inv: Real: " + i.ToString());
-                Assert.That(data[i + 1], NumericIs.AlmostEqualTo(0d), "Inv: Imag: " + i.ToString());
+                Assert.That(data[i], NumericIs.AlmostEqualTo((double)i), "Inv: Real: " + i);
+                Assert.That(data[i + 1], NumericIs.AlmostEqualTo(0d), "Inv: Imag: " + i);
             }
         }
         #endregion
-
-        [Test]
-        public void Stress_SingleReal_1024()
-        {
-            const int numSamples = 1024;
-            const int half = numSamples >> 1;
-
-            double[] dataEven = new double[numSamples];
-
-            for(int i = 0; i < numSamples; i++)
-            {
-                double z = (double)(i - half) / half;
-                dataEven[i] = 1.0 / ((z * z) + 1.0);
-            }
-
-            RealTestTimeEven(dataEven);
-
-            double[] evenReal = new double[0], evenImag = new double[0];
-
-            rft.Convention = TransformationConvention.Default;
-
-            ////MyStopwatch.MethodToTime m = delegate
-            ////{
-            rft.TransformForward(dataEven, out evenReal, out evenImag);
-            ////};
-            ////Console.Write("FFT Time (ms) for " + numSamples.ToString() + ": ");
-            ////MyStopwatch.Time(m);
-
-            // This time do a round trip check, too:
-            double[] dataEven2;
-            rft.TransformBackward(evenReal, evenImag, out dataEven2);
-
-            // Compare with original samples
-            for(int i = 0; i < numSamples; i += 2)
-            {
-                Assert.That(dataEven2[i], NumericIs.AlmostEqualTo(dataEven[i], 0.00001), "Inv: " + i.ToString());
-            }
-        }
-
-        [Test]
-        public void Stress_SingleReal_4096()
-        {
-            const int numSamples = 4096;
-            const int half = numSamples >> 1;
-
-            double[] dataEven = new double[numSamples];
-
-            for(int i = 0; i < numSamples; i++)
-            {
-                double z = (double)(i - half) / half;
-                dataEven[i] = 1.0 / ((z * z) + 1.0);
-            }
-
-            RealTestTimeEven(dataEven);
-
-            double[] evenReal = new double[0], evenImag = new double[0];
-
-            rft.Convention = TransformationConvention.Default;
-
-            ////MyStopwatch.MethodToTime m = delegate
-            ////{
-            rft.TransformForward(dataEven, out evenReal, out evenImag);
-            ////};
-            ////Console.Write("FFT Time (ms) for " + numSamples.ToString() + ": ");
-            ////MyStopwatch.Time(m);
-
-            // This time do a round trip check, too:
-            double[] dataEven2;
-            rft.TransformBackward(evenReal, evenImag, out dataEven2);
-
-            // Compare with original samples
-            for(int i = 0; i < numSamples; i += 2)
-            {
-                Assert.That(dataEven2[i], NumericIs.AlmostEqualTo(dataEven[i], 0.00001), "Inv: " + i.ToString());
-            }
-        }
-
-        [Test]
-        public void Stress_SingleReal_8192()
-        {
-            const int numSamples = 8192;
-            const int half = numSamples >> 1;
-
-            double[] dataEven = new double[numSamples];
-
-            for(int i = 0; i < numSamples; i++)
-            {
-                double z = (double)(i - half) / half;
-                dataEven[i] = 1.0 / ((z * z) + 1.0);
-            }
-
-            RealTestTimeEven(dataEven);
-
-            double[] evenReal = new double[0], evenImag = new double[0];
-
-            rft.Convention = TransformationConvention.Default;
-
-            ////MyStopwatch.MethodToTime m = delegate
-            ////{
-            rft.TransformForward(dataEven, out evenReal, out evenImag);
-            ////};
-            ////Console.Write("FFT Time (ms) for " + numSamples.ToString() + ": ");
-            ////MyStopwatch.Time(m);
-
-            // This time do a round trip check, too:
-            double[] dataEven2;
-            rft.TransformBackward(evenReal, evenImag, out dataEven2);
-
-            // Compare with original samples
-            for(int i = 0; i < numSamples; i += 2)
-            {
-                Assert.That(dataEven2[i], NumericIs.AlmostEqualTo(dataEven[i], 0.00001), "Inv: " + i.ToString());
-            }
-        }
-
-        [Test]
-        public void Stress_SingleReal_16384()
-        {
-            const int numSamples = 16384;
-            const int half = numSamples >> 1;
-
-            double[] dataEven = new double[numSamples];
-
-            for(int i = 0; i < numSamples; i++)
-            {
-                double z = (double)(i - half) / half;
-                dataEven[i] = 1.0 / ((z * z) + 1.0);
-            }
-
-            RealTestTimeEven(dataEven);
-
-            double[] evenReal = new double[0], evenImag = new double[0];
-
-            rft.Convention = TransformationConvention.Default;
-
-            ////MyStopwatch.MethodToTime m = delegate
-            ////{
-            rft.TransformForward(dataEven, out evenReal, out evenImag);
-            ////};
-            ////Console.Write("FFT Time (ms) for " + numSamples.ToString() + ": ");
-            ////MyStopwatch.Time(m);
-
-            // This time do a round trip check, too:
-            double[] dataEven2;
-            rft.TransformBackward(evenReal, evenImag, out dataEven2);
-
-            // Compare with original samples
-            for(int i = 0; i < numSamples; i += 2)
-            {
-                Assert.That(dataEven2[i], NumericIs.AlmostEqualTo(dataEven[i], 0.00001), "Inv: " + i.ToString());
-            }
-        }
-
-        [Test]
-        public void Stress_SingleReal_65536()
-        {
-            const int numSamples = 65536;
-            const int half = numSamples >> 1;
-
-            double[] dataEven = new double[numSamples];
-
-            for(int i = 0; i < numSamples; i++)
-            {
-                double z = (double)(i - half) / half;
-                dataEven[i] = 1.0 / ((z * z) + 1.0);
-            }
-
-            RealTestTimeEven(dataEven);
-
-            double[] evenReal = new double[0], evenImag = new double[0];
-
-            rft.Convention = TransformationConvention.Default;
-
-            ////MyStopwatch.MethodToTime m = delegate
-            ////{
-            rft.TransformForward(dataEven, out evenReal, out evenImag);
-            ////};
-            ////Console.Write("FFT Time (ms) for " + numSamples.ToString() + ": ");
-            ////MyStopwatch.Time(m);
-
-            // This time do a round trip check, too:
-            double[] dataEven2;
-            rft.TransformBackward(evenReal, evenImag, out dataEven2);
-
-            // Compare with original samples
-            for(int i = 0; i < numSamples; i += 2)
-            {
-                Assert.That(dataEven2[i], NumericIs.AlmostEqualTo(dataEven[i], 0.00001), "Inv: " + i.ToString());
-            }
-        }
-
-        [Test]
-        public void Stress_SingleReal_262144()
-        {
-            const int numSamples = 262144;
-            const int half = numSamples >> 1;
-
-            double[] dataEven = new double[numSamples];
-
-            for(int i = 0; i < numSamples; i++)
-            {
-                double z = (double)(i - half) / half;
-                dataEven[i] = 1.0 / ((z * z) + 1.0);
-            }
-
-            RealTestTimeEven(dataEven);
-
-            double[] evenReal = new double[0], evenImag = new double[0];
-
-            rft.Convention = TransformationConvention.Default;
-
-            ////MyStopwatch.MethodToTime m = delegate
-            ////{
-            rft.TransformForward(dataEven, out evenReal, out evenImag);
-            ////};
-            ////Console.Write("FFT Time (ms) for " + numSamples.ToString() + ": ");
-            ////MyStopwatch.Time(m);
-
-            // This time do a round trip check, too:
-            double[] dataEven2;
-            rft.TransformBackward(evenReal, evenImag, out dataEven2);
-
-            // Compare with original samples
-            for(int i = 0; i < numSamples; i += 2)
-            {
-                Assert.That(dataEven2[i], NumericIs.AlmostEqualTo(dataEven[i], 0.00001), "Inv: " + i.ToString());
-            }
-        }
-
-        [Test]
-        public void Stress_SingleReal_1048576()
-        {
-            const int numSamples = 1048576;
-            const int half = numSamples >> 1;
-
-            double[] dataEven = new double[numSamples];
-
-            for(int i = 0; i < numSamples; i++)
-            {
-                double z = (double)(i - half) / half;
-                dataEven[i] = 1.0 / ((z * z) + 1.0);
-            }
-
-            RealTestTimeEven(dataEven);
-
-            double[] evenReal = new double[0], evenImag = new double[0];
-
-            rft.Convention = TransformationConvention.Default;
-
-            ////MyStopwatch.MethodToTime m = delegate
-            ////{
-            rft.TransformForward(dataEven, out evenReal, out evenImag);
-            ////};
-            ////Console.Write("FFT Time (ms) for " + numSamples.ToString() + ": ");
-            ////MyStopwatch.Time(m);
-
-            // This time do a round trip check, too:
-            double[] dataEven2;
-            rft.TransformBackward(evenReal, evenImag, out dataEven2);
-
-            // Compare with original samples
-            for(int i = 0; i < numSamples; i += 2)
-            {
-                Assert.That(dataEven2[i], NumericIs.AlmostEqualTo(dataEven[i], 0.00001), "Inv: " + i.ToString());
-            }
-        }
-
-        /*
-        [Test]
-        public void Stress_SingleReal_2097152()
-        {
-            int numSamples = 2097152;
-            int half = numSamples >> 1;
-
-            double[] dataEven = new double[numSamples];
-
-            for(int i = 0; i < numSamples; i++)
-            {
-                double z = (double)(i - half) / half;
-                dataEven[i] = 1.0 / (z * z + 1.0);
-            }
-
-            RealTestTimeEven(dataEven);
-
-            double[] evenReal = new double[0], evenImag = new double[0];
-
-            rft.Convention = TransformationConvention.Default;
-
-            MyStopwatch.MethodToTime m = delegate
-            {
-                rft.TransformForward(dataEven, out evenReal, out evenImag);
-            };
-            Console.Write("FFT Time (ms) for " + numSamples.ToString() + ": ");
-            MyStopwatch.Time(m);
-
-            // This time do a round trip check, too:
-            double[] dataEven2;
-            rft.TransformBackward(evenReal, evenImag, out dataEven2);
-            // Compare with original samples
-            for(int i = 0; i < numSamples; i += 2)
-            {
-                NumericAssert.AreAlmostEqual(dataEven[i], dataEven2[i], 0.00001, "Inv: " + i.ToString());
-            }
-        }
-        */
     }
 }

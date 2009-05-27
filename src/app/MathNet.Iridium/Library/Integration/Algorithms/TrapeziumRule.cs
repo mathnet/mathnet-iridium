@@ -29,7 +29,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace MathNet.Numerics.Integration.Algorithms
 {
@@ -121,7 +120,7 @@ namespace MathNet.Numerics.Integration.Algorithms
             CustomFunction f,
             double intervalBegin,
             double intervalEnd,
-            IEnumerable<double[]> levelAbcissas,
+            IEnumerable<double[]> levelAbscissas,
             IEnumerable<double[]> levelWeights,
             double levelOneStep,
             double targetRelativeError)
@@ -130,7 +129,7 @@ namespace MathNet.Numerics.Integration.Algorithms
             double linearOffset = 0.5 * (intervalEnd + intervalBegin);
             targetRelativeError /= (5 * linearSlope);
 
-            IEnumerator<double[]> abcissasIterator = levelAbcissas.GetEnumerator();
+            IEnumerator<double[]> abcissasIterator = levelAbscissas.GetEnumerator();
             IEnumerator<double[]> weightsIterator = levelWeights.GetEnumerator();
 
             double step = levelOneStep;

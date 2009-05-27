@@ -61,7 +61,7 @@ namespace MathNet.Numerics.Statistics
         }
 
         /// <summary>
-        /// Esitmates the unbiased population variance.
+        /// Estimates the unbiased population variance.
         /// </summary>
         public static
         double
@@ -92,7 +92,7 @@ namespace MathNet.Numerics.Statistics
         }
 
         /// <summary>
-        /// Esitmates the biased sample variance, considering the provided samples as the whole population.
+        /// Estimates the biased sample variance, considering the provided samples as the whole population.
         /// </summary>
         public static
         double

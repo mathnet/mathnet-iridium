@@ -37,7 +37,7 @@ namespace MathNet.Numerics.Distributions
     using RandomSources;
 
     /// <summary>
-    /// Provides generation of laplace distributed random numbers.
+    /// Provides generation of Laplace distributed random numbers.
     /// </summary>
     /// <remarks>
     /// The implementation of the <see cref="LaplaceDistribution"/> type bases upon information presented on
@@ -217,14 +217,14 @@ namespace MathNet.Numerics.Distributions
 
         #region Generator
         /// <summary>
-        /// Returns a laplace distributed floating point random number.
+        /// Returns a Laplace distributed floating point random number.
         /// </summary>
-        /// <returns>A laplace distributed double-precision floating point number.</returns>
+        /// <returns>A Laplace distributed double-precision floating point number.</returns>
         public override
         double
         NextDouble()
         {
-            double rand = 0.5 - this.RandomSource.NextDouble();
+            double rand = 0.5 - RandomSource.NextDouble();
             return _location - (_scale * Math.Sign(rand) * Math.Log(2.0 * Math.Abs(rand)));
         }
         #endregion

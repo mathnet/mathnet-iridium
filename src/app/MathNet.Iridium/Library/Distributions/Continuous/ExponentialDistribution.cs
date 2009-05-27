@@ -216,7 +216,7 @@ namespace MathNet.Numerics.Distributions
         NextDouble()
         {
             // Subtract random number from 1.0 to avoid Math.Log(0.0)
-            return _helper1 * Math.Log(1.0 - this.RandomSource.NextDouble());
+            return _helper1 * Math.Log(1.0 - RandomSource.NextDouble());
         }
         #endregion
     }

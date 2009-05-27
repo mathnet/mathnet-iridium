@@ -42,7 +42,7 @@ namespace MathNet.Numerics.Distributions
         double NextDouble();
 
         /// <summary>
-        /// True if the generator is reproducible, i.e. te same sequence can be generated again.
+        /// True if the generator is reproducible, i.e. the same sequence can be generated again.
         /// </summary>
         bool CanReset
         {

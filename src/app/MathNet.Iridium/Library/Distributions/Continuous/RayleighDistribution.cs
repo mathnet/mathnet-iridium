@@ -227,7 +227,7 @@ namespace MathNet.Numerics.Distributions
         double
         NextDouble()
         {
-            return _sigma * Math.Sqrt(-2 * Math.Log(1 - this.RandomSource.NextDouble()));
+            return _sigma * Math.Sqrt(-2 * Math.Log(1 - RandomSource.NextDouble()));
         }
         #endregion
     }

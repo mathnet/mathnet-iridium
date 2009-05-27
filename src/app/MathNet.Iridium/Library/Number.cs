@@ -188,7 +188,7 @@ namespace MathNet.Numerics
         /// <summary>
         /// Evaluates the count of numbers between two double numbers
         /// </summary>
-        /// <remarks>The second number is included in the number, thus two equal numbers evaluate to zero and two neighbour numbers evaluate to one. Therefore, what is returned is actually the count of numbers between plus 1.</remarks>
+        /// <remarks>The second number is included in the number, thus two equal numbers evaluate to zero and two neighbor numbers evaluate to one. Therefore, what is returned is actually the count of numbers between plus 1.</remarks>
         [CLSCompliant(false)]
         public static
         ulong

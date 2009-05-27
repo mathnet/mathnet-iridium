@@ -157,7 +157,8 @@ namespace MathNet.Numerics.Distributions
         /// Determines whether the specified parameters is valid.
         /// </summary>
         /// <returns>
-        /// <see langword="true"/> if degreesOfFreedom is greater than 0.0; otherwise, <see langword="false"/>.
+        /// <see langword="true"/> if <paramref name="degreesOfFreedom"/> is greater than
+        /// 0.0; otherwise, <see langword="false"/>.
         /// </returns>
         /// <param name="degreesOfFreedom">nu-parameter</param>
         public static

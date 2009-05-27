@@ -44,17 +44,15 @@ namespace MathNet.Numerics
     [Serializable]
     public class SampleList :
         ICloneable,
-        ICollection,
-        IDictionary,
-        IEnumerable
+        IDictionary
     {
         int _size;
         int[] _sampleCount; // for mean calculation
         double[] _sampleT;
         double[] _sampleX;
 
-        SampleList.KeyList _keyList;
-        SampleList.ValueList _valueList;
+        KeyList _keyList;
+        ValueList _valueList;
 
         /// <summary>
         /// Event which notifies when a sample has been altered.
@@ -172,7 +170,7 @@ namespace MathNet.Numerics
         EnsureCapacity(int min)
         {
             int capacitySuggestion = (_sampleCount.Length < 8) ? 16 : (_sampleCount.Length << 1);
-            this.Capacity = (capacitySuggestion < min) ? min : capacitySuggestion;
+            Capacity = (capacitySuggestion < min) ? min : capacitySuggestion;
         }
 
         /// <summary>
@@ -413,8 +411,11 @@ namespace MathNet.Numerics
         /// <summary>
         /// Find the index i of a sample near t such that t[i] &lt;= t &lt;= t[i+1]. 
         /// </summary>
-        /// <remarks>This method is faster if the expected index is near nearIndex (compared to the list size) but may be slower otherwise (worst case: factor 2 slower, best case: log2(n) faster).</remarks>
-        /// <returns>The lower bound index of the interval, -1 or Size-1 if out of bounds.</returns>
+        /// <remarks>This method is faster if the expected index is near 
+        /// <paramref name="nearIndex"/> (compared to the list size) but may be slower
+        /// otherwise (worst case: factor 2 slower, best case: log2(n) faster).</remarks>
+        /// <returns>The lower bound index of the interval, -1 or Size-1 if out of bounds.
+        /// </returns>
         public
         int
         Locate(double t, int nearIndex)
@@ -471,10 +472,8 @@ namespace MathNet.Numerics
                         lower = -1;
                         break;
                     }
-                    else
-                    {
-                        lower = upper - increment;
-                    }
+
+                    lower = upper - increment;
                 }
             }
 
@@ -490,11 +489,9 @@ namespace MathNet.Numerics
             int lowerIndex,
             int upperIndex)
         {
-            int midpointIndex;
-
             while(upperIndex - lowerIndex > 1)
             {
-                midpointIndex = (upperIndex + lowerIndex) >> 1;
+                int midpointIndex = (upperIndex + lowerIndex) >> 1;
 
                 if(t >= _sampleT[midpointIndex])
                 {
@@ -654,10 +651,10 @@ namespace MathNet.Numerics
         {
             get
             {
-                int index = this.IndexOfT(Convert.ToDouble(key));
+                int index = IndexOfT(Convert.ToDouble(key));
                 if(index >= 0)
                 {
-                    return this._sampleX[index];
+                    return _sampleX[index];
                 }
 
                 return null;
@@ -727,7 +724,7 @@ namespace MathNet.Numerics
             {
                 if(_keyList == null)
                 {
-                    _keyList = new SampleList.KeyList(this);
+                    _keyList = new KeyList(this);
                 }
 
                 return _keyList;
@@ -740,7 +737,7 @@ namespace MathNet.Numerics
             {
                 if(_valueList == null)
                 {
-                    _valueList = new SampleList.ValueList(this);
+                    _valueList = new ValueList(this);
                 }
 
                 return _valueList;
@@ -748,7 +745,7 @@ namespace MathNet.Numerics
         }
 
         [Serializable]
-        private sealed class KeyList : IList, ICollection, IEnumerable
+        private sealed class KeyList : IList
         {
             private SampleList sampleList;
 
@@ -784,7 +781,7 @@ namespace MathNet.Numerics
 
             public IEnumerator GetEnumerator()
             {
-                return new SampleList.SampleListEnumerator(sampleList, 0, sampleList.Count, SampleList.SampleListEnumerator.EnumerationMode.Keys);
+                return new SampleListEnumerator(sampleList, 0, sampleList.Count, SampleListEnumerator.EnumerationMode.Keys);
             }
 
             public int IndexOf(object key)
@@ -840,13 +837,13 @@ namespace MathNet.Numerics
         }
 
         [Serializable]
-        private sealed class ValueList : IList, ICollection, IEnumerable
+        private sealed class ValueList : IList
         {
-            private SampleList sampleList;
+            private readonly SampleList _sampleList;
 
             internal ValueList(SampleList sampleList)
             {
-                this.sampleList = sampleList;
+                _sampleList = sampleList;
             }
 
             public int Add(object value)
@@ -861,7 +858,7 @@ namespace MathNet.Numerics
 
             public bool Contains(object value)
             {
-                return sampleList.ContainsX(Convert.ToDouble(value));
+                return _sampleList.ContainsX(Convert.ToDouble(value));
             }
 
             public void CopyTo(Array array, int index)
@@ -871,17 +868,17 @@ namespace MathNet.Numerics
                     throw new ArgumentException(Properties.LocalStrings.ArgumentSingleDimensionArray, "array");
                 }
 
-                Array.Copy(sampleList._sampleX, 0, array, index, sampleList.Count);
+                Array.Copy(_sampleList._sampleX, 0, array, index, _sampleList.Count);
             }
 
             public IEnumerator GetEnumerator()
             {
-                return new SampleList.SampleListEnumerator(sampleList, 0, sampleList.Count, SampleList.SampleListEnumerator.EnumerationMode.Values);
+                return new SampleListEnumerator(_sampleList, 0, _sampleList.Count, SampleListEnumerator.EnumerationMode.Values);
             }
 
             public int IndexOf(object value)
             {
-                return sampleList.IndexOfX(Convert.ToDouble(value));
+                return _sampleList.IndexOfX(Convert.ToDouble(value));
             }
 
             public void Insert(int index, object value)
@@ -901,7 +898,7 @@ namespace MathNet.Numerics
 
             public int Count
             {
-                get { return sampleList.Count; }
+                get { return _sampleList.Count; }
             }
 
             public bool IsFixedSize
@@ -916,18 +913,18 @@ namespace MathNet.Numerics
 
             public bool IsSynchronized
             {
-                get { return ((ICollection)sampleList).IsSynchronized; }
+                get { return ((ICollection)_sampleList).IsSynchronized; }
             }
 
             public object this[int index]
             {
-                get { return sampleList._sampleX[index]; }
+                get { return _sampleList._sampleX[index]; }
                 set { throw new NotSupportedException(); }
             }
 
             public object SyncRoot
             {
-                get { return ((ICollection)sampleList).SyncRoot; }
+                get { return ((ICollection)_sampleList).SyncRoot; }
             }
         }
         #endregion
@@ -941,16 +938,16 @@ namespace MathNet.Numerics
         }
 
         [Serializable]
-        private sealed class SampleListEnumerator : IDictionaryEnumerator, IEnumerator, ICloneable
+        private sealed class SampleListEnumerator : IDictionaryEnumerator, ICloneable
         {
-            private bool current;
-            private int endIndex;
-            private EnumerationMode mode;
-            private int index;
-            private object key;
-            private SampleList sampleList;
-            private int startIndex;
-            private object value;
+            private readonly int _endIndex;
+            private readonly EnumerationMode _mode;
+            private readonly SampleList _sampleList;
+            private readonly int _startIndex;
+            private bool _current;
+            private int _index;
+            private object _key;
+            private object _value;
 
             internal enum EnumerationMode : int
             {
@@ -966,11 +963,11 @@ namespace MathNet.Numerics
 
             internal SampleListEnumerator(SampleList sampleList, int index, int count, EnumerationMode mode)
             {
-                this.sampleList = sampleList;
-                this.index = index;
-                this.startIndex = index;
-                this.endIndex = index + count;
-                this.mode = mode;
+                _sampleList = sampleList;
+                _index = index;
+                _startIndex = index;
+                _endIndex = index + count;
+                _mode = mode;
             }
 
             public object Clone()
@@ -980,49 +977,49 @@ namespace MathNet.Numerics
 
             public bool MoveNext()
             {
-                if(this.index < this.endIndex)
+                if(_index < _endIndex)
                 {
-                    this.key = sampleList._sampleT[this.index];
-                    this.value = sampleList._sampleX[this.index];
-                    this.index++;
-                    this.current = true;
+                    _key = _sampleList._sampleT[_index];
+                    _value = _sampleList._sampleX[_index];
+                    _index++;
+                    _current = true;
                     return true;
                 }
 
-                this.key = null;
-                this.value = null;
-                this.current = false;
+                _key = null;
+                _value = null;
+                _current = false;
                 return false;
             }
 
             public void Reset()
             {
-                this.index = this.startIndex;
-                this.current = false;
-                this.key = null;
-                this.value = null;
+                _index = _startIndex;
+                _current = false;
+                _key = null;
+                _value = null;
             }
 
             public object Current
             {
                 get
                 {
-                    if(!this.current)
+                    if(!_current)
                     {
                         throw new InvalidOperationException();
                     }
 
-                    if(this.mode == EnumerationMode.Keys)
+                    if(_mode == EnumerationMode.Keys)
                     {
-                        return this.key;
+                        return _key;
                     }
 
-                    if(this.mode == EnumerationMode.Values)
+                    if(_mode == EnumerationMode.Values)
                     {
-                        return this.value;
+                        return _value;
                     }
 
-                    return new DictionaryEntry(this.key, this.value);
+                    return new DictionaryEntry(_key, _value);
                 }
             }
 
@@ -1030,12 +1027,12 @@ namespace MathNet.Numerics
             {
                 get
                 {
-                    if(!this.current)
+                    if(!_current)
                     {
                         throw new InvalidOperationException();
                     }
 
-                    return new DictionaryEntry(this.key, this.value);
+                    return new DictionaryEntry(_key, _value);
                 }
             }
 
@@ -1043,12 +1040,12 @@ namespace MathNet.Numerics
             {
                 get
                 {
-                    if(!this.current)
+                    if(!_current)
                     {
                         throw new InvalidOperationException();
                     }
 
-                    return this.key;
+                    return _key;
                 }
             }
 
@@ -1056,12 +1053,12 @@ namespace MathNet.Numerics
             {
                 get
                 {
-                    if(!this.current)
+                    if(!_current)
                     {
                         throw new InvalidOperationException();
                     }
 
-                    return this.value;
+                    return _value;
                 }
             }
         }
@@ -1074,7 +1071,7 @@ namespace MathNet.Numerics
         /// </summary>
         public class SampleAlteredEventArgs : EventArgs
         {
-            double t;
+            readonly double _t;
 
             /// <summary>
             /// Initializes a new instance of the SampleAlteredEventArgs class.
@@ -1082,7 +1079,7 @@ namespace MathNet.Numerics
             /// <param name="t">The t-value of the x=f(t) or (t,x) samples.</param>
             public SampleAlteredEventArgs(double t)
             {
-                this.t = t;
+                _t = t;
             }
 
             /// <summary>
@@ -1090,7 +1087,7 @@ namespace MathNet.Numerics
             /// </summary>
             public double T
             {
-                get { return t; }
+                get { return _t; }
             }
         }
 

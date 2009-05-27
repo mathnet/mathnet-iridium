@@ -56,9 +56,9 @@ namespace MathNet.Numerics.Distributions
     /// </remarks>
     public sealed class ZipfDistribution
     {
-        readonly RandomSource random;
+        readonly RandomSource _random;
 
-        private double skew;
+        private double _skew;
 
         /// <summary>
         /// Initializes a new instance of the ZipfDistribution class,
@@ -66,8 +66,8 @@ namespace MathNet.Numerics.Distributions
         /// </summary>
         public ZipfDistribution()
         {
-            this.skew = 2d;
-            random = new SystemRandomSource();
+            _skew = 2d;
+            _random = new SystemRandomSource();
         }
 
         /// <summary>
@@ -77,8 +77,8 @@ namespace MathNet.Numerics.Distributions
         /// <param name="random">A <see cref="RandomSource"/> object.</param>
         public ZipfDistribution(RandomSource random)
         {
-            this.skew = 2d;
-            this.random = random;
+            _skew = 2d;
+            _random = random;
         }
 
         /// <summary>
@@ -92,8 +92,8 @@ namespace MathNet.Numerics.Distributions
                 throw new ArgumentOutOfRangeException("skew", skew, Properties.LocalStrings.ArgumentOutOfRangeGreater("skew", 1));
             }
 
-            this.skew = skew;
-            random = new SystemRandomSource();
+            _skew = skew;
+            _random = new SystemRandomSource();
         }
 
         /// <summary>
@@ -107,8 +107,8 @@ namespace MathNet.Numerics.Distributions
                 throw new ArgumentOutOfRangeException("skew", skew, Properties.LocalStrings.ArgumentOutOfRangeGreater("skew", 1));
             }
 
-            this.skew = skew;
-            random = new SystemRandomSource(seed);
+            _skew = skew;
+            _random = new SystemRandomSource(seed);
         }
 
         /// <summary>
@@ -118,7 +118,7 @@ namespace MathNet.Numerics.Distributions
         {
             get
             {
-                return skew;
+                return _skew;
             }
 
             set
@@ -128,7 +128,7 @@ namespace MathNet.Numerics.Distributions
                     throw new ArgumentOutOfRangeException("value", value, Properties.LocalStrings.ArgumentOutOfRangeGreater("skew", 1));
                 }
 
-                skew = value;
+                _skew = value;
             }
         }
 
@@ -140,8 +140,8 @@ namespace MathNet.Numerics.Distributions
             /* A transformation method (similar to the exponential
              * generator) is used here to generate a zipfian deviate. */
 
-            double p = random.NextDouble();
-            return Math.Pow(1d - p, 1d / (1d - skew));
+            double p = _random.NextDouble();
+            return Math.Pow(1d - p, 1d / (1d - _skew));
         }
     }
 }

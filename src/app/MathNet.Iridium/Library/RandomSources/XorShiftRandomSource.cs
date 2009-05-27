@@ -36,13 +36,13 @@ using System;
 namespace MathNet.Numerics.RandomSources
 {
     /// <summary>
-    /// Represents a xorshift pseudo-random number generator with period 2^128-1.
+    /// Represents a xor-shift pseudo-random number generator with period 2^128-1.
     /// </summary>
     /// <remarks>
     /// The <see cref="XorShiftRandomSource"/> type bases upon the implementation presented in the CP article
     ///   "<a href="http://www.codeproject.com/csharp/fastrandom.asp">A fast equivalent for System.Random</a>"
-    ///   and the theoretical background on xorshift random number generators published by George Marsaglia 
-    ///   in this paper "<a href="http://www.jstatsoft.org/v08/i14/xorshift.pdf">Xorshift RNGs</a>".
+    ///   and the theoretical background on xor-shift random number generators published by George Marsaglia 
+    ///   in this paper "<a href="http://www.jstatsoft.org/v08/i14/xorshift.pdf">Xor-shift RNGs</a>".
     /// </remarks>
     public class XorShiftRandomSource :
         RandomSource
@@ -225,7 +225,7 @@ namespace MathNet.Numerics.RandomSources
         /// </summary>
         /// <returns>
         /// A 32-bit signed integer greater than or equal to 0, and less than or equal to <see cref="Int32.MaxValue"/>; 
-        ///   that is, the range of return values includes 0 and <paramref name="Int32.MaxValue"/>.
+        ///   that is, the range of return values includes 0 and <see name="Int32.MaxValue"/>.
         /// </returns>
         public
         int
@@ -246,7 +246,7 @@ namespace MathNet.Numerics.RandomSources
         /// </summary>
         /// <returns>
         /// A 32-bit signed integer greater than or equal to 0, and less than <see cref="Int32.MaxValue"/>; that is, 
-        ///   the range of return values includes 0 but not <paramref name="Int32.MaxValue"/>.
+        ///   the range of return values includes 0 but not <see name="Int32.MaxValue"/>.
         /// </returns>
         public override
         int
@@ -351,15 +351,12 @@ namespace MathNet.Numerics.RandomSources
             {
                 // The range is greater than Int32.MaxValue, so we have to use slower floating point arithmetic.
                 // Also all 32 random bits (uint) have to be used which again is slower (See comment in NextDouble()).
-                return minValue + (int)
-                    (w * UIntToDoubleMultiplier * ((double)maxValue - (double)minValue));
+                return minValue + (int)(w * UIntToDoubleMultiplier * (maxValue - (double)minValue));
             }
-            else
-            {
-                // 31 random bits (int) will suffice which allows us to shift and cast to an int before the first multiplication and gain better performance.
-                // See comment in NextDouble().
-                return minValue + (int)((int)(w >> 1) * IntToDoubleMultiplier * range);
-            }
+            
+            // 31 random bits (int) will suffice which allows us to shift and cast to an int before the first multiplication and gain better performance.
+            // See comment in NextDouble().
+            return minValue + (int)((int)(w >> 1) * IntToDoubleMultiplier * range);
         }
 
         /// <summary>

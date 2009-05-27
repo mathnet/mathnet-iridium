@@ -42,7 +42,7 @@ namespace MathNet.Numerics.LinearAlgebra
     /// <remarks>
     /// For an m-by-n matrix A with m >= n, the LU decomposition is an m-by-n
     /// unit lower triangular matrix L, an n-by-n upper triangular matrix U,
-    /// and a permutation vector pivot of length m so that A(piv,:) = L*U.
+    /// and a permutation vector pivot of length m so that A(_pivot,:) = L*U.
     /// <c> If m &lt; n, then L is m-by-m and U is m-by-n. </c>
     /// The LU decomposition with pivoting always exists, even if the matrix is
     /// singular, so the constructor will never fail.  The primary use of the
@@ -58,17 +58,17 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <summary>
         /// Array for internal storage of decomposition.
         /// </summary>
-        double[][] LU;
+        readonly double[][] _lu;
 
         /// <summary>
         /// Pivot sign.
         /// </summary>
-        int pivsign;
+        readonly int _pivotSign;
 
         /// <summary>
         /// Internal storage of pivot vector.
         /// </summary>
-        int[] piv;
+        readonly int[] _pivot;
 
         OnDemandComputation<bool> _isNonSingularOnDemand;
         OnDemandComputation<Matrix> _lowerTriangularFactorOnDemand;
@@ -81,26 +81,26 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <summary>
         /// Initializes a new instance of the LUDecomposition class.
         /// </summary>
-        /// <param name="A">Rectangular matrix</param>
-        /// <returns>Structure to access L, U and piv.</returns>
+        /// <param name="a">Rectangular matrix</param>
+        /// <returns>Structure to access L, U and pivot.</returns>
         public
-        LUDecomposition(Matrix A)
+        LUDecomposition(Matrix a)
         {
             /* TODO: it is usually considered as a poor practice to execute algorithms within a constructor */
 
             /* Use a "left-looking", dot-product, Crout/Doolittle algorithm. */
 
-            LU = A.Clone();
-            _rowCount = A.RowCount;
-            _columnCount = A.ColumnCount;
+            _lu = a.Clone();
+            _rowCount = a.RowCount;
+            _columnCount = a.ColumnCount;
 
-            piv = new int[_rowCount];
+            _pivot = new int[_rowCount];
             for(int i = 0; i < _rowCount; i++)
             {
-                piv[i] = i;
+                _pivot[i] = i;
             }
 
-            pivsign = 1;
+            _pivotSign = 1;
 
             ////double[] LUrowi;
             double[] LUcolj = new double[_rowCount];
@@ -113,7 +113,7 @@ namespace MathNet.Numerics.LinearAlgebra
 
                 for(int i = 0; i < LUcolj.Length; i++)
                 {
-                    LUcolj[i] = LU[i][j];
+                    LUcolj[i] = _lu[i][j];
                 }
 
                 /* Apply previous transformations */
@@ -128,10 +128,10 @@ namespace MathNet.Numerics.LinearAlgebra
                     double s = 0.0;
                     for(int k = 0; k < kmax; k++)
                     {
-                        s += LU[i][k] * LUcolj[k];
+                        s += _lu[i][k] * LUcolj[k];
                     }
 
-                    LU[i][j] = LUcolj[i] -= s;
+                    _lu[i][j] = LUcolj[i] -= s;
                 }
 
                 /* Find pivot and exchange if necessary */
@@ -150,25 +150,25 @@ namespace MathNet.Numerics.LinearAlgebra
                 {
                     for(int k = 0; k < _columnCount; k++)
                     {
-                        double t = LU[p][k];
-                        LU[p][k] = LU[j][k];
-                        LU[j][k] = t;
+                        double t = _lu[p][k];
+                        _lu[p][k] = _lu[j][k];
+                        _lu[j][k] = t;
                     }
 
-                    int k2 = piv[p];
-                    piv[p] = piv[j];
-                    piv[j] = k2;
+                    int k2 = _pivot[p];
+                    _pivot[p] = _pivot[j];
+                    _pivot[j] = k2;
 
-                    pivsign = -pivsign;
+                    _pivotSign = -_pivotSign;
                 }
 
                 /* Compute multipliers */
 
-                if((j < _rowCount) && (LU[j][j] != 0.0))
+                if((j < _rowCount) && (_lu[j][j] != 0.0))
                 {
                     for(int i = j + 1; i < _rowCount; i++)
                     {
-                        LU[i][j] /= LU[j][j];
+                        _lu[i][j] /= _lu[j][j];
                     }
                 }
             }
@@ -250,59 +250,59 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <summary>
         /// Solve A*X = B
         /// </summary>
-        /// <param name="B">A Matrix with as many rows as A and any number of columns.</param>
-        /// <returns>X so that L*U*X = B(piv,:)</returns>
+        /// <param name="b">A Matrix with as many rows as A and any number of columns.</param>
+        /// <returns>X so that L*U*X = B(pivot,:)</returns>
         /// <exception cref="System.ArgumentException">Matrix row dimensions must agree.</exception>
         /// <exception cref="System.SystemException">Matrix is singular.</exception>
         public
         Matrix
-        Solve(Matrix B)
+        Solve(Matrix b)
         {
-            if(B.RowCount != _rowCount)
+            if(b.RowCount != _rowCount)
             {
                 throw new ArgumentException(Properties.LocalStrings.ArgumentMatrixSameRowDimension, "B");
             }
 
-            if(!this.IsNonSingular)
+            if(!IsNonSingular)
             {
                 throw new InvalidOperationException(Properties.LocalStrings.ArgumentMatrixNotSingular);
             }
 
             // Copy right hand side with pivoting
-            int nx = B.ColumnCount;
-            Matrix Xmat = B.GetMatrix(piv, 0, nx - 1);
-            double[][] X = Xmat;
+            int nx = b.ColumnCount;
+            Matrix xmat = b.GetMatrix(_pivot, 0, nx - 1);
+            double[][] x = xmat;
 
-            // Solve L*Y = B(piv,:)
+            // Solve L*Y = B(_pivot,:)
             for(int k = 0; k < _columnCount; k++)
             {
                 for(int i = k + 1; i < _columnCount; i++)
                 {
                     for(int j = 0; j < nx; j++)
                     {
-                        X[i][j] -= X[k][j] * LU[i][k];
+                        x[i][j] -= x[k][j] * _lu[i][k];
                     }
                 }
             }
 
-            // Solve U*X = Y;
+            // Solve U*x = Y;
             for(int k = _columnCount - 1; k >= 0; k--)
             {
                 for(int j = 0; j < nx; j++)
                 {
-                    X[k][j] /= LU[k][k];
+                    x[k][j] /= _lu[k][k];
                 }
 
                 for(int i = 0; i < k; i++)
                 {
                     for(int j = 0; j < nx; j++)
                     {
-                        X[i][j] -= X[k][j] * LU[i][k];
+                        x[i][j] -= x[k][j] * _lu[i][k];
                     }
                 }
             }
 
-            return Xmat;
+            return xmat;
         }
 
         void
@@ -322,7 +322,7 @@ namespace MathNet.Numerics.LinearAlgebra
         {
             for(int j = 0; j < _columnCount; j++)
             {
-                if(LU[j][j] == 0.0)
+                if(_lu[j][j] == 0.0)
                 {
                     return false;
                 }
@@ -334,49 +334,42 @@ namespace MathNet.Numerics.LinearAlgebra
         Matrix
         ComputeLowerTriangularFactor()
         {
-            double[][] L = Matrix.CreateMatrixData(_rowCount, _columnCount);
-            for(int i = 0; i < L.Length; i++)
+            double[][] l = Matrix.CreateMatrixData(_rowCount, _columnCount);
+            for(int i = 0; i < l.Length; i++)
             {
                 for(int j = 0; j < _columnCount; j++)
                 {
                     if(i > j)
                     {
-                        L[i][j] = LU[i][j];
+                        l[i][j] = _lu[i][j];
                     }
                     else if(i == j)
                     {
-                        L[i][j] = 1.0;
+                        l[i][j] = 1.0;
                     }
                     else
                     {
-                        L[i][j] = 0.0;
+                        l[i][j] = 0.0;
                     }
                 }
             }
 
-            return new Matrix(L);
+            return new Matrix(l);
         }
 
         Matrix
         ComputeUpperTriangularFactor()
         {
-            double[][] U = Matrix.CreateMatrixData(_columnCount, _columnCount);
+            double[][] u = Matrix.CreateMatrixData(_columnCount, _columnCount);
             for(int i = 0; i < _columnCount; i++)
             {
                 for(int j = 0; j < _columnCount; j++)
                 {
-                    if(i <= j)
-                    {
-                        U[i][j] = LU[i][j];
-                    }
-                    else
-                    {
-                        U[i][j] = 0.0;
-                    }
+                    u[i][j] = (i <= j) ? _lu[i][j] : 0.0;
                 }
             }
 
-            return new Matrix(U);
+            return new Matrix(u);
         }
 
         int[]
@@ -385,7 +378,7 @@ namespace MathNet.Numerics.LinearAlgebra
             int[] p = new int[_rowCount];
             for(int i = 0; i < _rowCount; i++)
             {
-                p[i] = piv[i];
+                p[i] = _pivot[i];
             }
 
             return p;
@@ -397,7 +390,7 @@ namespace MathNet.Numerics.LinearAlgebra
             double[] vals = new double[_rowCount];
             for(int i = 0; i < _rowCount; i++)
             {
-                vals[i] = (double)piv[i];
+                vals[i] = _pivot[i];
             }
 
             return new Vector(vals);
@@ -421,13 +414,13 @@ namespace MathNet.Numerics.LinearAlgebra
         {
             if(_rowCount != _columnCount)
             {
-                throw new System.ArgumentException(Properties.LocalStrings.ArgumentMatrixSquare);
+                throw new ArgumentException(Properties.LocalStrings.ArgumentMatrixSquare);
             }
 
-            double d = (double)pivsign;
+            double d = _pivotSign;
             for(int j = 0; j < _columnCount; j++)
             {
-                d *= LU[j][j];
+                d *= _lu[j][j];
             }
 
             return d;

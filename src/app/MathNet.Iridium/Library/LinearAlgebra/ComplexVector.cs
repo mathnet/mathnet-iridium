@@ -253,7 +253,7 @@ namespace MathNet.Numerics.LinearAlgebra
         }
 
         /// <summary>
-        /// Generates an n-dimensional unit vector for i'th coordinate.
+        /// Generates an n-dimensional unit vector for i-th coordinate.
         /// </summary>
         /// <param name="n">Dimensionality of vector.</param>
         /// <param name="i">Coordinate index.</param>
@@ -269,7 +269,7 @@ namespace MathNet.Numerics.LinearAlgebra
         #region Conversion Operators and conversion to other types
 
         /// <summary>
-        /// Returns a reference to the internel data structure.
+        /// Returns a reference to the internal data structure.
         /// </summary>
         public static implicit
         operator Complex[](ComplexVector v)

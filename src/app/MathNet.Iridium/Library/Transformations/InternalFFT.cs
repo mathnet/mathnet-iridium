@@ -157,12 +157,12 @@ namespace MathNet.Numerics.Transformations
 
         #region Danielson Lanczos Transform (Step 2)
         /// <summary>
-        /// Apply the danielson lanczos transform.
+        /// Apply the Danielson Lanczos transform.
         /// </summary>
         /// <param name="samples">Reordered complex samples (even = real, odd = imaginary). Length must be a power of two.</param>
         /// <param name="forward">true for forward transformation, false for (unscaled) backward/inverse transform.</param>
         /// <param name="convention">FFT Convention to be used</param>
-        /// <remarks>The returned results in backward/inverse mode are not scaled yet; scale them using <see cref="Rescale"/> afterwards.</remarks>
+        /// <remarks>The returned results in backward/inverse mode are not scaled yet; scale them using <see cref="Rescale"/> afterward.</remarks>
         internal
         void
         DanielsonLanczosTransform(
@@ -303,8 +303,8 @@ namespace MathNet.Numerics.Transformations
 
         #region Precomputation: Reverse Bits
         /// <summary>
-        /// Permutates <c>numberOfBits</c> in ascending order
-        /// and reverses each element's bits afterwards.
+        /// Permutes <c>numberOfBits</c> in ascending order
+        /// and reverses each element's bits afterward.
         /// </summary>
         internal
         int[]

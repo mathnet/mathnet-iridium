@@ -158,7 +158,7 @@ namespace MathNet.Numerics.Distributions
         }
 
         /// <summary>
-        /// Gets or sets the skeqness beta parameter.
+        /// Gets or sets the skewness beta parameter.
         /// </summary>
         public double Beta
         {

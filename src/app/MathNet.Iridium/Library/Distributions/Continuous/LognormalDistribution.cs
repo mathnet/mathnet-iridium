@@ -38,7 +38,7 @@ namespace MathNet.Numerics.Distributions
     using RandomSources;
 
     /// <summary>
-    /// Provides generation of lognormal distributed random numbers.
+    /// Provides generation of log-normal distributed random numbers.
     /// </summary>
     /// <remarks>
     /// The implementation of the <see cref="LognormalDistribution"/> type bases upon information presented on
@@ -255,9 +255,9 @@ namespace MathNet.Numerics.Distributions
 
         #region Generator
         /// <summary>
-        /// Returns a lognormal distributed floating point random number.
+        /// Returns a log-normal distributed floating point random number.
         /// </summary>
-        /// <returns>A lognormal distributed double-precision floating point number.</returns>
+        /// <returns>A log-normal distributed double-precision floating point number.</returns>
         public override
         double
         NextDouble()

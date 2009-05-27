@@ -37,7 +37,7 @@ namespace MathNet.Numerics.Distributions
     using RandomSources;
 
     /// <summary>
-    /// Provides generation of erlang distributed random numbers.
+    /// Provides generation of Erlang distributed random numbers.
     /// </summary>
     /// <remarks>
     /// The implementation of the <see cref="ErlangDistribution"/> type bases upon information presented on
@@ -220,7 +220,7 @@ namespace MathNet.Numerics.Distributions
         }
 
         /// <summary>
-        /// Continuous inverse of the cumulativ distribution function (icdf) of this probabilit distribution.
+        /// Continuous inverse of the cumulative distribution function (icdf) of this probability distribution.
         /// </summary>
         public
         double
@@ -232,9 +232,9 @@ namespace MathNet.Numerics.Distributions
 
         #region Generator
         /// <summary>
-        /// Returns a erlang distributed floating point random number.
+        /// Returns a Erlang distributed floating point random number.
         /// </summary>
-        /// <returns>A erlang distributed double-precision floating point number.</returns>
+        /// <returns>A Erlang distributed double-precision floating point number.</returns>
         public override
         double
         NextDouble()
@@ -243,7 +243,7 @@ namespace MathNet.Numerics.Distributions
             for(int i = 0; i < _shape; i++)
             {
                 // Subtract random number from 1.0 to avoid Math.Log(0.0)
-                product *= (1.0 - this.RandomSource.NextDouble());
+                product *= (1.0 - RandomSource.NextDouble());
             }
 
             return _helper1 * Math.Log(product);

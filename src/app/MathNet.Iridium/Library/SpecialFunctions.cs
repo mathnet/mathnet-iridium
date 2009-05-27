@@ -300,18 +300,16 @@ namespace MathNet.Numerics
         #region Number Theory
 
         /// <summary>
-        /// Returns the greatest common divisor of two integers using euclids algorithm.
+        /// Returns the greatest common divisor of two integers using Euclid's algorithm.
         /// </summary>
         /// <returns>gcd(a,b)</returns>
         public static
         long
         Gcd(long a, long b)
         {
-            long rem;
-
             while(b != 0)
             {
-                rem = a % b;
+                long rem = a % b;
                 a = b;
                 b = rem;
             }
@@ -320,7 +318,7 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// Returns the greatest common divisor of a set of integers using euclids algorithm.
+        /// Returns the greatest common divisor of a set of integers using Euclid's algorithm.
         /// </summary>
         /// <returns>gcd(list of integers)</returns>
         public static
@@ -348,7 +346,7 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// Returns the greatest common divisor of a set of integers using euclids algorithm.
+        /// Returns the greatest common divisor of a set of integers using Euclid's algorithm.
         /// </summary>
         /// <returns>gcd(list of integers)</returns>
         public static
@@ -378,17 +376,16 @@ namespace MathNet.Numerics
             out long x,
             out long y)
         {
-            long rem, quot, tmp;
             long mp = 1, np = 0, m = 0, n = 1;
 
             while(b != 0)
             {
-                quot = a / b;
-                rem = a % b;
+                long quot = a / b;
+                long rem = a % b;
                 a = b;
                 b = rem;
 
-                tmp = m;
+                long tmp = m;
                 m = mp - (quot * m);
                 mp = tmp;
 
@@ -403,16 +400,14 @@ namespace MathNet.Numerics
                 y = np;
                 return a;
             }
-            else
-            {
-                x = -mp;
-                y = -np;
-                return -a;
-            }
+
+            x = -mp;
+            y = -np;
+            return -a;
         }
 
         /// <summary>
-        /// Returns the least common multiple of two integers using euclids algorithm.
+        /// Returns the least common multiple of two integers using Euclid's algorithm.
         /// </summary>
         /// <returns>lcm(a,b)</returns>
         public static
@@ -428,7 +423,7 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// Returns the least common multiple of a set of integers using euclids algorithm.
+        /// Returns the least common multiple of a set of integers using Euclid's algorithm.
         /// </summary>
         /// <returns>lcm(list of integers)</returns>
         public static
@@ -456,7 +451,7 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// Returns the least common multiple of a set of integers using euclids algorithm.
+        /// Returns the least common multiple of a set of integers using Euclid's algorithm.
         /// </summary>
         /// <returns>lcm(list of integers)</returns>
         public static
@@ -596,7 +591,7 @@ namespace MathNet.Numerics
 
         /// <summary>
         /// Returns the gamma function for real values (except at 0, -1, -2, ...).
-        /// For numeric stability, consider to use GammaLn for positive values.
+        /// For numeric stability, consider to use <see cref="GammaLn"/> for positive values.
         /// </summary>
         /// <returns>A value Gamma(a) for a != 0,-1,-2,...</returns>
         public static
@@ -607,7 +602,7 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// Obsolete. Please use GammaRegularized instead, with the same parameters (method was renamed).
+        /// Obsolete. Please use <see cref="GammaRegularized"/> instead, with the same parameters (method was renamed).
         /// </summary>
         [Obsolete("Renamed to GammaRegularized; Hence please migrate to GammaRegularized.")]
         public static
@@ -692,7 +687,7 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// Obsolete. Please use BetaRegularized instead, with the same parameters (method was renamed).
+        /// Obsolete. Please use <see cref="BetaRegularized"/> instead, with the same parameters (method was renamed).
         /// </summary>
         [Obsolete("Renamed to BetaRegularized; Hence please migrate to BetaRegularized.")]
         public static

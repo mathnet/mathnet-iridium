@@ -38,7 +38,7 @@ namespace MathNet.Numerics.Distributions
     using RandomSources;
 
     /// <summary>
-    /// Pseudo-random generation of poisson distributed deviates.
+    /// Pseudo-random generation of Poisson distributed deviates.
     /// </summary>
     /// <remarks> 
     /// <para>
@@ -212,9 +212,9 @@ namespace MathNet.Numerics.Distributions
 
         #region Generator
         /// <summary>
-        /// Returns a poisson distributed random number.
+        /// Returns a Poisson distributed random number.
         /// </summary>
-        /// <returns>A poisson distributed 32-bit signed integer.</returns>
+        /// <returns>A Poisson distributed 32-bit signed integer.</returns>
         public override
         int
         NextInt32()

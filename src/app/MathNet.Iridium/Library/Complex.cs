@@ -168,7 +168,7 @@ namespace MathNet.Numerics
         #region Constructors and Constants
 
         /// <summary>
-        /// Initializes a new instance of the Complex struct 
+        /// Initializes a new instance of the Complex 
         /// from its real and imaginary parts.
         /// </summary>
         public
@@ -632,7 +632,7 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// Indicates wherer <paramref name="other"/> is almost equal to this complex number, up to the default maximum relative error.
+        /// Indicates whether <paramref name="other"/> is almost equal to this complex number, up to the default maximum relative error.
         /// </summary>
         public
         bool
@@ -645,7 +645,7 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// Indicates wherer <paramref name="other"/> is almost equal to this complex number, up to the provided maximum relative error.
+        /// Indicates whether <paramref name="other"/> is almost equal to this complex number, up to the provided maximum relative error.
         /// </summary>
         public
         bool
@@ -685,7 +685,7 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// Gets the hashcode of this <c>Complex</c>.
+        /// Gets the hash code of this <c>Complex</c>.
         /// </summary>
         public override
         int
@@ -1378,9 +1378,9 @@ namespace MathNet.Numerics
         /// </summary>
         public
         Complex
-        Root(Complex rootexponent)
+        Root(Complex rootExponent)
         {
-            return Power(1 / rootexponent);
+            return Power(1 / rootExponent);
         }
 
         /// <summary>

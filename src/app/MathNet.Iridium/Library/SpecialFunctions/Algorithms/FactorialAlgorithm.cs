@@ -36,7 +36,7 @@ namespace MathNet.Numerics.SpecialFunctions.Algorithms
         /// <summary>
         /// Returns the natural logarithm of the factorial (n!) for an integer value > 0.
         /// </summary>
-        /// <returns>A value ln(value!) for value > 0</returns>
+        /// <returns>A value <c>ln</c>(value!) for value > 0</returns>
         public static
         double
         FactorialLn(int value)
@@ -98,7 +98,7 @@ namespace MathNet.Numerics.SpecialFunctions.Algorithms
         const int FactorialLnCacheSize = 2 * FactorialPrecompSize;
         const int FactorialPrecompSize = 32;
         static double[] factorialLnCache;
-        static double[] factorialPrecomp = new double[] {
+        static readonly double[] factorialPrecomp = new double[] {
             1d,
             1d,
             2d,

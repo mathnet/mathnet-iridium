@@ -30,7 +30,8 @@
 namespace MathNet.Numerics
 {
     /// <summary>
-    /// Custom function double -> double, to be replaced later with the new generic Func delegate.
+    /// Custom function double -> double, to be replaced later with the new generic 
+    /// Func delegate.
     /// </summary>
     public delegate double CustomFunction(double parameter);
 

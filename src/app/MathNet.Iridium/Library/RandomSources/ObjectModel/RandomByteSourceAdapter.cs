@@ -29,10 +29,10 @@
 
 using System;
 
-namespace MathNet.Numerics.RandomSources.OjectModel
+namespace MathNet.Numerics.RandomSources.ObjectModel
 {
     /// <summary>
-    /// Adapter to extend byte-only uniform random sources to a full RandomSource provider.
+    /// Adapter to extend byte-only uniform random sources to a full <see cref="RandomSource"/> provider.
     /// </summary>
     public abstract class RandomByteSourceAdapter :
         RandomSource
@@ -54,12 +54,6 @@ namespace MathNet.Numerics.RandomSources.OjectModel
         ///   and less than 1.0  when it gets applied to a 32-bit unsigned integer.
         /// </summary>
         const double UInt32ToDoubleMultiplier = 1.0 / (UInt32.MaxValue + 1.0);
-
-        /// <summary>
-        /// Represents the multiplier that computes a double-precision floating point number greater than or equal to 0.0 
-        ///   and less than 1.0  when it gets applied to a 64-bit unsigned integer.
-        /// </summary>
-        const double UInt64ToDoubleMultiplier = 1.0 / (UInt64.MaxValue + 1.0);
 
         /// <summary>
         /// Stores an <see cref="Int32"/> used to generate up to 31 random <see cref="Boolean"/> values.
@@ -226,15 +220,12 @@ namespace MathNet.Numerics.RandomSources.OjectModel
             {
                 // The range is greater than Int32.MaxValue, so we have to use slower floating point arithmetic.
                 // Also all 32 random bits (uint) have to be used which again is slower (See comment in NextDouble()).
-                return minValue + (int)
-                    (NextFullRangeUInt32() * UInt32ToDoubleMultiplier * ((double)maxValue - (double)minValue));
+                return minValue + (int)(NextFullRangeUInt32() * UInt32ToDoubleMultiplier * (maxValue - (double)minValue));
             }
-            else
-            {
-                // 31 random bits (int) will suffice which allows us to shift and cast to an int before the first multiplication and gain better performance.
-                // See comment in NextDouble().
-                return minValue + (int)((int)(NextFullRangeUInt32() >> 1) * Int32ToDoubleMultiplier * range);
-            }
+
+            // 31 random bits (int) will suffice which allows us to shift and cast to an int before the first multiplication and gain better performance.
+            // See comment in NextDouble().
+            return minValue + (int)((int)(NextFullRangeUInt32() >> 1) * Int32ToDoubleMultiplier * range);
         }
 
         /// <summary>
@@ -242,7 +233,7 @@ namespace MathNet.Numerics.RandomSources.OjectModel
         /// </summary>
         /// <returns>
         /// A 64-bit signed integer greater than or equal to 0, and less than <see cref="Int64.MaxValue"/>; that is, 
-        /// the range of return values includes 0 but not <paramref name="Int64.MaxValue"/>.
+        /// the range of return values includes 0 but not <see cref="long.MaxValue"/>.
         /// </returns>
         /// <seealso cref="NextFullRangeInt64()"/>
         public override

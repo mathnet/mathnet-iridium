@@ -58,7 +58,6 @@ namespace MathNet.Numerics.LinearAlgebra
         /// which provides the cholesky algorithm for symmetric and positive definite matrix.
         /// </summary>
         /// <param name="m">Square, symmetric matrix.</param>
-        /// <returns>Structure to access L and isspd flag.</returns>
         public
         CholeskyDecomposition(Matrix m)
         {
@@ -67,41 +66,41 @@ namespace MathNet.Numerics.LinearAlgebra
                 throw new InvalidOperationException(Properties.LocalStrings.ArgumentMatrixSquare);
             }
 
-            double[][] A = m;
-            double[][] L = Matrix.CreateMatrixData(m.RowCount, m.RowCount);
+            double[][] a = m;
+            double[][] l = Matrix.CreateMatrixData(m.RowCount, m.RowCount);
 
             _isSymmetricPositiveDefinite = true; // ensure square
 
-            for(int i = 0; i < L.Length; i++)
+            for(int i = 0; i < l.Length; i++)
             {
                 double diagonal = 0.0;
                 for(int j = 0; j < i; j++)
                 {
-                    double sum = A[i][j];
+                    double sum = a[i][j];
                     for(int k = 0; k < j; k++)
                     {
-                        sum -= L[j][k] * L[i][k];
+                        sum -= l[j][k] * l[i][k];
                     }
 
-                    L[i][j] = sum /= L[j][j];
+                    l[i][j] = sum /= l[j][j];
                     diagonal += sum * sum;
 
-                    _isSymmetricPositiveDefinite &= (A[j][i] == A[i][j]); // ensure symmetry
+                    _isSymmetricPositiveDefinite &= (a[j][i] == a[i][j]); // ensure symmetry
                 }
 
-                diagonal = A[i][i] - diagonal;
-                L[i][i] = Math.Sqrt(Math.Max(diagonal, 0.0));
+                diagonal = a[i][i] - diagonal;
+                l[i][i] = Math.Sqrt(Math.Max(diagonal, 0.0));
 
                 _isSymmetricPositiveDefinite &= (diagonal > 0.0); // ensure positive definite
 
                 // zero out resulting upper triangle.
-                for(int j = i + 1; j < L.Length; j++)
+                for(int j = i + 1; j < l.Length; j++)
                 {
-                    L[i][j] = 0.0;
+                    l[i][j] = 0.0;
                 }
             }
 
-            _l = new Matrix(L);
+            _l = new Matrix(l);
         }
 
         /// <summary>Is the matrix symmetric and positive definite?</summary>
@@ -149,7 +148,7 @@ namespace MathNet.Numerics.LinearAlgebra
                 throw new InvalidOperationException(Properties.LocalStrings.ArgumentMatrixSymmetricPositiveDefinite);
             }
 
-            double[][] L = _l;
+            double[][] l = _l;
             double[] bb = b;
             double[] x = new double[b.Length];
 
@@ -159,10 +158,10 @@ namespace MathNet.Numerics.LinearAlgebra
                 double sum = bb[i];
                 for(int k = i - 1; k >= 0; k--)
                 {
-                    sum -= L[i][k] * x[k];
+                    sum -= l[i][k] * x[k];
                 }
 
-                x[i] = sum / L[i][i];
+                x[i] = sum / l[i][i];
             }
 
             // Solve L'*x = y
@@ -171,25 +170,25 @@ namespace MathNet.Numerics.LinearAlgebra
                 double sum = x[i];
                 for(int k = i + 1; k < x.Length; k++)
                 {
-                    sum -= L[k][i] * x[k];
+                    sum -= l[k][i] * x[k];
                 }
 
-                x[i] = sum / L[i][i];
+                x[i] = sum / l[i][i];
             }
 
             return new Vector(x);
         }
 
         /// <summary>Solve A*X = B</summary>
-        /// <param name="B">A Matrix with as many rows as A and any number of columns.</param>
+        /// <param name="b">A Matrix with as many rows as A and any number of columns.</param>
         /// <returns>X so that L*L'*X = B</returns>
         /// <exception cref="System.ArgumentException">Matrix row dimensions must agree.</exception>
         /// <exception cref="System.InvalidOperationException">Matrix is not symmetric positive definite.</exception>
         public
         Matrix
-        Solve(Matrix B)
+        Solve(Matrix b)
         {
-            if(B.RowCount != _l.RowCount)
+            if(b.RowCount != _l.RowCount)
             {
                 throw new ArgumentException(Properties.LocalStrings.ArgumentMatrixSameRowDimension, "B");
             }
@@ -199,44 +198,44 @@ namespace MathNet.Numerics.LinearAlgebra
                 throw new InvalidOperationException(Properties.LocalStrings.ArgumentMatrixSymmetricPositiveDefinite);
             }
 
-            int nx = B.ColumnCount;
-            double[][] L = _l;
-            double[][] BB = B;
-            double[][] X = Matrix.CreateMatrixData(L.Length, nx);
+            int nx = b.ColumnCount;
+            double[][] l = _l;
+            double[][] bb = b;
+            double[][] x = Matrix.CreateMatrixData(l.Length, nx);
 
             // Solve L*Y = B
-            for(int i = 0; i < X.Length; i++)
+            for(int i = 0; i < x.Length; i++)
             {
                 for(int j = 0; j < nx; j++)
                 {
-                    double sum = BB[i][j];
+                    double sum = bb[i][j];
 
                     for(int k = i - 1; k >= 0; k--)
                     {
-                        sum -= L[i][k] * X[k][j];
+                        sum -= l[i][k] * x[k][j];
                     }
 
-                    X[i][j] = sum / L[i][i];
+                    x[i][j] = sum / l[i][i];
                 }
             }
 
             // Solve L'*x = y
-            for(int i = X.Length - 1; i >= 0; i--)
+            for(int i = x.Length - 1; i >= 0; i--)
             {
                 for(int j = 0; j < nx; j++)
                 {
-                    double sum = X[i][j];
+                    double sum = x[i][j];
 
-                    for(int k = i + 1; k < X.Length; k++)
+                    for(int k = i + 1; k < x.Length; k++)
                     {
-                        sum -= L[k][i] * X[k][j];
+                        sum -= l[k][i] * x[k][j];
                     }
 
-                    X[i][j] = sum / L[i][i];
+                    x[i][j] = sum / l[i][i];
                 }
             }
 
-            return new Matrix(X);
+            return new Matrix(x);
         }
     }
 }

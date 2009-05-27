@@ -41,7 +41,7 @@ namespace MathNet.Numerics.Interpolation.Algorithms
     /// Cubic Hermite Spline Interpolation Algorithm.
     /// </summary>
     /// <remarks>
-    /// This algorithm supports both differentiation and interation.
+    /// This algorithm supports both differentiation and integration.
     /// </remarks>
     public class CubicHermiteSplineInterpolation :
         IInterpolationMethod
@@ -58,7 +58,7 @@ namespace MathNet.Numerics.Interpolation.Algorithms
         }
 
         /// <summary>
-        /// True if the alorithm supports differentiation.
+        /// True if the algorithm supports differentiation.
         /// </summary>
         /// <seealso cref="Differentiate"/>
         public bool SupportsDifferentiation
@@ -67,7 +67,7 @@ namespace MathNet.Numerics.Interpolation.Algorithms
         }
 
         /// <summary>
-        /// True if the alorithm supports integration.
+        /// True if the algorithm supports integration.
         /// </summary>
         /// <seealso cref="Integrate"/>
         public bool SupportsIntegration
@@ -189,7 +189,7 @@ namespace MathNet.Numerics.Interpolation.Algorithms
         /// Definite Integrate up to point t.
         /// </summary>
         /// <param name="t">Right bound of the integration interval [a,t].</param>
-        /// <returns>Interpolated definite integeral over the interval [a,t].</returns>
+        /// <returns>Interpolated definite integral over the interval [a,t].</returns>
         /// <seealso cref="SupportsIntegration"/>
         public
         double

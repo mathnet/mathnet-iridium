@@ -27,10 +27,13 @@
 // </license>
 //-----------------------------------------------------------------------
 
+using System;
+
 namespace MathNet.Numerics
 {
     /// <summary>
-    /// Almost-Equality support, similar to the native IEquatable but considering a maximum relative error.
+    /// Almost-Equality support, similar to the native <see cref="IEquatable{T}"/> but
+    /// considering a maximum relative error.
     /// </summary>
     public interface IAlmostEquatable<T>
     {

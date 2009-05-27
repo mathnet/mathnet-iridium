@@ -169,7 +169,7 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// Check wether a rational is bigger than another rational.
+        /// Check whether a rational is bigger than another rational.
         /// </summary>
         public static
         bool
@@ -181,7 +181,7 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// Check wether a rational is smaller than another rational.
+        /// Check whether a rational is smaller than another rational.
         /// </summary>
         public static
         bool
@@ -193,7 +193,7 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// Check wether a rational is bigger than or equal to another rational.
+        /// Check whether a rational is bigger than or equal to another rational.
         /// </summary>
         public static
         bool
@@ -206,7 +206,7 @@ namespace MathNet.Numerics
         }
 
         /// <summary>
-        /// Check wether a rational is smaller than or equal to another rational.
+        /// Check whether a rational is smaller than or equal to another rational.
         /// </summary>
         public static
         bool

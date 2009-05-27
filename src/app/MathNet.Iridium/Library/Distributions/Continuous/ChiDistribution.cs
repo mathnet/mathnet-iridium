@@ -140,7 +140,8 @@ namespace MathNet.Numerics.Distributions
         /// Determines whether the specified parameters is valid.
         /// </summary>
         /// <returns>
-        /// <see langword="true"/> if degreesOfFreedom is greater than 0.0; otherwise, <see langword="false"/>.
+        /// <see langword="true"/> if <paramref name="degreesOfFreedom"/> is greater than
+        /// 0.0; otherwise, <see langword="false"/>.
         /// </returns>
         public static
         bool
@@ -239,7 +240,7 @@ namespace MathNet.Numerics.Distributions
         }
 
         /// <summary>
-        /// Continuous inverse of the cumulativ distribution function (icdf) of this probabilit distribution.
+        /// Continuous inverse of the cumulative distribution function (icdf) of this probability distribution.
         /// </summary>
         public
         double
