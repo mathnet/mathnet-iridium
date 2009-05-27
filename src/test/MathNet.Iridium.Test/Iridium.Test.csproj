@@ -64,9 +64,10 @@
     <Compile Include="IntegrationTests\IntegrationTest.cs" />
     <Compile Include="InterpolationTests\InterpolationTest.cs" />
     <Compile Include="LinearAlgebraTests\ComplexMatrixArithmeticsTest.cs" />
-    <Compile Include="LinearAlgebraTests\LinearAlgebra.Test.cs" />
     <Compile Include="LinearAlgebraTests\LinearAlgebraAlgorithmsTest.cs" />
     <Compile Include="LinearAlgebraTests\MatrixArithmeticsTest.cs" />
+    <Compile Include="LinearAlgebraTests\MatrixDecompositionTest.cs" />
+    <Compile Include="LinearAlgebraTests\MatrixStressTest.cs" />
     <Compile Include="NumberTheoryTests\NumberTheoryTest.cs" />
     <Compile Include="NumericIs.cs" />
     <Compile Include="PolynomialTests\PolynomialTest.cs" />
