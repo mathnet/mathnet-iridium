@@ -411,24 +411,24 @@ namespace Iridium.Test.LinearAlgebraTests
 
             // array-division
             Assert.That(delegate { Matrix.ArrayDivide(Matrix.Ones(3), Matrix.Ones(4)); }, Throws.TypeOf<ArgumentException>());
-            Assert.That(delegate { r.ArrayDivide(Matrix.Ones(4)); }, Throws.TypeOf<ArgumentException>());
+            Assert.That(delegate { r.ArrayDivideInplace(Matrix.Ones(4)); }, Throws.TypeOf<ArgumentException>());
             Assert.That(Matrix.ArrayDivide(Matrix.Zeros(4), Matrix.Ones(4)), Is.EqualTo(Matrix.Zeros(4)));
             Matrix d = r.Clone();
-            d.ArrayDivide(r);
+            d.ArrayDivideInplace(r);
             Assert.That(d, NumericIs.AlmostEqualTo(new Matrix(r.RowCount, r.ColumnCount, 1.0)));
 
             // array-multiplication
             Assert.That(delegate { Matrix.ArrayMultiply(Matrix.Ones(3), Matrix.Ones(4)); }, Throws.TypeOf<ArgumentException>());
-            Assert.That(delegate { r.ArrayMultiply(Matrix.Ones(4)); }, Throws.TypeOf<ArgumentException>());
+            Assert.That(delegate { r.ArrayMultiplyInplace(Matrix.Ones(4)); }, Throws.TypeOf<ArgumentException>());
             Assert.That(Matrix.ArrayMultiply(r, new Matrix(r.RowCount, r.ColumnCount, 1.0)), Is.EqualTo(r));
             Matrix e = r.Clone();
-            e.ArrayMultiply(new Matrix(r.RowCount, r.ColumnCount));
+            e.ArrayMultiplyInplace(new Matrix(r.RowCount, r.ColumnCount));
             Assert.That(e, Is.EqualTo(new Matrix(r.RowCount, r.ColumnCount)));
 
             // mixed array multiplication & division
             Matrix f = r.Clone();
-            f.ArrayMultiply(r2);
-            f.ArrayDivide(r2);
+            f.ArrayMultiplyInplace(r2);
+            f.ArrayDivideInplace(r2);
             Assert.That(f, NumericIs.AlmostEqualTo(r));
         }
 

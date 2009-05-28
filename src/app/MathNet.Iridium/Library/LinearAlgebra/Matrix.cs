@@ -1408,7 +1408,7 @@ namespace MathNet.Numerics.LinearAlgebra
         /// <remarks>
         /// This method changes this matrix. Only square matrices are supported.
         /// </remarks>
-        /// <seealso cref="Multiply(IMatrix{double})"/>
+        /// <seealso cref="Multiply(Matrix)"/>
         /// <seealso cref="operator * (Matrix, Matrix)"/>
         /// <exception cref="ArgumentNullException">B must not be null.</exception>
         /// <exception cref="ArgumentException">Matrix inner dimensions must agree.</exception>
@@ -1838,9 +1838,24 @@ namespace MathNet.Numerics.LinearAlgebra
         /// This instance and <c>m</c> must have the same dimensions.
         /// </remarks>
         /// <seealso cref="ArrayMultiply(IMatrix{double}, IMatrix{double})"/>
+        [Obsolete("Use 'ArrayMultiplyInplace' instead. 'ArrayMultiply' will soon be replaced with an outplace version")]
         public
         void
         ArrayMultiply(IMatrix<double> m)
+        {
+            ArrayMultiplyInplace(m);
+        }
+
+        /// <summary>
+        /// In place element-by-element multiplication, <c>A .*= M</c>.
+        /// </summary>
+        /// <remarks>
+        /// This instance and <c>m</c> must have the same dimensions.
+        /// </remarks>
+        /// <seealso cref="ArrayMultiply(IMatrix{double}, IMatrix{double})"/>
+        public
+        void
+        ArrayMultiplyInplace(IMatrix<double> m)
         {
             CheckMatchingMatrixDimensions(this, m);
 
@@ -1889,9 +1904,24 @@ namespace MathNet.Numerics.LinearAlgebra
         /// This instance and <c>m</c> must have the same dimensions.
         /// </remarks>
         /// <seealso cref="ArrayDivide(IMatrix{double}, IMatrix{double})"/>
+        [Obsolete("Use 'ArrayDivideInplace' instead. 'ArrayDivide' will soon be replaced with an outplace version")]
         public
         void
         ArrayDivide(IMatrix<double> m)
+        {
+            ArrayDivideInplace(m);
+        }
+
+        /// <summary>
+        /// In place element-by-element right division, <c>A ./= M</c>.
+        /// </summary>
+        /// <remarks>
+        /// This instance and <c>m</c> must have the same dimensions.
+        /// </remarks>
+        /// <seealso cref="ArrayDivide(IMatrix{double}, IMatrix{double})"/>
+        public
+        void
+        ArrayDivideInplace(IMatrix<double> m)
         {
             CheckMatchingMatrixDimensions(this, m);
 
@@ -1937,9 +1967,21 @@ namespace MathNet.Numerics.LinearAlgebra
         /// In place element-by-element raise to power, <c>A[i,j] = A[i,j]^exponent</c>.
         /// </summary>
         /// <seealso cref="ArrayPower(IMatrix{double}, double)"/>
+        [Obsolete("Use 'ArrayPowerInplace' instead. 'ArrayPower' will soon be replaced with an outplace version")]
         public
         void
         ArrayPower(double exponent)
+        {
+            ArrayPowerInplace(exponent);
+        }
+
+        /// <summary>
+        /// In place element-by-element raise to power, <c>A[i,j] = A[i,j]^exponent</c>.
+        /// </summary>
+        /// <seealso cref="ArrayPower(IMatrix{double}, double)"/>
+        public
+        void
+        ArrayPowerInplace(double exponent)
         {
             for(int i = 0; i < _rowCount; i++)
             {
@@ -1978,9 +2020,21 @@ namespace MathNet.Numerics.LinearAlgebra
         /// In place element-by-element mapping of an arbitrary function, <c>A[i,j] = mapping(A[i,j])</c>.
         /// </summary>
         /// <seealso cref="ArrayMap(IMatrix{double}, Converter{double, double})"/>
+        [Obsolete("Use 'ArrayMapInplace' instead. 'ArrayMap' will soon be replaced with an outplace version")]
         public
         void
         ArrayMap(Converter<double, double> mapping)
+        {
+            ArrayMapInplace(mapping);
+        }
+
+        /// <summary>
+        /// In place element-by-element mapping of an arbitrary function, <c>A[i,j] = mapping(A[i,j])</c>.
+        /// </summary>
+        /// <seealso cref="ArrayMap(IMatrix{double}, Converter{double, double})"/>
+        public
+        void
+        ArrayMapInplace(Converter<double, double> mapping)
         {
             for(int i = 0; i < _rowCount; i++)
             {
