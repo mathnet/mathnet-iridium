@@ -609,12 +609,7 @@ namespace MathNet.Numerics
         double
         IncompleteGammaRegularized(double a, double x)
         {
-            if(a < 0d || x < 0d)
-            {
-                throw new ArgumentOutOfRangeException("a,x", Properties.LocalStrings.ArgumentNotNegative);
-            }
-
-            return GammaRegularizedAlgorithm.GammaRegularized(a, x);
+            return GammaRegularized(a, x);
         }
 
         /// <summary>
@@ -625,9 +620,14 @@ namespace MathNet.Numerics
         double
         GammaRegularized(double a, double x)
         {
-            if(a < 0d || x < 0d)
+            if(a < 0.0)
             {
-                throw new ArgumentOutOfRangeException("a,x", Properties.LocalStrings.ArgumentNotNegative);
+                throw new ArgumentOutOfRangeException("a", Properties.LocalStrings.ArgumentNotNegative);
+            }
+
+            if(x < 0.0)
+            {
+                throw new ArgumentOutOfRangeException("x", Properties.LocalStrings.ArgumentNotNegative);
             }
 
             return GammaRegularizedAlgorithm.GammaRegularized(a, x);
@@ -697,17 +697,7 @@ namespace MathNet.Numerics
             double b,
             double x)
         {
-            if(a < 0.0 || b < 0.0)
-            {
-                throw new ArgumentOutOfRangeException("a,b", Properties.LocalStrings.ArgumentNotNegative);
-            }
-
-            if(x < 0.0 || x > 1.0)
-            {
-                throw new ArgumentOutOfRangeException("x", Properties.LocalStrings.ArgumentInIntervalXYInclusive(0, 1));
-            }
-
-            return BetaRegularizedAlgorithm.BetaRegularized(a, b, x);
+            return BetaRegularized(a, b, x);
         }
 
         /// <summary>
@@ -721,9 +711,14 @@ namespace MathNet.Numerics
             double b,
             double x)
         {
-            if(a < 0.0 || b < 0.0)
+            if(a < 0.0)
             {
-                throw new ArgumentOutOfRangeException("a,b", Properties.LocalStrings.ArgumentNotNegative);
+                throw new ArgumentOutOfRangeException("a", Properties.LocalStrings.ArgumentNotNegative);
+            }
+
+            if(b < 0.0)
+            {
+                throw new ArgumentOutOfRangeException("b", Properties.LocalStrings.ArgumentNotNegative);
             }
 
             if(x < 0.0 || x > 1.0)
@@ -745,19 +740,7 @@ namespace MathNet.Numerics
         double
         Erf(double x)
         {
-            if(double.IsNegativeInfinity(x))
-            {
-                return -1.0;
-            }
-
-            if(double.IsPositiveInfinity(x))
-            {
-                return 1.0;
-            }
-
-            return x < 0.0
-                ? -GammaRegularized(0.5, x * x)
-                : GammaRegularized(0.5, x * x);
+            return ErrorFunctionAlgorithm.Erf(x);
         }
 
         /// <summary>
@@ -783,62 +766,8 @@ namespace MathNet.Numerics
                 throw new ArgumentOutOfRangeException("x", x, Properties.LocalStrings.ArgumentInIntervalXYInclusive(-1, 1));
             }
 
-            x = 0.5 * (x + 1.0);
-
-            // Define break-points.
-            const double Plow = 0.02425;
-            const double Phigh = 1 - Plow;
-
-            double q;
-
-            // Rational approximation for lower region:
-            if(x < Plow)
-            {
-                q = Math.Sqrt(-2 * Math.Log(x));
-                return ((((((((((ErfInvC[0] * q) + ErfInvC[1]) * q) + ErfInvC[2]) * q) + ErfInvC[3]) * q) + ErfInvC[4]) * q) + ErfInvC[5]) /
-                    ((((((((ErfInvD[0] * q) + ErfInvD[1]) * q) + ErfInvD[2]) * q) + ErfInvD[3]) * q) + 1)
-                    * Constants.Sqrt1_2;
-            }
-
-            // Rational approximation for upper region:
-            if(Phigh < x)
-            {
-                q = Math.Sqrt(-2 * Math.Log(1 - x));
-                return -((((((((((ErfInvC[0] * q) + ErfInvC[1]) * q) + ErfInvC[2]) * q) + ErfInvC[3]) * q) + ErfInvC[4]) * q) + ErfInvC[5]) /
-                    ((((((((ErfInvD[0] * q) + ErfInvD[1]) * q) + ErfInvD[2]) * q) + ErfInvD[3]) * q) + 1)
-                    * Constants.Sqrt1_2;
-            }
-
-            // Rational approximation for central region:
-            q = x - 0.5;
-            double r = q * q;
-            return ((((((((((ErfInvA[0] * r) + ErfInvA[1]) * r) + ErfInvA[2]) * r) + ErfInvA[3]) * r) + ErfInvA[4]) * r) + ErfInvA[5]) * q /
-                ((((((((((ErfInvB[0] * r) + ErfInvB[1]) * r) + ErfInvB[2]) * r) + ErfInvB[3]) * r) + ErfInvB[4]) * r) + 1)
-                * Constants.Sqrt1_2;
+            return ErrorFunctionAlgorithm.ErfInverse(x);
         }
-
-        private static readonly double[] ErfInvA = {
-            -3.969683028665376e+01, 2.209460984245205e+02,
-            -2.759285104469687e+02, 1.383577518672690e+02,
-            -3.066479806614716e+01, 2.506628277459239e+00
-            };
-
-        private static readonly double[] ErfInvB = {
-            -5.447609879822406e+01, 1.615858368580409e+02,
-            -1.556989798598866e+02, 6.680131188771972e+01,
-            -1.328068155288572e+01
-            };
-
-        private static readonly double[] ErfInvC = {
-            -7.784894002430293e-03, -3.223964580411365e-01,
-            -2.400758277161838e+00, -2.549732539343734e+00,
-            4.374664141464968e+00, 2.938163982698783e+00
-            };
-
-        private static readonly double[] ErfInvD = {
-            7.784695709041462e-03, 3.224671290700398e-01,
-            2.445134137142996e+00, 3.754408661907416e+00
-            };
 
         #endregion
 

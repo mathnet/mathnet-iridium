@@ -41,10 +41,10 @@ namespace MathNet.Numerics.SpecialFunctions.Algorithms
         double
         FactorialLn(int value)
         {
-            if(value < 0)
-            {
-                throw new ArgumentOutOfRangeException("value", Properties.LocalStrings.ArgumentPositive);
-            }
+            //if(value < 0)
+            //{
+            //    throw new ArgumentOutOfRangeException("value", Properties.LocalStrings.ArgumentPositive);
+            //}
 
             if(value <= 1)
             {
@@ -82,10 +82,10 @@ namespace MathNet.Numerics.SpecialFunctions.Algorithms
         double
         Factorial(int value)
         {
-            if(value < 0)
-            {
-                throw new ArgumentOutOfRangeException("value", Properties.LocalStrings.ArgumentPositive);
-            }
+            //if(value < 0)
+            //{
+            //    throw new ArgumentOutOfRangeException("value", Properties.LocalStrings.ArgumentPositive);
+            //}
 
             if(value >= FactorialPrecompSize)
             {

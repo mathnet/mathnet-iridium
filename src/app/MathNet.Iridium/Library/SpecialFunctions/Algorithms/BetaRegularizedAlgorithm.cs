@@ -48,15 +48,20 @@ namespace MathNet.Numerics.SpecialFunctions.Algorithms
             double b,
             double x)
         {
-            if(a < 0.0 || b < 0.0)
-            {
-                throw new ArgumentOutOfRangeException("a,b", Properties.LocalStrings.ArgumentNotNegative);
-            }
+            //if(a < 0.0)
+            //{
+            //    throw new ArgumentOutOfRangeException("a", Properties.LocalStrings.ArgumentNotNegative);
+            //}
 
-            if(x < 0.0 || x > 1.0)
-            {
-                throw new ArgumentOutOfRangeException("x", Properties.LocalStrings.ArgumentInIntervalXYInclusive(0, 1));
-            }
+            //if(b < 0.0)
+            //{
+            //    throw new ArgumentOutOfRangeException("b", Properties.LocalStrings.ArgumentNotNegative);
+            //}
+
+            //if(x < 0.0 || x > 1.0)
+            //{
+            //    throw new ArgumentOutOfRangeException("x", Properties.LocalStrings.ArgumentInIntervalXYInclusive(0, 1));
+            //}
 
             double bt = (x == 0.0 || x == 1.0)
                 ? 0.0

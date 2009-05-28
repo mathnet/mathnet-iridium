@@ -49,10 +49,15 @@ namespace MathNet.Numerics.SpecialFunctions.Algorithms
             const double BigNumber = 4503599627370496.0;
             const double BigNumberInverse = 2.22044604925031308085e-16;
 
-            if(a < 0d || x < 0d)
-            {
-                throw new ArgumentOutOfRangeException("a,x", Properties.LocalStrings.ArgumentNotNegative);
-            }
+            //if(a < 0.0)
+            //{
+            //    throw new ArgumentOutOfRangeException("a", Properties.LocalStrings.ArgumentNotNegative);
+            //}
+
+            //if(x < 0.0)
+            //{
+            //    throw new ArgumentOutOfRangeException("x", Properties.LocalStrings.ArgumentNotNegative);
+            //}
 
             if(Number.AlmostZero(a))
             {
@@ -185,7 +190,7 @@ namespace MathNet.Numerics.SpecialFunctions.Algorithms
 
             // Initial Guess
             double d = 1 / (9 * a);
-            double y = 1 - d - (0.98 * Constants.Sqrt2 * Fn.ErfInverse((2.0 * y0) - 1.0) * Math.Sqrt(d));
+            double y = 1 - d - (0.98 * Constants.Sqrt2 * ErrorFunctionAlgorithm.ErfInverse((2.0 * y0) - 1.0) * Math.Sqrt(d));
             double x = a * y * y * y;
             double lgm = GammaAlgorithm.GammaLn(a);
 
