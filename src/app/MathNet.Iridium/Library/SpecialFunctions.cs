@@ -640,9 +640,9 @@ namespace MathNet.Numerics
         /// </summary>
         public static
         double
-        InverseGammaRegularized(double a, double y0)
+        GammaRegularizedInverse(double a, double y0)
         {
-            return GammaRegularizedAlgorithm.InverseGammaRegularized(a, y0);
+            return GammaRegularizedAlgorithm.GammaRegularizedInverse(a, y0);
         }
 
         #endregion

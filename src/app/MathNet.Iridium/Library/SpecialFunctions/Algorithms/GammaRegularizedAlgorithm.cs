@@ -159,7 +159,7 @@ namespace MathNet.Numerics.SpecialFunctions.Algorithms
         /// </summary>
         public static
         double
-        InverseGammaRegularized(double a, double y0)
+        GammaRegularizedInverse(double a, double y0)
         {
             const double Epsilon = 0.000000000000001;
             const double BigNumber = 4503599627370496.0;

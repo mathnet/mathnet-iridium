@@ -246,7 +246,7 @@ namespace MathNet.Numerics.Distributions
         double
         InverseCumulativeDistribution(double x)
         {
-            return Math.Sqrt(2 * Fn.InverseGammaRegularized(0.5 * _degreesOfFreedom, x));
+            return Math.Sqrt(2 * Fn.GammaRegularizedInverse(0.5 * _degreesOfFreedom, x));
         }
         #endregion
 

@@ -229,7 +229,7 @@ namespace MathNet.Numerics.Distributions
         double
         InverseCumulativeDistribution(double x)
         {
-            return Fn.InverseGammaRegularized(_alpha, x) * _theta;
+            return Fn.GammaRegularizedInverse(_alpha, x) * _theta;
         }
         #endregion
 

@@ -384,7 +384,7 @@ namespace Iridium.Test.SpecialFunctionsTests
         }
 
         [Test]
-        public void TestSpecialFunctions_InverseGammaRegularized()
+        public void TestSpecialFunctions_GammaRegularizedInverse()
         {
             /*
             Maple: PInv := (a,y) -> RootOf(1 - GAMMA(a,x)/GAMMA(a) - y);
@@ -392,41 +392,41 @@ namespace Iridium.Test.SpecialFunctionsTests
             */
 
             // Special Points (expected value debatable)
-            Assert.That(Fn.InverseGammaRegularized(0, 0), Is.NaN, "(0,0) -> NaN");
+            Assert.That(Fn.GammaRegularizedInverse(0, 0), Is.NaN, "(0,0) -> NaN");
 
             // a axis (y=0)
-            Assert.That(Fn.InverseGammaRegularized(1, 0), NumericIs.AlmostEqualTo((double) 0), "(1,0) -> 0");
-            Assert.That(Fn.InverseGammaRegularized(0.5, 0), NumericIs.AlmostEqualTo((double) 0), "(1/2,0) -> 0");
-            Assert.That(Fn.InverseGammaRegularized(0.001, 0), NumericIs.AlmostEqualTo((double) 0), "(1/1000,0) -> 0");
+            Assert.That(Fn.GammaRegularizedInverse(1, 0), NumericIs.AlmostEqualTo((double) 0), "(1,0) -> 0");
+            Assert.That(Fn.GammaRegularizedInverse(0.5, 0), NumericIs.AlmostEqualTo((double) 0), "(1/2,0) -> 0");
+            Assert.That(Fn.GammaRegularizedInverse(0.001, 0), NumericIs.AlmostEqualTo((double) 0), "(1/1000,0) -> 0");
 
             // shifted a axis (y=1)
-            Assert.That(Fn.InverseGammaRegularized(1, 1), Is.EqualTo(double.PositiveInfinity), "(1,1) -> +infty");
-            Assert.That(Fn.InverseGammaRegularized(0.5, 1), Is.EqualTo(double.PositiveInfinity), "(1/2,1) -> +infty");
-            Assert.That(Fn.InverseGammaRegularized(0.001, 1), Is.EqualTo(double.PositiveInfinity), "(1/1000,1) -> +infty");
+            Assert.That(Fn.GammaRegularizedInverse(1, 1), Is.EqualTo(double.PositiveInfinity), "(1,1) -> +infty");
+            Assert.That(Fn.GammaRegularizedInverse(0.5, 1), Is.EqualTo(double.PositiveInfinity), "(1/2,1) -> +infty");
+            Assert.That(Fn.GammaRegularizedInverse(0.001, 1), Is.EqualTo(double.PositiveInfinity), "(1/1000,1) -> +infty");
 
             // shifted a axis (y=1.1)
-            Assert.That(Fn.InverseGammaRegularized(1, 1.1), Is.NaN, "(1,1) -> NaN");
-            Assert.That(Fn.InverseGammaRegularized(0.5, 1.1), Is.NaN, "(1/2,1) -> NaN");
-            Assert.That(Fn.InverseGammaRegularized(0.001, 1.1), Is.NaN, "(1/1000,1) -> NaN");
+            Assert.That(Fn.GammaRegularizedInverse(1, 1.1), Is.NaN, "(1,1) -> NaN");
+            Assert.That(Fn.GammaRegularizedInverse(0.5, 1.1), Is.NaN, "(1/2,1) -> NaN");
+            Assert.That(Fn.GammaRegularizedInverse(0.001, 1.1), Is.NaN, "(1/1000,1) -> NaN");
 
             // y axis (a=0)
-            Assert.That(Fn.InverseGammaRegularized(0, 1), Is.NaN, "(0,1) -> NaN");
-            Assert.That(Fn.InverseGammaRegularized(0, 0.001), Is.NaN, "(0,1/1000) -> NaN");
+            Assert.That(Fn.GammaRegularizedInverse(0, 1), Is.NaN, "(0,1) -> NaN");
+            Assert.That(Fn.GammaRegularizedInverse(0, 0.001), Is.NaN, "(0,1/1000) -> NaN");
 
             // various points (some with known other representation)
-            Assert.That(Fn.InverseGammaRegularized(1, 0.63212055882855767840), NumericIs.AlmostEqualTo((double) 1), "(1,1-exp(-1)) -> 1");
-            Assert.That(Fn.InverseGammaRegularized(1, 0.95678608173622775023), NumericIs.AlmostEqualTo(Math.PI), "(1,1-exp(-pi)) -> pi");
-            Assert.That(Fn.InverseGammaRegularized(0.5, 0.84270079294971486934), NumericIs.AlmostEqualTo((double) 1), "(1/2,erf(1)) -> 1");
-            Assert.That(Fn.InverseGammaRegularized(0.5, 0.47291074313446191487), NumericIs.AlmostEqualTo(0.2), "(1/2,erf(sqrt(1/5))) -> 1/5");
-            Assert.That(Fn.InverseGammaRegularized(0.5, 0.62890663047730242621), NumericIs.AlmostEqualTo(0.4), "(1/2,erf(sqrt(2/5))) -> 2/5");
-            Assert.That(Fn.InverseGammaRegularized(0.5, 0.79409678926793169113), NumericIs.AlmostEqualTo(0.8), "(1/2,erf(sqrt(8/5))) -> 4/5");
-            Assert.That(Fn.InverseGammaRegularized(0.25, 0.70985103173698245837), NumericIs.AlmostEqualTo(0.2), "(1/4,?) -> 4/5");
-            Assert.That(Fn.InverseGammaRegularized(0.5, 0.99999225578356895592), NumericIs.AlmostEqualTo((double) 10, 1e-12), "(1/2,erf(sqrt(10))) -> 10");
-            Assert.That(Fn.InverseGammaRegularized(0.5, 0.99999999974603714105), NumericIs.AlmostEqualTo((double) 20, 1e-8), "(1/2,erf(sqrt(20))) -> 20");
-            Assert.That(Fn.InverseGammaRegularized(0.5, 0.999), NumericIs.AlmostEqualTo(5.4137830853313661466), "(1/2,0.999)");
-            Assert.That(Fn.InverseGammaRegularized(0.5, 0.8), NumericIs.AlmostEqualTo(0.82118720757490819339), "(1/2,0.8)");
-            Assert.That(Fn.InverseGammaRegularized(0.5, 0.6), NumericIs.AlmostEqualTo(0.35416315040039690443), "(1/2,0.6)");
-            Assert.That(Fn.InverseGammaRegularized(0.5, 0.2), NumericIs.AlmostEqualTo(0.032092377333650790123), "(1/2,0.2)");
+            Assert.That(Fn.GammaRegularizedInverse(1, 0.63212055882855767840), NumericIs.AlmostEqualTo((double) 1), "(1,1-exp(-1)) -> 1");
+            Assert.That(Fn.GammaRegularizedInverse(1, 0.95678608173622775023), NumericIs.AlmostEqualTo(Math.PI), "(1,1-exp(-pi)) -> pi");
+            Assert.That(Fn.GammaRegularizedInverse(0.5, 0.84270079294971486934), NumericIs.AlmostEqualTo((double) 1), "(1/2,erf(1)) -> 1");
+            Assert.That(Fn.GammaRegularizedInverse(0.5, 0.47291074313446191487), NumericIs.AlmostEqualTo(0.2), "(1/2,erf(sqrt(1/5))) -> 1/5");
+            Assert.That(Fn.GammaRegularizedInverse(0.5, 0.62890663047730242621), NumericIs.AlmostEqualTo(0.4), "(1/2,erf(sqrt(2/5))) -> 2/5");
+            Assert.That(Fn.GammaRegularizedInverse(0.5, 0.79409678926793169113), NumericIs.AlmostEqualTo(0.8), "(1/2,erf(sqrt(8/5))) -> 4/5");
+            Assert.That(Fn.GammaRegularizedInverse(0.25, 0.70985103173698245837), NumericIs.AlmostEqualTo(0.2), "(1/4,?) -> 4/5");
+            Assert.That(Fn.GammaRegularizedInverse(0.5, 0.99999225578356895592), NumericIs.AlmostEqualTo((double) 10, 1e-12), "(1/2,erf(sqrt(10))) -> 10");
+            Assert.That(Fn.GammaRegularizedInverse(0.5, 0.99999999974603714105), NumericIs.AlmostEqualTo((double) 20, 1e-8), "(1/2,erf(sqrt(20))) -> 20");
+            Assert.That(Fn.GammaRegularizedInverse(0.5, 0.999), NumericIs.AlmostEqualTo(5.4137830853313661466), "(1/2,0.999)");
+            Assert.That(Fn.GammaRegularizedInverse(0.5, 0.8), NumericIs.AlmostEqualTo(0.82118720757490819339), "(1/2,0.8)");
+            Assert.That(Fn.GammaRegularizedInverse(0.5, 0.6), NumericIs.AlmostEqualTo(0.35416315040039690443), "(1/2,0.6)");
+            Assert.That(Fn.GammaRegularizedInverse(0.5, 0.2), NumericIs.AlmostEqualTo(0.032092377333650790123), "(1/2,0.2)");
         }
 
         [Test]
