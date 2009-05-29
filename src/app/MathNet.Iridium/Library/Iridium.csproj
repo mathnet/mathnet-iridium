@@ -51,7 +51,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Collection.cs" />
     <Compile Include="Combinatorics.cs" />
     <Compile Include="Complex.cs" />
     <Compile Include="ComplexPolynomial.cs" />
