@@ -123,6 +123,7 @@
     <Compile Include="Properties\LocalStrings.cs" />
     <Compile Include="RandomSources\CryptographicRandomSource.cs" />
     <Compile Include="RandomSources\ObjectModel\RandomByteSourceAdapter.cs" />
+    <Compile Include="Searching.cs" />
     <Compile Include="Sorting.cs" />
     <Compile Include="OnDemandComputation.cs" />
     <Compile Include="RandomSources\AdditiveLaggedFibonacciRandomSource.cs" />

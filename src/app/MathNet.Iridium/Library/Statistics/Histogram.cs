@@ -28,23 +28,22 @@
 //-----------------------------------------------------------------------
 
 using System;
-using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
 
 namespace MathNet.Numerics.Statistics
 {
-    // TODO: refactor 'Histogram' with generics.
-    // TODO: improve design.
-
-    /// <summary>Base class for the <i>histogram</i> algorithms.</summary>
+    /// <summary>
+    /// Base class for the <i>histogram</i> algorithms.
+    /// </summary>
     [Serializable]
     public class Histogram
     {
         /// <summary>
         /// Contains all the <c>Bucket</c>s of the <c>Histogram</c>.
         /// </summary>
-        readonly ArrayList _buckets;
+        readonly List<Bucket> _buckets;
 
         /// <summary>
         /// Indicates whether the elements of <c>buckets</c> are
@@ -57,7 +56,7 @@ namespace MathNet.Numerics.Statistics
         /// </summary>
         public Histogram()
         {
-            _buckets = new ArrayList();
+            _buckets = new List<Bucket>();
             _areBucketsSorted = true;
         }
 
@@ -71,29 +70,29 @@ namespace MathNet.Numerics.Statistics
         }
 
         /// <summary>
-        /// Returns the <c>Bucket</c> that contains the value <c>v</c>. 
+        /// Returns the <c>Bucket</c> that contains the <c>value</c>. 
         /// </summary>
-        public Bucket GetContainerOf(double v)
+        public Bucket GetContainerOf(double value)
         {
             LazySort();
-            return (Bucket)_buckets[_buckets.BinarySearch(v, Bucket.DefaultPointComparer)];
+            int index = Searching.BinaryMapSearch(_buckets, value);
+
+            if(index < 0)
+            {
+                throw new ArgumentException(Properties.LocalStrings.ArgumentHistogramContainsNot(value));
+            }
+
+            return _buckets[index];
         }
 
         /// <summary>
         /// Returns the index in the <c>Histogram</c> of the <c>Bucket</c>
-        /// that contains the value <c>v</c>.
+        /// that contains the <c>value</c>.
         /// </summary>
-        public int GetContainerIndexOf(double v)
+        public int GetContainerIndexOf(double value)
         {
             LazySort();
-            int index = _buckets.BinarySearch(v, Bucket.DefaultPointComparer);
-
-            if(index < 0)
-            {
-                throw new ArgumentException(Properties.LocalStrings.ArgumentHistogramContainsNot(v));
-            }
-
-            return index;
+            return Searching.BinaryMapSearch(_buckets, value);
         }
 
         /// <summary>
@@ -109,11 +108,9 @@ namespace MathNet.Numerics.Statistics
             LazySort();
             for(int i = 0; i < _buckets.Count - 2; i++)
             {
-                double middle = (((Bucket)_buckets[i]).UpperBound
-                    + ((Bucket)_buckets[i + 1]).LowerBound) / 2;
-
-                ((Bucket)_buckets[i]).UpperBound = middle;
-                ((Bucket)_buckets[i + 1]).LowerBound = middle;
+                Bucket u = _buckets[i];
+                Bucket v = _buckets[i + 1];
+                u.UpperBound = v.LowerBound = (u.UpperBound + v.LowerBound) / 2;
             }
         }
 
@@ -142,7 +139,7 @@ namespace MathNet.Numerics.Statistics
             get
             {
                 LazySort();
-                return (Bucket)_buckets[index];
+                return _buckets[index];
             }
 
             set
@@ -168,9 +165,9 @@ namespace MathNet.Numerics.Statistics
             get
             {
                 double totalDepth = 0;
-                for(int i = 0; i < Count; i++)
+                foreach(Bucket b in _buckets)
                 {
-                    totalDepth += this[i].Depth;
+                    totalDepth += b.Depth;
                 }
 
                 return totalDepth;
@@ -194,7 +191,7 @@ namespace MathNet.Numerics.Statistics
         /// <summary>
         /// Returns the optimal dispersion histogram.
         /// </summary>
-        public static Histogram OptimalDispersion(int bucketCount, ICollection distribution)
+        public static Histogram OptimalDispersion(int bucketCount, ICollection<double> distribution)
         {
             if(distribution.Count < Math.Max(bucketCount, 2))
             {
@@ -307,7 +304,7 @@ namespace MathNet.Numerics.Statistics
         /// <param name="distribution"><c>double</c> elements expected.</param>
         /// <remarks>Requires a computations time quadratic to 
         /// <c>distribution.Length</c>.</remarks>
-        public static Histogram OptimalVariance(int bucketCount, ICollection distribution)
+        public static Histogram OptimalVariance(int bucketCount, ICollection<double> distribution)
         {
             if(distribution.Count < bucketCount)
             {
@@ -406,7 +403,7 @@ namespace MathNet.Numerics.Statistics
         /// <summary>
         /// Returns the optimal freedom histogram.
         /// </summary>
-        public static Histogram OptimalFreedom(int bucketCount, ICollection distribution)
+        public static Histogram OptimalFreedom(int bucketCount, ICollection<double> distribution)
         {
             if(distribution.Count < Math.Max(bucketCount, 2))
             {
@@ -488,7 +485,7 @@ namespace MathNet.Numerics.Statistics
         /// <summary>
         /// Returns the optimal squared freedom histogram.
         /// </summary>
-        public static Histogram OptimalSquaredFreedom(int histSize, ICollection distribution)
+        public static Histogram OptimalSquaredFreedom(int histSize, ICollection<double> distribution)
         {
             if(distribution.Count < Math.Max(histSize, 2))
             {
@@ -574,52 +571,8 @@ namespace MathNet.Numerics.Statistics
     /// each representing a region limited by an upper and a lower bound.
     /// </summary>
     [Serializable]
-    public class Bucket : IComparable, ICloneable
+    public class Bucket : IComparable<double>, IComparable<Bucket>, ICloneable
     {
-        /// <summary>
-        /// This <c>IComparer</c> performs comparisons between a
-        /// <c>double</c> and a <c>Bucket</c> object.
-        /// </summary>
-        private sealed class PointComparer : IComparer
-        {
-            /// <summary>Compares a <c>double</c> and <c>Bucket</c>.</summary>
-            /// <returns>Zero if the <c>double</c> is included
-            /// in the bucket.</returns>
-            public int Compare(object obj1, object obj2)
-            {
-                Bucket bucket;
-                double val;
-                int unit;
-
-                if(obj1 is Bucket)
-                {
-                    bucket = (Bucket)obj1;
-                    val = (double)obj2;
-                    unit = 1;
-                }
-                else
-                {
-                    bucket = (Bucket)obj2;
-                    val = (double)obj1;
-                    unit = -1;
-                }
-
-                if(bucket._upperBound < val)
-                {
-                    return -unit;
-                }
-
-                if(bucket._lowerBound <= val)
-                {
-                    return 0;
-                }
-
-                return unit;
-            }
-        }
-
-        static readonly PointComparer _pointComparer = new PointComparer();
-
         /// <summary>Lower boundary of the <c>Bucket</c>.</summary>
         double _lowerBound;
 
@@ -699,37 +652,44 @@ namespace MathNet.Numerics.Statistics
         }
 
         /// <summary>
-        /// Default comparer.
+        /// Comparison of two buckets.
         /// </summary>
-        public static IComparer DefaultPointComparer
+        public int CompareTo(Bucket bucket)
         {
-            get { return _pointComparer; }
-        }
+            if(_lowerBound >= bucket._lowerBound)
+            {
+                if(_upperBound <= bucket._upperBound)
+                {
+                    return 0;
+                }
 
-        /// <summary>
-        /// Comparison of two disjoint buckets.
-        /// </summary>
-        public int CompareTo(object bkt)
-        {
-            Bucket bucket = (Bucket)bkt;
+                return 1;
+            }
 
-            Debug.Assert(
-                _upperBound <= bucket._lowerBound
-                || _lowerBound >= bucket._upperBound,
-                "Could not compare two intersecting buckets.");
-
-            if(Number.AlmostZero(Width) && Number.AlmostZero(bucket.Width)
-                && Number.AlmostEqual(_lowerBound, bucket._lowerBound))
+            if(_upperBound >= bucket._upperBound)
             {
                 return 0;
             }
 
-            if(bucket._upperBound - _lowerBound <= 0)
+            return -1;
+        }
+
+        ///<summary>
+        /// Comparison of a bucket with a value, matching values to buckets.
+        ///</summary>
+        public int CompareTo(double value)
+        {
+            if(value > _upperBound)
+            {
+                return -1;
+            }
+
+            if(value < _lowerBound)
             {
                 return 1;
             }
 
-            return -1;
+            return 0;
         }
 
         /// <summary>

@@ -58,6 +58,7 @@
     <Compile Include="InfrastructureTests\AlmostEqualityTest.cs" />
     <Compile Include="InfrastructureTests\ComplexTest.cs" />
     <Compile Include="InfrastructureTests\NumberTest.cs" />
+    <Compile Include="InfrastructureTests\SearchingTest.cs" />
     <Compile Include="InfrastructureTests\SerializationTest.cs" />
     <Compile Include="InfrastructureTests\SetTest.cs" />
     <Compile Include="InfrastructureTests\SortingTest.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpecialFunctionsTests\ExcelStatisticsTests.cs" />
     <Compile Include="SpecialFunctionsTests\SpecialFunctionsTest.cs" />
+    <Compile Include="StatisticsTests\HistogramTest.cs" />
     <Compile Include="StatisticsTests\StatisticsTest.cs" />
     <Compile Include="TransformationsTests\FftTest.cs" />
     <Compile Include="TransformationsTests\FftStressTest.cs" />
