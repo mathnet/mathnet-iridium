@@ -1,10 +1,10 @@
 //-----------------------------------------------------------------------
 // <copyright file="Complex.cs" company="Math.NET Project">
-//    Copyright (c) 2002-2009, Christoph Rüegg, Joannes Vermorel.
+//    Copyright (c) 2002-2009, Christoph RÃ¼egg, Joannes Vermorel.
 //    All Right Reserved.
 // </copyright>
 // <author>
-//    Christoph Rüegg, http://christoph.ruegg.name
+//    Christoph RÃ¼egg, http://christoph.ruegg.name
 //    Joannes Vermorel, http://www.vermorel.com
 // </author>
 // <product>
@@ -1095,8 +1095,8 @@ namespace MathNet.Numerics
         Complex
         InverseCotangent()
         {
-            Complex iz = new Complex(-_imag, _real); // I*this
-            return (new Complex(0, 0.5) * ((1 + iz).NaturalLogarithm() - (1 - iz).NaturalLogarithm())) + (Math.PI / 2);
+            Complex iz = new Complex(0, 1) / this;
+            return new Complex(0, 0.5) * ((1 - iz).NaturalLogarithm() - (1 + iz).NaturalLogarithm());
         }
 
         /// <summary>
