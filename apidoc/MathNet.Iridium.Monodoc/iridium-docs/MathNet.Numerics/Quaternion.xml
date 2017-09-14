@@ -59,8 +59,8 @@
         <ReturnType>System.Double</ReturnType>
       </ReturnValue>
       <Docs>
-        <summary>G
-            ets the standard euclidean length |q| = sqrt(||q||) of the quaternion q: the square root of the sum of the squares of the four components.
+        <summary>
+            Gets the standard euclidean length |q| = sqrt(||q||) of the quaternion q: the square root of the sum of the squares of the four components.
             Q may then be represented as q = r*(cos(phi) + u * sin(phi)) = r*exp(phi*u) where u is the unit vector and phi the argument of q.
             </summary>
         <value>To be added.</value>
