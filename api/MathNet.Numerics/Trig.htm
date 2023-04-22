@@ -1,0 +1,596 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <title>Trig - Math.NET Documentation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+    <link type="text/css" rel="stylesheet" href="../main.css"/>
+  </head>
+  <body><div id="namespaces">
+	<h2 class="fixed">Namespaces</h2>
+	<div class="scroll">
+		<ul><li>
+          <a href="../MathNet.Numerics/index.htm" class="current">MathNet.Numerics</a>
+      </li><li>
+          <a href="../MathNet.Numerics.Distributions/index.htm">MathNet.Numerics.Distributions</a>
+      </li><li>
+          <a href="../MathNet.Numerics.Interpolation/index.htm">MathNet.Numerics.Interpolation</a>
+      </li><li>
+          <a href="../MathNet.Numerics.Interpolation.Algorithms/index.htm">MathNet.Numerics.Interpolation.Algorithms</a>
+      </li><li>
+          <a href="../MathNet.Numerics.LinearAlgebra/index.htm">MathNet.Numerics.LinearAlgebra</a>
+      </li><li>
+          <a href="../MathNet.Numerics.RandomSources/index.htm">MathNet.Numerics.RandomSources</a>
+      </li><li>
+          <a href="../MathNet.Numerics.Statistics/index.htm">MathNet.Numerics.Statistics</a>
+      </li><li>
+          <a href="../MathNet.Numerics.Transformations/index.htm">MathNet.Numerics.Transformations</a>
+      </li>
+		</ul>
+	</div>
+</div><div id="types">
+	<h2 class="fixed">Types</h2>
+	<div class="scroll">
+		<ul><li>
+            <a href="../MathNet.Numerics/Collection.htm">Collection</a>
+        </li><li>
+            <a href="../MathNet.Numerics/Combinatorics.htm">Combinatorics</a>
+        </li><li>
+            <a href="../MathNet.Numerics/Complex.htm">Complex</a>
+        </li><li>
+            <a href="../MathNet.Numerics/Constants.htm">Constants</a>
+        </li><li>
+            <a href="../MathNet.Numerics/Fn.htm">Fn</a>
+        </li><li>
+            <a href="../MathNet.Numerics/IRealFunction.htm">IRealFunction</a>
+        </li><li>
+            <a href="../MathNet.Numerics/ISet`1.htm">ISet&lt;T&gt;</a>
+        </li><li>
+            <a href="../MathNet.Numerics/Natural.htm">Natural</a>
+        </li><li>
+            <a href="../MathNet.Numerics/Number.htm">Number</a>
+        </li><li>
+            <a href="../MathNet.Numerics/Polynomial.htm">Polynomial</a>
+        </li><li>
+            <a href="../MathNet.Numerics/Quaternion.htm">Quaternion</a>
+        </li><li>
+            <a href="../MathNet.Numerics/Rational.htm">Rational</a>
+        </li><li>
+            <a href="../MathNet.Numerics/Ratios.htm">Ratios</a>
+        </li><li>
+            <a href="../MathNet.Numerics/ReadOnlySet`1.htm">ReadOnlySet&lt;T&gt;</a>
+        </li><li>
+            <a href="../MathNet.Numerics/SampleAlteredEventArgs.htm">SampleAlteredEventArgs</a>
+        </li><li>
+            <a href="../MathNet.Numerics/SampleList.htm">SampleList</a>
+        </li><li>
+            <a href="../MathNet.Numerics/Set`1.htm">Set&lt;T&gt;</a>
+        </li><li>
+            <a href="../MathNet.Numerics/SetChangedEventArgs`1.htm">SetChangedEventArgs&lt;T&gt;</a>
+        </li><li>
+            <a href="../MathNet.Numerics/SetElementOperation.htm">SetElementOperation</a>
+        </li><li>
+            <a href="../MathNet.Numerics/SiConstants.htm">SiConstants</a>
+        </li><li>
+            <a href="../MathNet.Numerics/SiPrefixes.htm">SiPrefixes</a>
+        </li><li>
+            <a href="../MathNet.Numerics/Sorting.htm">Sorting</a>
+        </li><li>
+            <a href="../MathNet.Numerics/Trig.htm" class="current">Trig</a>
+        </li><li>
+            <a href="../MathNet.Numerics/Tuple`2.htm">Tuple&lt;TFirst, TSecond&gt;</a>
+        </li>
+		</ul>
+	</div>
+</div>
+    <div class="header">
+		<p class="class"><strong>Type</strong> Trig</p>
+		<p><strong>Namespace</strong> MathNet.Numerics</p>
+	</div>
+    <div class="sub-header">
+
+
+			<h3 class="section">Methods</h3>
+			<ul><li><a href="#Cosecant" class="type">Cosecant</a></li><li><a href="#Cosine" class="type">Cosine</a></li><li><a href="#Cotangent" class="type">Cotangent</a></li><li><a href="#DegreeToGrad" class="type">DegreeToGrad</a></li><li><a href="#DegreeToRadian" class="type">DegreeToRadian</a></li><li><a href="#Equals" class="type">Equals</a></li><li><a href="#GetHashCode" class="type">GetHashCode</a></li><li><a href="#GetType" class="type">GetType</a></li><li><a href="#GradToDegree" class="type">GradToDegree</a></li><li><a href="#GradToRadian" class="type">GradToRadian</a></li><li><a href="#HyperbolicCosecant" class="type">HyperbolicCosecant</a></li><li><a href="#HyperbolicCosine" class="type">HyperbolicCosine</a></li><li><a href="#HyperbolicCotangent" class="type">HyperbolicCotangent</a></li><li><a href="#HyperbolicSecant" class="type">HyperbolicSecant</a></li><li><a href="#HyperbolicSine" class="type">HyperbolicSine</a></li><li><a href="#HyperbolicTangent" class="type">HyperbolicTangent</a></li><li><a href="#InverseCosecant" class="type">InverseCosecant</a></li><li><a href="#InverseCosine" class="type">InverseCosine</a></li><li><a href="#InverseCotangent" class="type">InverseCotangent</a></li><li><a href="#InverseHyperbolicCosecant" class="type">InverseHyperbolicCosecant</a></li><li><a href="#InverseHyperbolicCosine" class="type">InverseHyperbolicCosine</a></li><li><a href="#InverseHyperbolicCotangent" class="type">InverseHyperbolicCotangent</a></li><li><a href="#InverseHyperbolicSecant" class="type">InverseHyperbolicSecant</a></li><li><a href="#InverseHyperbolicSine" class="type">InverseHyperbolicSine</a></li><li><a href="#InverseHyperbolicTangent" class="type">InverseHyperbolicTangent</a></li><li><a href="#InverseSecant" class="type">InverseSecant</a></li><li><a href="#InverseSine" class="type">InverseSine</a></li><li><a href="#InverseTangent" class="type">InverseTangent</a></li><li><a href="#InverseTangentFromRational" class="type">InverseTangentFromRational</a></li><li><a href="#RadianToDegree" class="type">RadianToDegree</a></li><li><a href="#RadianToGrad" class="type">RadianToGrad</a></li><li><a href="#Secant" class="type">Secant</a></li><li><a href="#Sine" class="type">Sine</a></li><li><a href="#Tangent" class="type">Tangent</a></li><li><a href="#ToString" class="type">ToString</a></li>
+			</ul>
+
+
+	</div>
+
+
+	<h3 class="section">Public instance methods</h3>
+<div id="Equals" class="method">
+		<h4>bool <strong>Equals</strong>(object obj)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.bool">bool</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.object">object</span></code> obj</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="GetHashCode" class="method">
+		<h4>int <strong>GetHashCode</strong>()</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.int">int</span></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="GetType" class="method">
+		<h4>Type <strong>GetType</strong>()</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.Type">Type</span></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="ToString" class="method">
+		<h4>string <strong>ToString</strong>()</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.string">string</span></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+	<h3 class="section">Public static methods</h3>
+<div id="Cosecant" class="method">
+		<h4>double <strong>Cosecant</strong>(double radian)</h4>
+		<div class="content">Trigonometric Cosecant (Cosekans) of an angle in radian
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.double">double</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.double">double</span></code> radian</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Cosine" class="method">
+		<h4>double <strong>Cosine</strong>(double radian)</h4>
+		<div class="content">Trigonometric Cosine (Cosinus) of an angle in radian
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.double">double</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.double">double</span></code> radian</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Cotangent" class="method">
+		<h4>double <strong>Cotangent</strong>(double radian)</h4>
+		<div class="content">Trigonometric Cotangent (Cotangens) of an angle in radian
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.double">double</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.double">double</span></code> radian</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="DegreeToGrad" class="method">
+		<h4>double <strong>DegreeToGrad</strong>(double degree)</h4>
+		<div class="content">Converts a degree (360-periodic) angle to a newgrad (400-periodic) angle.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.double">double</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.double">double</span></code> degree</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="DegreeToRadian" class="method">
+		<h4>double <strong>DegreeToRadian</strong>(double degree)</h4>
+		<div class="content">Converts a degree (360-periodic) angle to a radian (2*Pi-periodic) angle.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.double">double</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.double">double</span></code> degree</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="GradToDegree" class="method">
+		<h4>double <strong>GradToDegree</strong>(double newgrad)</h4>
+		<div class="content">Converts a newgrad (400-periodic) angle to a degree (360-periodic) angle.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.double">double</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.double">double</span></code> newgrad</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="GradToRadian" class="method">
+		<h4>double <strong>GradToRadian</strong>(double newgrad)</h4>
+		<div class="content">Converts a newgrad (400-periodic) angle to a radian (2*Pi-periodic) angle.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.double">double</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.double">double</span></code> newgrad</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="HyperbolicCosecant" class="method">
+		<h4>double <strong>HyperbolicCosecant</strong>(double radian)</h4>
+		<div class="content">Trigonometric Hyperbolic Cosecant (Cosekans hyperbolicus)
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.double">double</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.double">double</span></code> radian</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="HyperbolicCosine" class="method">
+		<h4>double <strong>HyperbolicCosine</strong>(double radian)</h4>
+		<div class="content">Trigonometric Hyperbolic Cosine (Cosinus hyperbolicus)
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.double">double</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.double">double</span></code> radian</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="HyperbolicCotangent" class="method">
+		<h4>double <strong>HyperbolicCotangent</strong>(double radian)</h4>
+		<div class="content">Trigonometric Hyperbolic Cotangent (Cotangens hyperbolicus)
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.double">double</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.double">double</span></code> radian</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="HyperbolicSecant" class="method">
+		<h4>double <strong>HyperbolicSecant</strong>(double radian)</h4>
+		<div class="content">Trigonometric Hyperbolic Secant (Sekans hyperbolicus)
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.double">double</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.double">double</span></code> radian</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="HyperbolicSine" class="method">
+		<h4>double <strong>HyperbolicSine</strong>(double radian)</h4>
+		<div class="content">Trigonometric Hyperbolic Sine (Sinus hyperbolicus)
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.double">double</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.double">double</span></code> radian</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="HyperbolicTangent" class="method">
+		<h4>double <strong>HyperbolicTangent</strong>(double radian)</h4>
+		<div class="content">Trigonometric Hyperbolic Tangent (Tangens hyperbolicus)
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.double">double</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.double">double</span></code> radian</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="InverseCosecant" class="method">
+		<h4>double <strong>InverseCosecant</strong>(double real)</h4>
+		<div class="content">Trigonometric Arcus Cosecant (Arkuscosekans) in radian
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.double">double</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.double">double</span></code> real</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="InverseCosine" class="method">
+		<h4>double <strong>InverseCosine</strong>(double real)</h4>
+		<div class="content">Trigonometric Arcus Cosine (Arkuscosinus) in radian
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.double">double</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.double">double</span></code> real</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="InverseCotangent" class="method">
+		<h4>double <strong>InverseCotangent</strong>(double real)</h4>
+		<div class="content">Trigonometric Arcus Cotangent (Arkuscotangens) in radian
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.double">double</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.double">double</span></code> real</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="InverseHyperbolicCosecant" class="method">
+		<h4>double <strong>InverseHyperbolicCosecant</strong>(double real)</h4>
+		<div class="content">Trigonometric Hyperbolic Area Cosecant (Areacosekans hyperbolicus)
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.double">double</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.double">double</span></code> real</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="InverseHyperbolicCosine" class="method">
+		<h4>double <strong>InverseHyperbolicCosine</strong>(double real)</h4>
+		<div class="content">Trigonometric Hyperbolic Area Cosine (Areacosinus hyperbolicus)
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.double">double</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.double">double</span></code> real</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="InverseHyperbolicCotangent" class="method">
+		<h4>double <strong>InverseHyperbolicCotangent</strong>(double real)</h4>
+		<div class="content">Trigonometric Hyperbolic Area Cotangent (Areacotangens hyperbolicus)
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.double">double</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.double">double</span></code> real</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="InverseHyperbolicSecant" class="method">
+		<h4>double <strong>InverseHyperbolicSecant</strong>(double real)</h4>
+		<div class="content">Trigonometric Hyperbolic Area Secant (Areasekans hyperbolicus)
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.double">double</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.double">double</span></code> real</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="InverseHyperbolicSine" class="method">
+		<h4>double <strong>InverseHyperbolicSine</strong>(double real)</h4>
+		<div class="content">Trigonometric Hyperbolic Area Sine (Areasinus hyperbolicus)
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.double">double</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.double">double</span></code> real</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="InverseHyperbolicTangent" class="method">
+		<h4>double <strong>InverseHyperbolicTangent</strong>(double real)</h4>
+		<div class="content">Trigonometric Hyperbolic Area Tangent (Areatangens hyperbolicus)
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.double">double</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.double">double</span></code> real</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="InverseSecant" class="method">
+		<h4>double <strong>InverseSecant</strong>(double real)</h4>
+		<div class="content">Trigonometric Arcus Secant (Arkussekans) in radian
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.double">double</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.double">double</span></code> real</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="InverseSine" class="method">
+		<h4>double <strong>InverseSine</strong>(double real)</h4>
+		<div class="content">Trigonometric Arcus Sine (Arkussinus) in radian
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.double">double</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.double">double</span></code> real</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="InverseTangent" class="method">
+		<h4>double <strong>InverseTangent</strong>(double real)</h4>
+		<div class="content">Trigonometric Arcus Tangent (Arkustangens) in radian
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.double">double</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.double">double</span></code> real</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="InverseTangentFromRational" class="method">
+		<h4>double <strong>InverseTangentFromRational</strong>(double nominator, double denominator)</h4>
+		<div class="content">The principal argument (in radian) of the complex number x+I*y
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.double">double</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.double">double</span></code> nominator</td>
+					<td>y</td>
+				</tr><tr>
+					<td><code><span title="System.double">double</span></code> denominator</td>
+					<td>x</td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="RadianToDegree" class="method">
+		<h4>double <strong>RadianToDegree</strong>(double radian)</h4>
+		<div class="content">Converts a radian (2*Pi-periodic) angle to a degree (360-periodic) angle.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.double">double</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.double">double</span></code> radian</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="RadianToGrad" class="method">
+		<h4>double <strong>RadianToGrad</strong>(double radian)</h4>
+		<div class="content">Converts a radian (2*Pi-periodic) angle to a newgrad (400-periodic) angle.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.double">double</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.double">double</span></code> radian</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Secant" class="method">
+		<h4>double <strong>Secant</strong>(double radian)</h4>
+		<div class="content">Trigonometric Secant (Sekans) of an angle in radian
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.double">double</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.double">double</span></code> radian</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Sine" class="method">
+		<h4>double <strong>Sine</strong>(double radian)</h4>
+		<div class="content">Trigonometric Sine (Sinus) of an angle in radian
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.double">double</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.double">double</span></code> radian</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Tangent" class="method">
+		<h4>double <strong>Tangent</strong>(double radian)</h4>
+		<div class="content">Trigonometric Tangent (Tangens) of an angle in radian
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.double">double</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.double">double</span></code> radian</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+<div id="footer">
+  <p>Based on v2008.8.16.470 of Math.NET Iridium: Scientific Numerical Library (Math.NET)</p>
+  <p>Generated by <a href="http://docu.jagregory.com">docu</a></p>
+</div>
+  </body>
+</html>

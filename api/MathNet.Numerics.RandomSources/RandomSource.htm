@@ -1,0 +1,252 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <title>RandomSource - Math.NET Documentation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+    <link type="text/css" rel="stylesheet" href="../main.css"/>
+  </head>
+  <body><div id="namespaces">
+	<h2 class="fixed">Namespaces</h2>
+	<div class="scroll">
+		<ul><li>
+          <a href="../MathNet.Numerics/index.htm">MathNet.Numerics</a>
+      </li><li>
+          <a href="../MathNet.Numerics.Distributions/index.htm">MathNet.Numerics.Distributions</a>
+      </li><li>
+          <a href="../MathNet.Numerics.Interpolation/index.htm">MathNet.Numerics.Interpolation</a>
+      </li><li>
+          <a href="../MathNet.Numerics.Interpolation.Algorithms/index.htm">MathNet.Numerics.Interpolation.Algorithms</a>
+      </li><li>
+          <a href="../MathNet.Numerics.LinearAlgebra/index.htm">MathNet.Numerics.LinearAlgebra</a>
+      </li><li>
+          <a href="../MathNet.Numerics.RandomSources/index.htm" class="current">MathNet.Numerics.RandomSources</a>
+      </li><li>
+          <a href="../MathNet.Numerics.Statistics/index.htm">MathNet.Numerics.Statistics</a>
+      </li><li>
+          <a href="../MathNet.Numerics.Transformations/index.htm">MathNet.Numerics.Transformations</a>
+      </li>
+		</ul>
+	</div>
+</div><div id="types">
+	<h2 class="fixed">Types</h2>
+	<div class="scroll">
+		<ul><li>
+            <a href="../MathNet.Numerics.RandomSources/AdditiveLaggedFibonacciRandomSource.htm">AdditiveLaggedFibonacciRandomSource</a>
+        </li><li>
+            <a href="../MathNet.Numerics.RandomSources/MersenneTwisterRandomSource.htm">MersenneTwisterRandomSource</a>
+        </li><li>
+            <a href="../MathNet.Numerics.RandomSources/RandomSource.htm" class="current">RandomSource</a>
+        </li><li>
+            <a href="../MathNet.Numerics.RandomSources/SystemRandomSource.htm">SystemRandomSource</a>
+        </li><li>
+            <a href="../MathNet.Numerics.RandomSources/XorShiftRandomSource.htm">XorShiftRandomSource</a>
+        </li>
+		</ul>
+	</div>
+</div>
+    <div class="header">
+		<p class="class"><strong>Type</strong> RandomSource</p>
+		<p><strong>Namespace</strong> MathNet.Numerics.RandomSources</p><p><strong>Interfaces</strong> <a href="../MathNet.Numerics.Distributions/IContinuousGenerator.htm">IContinuousGenerator</a></p>
+	</div>
+    <div class="sub-header">
+
+
+			<h3 class="section">Methods</h3>
+			<ul><li><a href="#Equals" class="type">Equals</a></li><li><a href="#GetHashCode" class="type">GetHashCode</a></li><li><a href="#GetType" class="type">GetType</a></li><li><a href="#Next" class="type">Next</a></li><li><a href="#Next" class="type">Next</a></li><li><a href="#Next" class="type">Next</a></li><li><a href="#NextBoolean" class="type">NextBoolean</a></li><li><a href="#NextBytes" class="type">NextBytes</a></li><li><a href="#NextDouble" class="type">NextDouble</a></li><li><a href="#NextDouble" class="type">NextDouble</a></li><li><a href="#NextDouble" class="type">NextDouble</a></li><li><a href="#Reset" class="type">Reset</a></li><li><a href="#ToString" class="type">ToString</a></li>
+			</ul>
+
+			<h3 class="section">Properties</h3>
+			<ul><li><a href="#CanReset" class="type">CanReset</a></li>
+			</ul>
+
+	</div>
+
+
+	<h3 class="section">Public instance methods</h3>
+<div id="Equals" class="method">
+		<h4>bool <strong>Equals</strong>(object obj)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.bool">bool</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.object">object</span></code> obj</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="GetHashCode" class="method">
+		<h4>int <strong>GetHashCode</strong>()</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.int">int</span></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="GetType" class="method">
+		<h4>Type <strong>GetType</strong>()</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.Type">Type</span></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Next" class="method">
+		<h4>int <strong>Next</strong>()</h4>
+		<div class="content">Returns a nonnegative random number less than <a href="">MaxValue</a>.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.int">int</span></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Next" class="method">
+		<h4>int <strong>Next</strong>(int minValue, int maxValue)</h4>
+		<div class="content">Returns a random number within the specified range.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.int">int</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.int">int</span></code> minValue</td>
+					<td>The inclusive lower bound of the random number to be generated.</td>
+				</tr><tr>
+					<td><code><span title="System.int">int</span></code> maxValue</td>
+					<td>The exclusive upper bound of the random number to be generated. must be greater than or equal to .</td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Next" class="method">
+		<h4>int <strong>Next</strong>(int maxValue)</h4>
+		<div class="content">Returns a nonnegative random number less than the specified maximum.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.int">int</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.int">int</span></code> maxValue</td>
+					<td>The exclusive upper bound of the random number to be generated. must be greater than or equal to 0.</td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="NextBoolean" class="method">
+		<h4>bool <strong>NextBoolean</strong>()</h4>
+		<div class="content">Returns a random Boolean value.<blockquote>
+  Buffers 31 random bits for future calls, so the random number generator is only invoked once in every 31 calls.
+</blockquote>
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.bool">bool</span></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="NextBytes" class="method">
+		<h4>void <strong>NextBytes</strong>(Byte[] buffer)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td><code><span title="System.Byte[]">Byte[]</span></code> buffer</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="NextDouble" class="method">
+		<h4>double <strong>NextDouble</strong>(double maxValue)</h4>
+		<div class="content">Returns a nonnegative floating point random number less than the specified maximum.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.double">double</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.double">double</span></code> maxValue</td>
+					<td>The exclusive upper bound of the random number to be generated. must be greater than or equal to 0.0.</td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="NextDouble" class="method">
+		<h4>double <strong>NextDouble</strong>(double minValue, double maxValue)</h4>
+		<div class="content">Returns a floating point random number within the specified range.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.double">double</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.double">double</span></code> minValue</td>
+					<td>The inclusive lower bound of the random number to be generated.
+The range between  and  must be less than or equal to<a href="">MaxValue</a></td>
+				</tr><tr>
+					<td><code><span title="System.double">double</span></code> maxValue</td>
+					<td>The exclusive upper bound of the random number to be generated. must be greater than or equal to .
+The range between  and  must be less than or equal to<a href="">MaxValue</a>.</td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="NextDouble" class="method">
+		<h4>double <strong>NextDouble</strong>()</h4>
+		<div class="content">Returns a nonnegative floating point random number less than 1.0.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.double">double</span></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Reset" class="method">
+		<h4>void <strong>Reset</strong>()</h4>
+		<div class="content">Resets the random number generator, so that it produces the same random number sequence again.
+
+
+		</div>
+	</div><div id="ToString" class="method">
+		<h4>string <strong>ToString</strong>()</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.string">string</span></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+
+  <h3 class="section">Public properties</h3>
+<div id="CanReset" class="method">
+    <h4>bool <strong>CanReset</strong> get; </h4>
+    <div class="content">Gets a value indicating whether the random number generator can be reset, so that it produces the same
+random number sequence again.
+      <table>
+        <tr>
+          <td>
+            <code>return <span title="System.bool">bool</span></code>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+<div id="footer">
+  <p>Based on v2008.8.16.470 of Math.NET Iridium: Scientific Numerical Library (Math.NET)</p>
+  <p>Generated by <a href="http://docu.jagregory.com">docu</a></p>
+</div>
+  </body>
+</html>

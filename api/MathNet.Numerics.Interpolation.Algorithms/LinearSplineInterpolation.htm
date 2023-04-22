@@ -1,0 +1,226 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <title>LinearSplineInterpolation - Math.NET Documentation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+    <link type="text/css" rel="stylesheet" href="../main.css"/>
+  </head>
+  <body><div id="namespaces">
+	<h2 class="fixed">Namespaces</h2>
+	<div class="scroll">
+		<ul><li>
+          <a href="../MathNet.Numerics/index.htm">MathNet.Numerics</a>
+      </li><li>
+          <a href="../MathNet.Numerics.Distributions/index.htm">MathNet.Numerics.Distributions</a>
+      </li><li>
+          <a href="../MathNet.Numerics.Interpolation/index.htm">MathNet.Numerics.Interpolation</a>
+      </li><li>
+          <a href="../MathNet.Numerics.Interpolation.Algorithms/index.htm" class="current">MathNet.Numerics.Interpolation.Algorithms</a>
+      </li><li>
+          <a href="../MathNet.Numerics.LinearAlgebra/index.htm">MathNet.Numerics.LinearAlgebra</a>
+      </li><li>
+          <a href="../MathNet.Numerics.RandomSources/index.htm">MathNet.Numerics.RandomSources</a>
+      </li><li>
+          <a href="../MathNet.Numerics.Statistics/index.htm">MathNet.Numerics.Statistics</a>
+      </li><li>
+          <a href="../MathNet.Numerics.Transformations/index.htm">MathNet.Numerics.Transformations</a>
+      </li>
+		</ul>
+	</div>
+</div><div id="types">
+	<h2 class="fixed">Types</h2>
+	<div class="scroll">
+		<ul><li>
+            <a href="../MathNet.Numerics.Interpolation.Algorithms/AkimaSplineInterpolation.htm">AkimaSplineInterpolation</a>
+        </li><li>
+            <a href="../MathNet.Numerics.Interpolation.Algorithms/BarycentricInterpolation.htm">BarycentricInterpolation</a>
+        </li><li>
+            <a href="../MathNet.Numerics.Interpolation.Algorithms/ChebyshevFirstKindPolynomialInterpolation.htm">ChebyshevFirstKindPolynomialInterpolation</a>
+        </li><li>
+            <a href="../MathNet.Numerics.Interpolation.Algorithms/ChebyshevSecondKindPolynomialInterpolation.htm">ChebyshevSecondKindPolynomialInterpolation</a>
+        </li><li>
+            <a href="../MathNet.Numerics.Interpolation.Algorithms/CubicHermiteSplineInterpolation.htm">CubicHermiteSplineInterpolation</a>
+        </li><li>
+            <a href="../MathNet.Numerics.Interpolation.Algorithms/CubicSplineInterpolation.htm">CubicSplineInterpolation</a>
+        </li><li>
+            <a href="../MathNet.Numerics.Interpolation.Algorithms/EquidistantPolynomialInterpolation.htm">EquidistantPolynomialInterpolation</a>
+        </li><li>
+            <a href="../MathNet.Numerics.Interpolation.Algorithms/LimitedOrderPolynomialInterpolation.htm">LimitedOrderPolynomialInterpolation</a>
+        </li><li>
+            <a href="../MathNet.Numerics.Interpolation.Algorithms/LimitedOrderRationalInterpolation.htm">LimitedOrderRationalInterpolation</a>
+        </li><li>
+            <a href="../MathNet.Numerics.Interpolation.Algorithms/LinearSplineInterpolation.htm" class="current">LinearSplineInterpolation</a>
+        </li><li>
+            <a href="../MathNet.Numerics.Interpolation.Algorithms/PolynomialInterpolation.htm">PolynomialInterpolation</a>
+        </li><li>
+            <a href="../MathNet.Numerics.Interpolation.Algorithms/RationalInterpolation.htm">RationalInterpolation</a>
+        </li><li>
+            <a href="../MathNet.Numerics.Interpolation.Algorithms/RationalPoleFreeInterpolation.htm">RationalPoleFreeInterpolation</a>
+        </li><li>
+            <a href="../MathNet.Numerics.Interpolation.Algorithms/SplineInterpolation.htm">SplineInterpolation</a>
+        </li>
+		</ul>
+	</div>
+</div>
+    <div class="header">
+		<p class="class"><strong>Type</strong> LinearSplineInterpolation</p>
+		<p><strong>Namespace</strong> MathNet.Numerics.Interpolation.Algorithms</p><p><strong>Interfaces</strong> <a href="../MathNet.Numerics.Interpolation/IInterpolationMethod.htm">IInterpolationMethod</a></p>
+	</div>
+    <div class="sub-header">
+
+
+			<h3 class="section">Methods</h3>
+			<ul><li><a href="#Differentiate" class="type">Differentiate</a></li><li><a href="#Equals" class="type">Equals</a></li><li><a href="#GetHashCode" class="type">GetHashCode</a></li><li><a href="#GetType" class="type">GetType</a></li><li><a href="#Init" class="type">Init</a></li><li><a href="#Integrate" class="type">Integrate</a></li><li><a href="#Interpolate" class="type">Interpolate</a></li><li><a href="#ToString" class="type">ToString</a></li>
+			</ul>
+
+			<h3 class="section">Properties</h3>
+			<ul><li><a href="#SupportsDifferentiation" class="type">SupportsDifferentiation</a></li><li><a href="#SupportsIntegration" class="type">SupportsIntegration</a></li>
+			</ul>
+
+	</div>
+
+
+	<h3 class="section">Public instance methods</h3>
+<div id="Differentiate" class="method">
+		<h4>double <strong>Differentiate</strong>(double t, Double&amp; first, Double&amp; second)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.double">double</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.double">double</span></code> t</td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.Double&">Double&amp;</span></code> first</td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.Double&">Double&amp;</span></code> second</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Equals" class="method">
+		<h4>bool <strong>Equals</strong>(object obj)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.bool">bool</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.object">object</span></code> obj</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="GetHashCode" class="method">
+		<h4>int <strong>GetHashCode</strong>()</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.int">int</span></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="GetType" class="method">
+		<h4>Type <strong>GetType</strong>()</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.Type">Type</span></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Init" class="method">
+		<h4>void <strong>Init</strong>(IList&lt;double&gt; t, IList&lt;double&gt; x)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td><code><span title="System.Collections.Generic.IList<double>">IList&lt;double&gt;</span></code> t</td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.Collections.Generic.IList<double>">IList&lt;double&gt;</span></code> x</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Integrate" class="method">
+		<h4>double <strong>Integrate</strong>(double t)</h4>
+		<div class="content">Definite Integrate up to point t.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.double">double</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.double">double</span></code> t</td>
+					<td>Right bound of the integration interval [a,t].</td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Interpolate" class="method">
+		<h4>double <strong>Interpolate</strong>(double t)</h4>
+		<div class="content">Interpolate at point t.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.double">double</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.double">double</span></code> t</td>
+					<td>Point t to interpolate at.</td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="ToString" class="method">
+		<h4>string <strong>ToString</strong>()</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.string">string</span></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+
+  <h3 class="section">Public properties</h3>
+<div id="SupportsDifferentiation" class="method">
+    <h4>bool <strong>SupportsDifferentiation</strong> get; </h4>
+    <div class="content">True if the alorithm supports differentiation.
+      <table>
+        <tr>
+          <td>
+            <code>return <span title="System.bool">bool</span></code>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div><div id="SupportsIntegration" class="method">
+    <h4>bool <strong>SupportsIntegration</strong> get; </h4>
+    <div class="content">True if the alorithm supports integration.
+      <table>
+        <tr>
+          <td>
+            <code>return <span title="System.bool">bool</span></code>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+<div id="footer">
+  <p>Based on v2008.8.16.470 of Math.NET Iridium: Scientific Numerical Library (Math.NET)</p>
+  <p>Generated by <a href="http://docu.jagregory.com">docu</a></p>
+</div>
+  </body>
+</html>

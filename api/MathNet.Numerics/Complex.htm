@@ -1,0 +1,957 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <title>Complex - Math.NET Documentation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+    <link type="text/css" rel="stylesheet" href="../main.css"/>
+  </head>
+  <body><div id="namespaces">
+	<h2 class="fixed">Namespaces</h2>
+	<div class="scroll">
+		<ul><li>
+          <a href="../MathNet.Numerics/index.htm" class="current">MathNet.Numerics</a>
+      </li><li>
+          <a href="../MathNet.Numerics.Distributions/index.htm">MathNet.Numerics.Distributions</a>
+      </li><li>
+          <a href="../MathNet.Numerics.Interpolation/index.htm">MathNet.Numerics.Interpolation</a>
+      </li><li>
+          <a href="../MathNet.Numerics.Interpolation.Algorithms/index.htm">MathNet.Numerics.Interpolation.Algorithms</a>
+      </li><li>
+          <a href="../MathNet.Numerics.LinearAlgebra/index.htm">MathNet.Numerics.LinearAlgebra</a>
+      </li><li>
+          <a href="../MathNet.Numerics.RandomSources/index.htm">MathNet.Numerics.RandomSources</a>
+      </li><li>
+          <a href="../MathNet.Numerics.Statistics/index.htm">MathNet.Numerics.Statistics</a>
+      </li><li>
+          <a href="../MathNet.Numerics.Transformations/index.htm">MathNet.Numerics.Transformations</a>
+      </li>
+		</ul>
+	</div>
+</div><div id="types">
+	<h2 class="fixed">Types</h2>
+	<div class="scroll">
+		<ul><li>
+            <a href="../MathNet.Numerics/Collection.htm">Collection</a>
+        </li><li>
+            <a href="../MathNet.Numerics/Combinatorics.htm">Combinatorics</a>
+        </li><li>
+            <a href="../MathNet.Numerics/Complex.htm" class="current">Complex</a>
+        </li><li>
+            <a href="../MathNet.Numerics/Constants.htm">Constants</a>
+        </li><li>
+            <a href="../MathNet.Numerics/Fn.htm">Fn</a>
+        </li><li>
+            <a href="../MathNet.Numerics/IRealFunction.htm">IRealFunction</a>
+        </li><li>
+            <a href="../MathNet.Numerics/ISet`1.htm">ISet&lt;T&gt;</a>
+        </li><li>
+            <a href="../MathNet.Numerics/Natural.htm">Natural</a>
+        </li><li>
+            <a href="../MathNet.Numerics/Number.htm">Number</a>
+        </li><li>
+            <a href="../MathNet.Numerics/Polynomial.htm">Polynomial</a>
+        </li><li>
+            <a href="../MathNet.Numerics/Quaternion.htm">Quaternion</a>
+        </li><li>
+            <a href="../MathNet.Numerics/Rational.htm">Rational</a>
+        </li><li>
+            <a href="../MathNet.Numerics/Ratios.htm">Ratios</a>
+        </li><li>
+            <a href="../MathNet.Numerics/ReadOnlySet`1.htm">ReadOnlySet&lt;T&gt;</a>
+        </li><li>
+            <a href="../MathNet.Numerics/SampleAlteredEventArgs.htm">SampleAlteredEventArgs</a>
+        </li><li>
+            <a href="../MathNet.Numerics/SampleList.htm">SampleList</a>
+        </li><li>
+            <a href="../MathNet.Numerics/Set`1.htm">Set&lt;T&gt;</a>
+        </li><li>
+            <a href="../MathNet.Numerics/SetChangedEventArgs`1.htm">SetChangedEventArgs&lt;T&gt;</a>
+        </li><li>
+            <a href="../MathNet.Numerics/SetElementOperation.htm">SetElementOperation</a>
+        </li><li>
+            <a href="../MathNet.Numerics/SiConstants.htm">SiConstants</a>
+        </li><li>
+            <a href="../MathNet.Numerics/SiPrefixes.htm">SiPrefixes</a>
+        </li><li>
+            <a href="../MathNet.Numerics/Sorting.htm">Sorting</a>
+        </li><li>
+            <a href="../MathNet.Numerics/Trig.htm">Trig</a>
+        </li><li>
+            <a href="../MathNet.Numerics/Tuple`2.htm">Tuple&lt;TFirst, TSecond&gt;</a>
+        </li>
+		</ul>
+	</div>
+</div>
+    <div class="header">
+		<p class="class"><strong>Type</strong> Complex</p>
+		<p><strong>Namespace</strong> MathNet.Numerics</p><p><strong>Parent</strong> <span title="System.ValueType">ValueType</span></p><p><strong>Interfaces</strong> <span title="System.IEquatable<Complex>">IEquatable&lt;Complex&gt;</span>, <span title="System.IComparable<Complex>">IComparable&lt;Complex&gt;</span></p>
+	</div>
+    <div class="sub-header">
+
+
+			<h3 class="section">Methods</h3>
+			<ul><li><a href="#CompareTo" class="type">CompareTo</a></li><li><a href="#Cosecant" class="type">Cosecant</a></li><li><a href="#Cosine" class="type">Cosine</a></li><li><a href="#Cotangent" class="type">Cotangent</a></li><li><a href="#Equals" class="type">Equals</a></li><li><a href="#Equals" class="type">Equals</a></li><li><a href="#Exponential" class="type">Exponential</a></li><li><a href="#FromModulusArgument" class="type">FromModulusArgument</a></li><li><a href="#FromRealImaginary" class="type">FromRealImaginary</a></li><li><a href="#GetHashCode" class="type">GetHashCode</a></li><li><a href="#GetType" class="type">GetType</a></li><li><a href="#HyperbolicCosecant" class="type">HyperbolicCosecant</a></li><li><a href="#HyperbolicCosine" class="type">HyperbolicCosine</a></li><li><a href="#HyperbolicCotangent" class="type">HyperbolicCotangent</a></li><li><a href="#HyperbolicSecant" class="type">HyperbolicSecant</a></li><li><a href="#HyperbolicSine" class="type">HyperbolicSine</a></li><li><a href="#HyperbolicTangent" class="type">HyperbolicTangent</a></li><li><a href="#InverseCosecant" class="type">InverseCosecant</a></li><li><a href="#InverseCosine" class="type">InverseCosine</a></li><li><a href="#InverseCotangent" class="type">InverseCotangent</a></li><li><a href="#InverseHyperbolicCosecant" class="type">InverseHyperbolicCosecant</a></li><li><a href="#InverseHyperbolicCosine" class="type">InverseHyperbolicCosine</a></li><li><a href="#InverseHyperbolicCotangent" class="type">InverseHyperbolicCotangent</a></li><li><a href="#InverseHyperbolicSecant" class="type">InverseHyperbolicSecant</a></li><li><a href="#InverseHyperbolicSine" class="type">InverseHyperbolicSine</a></li><li><a href="#InverseHyperbolicTangent" class="type">InverseHyperbolicTangent</a></li><li><a href="#InverseSecant" class="type">InverseSecant</a></li><li><a href="#InverseSine" class="type">InverseSine</a></li><li><a href="#InverseTangent" class="type">InverseTangent</a></li><li><a href="#NaturalLogarithm" class="type">NaturalLogarithm</a></li><li><a href="#Parse" class="type">Parse</a></li><li><a href="#Parse" class="type">Parse</a></li><li><a href="#Power" class="type">Power</a></li><li><a href="#Random" class="type">Random</a></li><li><a href="#Random" class="type">Random</a></li><li><a href="#RandomPolar" class="type">RandomPolar</a></li><li><a href="#RandomUnitCircle" class="type">RandomUnitCircle</a></li><li><a href="#Root" class="type">Root</a></li><li><a href="#Secant" class="type">Secant</a></li><li><a href="#Sine" class="type">Sine</a></li><li><a href="#Square" class="type">Square</a></li><li><a href="#SquareRoot" class="type">SquareRoot</a></li><li><a href="#Tangent" class="type">Tangent</a></li><li><a href="#ToString" class="type">ToString</a></li><li><a href="#ToString" class="type">ToString</a></li>
+			</ul>
+
+			<h3 class="section">Properties</h3>
+			<ul><li><a href="#Argument" class="type">Argument</a></li><li><a href="#ArgumentModulusComparer" class="type">ArgumentModulusComparer</a></li><li><a href="#Conjugate" class="type">Conjugate</a></li><li><a href="#I" class="type">I</a></li><li><a href="#Imag" class="type">Imag</a></li><li><a href="#Infinity" class="type">Infinity</a></li><li><a href="#IsI" class="type">IsI</a></li><li><a href="#IsImaginary" class="type">IsImaginary</a></li><li><a href="#IsInfinity" class="type">IsInfinity</a></li><li><a href="#IsNaN" class="type">IsNaN</a></li><li><a href="#IsOne" class="type">IsOne</a></li><li><a href="#IsReal" class="type">IsReal</a></li><li><a href="#IsRealNonNegative" class="type">IsRealNonNegative</a></li><li><a href="#IsZero" class="type">IsZero</a></li><li><a href="#Modulus" class="type">Modulus</a></li><li><a href="#ModulusArgumentComparer" class="type">ModulusArgumentComparer</a></li><li><a href="#ModulusSquared" class="type">ModulusSquared</a></li><li><a href="#NaN" class="type">NaN</a></li><li><a href="#One" class="type">One</a></li><li><a href="#Real" class="type">Real</a></li><li><a href="#RealImaginaryComparer" class="type">RealImaginaryComparer</a></li><li><a href="#Sign" class="type">Sign</a></li><li><a href="#Zero" class="type">Zero</a></li>
+			</ul>
+
+	</div>
+
+
+	<h3 class="section">Public instance methods</h3>
+<div id="CompareTo" class="method">
+		<h4>int <strong>CompareTo</strong>(Complex other)</h4>
+		<div class="content">Compare this complex number with another complex number.<blockquote>
+  The complex number's modulus takes precedence over the argument.
+</blockquote>
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.int">int</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics/Complex.htm">Complex</a></code> other</td>
+					<td>The complex number to compare with.</td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Cosecant" class="method">
+		<h4>Complex <strong>Cosecant</strong>()</h4>
+		<div class="content">Trigonometric Cosecant (csc, Cosekans) of this <code>Complex</code>.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics/Complex.htm">Complex</a></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Cosine" class="method">
+		<h4>Complex <strong>Cosine</strong>()</h4>
+		<div class="content">Trigonometric Cosine (cos, Cosinus) of this <code>Complex</code>.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics/Complex.htm">Complex</a></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Cotangent" class="method">
+		<h4>Complex <strong>Cotangent</strong>()</h4>
+		<div class="content">Trigonometric Cotangent (cot, Cotangens) of this <code>Complex</code>.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics/Complex.htm">Complex</a></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Equals" class="method">
+		<h4>bool <strong>Equals</strong>(object obj)</h4>
+		<div class="content">Indicates whether <code>obj</code> is equal to this instance.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.bool">bool</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.object">object</span></code> obj</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Equals" class="method">
+		<h4>bool <strong>Equals</strong>(Complex other)</h4>
+		<div class="content">Indicates whether <code>z</code> is equal to this instance.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.bool">bool</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics/Complex.htm">Complex</a></code> other</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Exponential" class="method">
+		<h4>Complex <strong>Exponential</strong>()</h4>
+		<div class="content">Exponential of this <code>Complex</code> (exp(x), E^x).
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics/Complex.htm">Complex</a></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="GetHashCode" class="method">
+		<h4>int <strong>GetHashCode</strong>()</h4>
+		<div class="content">Gets the hashcode of this <code>Complex</code>.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.int">int</span></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="GetType" class="method">
+		<h4>Type <strong>GetType</strong>()</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.Type">Type</span></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="HyperbolicCosecant" class="method">
+		<h4>Complex <strong>HyperbolicCosecant</strong>()</h4>
+		<div class="content">Trigonometric Hyperbolic Cosecant (csch, Cosecans hyperbolicus) of this <code>Complex</code>.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics/Complex.htm">Complex</a></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="HyperbolicCosine" class="method">
+		<h4>Complex <strong>HyperbolicCosine</strong>()</h4>
+		<div class="content">Trigonometric Hyperbolic Cosine (cosh, Cosinus hyperbolicus) of this <code>Complex</code>.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics/Complex.htm">Complex</a></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="HyperbolicCotangent" class="method">
+		<h4>Complex <strong>HyperbolicCotangent</strong>()</h4>
+		<div class="content">Trigonometric Hyperbolic Cotangent (coth, Cotangens hyperbolicus) of this <code>Complex</code>.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics/Complex.htm">Complex</a></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="HyperbolicSecant" class="method">
+		<h4>Complex <strong>HyperbolicSecant</strong>()</h4>
+		<div class="content">Trigonometric Hyperbolic Secant (sech, Secans hyperbolicus) of this <code>Complex</code>.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics/Complex.htm">Complex</a></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="HyperbolicSine" class="method">
+		<h4>Complex <strong>HyperbolicSine</strong>()</h4>
+		<div class="content">Trigonometric Hyperbolic Sine (sinh, Sinus hyperbolicus) of this <code>Complex</code>.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics/Complex.htm">Complex</a></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="HyperbolicTangent" class="method">
+		<h4>Complex <strong>HyperbolicTangent</strong>()</h4>
+		<div class="content">Trigonometric Hyperbolic Tangent (tanh, Tangens hyperbolicus) of this <code>Complex</code>.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics/Complex.htm">Complex</a></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="InverseCosecant" class="method">
+		<h4>Complex <strong>InverseCosecant</strong>()</h4>
+		<div class="content">Trigonometric Arcus Cosecant (acsc, Arkuscosekans) of this <code>Complex</code>.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics/Complex.htm">Complex</a></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="InverseCosine" class="method">
+		<h4>Complex <strong>InverseCosine</strong>()</h4>
+		<div class="content">Trigonometric Arcus Cosine (acos, Arkuscosinus) of this <code>Complex</code>.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics/Complex.htm">Complex</a></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="InverseCotangent" class="method">
+		<h4>Complex <strong>InverseCotangent</strong>()</h4>
+		<div class="content">Trigonometric Arcus Cotangent (acot, Arkuscotangens) of this <code>Complex</code>.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics/Complex.htm">Complex</a></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="InverseHyperbolicCosecant" class="method">
+		<h4>Complex <strong>InverseHyperbolicCosecant</strong>()</h4>
+		<div class="content">Trigonometric Hyperbolic Area Cosecant (acsch, Areacosekans hyperbolicus) of this <code>Complex</code>.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics/Complex.htm">Complex</a></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="InverseHyperbolicCosine" class="method">
+		<h4>Complex <strong>InverseHyperbolicCosine</strong>()</h4>
+		<div class="content">Trigonometric Hyperbolic Area Cosine (acosh, Areacosinus hyperbolicus) of this <code>Complex</code>.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics/Complex.htm">Complex</a></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="InverseHyperbolicCotangent" class="method">
+		<h4>Complex <strong>InverseHyperbolicCotangent</strong>()</h4>
+		<div class="content">Trigonometric Hyperbolic Area Cotangent (acoth, Areacotangens hyperbolicus) of this <code>Complex</code>.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics/Complex.htm">Complex</a></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="InverseHyperbolicSecant" class="method">
+		<h4>Complex <strong>InverseHyperbolicSecant</strong>()</h4>
+		<div class="content">Trigonometric Hyperbolic Area Secant (asech, Areasekans hyperbolicus) of this <code>Complex</code>.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics/Complex.htm">Complex</a></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="InverseHyperbolicSine" class="method">
+		<h4>Complex <strong>InverseHyperbolicSine</strong>()</h4>
+		<div class="content">Trigonometric Hyperbolic Area Sine (asinh, reasinus hyperbolicus) of this <code>Complex</code>.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics/Complex.htm">Complex</a></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="InverseHyperbolicTangent" class="method">
+		<h4>Complex <strong>InverseHyperbolicTangent</strong>()</h4>
+		<div class="content">Trigonometric Hyperbolic Area Tangent (atanh, Areatangens hyperbolicus) of this <code>Complex</code>.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics/Complex.htm">Complex</a></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="InverseSecant" class="method">
+		<h4>Complex <strong>InverseSecant</strong>()</h4>
+		<div class="content">Trigonometric Arcus Secant (asec, Arkussekans) of this <code>Complex</code>.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics/Complex.htm">Complex</a></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="InverseSine" class="method">
+		<h4>Complex <strong>InverseSine</strong>()</h4>
+		<div class="content">Trigonometric Arcus Sine (asin, Arkussinus) of this <code>Complex</code>.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics/Complex.htm">Complex</a></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="InverseTangent" class="method">
+		<h4>Complex <strong>InverseTangent</strong>()</h4>
+		<div class="content">Trigonometric Arcus Tangent (atan, Arkustangens) of this <code>Complex</code>.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics/Complex.htm">Complex</a></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="NaturalLogarithm" class="method">
+		<h4>Complex <strong>NaturalLogarithm</strong>()</h4>
+		<div class="content">Natural Logarithm of this <code>Complex</code> (Base E).
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics/Complex.htm">Complex</a></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Power" class="method">
+		<h4>Complex <strong>Power</strong>(Complex exponent)</h4>
+		<div class="content">Raise this <code>Complex</code> to the given value.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics/Complex.htm">Complex</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics/Complex.htm">Complex</a></code> exponent</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Root" class="method">
+		<h4>Complex <strong>Root</strong>(Complex rootexponent)</h4>
+		<div class="content">Raise this <code>Complex</code> to the inverse of the given value.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics/Complex.htm">Complex</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics/Complex.htm">Complex</a></code> rootexponent</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Secant" class="method">
+		<h4>Complex <strong>Secant</strong>()</h4>
+		<div class="content">Trigonometric Secant (sec, Sekans) of this <code>Complex</code>.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics/Complex.htm">Complex</a></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Sine" class="method">
+		<h4>Complex <strong>Sine</strong>()</h4>
+		<div class="content">Trigonometric Sine (sin, Sinus) of this <code>Complex</code>.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics/Complex.htm">Complex</a></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Square" class="method">
+		<h4>Complex <strong>Square</strong>()</h4>
+		<div class="content">The Square (power 2) of this <code>Complex</code>
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics/Complex.htm">Complex</a></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="SquareRoot" class="method">
+		<h4>Complex <strong>SquareRoot</strong>()</h4>
+		<div class="content">The Square Root (power 1/2) of this <code>Complex</code>
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics/Complex.htm">Complex</a></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Tangent" class="method">
+		<h4>Complex <strong>Tangent</strong>()</h4>
+		<div class="content">Trigonometric Tangent (tan, Tangens) of this <code>Complex</code>.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics/Complex.htm">Complex</a></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="ToString" class="method">
+		<h4>string <strong>ToString</strong>()</h4>
+		<div class="content">Formats this <code>Complex</code> into a <code>string</code>.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.string">string</span></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="ToString" class="method">
+		<h4>string <strong>ToString</strong>(NumberFormatInfo numberFormat)</h4>
+		<div class="content">Formats this <code>Complex</code> into a <code>string</code>.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.string">string</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.Globalization.NumberFormatInfo">NumberFormatInfo</span></code> numberFormat</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+	<h3 class="section">Public static methods</h3>
+<div id="FromModulusArgument" class="method">
+		<h4>Complex <strong>FromModulusArgument</strong>(double modulus, double argument)</h4>
+		<div class="content">Constructs a <code>Complex</code> from its modulus and
+argument.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics/Complex.htm">Complex</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.double">double</span></code> modulus</td>
+					<td>Must be non-negative.</td>
+				</tr><tr>
+					<td><code><span title="System.double">double</span></code> argument</td>
+					<td>Real number.</td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="FromRealImaginary" class="method">
+		<h4>Complex <strong>FromRealImaginary</strong>(double real, double imag)</h4>
+		<div class="content">Constructs a <code>Complex</code> from its real
+and imaginary parts.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics/Complex.htm">Complex</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.double">double</span></code> real</td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.double">double</span></code> imag</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Parse" class="method">
+		<h4>Complex <strong>Parse</strong>(string complex)</h4>
+		<div class="content">Parse a string into a <code>Complex</code>.<blockquote>
+  The adopted string representation for the complex numbers is where  and  are <code>double</code>strings. Some alternative representations are ,,  and .
+Additionally the string <code>"NaN"</code> is mapped to<code>Complex.NaN</code>, the string <code>"Infinity"</code> to<code>Complex.ComplexInfinity</code>, <code>"PositiveInfinity"</code>to <code>Complex.DirectedInfinity(Complex.One)</code>,<code>"NegativeInfinity"</code> to <code>Complex.DirectedInfinity(-Complex.One)</code>and finally <code>"DirectedInfinity(WVW+I*XYZ)"</code> to <code>Complex.DirectedInfinity(WVW+I*XYZ)</code>.<code>Complex z = Complex.Parse("12.5+I*7");
+Complex nan = Complex.Parse("NaN");
+Complex infinity = Complex.Parse("Infinity");</code>This method is symmetric to <a href="">ToString</a>.
+</blockquote>
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics/Complex.htm">Complex</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.string">string</span></code> complex</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Parse" class="method">
+		<h4>Complex <strong>Parse</strong>(string complex, NumberFormatInfo numberFormat)</h4>
+		<div class="content">Parse a string into a <code>Complex</code>.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics/Complex.htm">Complex</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.string">string</span></code> complex</td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.Globalization.NumberFormatInfo">NumberFormatInfo</span></code> numberFormat</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Random" class="method">
+		<h4>Complex <strong>Random</strong>(IContinuousGenerator randomDistribution)</h4>
+		<div class="content">Constructs a complex number with random real and imaginary value.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics/Complex.htm">Complex</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics.Distributions/IContinuousGenerator.htm">IContinuousGenerator</a></code> randomDistribution</td>
+					<td>Continuous random distribution or source for the real and imaginary parts.</td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Random" class="method">
+		<h4>Complex <strong>Random</strong>(IContinuousGenerator realRandomDistribution, IContinuousGenerator imagRandomDistribution)</h4>
+		<div class="content">Constructs a complex number with random real and imaginary value.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics/Complex.htm">Complex</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics.Distributions/IContinuousGenerator.htm">IContinuousGenerator</a></code> realRandomDistribution</td>
+					<td>Continuous random distribution or source for the real part.</td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics.Distributions/IContinuousGenerator.htm">IContinuousGenerator</a></code> imagRandomDistribution</td>
+					<td>Continuous random distribution or source for the imaginary part.</td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="RandomPolar" class="method">
+		<h4>Complex <strong>RandomPolar</strong>(IContinuousGenerator modulusRandomDistribution, IContinuousGenerator argumentRandomDistribution)</h4>
+		<div class="content">Constructs a complex number with random modulus and argument.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics/Complex.htm">Complex</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics.Distributions/IContinuousGenerator.htm">IContinuousGenerator</a></code> modulusRandomDistribution</td>
+					<td>Continuous random distribution or source for the modulus.</td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics.Distributions/IContinuousGenerator.htm">IContinuousGenerator</a></code> argumentRandomDistribution</td>
+					<td>Continuous random distribution or source for the argument.</td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="RandomUnitCircle" class="method">
+		<h4>Complex <strong>RandomUnitCircle</strong>(IContinuousGenerator argumentRandomDistribution)</h4>
+		<div class="content">Constructs a complex number on the unit circle with random argument.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics/Complex.htm">Complex</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics.Distributions/IContinuousGenerator.htm">IContinuousGenerator</a></code> argumentRandomDistribution</td>
+					<td>Continuous random distribution or source for the argument.</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+  <h3 class="section">Public properties</h3>
+<div id="Argument" class="method">
+    <h4>double <strong>Argument</strong> get; set;</h4>
+    <div class="content">Gets or sets the argument of this <code>Complex</code>.<blockquote>
+  Argument always returns a value bigger than negative Pi and
+smaller or equal to Pi. If this <code>Complex</code> is zero, the Complex
+is assumed to be positive real with an argument of zero.
+</blockquote>
+      <table>
+        <tr>
+          <td>
+            <code>return <span title="System.double">double</span></code>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div><div id="ArgumentModulusComparer" class="method">
+    <h4>IComparer <strong>ArgumentModulusComparer</strong> get; </h4>
+    <div class="content">Gets the lexicographical comparer based on <code>(argument, modulus)</code>.
+      <table>
+        <tr>
+          <td>
+            <code>return <span title="System.Collections.IComparer">IComparer</span></code>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div><div id="Conjugate" class="method">
+    <h4>Complex <strong>Conjugate</strong> get; set;</h4>
+    <div class="content">Gets or sets the conjugate of this <code>Complex</code>.<blockquote>
+  The semantic of  is such that<code>// a, b of type Complex
+a.Conjugate = b;</code>is equivalent to<code>// a, b of type Complex
+a = b.Conjugate</code>
+</blockquote>
+      <table>
+        <tr>
+          <td>
+            <code>return <a href="../MathNet.Numerics/Complex.htm">Complex</a></code>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div><div id="I" class="method">
+    <h4>Complex <strong>I</strong> get; </h4>
+    <div class="content">Represents the imaginary unit number. This field is constant.
+      <table>
+        <tr>
+          <td>
+            <code>return <a href="../MathNet.Numerics/Complex.htm">Complex</a></code>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div><div id="Imag" class="method">
+    <h4>double <strong>Imag</strong> get; set;</h4>
+    <div class="content">Gets or sets the imaginary part of this <code>Complex</code>.
+      <table>
+        <tr>
+          <td>
+            <code>return <span title="System.double">double</span></code>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div><div id="Infinity" class="method">
+    <h4>Complex <strong>Infinity</strong> get; </h4>
+    <div class="content">Represents the infinity value. This field is constant.<blockquote>
+  The semantic associated to this value is a <code>Complex</code> of
+infinite real and imaginary part. If you need more formal complex
+number handling (according to the Riemann Sphere and the extended
+complex plane C*, or using directed infinity) please check out the
+alternative MathNet.PreciseNumerics and MathNet.Symbolics packages
+instead.
+</blockquote>
+      <table>
+        <tr>
+          <td>
+            <code>return <a href="../MathNet.Numerics/Complex.htm">Complex</a></code>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div><div id="IsI" class="method">
+    <h4>bool <strong>IsI</strong> get; </h4>
+    <div class="content">Indicates whether the <code>Complex</code> is the imaginary unit.
+      <table>
+        <tr>
+          <td>
+            <code>return <span title="System.bool">bool</span></code>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div><div id="IsImaginary" class="method">
+    <h4>bool <strong>IsImaginary</strong> get; </h4>
+    <div class="content">Indicates the provided <code>Complex</code> is imaginary.
+      <table>
+        <tr>
+          <td>
+            <code>return <span title="System.bool">bool</span></code>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div><div id="IsInfinity" class="method">
+    <h4>bool <strong>IsInfinity</strong> get; </h4>
+    <div class="content">Indicates the provided <code>Complex</code> evaluates to an
+infinite value.<blockquote>
+  True if it either evaluates to a complex infinity
+or to a directed infinity.
+</blockquote>
+      <table>
+        <tr>
+          <td>
+            <code>return <span title="System.bool">bool</span></code>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div><div id="IsNaN" class="method">
+    <h4>bool <strong>IsNaN</strong> get; </h4>
+    <div class="content">Indicates whether the provided <code>Complex</code> evaluates to a
+value that is not a number.
+      <table>
+        <tr>
+          <td>
+            <code>return <span title="System.bool">bool</span></code>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div><div id="IsOne" class="method">
+    <h4>bool <strong>IsOne</strong> get; </h4>
+    <div class="content">Indicates whether the <code>Complex</code> is one.
+      <table>
+        <tr>
+          <td>
+            <code>return <span title="System.bool">bool</span></code>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div><div id="IsReal" class="method">
+    <h4>bool <strong>IsReal</strong> get; </h4>
+    <div class="content">Indicates the provided <code>Complex</code> is real.
+      <table>
+        <tr>
+          <td>
+            <code>return <span title="System.bool">bool</span></code>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div><div id="IsRealNonNegative" class="method">
+    <h4>bool <strong>IsRealNonNegative</strong> get; </h4>
+    <div class="content">Indicates the provided <code>Complex</code> is real and not negative, that is >= 0.
+      <table>
+        <tr>
+          <td>
+            <code>return <span title="System.bool">bool</span></code>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div><div id="IsZero" class="method">
+    <h4>bool <strong>IsZero</strong> get; </h4>
+    <div class="content">Indicates whether the <code>Complex</code> is zero.
+      <table>
+        <tr>
+          <td>
+            <code>return <span title="System.bool">bool</span></code>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div><div id="Modulus" class="method">
+    <h4>double <strong>Modulus</strong> get; set;</h4>
+    <div class="content">Gets or sets the modulus of this <code>Complex</code>.<blockquote>
+  If this <code>Complex</code> is zero when the modulus is set,
+the Complex is assumed to be positive real with an argument of zero.
+</blockquote>
+      <table>
+        <tr>
+          <td>
+            <code>return <span title="System.double">double</span></code>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div><div id="ModulusArgumentComparer" class="method">
+    <h4>IComparer <strong>ModulusArgumentComparer</strong> get; </h4>
+    <div class="content">Gets the lexicographical comparer based on <code>(modulus, argument)</code>.
+      <table>
+        <tr>
+          <td>
+            <code>return <span title="System.Collections.IComparer">IComparer</span></code>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div><div id="ModulusSquared" class="method">
+    <h4>double <strong>ModulusSquared</strong> get; set;</h4>
+    <div class="content">Gets or sets the squared modulus of this <code>Complex</code>.<blockquote>
+  If this <code>Complex</code> is zero when the modulus is set,
+the Complex is assumed to be positive real with an argument of zero.
+</blockquote>
+      <table>
+        <tr>
+          <td>
+            <code>return <span title="System.double">double</span></code>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div><div id="NaN" class="method">
+    <h4>Complex <strong>NaN</strong> get; </h4>
+    <div class="content">Represents a value that is not a number. This field is constant.
+      <table>
+        <tr>
+          <td>
+            <code>return <a href="../MathNet.Numerics/Complex.htm">Complex</a></code>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div><div id="One" class="method">
+    <h4>Complex <strong>One</strong> get; </h4>
+    <div class="content">Represents the <code>1</code> value. This field is constant.
+      <table>
+        <tr>
+          <td>
+            <code>return <a href="../MathNet.Numerics/Complex.htm">Complex</a></code>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div><div id="Real" class="method">
+    <h4>double <strong>Real</strong> get; set;</h4>
+    <div class="content">Gets or sets the real part of this <code>Complex</code>.
+      <table>
+        <tr>
+          <td>
+            <code>return <span title="System.double">double</span></code>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div><div id="RealImaginaryComparer" class="method">
+    <h4>IComparer <strong>RealImaginaryComparer</strong> get; </h4>
+    <div class="content">Gets the lexicographical comparer based on <code>(real, imaginary)</code>.
+      <table>
+        <tr>
+          <td>
+            <code>return <span title="System.Collections.IComparer">IComparer</span></code>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div><div id="Sign" class="method">
+    <h4>Complex <strong>Sign</strong> get; </h4>
+    <div class="content">Gets the unity of this complex (same argument, but on the unit circle; exp(I*arg))
+      <table>
+        <tr>
+          <td>
+            <code>return <a href="../MathNet.Numerics/Complex.htm">Complex</a></code>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div><div id="Zero" class="method">
+    <h4>Complex <strong>Zero</strong> get; </h4>
+    <div class="content">Represents the zero value. This field is constant.
+      <table>
+        <tr>
+          <td>
+            <code>return <a href="../MathNet.Numerics/Complex.htm">Complex</a></code>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+<div id="footer">
+  <p>Based on v2008.8.16.470 of Math.NET Iridium: Scientific Numerical Library (Math.NET)</p>
+  <p>Generated by <a href="http://docu.jagregory.com">docu</a></p>
+</div>
+  </body>
+</html>

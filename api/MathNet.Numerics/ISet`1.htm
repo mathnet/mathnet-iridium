@@ -1,0 +1,472 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <title>ISet&lt;T&gt; - Math.NET Documentation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+    <link type="text/css" rel="stylesheet" href="../main.css"/>
+  </head>
+  <body><div id="namespaces">
+	<h2 class="fixed">Namespaces</h2>
+	<div class="scroll">
+		<ul><li>
+          <a href="../MathNet.Numerics/index.htm" class="current">MathNet.Numerics</a>
+      </li><li>
+          <a href="../MathNet.Numerics.Distributions/index.htm">MathNet.Numerics.Distributions</a>
+      </li><li>
+          <a href="../MathNet.Numerics.Interpolation/index.htm">MathNet.Numerics.Interpolation</a>
+      </li><li>
+          <a href="../MathNet.Numerics.Interpolation.Algorithms/index.htm">MathNet.Numerics.Interpolation.Algorithms</a>
+      </li><li>
+          <a href="../MathNet.Numerics.LinearAlgebra/index.htm">MathNet.Numerics.LinearAlgebra</a>
+      </li><li>
+          <a href="../MathNet.Numerics.RandomSources/index.htm">MathNet.Numerics.RandomSources</a>
+      </li><li>
+          <a href="../MathNet.Numerics.Statistics/index.htm">MathNet.Numerics.Statistics</a>
+      </li><li>
+          <a href="../MathNet.Numerics.Transformations/index.htm">MathNet.Numerics.Transformations</a>
+      </li>
+		</ul>
+	</div>
+</div><div id="types">
+	<h2 class="fixed">Types</h2>
+	<div class="scroll">
+		<ul><li>
+            <a href="../MathNet.Numerics/Collection.htm">Collection</a>
+        </li><li>
+            <a href="../MathNet.Numerics/Combinatorics.htm">Combinatorics</a>
+        </li><li>
+            <a href="../MathNet.Numerics/Complex.htm">Complex</a>
+        </li><li>
+            <a href="../MathNet.Numerics/Constants.htm">Constants</a>
+        </li><li>
+            <a href="../MathNet.Numerics/Fn.htm">Fn</a>
+        </li><li>
+            <a href="../MathNet.Numerics/IRealFunction.htm">IRealFunction</a>
+        </li><li>
+            <a href="../MathNet.Numerics/ISet`1.htm" class="current">ISet&lt;T&gt;</a>
+        </li><li>
+            <a href="../MathNet.Numerics/Natural.htm">Natural</a>
+        </li><li>
+            <a href="../MathNet.Numerics/Number.htm">Number</a>
+        </li><li>
+            <a href="../MathNet.Numerics/Polynomial.htm">Polynomial</a>
+        </li><li>
+            <a href="../MathNet.Numerics/Quaternion.htm">Quaternion</a>
+        </li><li>
+            <a href="../MathNet.Numerics/Rational.htm">Rational</a>
+        </li><li>
+            <a href="../MathNet.Numerics/Ratios.htm">Ratios</a>
+        </li><li>
+            <a href="../MathNet.Numerics/ReadOnlySet`1.htm">ReadOnlySet&lt;T&gt;</a>
+        </li><li>
+            <a href="../MathNet.Numerics/SampleAlteredEventArgs.htm">SampleAlteredEventArgs</a>
+        </li><li>
+            <a href="../MathNet.Numerics/SampleList.htm">SampleList</a>
+        </li><li>
+            <a href="../MathNet.Numerics/Set`1.htm">Set&lt;T&gt;</a>
+        </li><li>
+            <a href="../MathNet.Numerics/SetChangedEventArgs`1.htm">SetChangedEventArgs&lt;T&gt;</a>
+        </li><li>
+            <a href="../MathNet.Numerics/SetElementOperation.htm">SetElementOperation</a>
+        </li><li>
+            <a href="../MathNet.Numerics/SiConstants.htm">SiConstants</a>
+        </li><li>
+            <a href="../MathNet.Numerics/SiPrefixes.htm">SiPrefixes</a>
+        </li><li>
+            <a href="../MathNet.Numerics/Sorting.htm">Sorting</a>
+        </li><li>
+            <a href="../MathNet.Numerics/Trig.htm">Trig</a>
+        </li><li>
+            <a href="../MathNet.Numerics/Tuple`2.htm">Tuple&lt;TFirst, TSecond&gt;</a>
+        </li>
+		</ul>
+	</div>
+</div>
+    <div class="header">
+		<p class="class"><strong>Type</strong> ISet&lt;T&gt;</p>
+		<p><strong>Namespace</strong> MathNet.Numerics</p><p><strong>Interfaces</strong> <span title="System.Collections.Generic.IList<T>">IList&lt;T&gt;</span></p>
+	</div>
+    <div class="sub-header">
+
+
+			<h3 class="section">Methods</h3>
+			<ul><li><a href="#AddDistinct" class="type">AddDistinct</a></li><li><a href="#AddRange" class="type">AddRange</a></li><li><a href="#AddRangeDistinct" class="type">AddRangeDistinct</a></li><li><a href="#ConvertAll``1" class="type">ConvertAll&lt;TOutput&gt;</a></li><li><a href="#Exists" class="type">Exists</a></li><li><a href="#Exists" class="type">Exists</a></li><li><a href="#Find" class="type">Find</a></li><li><a href="#FindAll" class="type">FindAll</a></li><li><a href="#FindIndex" class="type">FindIndex</a></li><li><a href="#FindIndex" class="type">FindIndex</a></li><li><a href="#FindIndex" class="type">FindIndex</a></li><li><a href="#FindLast" class="type">FindLast</a></li><li><a href="#FindLastIndex" class="type">FindLastIndex</a></li><li><a href="#FindLastIndex" class="type">FindLastIndex</a></li><li><a href="#FindLastIndex" class="type">FindLastIndex</a></li><li><a href="#ForEach" class="type">ForEach</a></li><li><a href="#HasEqualElements" class="type">HasEqualElements</a></li><li><a href="#IsSubset" class="type">IsSubset</a></li><li><a href="#IsSuperset" class="type">IsSuperset</a></li><li><a href="#LastIndexOf" class="type">LastIndexOf</a></li><li><a href="#RemoveAll" class="type">RemoveAll</a></li><li><a href="#RemoveDuplicates" class="type">RemoveDuplicates</a></li><li><a href="#Sort" class="type">Sort</a></li><li><a href="#Sort" class="type">Sort</a></li><li><a href="#ToArray" class="type">ToArray</a></li><li><a href="#TrueForAll" class="type">TrueForAll</a></li>
+			</ul>
+
+
+	</div>
+
+
+	<h3 class="section">Public instance methods</h3>
+<div id="AddDistinct" class="method">
+		<h4>void <strong>AddDistinct</strong>(T item)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td><code><span title="MathNet.Numerics.T">T</span></code> item</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="AddRange" class="method">
+		<h4>void <strong>AddRange</strong>(IEnumerable&lt;T&gt; range)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td><code><span title="System.Collections.Generic.IEnumerable<T>">IEnumerable&lt;T&gt;</span></code> range</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="AddRangeDistinct" class="method">
+		<h4>void <strong>AddRangeDistinct</strong>(IEnumerable&lt;T&gt; range)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td><code><span title="System.Collections.Generic.IEnumerable<T>">IEnumerable&lt;T&gt;</span></code> range</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="ConvertAll``1" class="method">
+		<h4>Set&lt;T&gt; <strong>ConvertAll&lt;TOutput&gt;</strong>(Converter&lt;T, TOutput&gt; convert)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics/Set`1.htm">Set&lt;T&gt;</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.Converter<T, TOutput>">Converter&lt;T, TOutput&gt;</span></code> convert</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Exists" class="method">
+		<h4>bool <strong>Exists</strong>(Predicate&lt;T&gt; match)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.bool">bool</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.Predicate<T>">Predicate&lt;T&gt;</span></code> match</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Exists" class="method">
+		<h4>bool <strong>Exists</strong>(Predicate&lt;T&gt; match, T&amp; foundItem)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.bool">bool</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.Predicate<T>">Predicate&lt;T&gt;</span></code> match</td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="MathNet.Numerics.T&">T&amp;</span></code> foundItem</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Find" class="method">
+		<h4>T <strong>Find</strong>(Predicate&lt;T&gt; match)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="MathNet.Numerics.T">T</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.Predicate<T>">Predicate&lt;T&gt;</span></code> match</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="FindAll" class="method">
+		<h4>Set&lt;T&gt; <strong>FindAll</strong>(Predicate&lt;T&gt; match)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics/Set`1.htm">Set&lt;T&gt;</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.Predicate<T>">Predicate&lt;T&gt;</span></code> match</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="FindIndex" class="method">
+		<h4>int <strong>FindIndex</strong>(int startIndex, Predicate&lt;T&gt; match)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.int">int</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.int">int</span></code> startIndex</td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.Predicate<T>">Predicate&lt;T&gt;</span></code> match</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="FindIndex" class="method">
+		<h4>int <strong>FindIndex</strong>(Predicate&lt;T&gt; match)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.int">int</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.Predicate<T>">Predicate&lt;T&gt;</span></code> match</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="FindIndex" class="method">
+		<h4>int <strong>FindIndex</strong>(int startIndex, int count, Predicate&lt;T&gt; match)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.int">int</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.int">int</span></code> startIndex</td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.int">int</span></code> count</td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.Predicate<T>">Predicate&lt;T&gt;</span></code> match</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="FindLast" class="method">
+		<h4>T <strong>FindLast</strong>(Predicate&lt;T&gt; match)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="MathNet.Numerics.T">T</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.Predicate<T>">Predicate&lt;T&gt;</span></code> match</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="FindLastIndex" class="method">
+		<h4>int <strong>FindLastIndex</strong>(int startIndex, Predicate&lt;T&gt; match)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.int">int</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.int">int</span></code> startIndex</td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.Predicate<T>">Predicate&lt;T&gt;</span></code> match</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="FindLastIndex" class="method">
+		<h4>int <strong>FindLastIndex</strong>(Predicate&lt;T&gt; match)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.int">int</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.Predicate<T>">Predicate&lt;T&gt;</span></code> match</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="FindLastIndex" class="method">
+		<h4>int <strong>FindLastIndex</strong>(int startIndex, int count, Predicate&lt;T&gt; match)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.int">int</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.int">int</span></code> startIndex</td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.int">int</span></code> count</td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.Predicate<T>">Predicate&lt;T&gt;</span></code> match</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="ForEach" class="method">
+		<h4>void <strong>ForEach</strong>(Action&lt;T&gt; action)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td><code><span title="System.Action<T>">Action&lt;T&gt;</span></code> action</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="HasEqualElements" class="method">
+		<h4>bool <strong>HasEqualElements</strong>(IEnumerable&lt;T&gt; c)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.bool">bool</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.Collections.Generic.IEnumerable<T>">IEnumerable&lt;T&gt;</span></code> c</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="IsSubset" class="method">
+		<h4>bool <strong>IsSubset</strong>(IEnumerable&lt;T&gt; c)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.bool">bool</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.Collections.Generic.IEnumerable<T>">IEnumerable&lt;T&gt;</span></code> c</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="IsSuperset" class="method">
+		<h4>bool <strong>IsSuperset</strong>(IEnumerable&lt;T&gt; c)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.bool">bool</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.Collections.Generic.IEnumerable<T>">IEnumerable&lt;T&gt;</span></code> c</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="LastIndexOf" class="method">
+		<h4>int <strong>LastIndexOf</strong>(T item)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.int">int</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="MathNet.Numerics.T">T</span></code> item</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="RemoveAll" class="method">
+		<h4>int <strong>RemoveAll</strong>(Predicate&lt;T&gt; match)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.int">int</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.Predicate<T>">Predicate&lt;T&gt;</span></code> match</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="RemoveDuplicates" class="method">
+		<h4>void <strong>RemoveDuplicates</strong>()</h4>
+		<div class="content">Remove al duplicate items from this set.
+
+
+		</div>
+	</div><div id="Sort" class="method">
+		<h4>void <strong>Sort</strong>(IComparer&lt;T&gt; comparer)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td><code><span title="System.Collections.Generic.IComparer<T>">IComparer&lt;T&gt;</span></code> comparer</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Sort" class="method">
+		<h4>void <strong>Sort</strong>(int index, int count, IComparer&lt;T&gt; comparer)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td><code><span title="System.int">int</span></code> index</td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.int">int</span></code> count</td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.Collections.Generic.IComparer<T>">IComparer&lt;T&gt;</span></code> comparer</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="ToArray" class="method">
+		<h4>T[] <strong>ToArray</strong>()</h4>
+		<div class="content">Create an array with all elements of this set.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="MathNet.Numerics.T[]">T[]</span></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="TrueForAll" class="method">
+		<h4>bool <strong>TrueForAll</strong>(Predicate&lt;T&gt; match)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.bool">bool</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.Predicate<T>">Predicate&lt;T&gt;</span></code> match</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+
+<div id="footer">
+  <p>Based on v2008.8.16.470 of Math.NET Iridium: Scientific Numerical Library (Math.NET)</p>
+  <p>Generated by <a href="http://docu.jagregory.com">docu</a></p>
+</div>
+  </body>
+</html>

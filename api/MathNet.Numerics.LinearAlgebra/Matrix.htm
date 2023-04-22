@@ -1,0 +1,1207 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <title>Matrix - Math.NET Documentation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+    <link type="text/css" rel="stylesheet" href="../main.css"/>
+  </head>
+  <body><div id="namespaces">
+	<h2 class="fixed">Namespaces</h2>
+	<div class="scroll">
+		<ul><li>
+          <a href="../MathNet.Numerics/index.htm">MathNet.Numerics</a>
+      </li><li>
+          <a href="../MathNet.Numerics.Distributions/index.htm">MathNet.Numerics.Distributions</a>
+      </li><li>
+          <a href="../MathNet.Numerics.Interpolation/index.htm">MathNet.Numerics.Interpolation</a>
+      </li><li>
+          <a href="../MathNet.Numerics.Interpolation.Algorithms/index.htm">MathNet.Numerics.Interpolation.Algorithms</a>
+      </li><li>
+          <a href="../MathNet.Numerics.LinearAlgebra/index.htm" class="current">MathNet.Numerics.LinearAlgebra</a>
+      </li><li>
+          <a href="../MathNet.Numerics.RandomSources/index.htm">MathNet.Numerics.RandomSources</a>
+      </li><li>
+          <a href="../MathNet.Numerics.Statistics/index.htm">MathNet.Numerics.Statistics</a>
+      </li><li>
+          <a href="../MathNet.Numerics.Transformations/index.htm">MathNet.Numerics.Transformations</a>
+      </li>
+		</ul>
+	</div>
+</div><div id="types">
+	<h2 class="fixed">Types</h2>
+	<div class="scroll">
+		<ul><li>
+            <a href="../MathNet.Numerics.LinearAlgebra/CholeskyDecomposition.htm">CholeskyDecomposition</a>
+        </li><li>
+            <a href="../MathNet.Numerics.LinearAlgebra/ComplexMatrix.htm">ComplexMatrix</a>
+        </li><li>
+            <a href="../MathNet.Numerics.LinearAlgebra/ComplexVector.htm">ComplexVector</a>
+        </li><li>
+            <a href="../MathNet.Numerics.LinearAlgebra/EigenvalueDecomposition.htm">EigenvalueDecomposition</a>
+        </li><li>
+            <a href="../MathNet.Numerics.LinearAlgebra/IMatrix`1.htm">IMatrix&lt;T&gt;</a>
+        </li><li>
+            <a href="../MathNet.Numerics.LinearAlgebra/IVector`1.htm">IVector&lt;T&gt;</a>
+        </li><li>
+            <a href="../MathNet.Numerics.LinearAlgebra/LUDecomposition.htm">LUDecomposition</a>
+        </li><li>
+            <a href="../MathNet.Numerics.LinearAlgebra/Matrix.htm" class="current">Matrix</a>
+        </li><li>
+            <a href="../MathNet.Numerics.LinearAlgebra/QRDecomposition.htm">QRDecomposition</a>
+        </li><li>
+            <a href="../MathNet.Numerics.LinearAlgebra/SingularValueDecomposition.htm">SingularValueDecomposition</a>
+        </li><li>
+            <a href="../MathNet.Numerics.LinearAlgebra/Vector.htm">Vector</a>
+        </li>
+		</ul>
+	</div>
+</div>
+    <div class="header">
+		<p class="class"><strong>Type</strong> Matrix</p>
+		<p><strong>Namespace</strong> MathNet.Numerics.LinearAlgebra</p><p><strong>Interfaces</strong> <a href="../MathNet.Numerics.LinearAlgebra/IMatrix`1.htm">IMatrix&lt;T&gt;</a>, <span title="System.ICloneable">ICloneable</span></p>
+	</div>
+    <div class="sub-header">
+
+
+			<h3 class="section">Methods</h3>
+			<ul><li><a href="#Add" class="type">Add</a></li><li><a href="#AlmostEqual" class="type">AlmostEqual</a></li><li><a href="#AlmostEqual" class="type">AlmostEqual</a></li><li><a href="#ArrayDivide" class="type">ArrayDivide</a></li><li><a href="#ArrayDivide" class="type">ArrayDivide</a></li><li><a href="#ArrayMap" class="type">ArrayMap</a></li><li><a href="#ArrayMap" class="type">ArrayMap</a></li><li><a href="#ArrayMultiply" class="type">ArrayMultiply</a></li><li><a href="#ArrayMultiply" class="type">ArrayMultiply</a></li><li><a href="#ArrayPower" class="type">ArrayPower</a></li><li><a href="#ArrayPower" class="type">ArrayPower</a></li><li><a href="#chol" class="type">chol</a></li><li><a href="#Clone" class="type">Clone</a></li><li><a href="#CloneMatrixData" class="type">CloneMatrixData</a></li><li><a href="#Condition" class="type">Condition</a></li><li><a href="#CopyToArray" class="type">CopyToArray</a></li><li><a href="#CopyToJaggedArray" class="type">CopyToJaggedArray</a></li><li><a href="#Create" class="type">Create</a></li><li><a href="#Create" class="type">Create</a></li><li><a href="#CreateFromColumns" class="type">CreateFromColumns</a></li><li><a href="#CreateFromRows" class="type">CreateFromRows</a></li><li><a href="#CreateMatrixData" class="type">CreateMatrixData</a></li><li><a href="#Determinant" class="type">Determinant</a></li><li><a href="#Diagonal" class="type">Diagonal</a></li><li><a href="#Diagonal" class="type">Diagonal</a></li><li><a href="#Eigen" class="type">Eigen</a></li><li><a href="#Equals" class="type">Equals</a></li><li><a href="#GetArray" class="type">GetArray</a></li><li><a href="#GetColumnVector" class="type">GetColumnVector</a></li><li><a href="#GetHashCode" class="type">GetHashCode</a></li><li><a href="#GetMatrix" class="type">GetMatrix</a></li><li><a href="#GetMatrix" class="type">GetMatrix</a></li><li><a href="#GetMatrix" class="type">GetMatrix</a></li><li><a href="#GetMatrix" class="type">GetMatrix</a></li><li><a href="#GetRowColumnCount" class="type">GetRowColumnCount</a></li><li><a href="#GetRowVector" class="type">GetRowVector</a></li><li><a href="#GetType" class="type">GetType</a></li><li><a href="#Identity" class="type">Identity</a></li><li><a href="#Inverse" class="type">Inverse</a></li><li><a href="#KroneckerProduct" class="type">KroneckerProduct</a></li><li><a href="#LUD" class="type">LUD</a></li><li><a href="#Multiply" class="type">Multiply</a></li><li><a href="#Multiply" class="type">Multiply</a></li><li><a href="#Multiply" class="type">Multiply</a></li><li><a href="#Norm1" class="type">Norm1</a></li><li><a href="#Norm2" class="type">Norm2</a></li><li><a href="#NormF" class="type">NormF</a></li><li><a href="#NormInf" class="type">NormInf</a></li><li><a href="#Ones" class="type">Ones</a></li><li><a href="#QRD" class="type">QRD</a></li><li><a href="#Random" class="type">Random</a></li><li><a href="#Random" class="type">Random</a></li><li><a href="#Rank" class="type">Rank</a></li><li><a href="#ResetComputations" class="type">ResetComputations</a></li><li><a href="#SetColumnVector" class="type">SetColumnVector</a></li><li><a href="#SetMatrix" class="type">SetMatrix</a></li><li><a href="#SetMatrix" class="type">SetMatrix</a></li><li><a href="#SetMatrix" class="type">SetMatrix</a></li><li><a href="#SetMatrix" class="type">SetMatrix</a></li><li><a href="#SetRowVector" class="type">SetRowVector</a></li><li><a href="#Solve" class="type">Solve</a></li><li><a href="#SolveRobust" class="type">SolveRobust</a></li><li><a href="#SolveTranspose" class="type">SolveTranspose</a></li><li><a href="#Subtract" class="type">Subtract</a></li><li><a href="#SVD" class="type">SVD</a></li><li><a href="#TensorMultiply" class="type">TensorMultiply</a></li><li><a href="#ToString" class="type">ToString</a></li><li><a href="#Trace" class="type">Trace</a></li><li><a href="#Transpose" class="type">Transpose</a></li><li><a href="#Transpose" class="type">Transpose</a></li><li><a href="#UnaryMinus" class="type">UnaryMinus</a></li><li><a href="#Zeros" class="type">Zeros</a></li>
+			</ul>
+
+			<h3 class="section">Properties</h3>
+			<ul><li><a href="#CholeskyDecomposition" class="type">CholeskyDecomposition</a></li><li><a href="#ColumnCount" class="type">ColumnCount</a></li><li><a href="#EigenvalueDecomposition" class="type">EigenvalueDecomposition</a></li><li><a href="#EigenValues" class="type">EigenValues</a></li><li><a href="#EigenVectors" class="type">EigenVectors</a></li><li><a href="#Item" class="type">Item</a></li><li><a href="#LUDecomposition" class="type">LUDecomposition</a></li><li><a href="#QRDecomposition" class="type">QRDecomposition</a></li><li><a href="#RowCount" class="type">RowCount</a></li><li><a href="#SingularValueDecomposition" class="type">SingularValueDecomposition</a></li>
+			</ul>
+
+	</div>
+
+
+	<h3 class="section">Public instance methods</h3>
+<div id="Add" class="method">
+		<h4>void <strong>Add</strong>(IMatrix&lt;T&gt; m)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td><code><a href="../MathNet.Numerics.LinearAlgebra/IMatrix`1.htm">IMatrix&lt;T&gt;</a></code> m</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="ArrayDivide" class="method">
+		<h4>void <strong>ArrayDivide</strong>(IMatrix&lt;T&gt; m)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td><code><a href="../MathNet.Numerics.LinearAlgebra/IMatrix`1.htm">IMatrix&lt;T&gt;</a></code> m</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="ArrayMap" class="method">
+		<h4>void <strong>ArrayMap</strong>(Converter&lt;double, double&gt; mapping)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td><code><span title="System.Converter<double, double>">Converter&lt;double, double&gt;</span></code> mapping</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="ArrayMultiply" class="method">
+		<h4>void <strong>ArrayMultiply</strong>(IMatrix&lt;T&gt; m)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td><code><a href="../MathNet.Numerics.LinearAlgebra/IMatrix`1.htm">IMatrix&lt;T&gt;</a></code> m</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="ArrayPower" class="method">
+		<h4>void <strong>ArrayPower</strong>(double exponent)</h4>
+		<div class="content">In place element-by-element raise to power, <code>A[i,j] = A[i,j]^exponent</code>.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td><code><span title="System.double">double</span></code> exponent</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="chol" class="method">
+		<h4>CholeskyDecomposition <strong>chol</strong>()</h4>
+		<div class="content">Cholesky Decomposition
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/CholeskyDecomposition.htm">CholeskyDecomposition</a></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Clone" class="method">
+		<h4>Matrix <strong>Clone</strong>()</h4>
+		<div class="content">Returns a deep copy of this instance.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/Matrix.htm">Matrix</a></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Condition" class="method">
+		<h4>double <strong>Condition</strong>()</h4>
+		<div class="content">Matrix condition (2 norm)
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.double">double</span></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="CopyToArray" class="method">
+		<h4>Double[,] <strong>CopyToArray</strong>()</h4>
+		<div class="content">Copies the internal data structure to a 2-dimensional array.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.Double[,]">Double[,]</span></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="CopyToJaggedArray" class="method">
+		<h4>Double[][] <strong>CopyToJaggedArray</strong>()</h4>
+		<div class="content">Copies the internal data structure to a jagged rectangular array.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.Double[][]">Double[][]</span></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Determinant" class="method">
+		<h4>double <strong>Determinant</strong>()</h4>
+		<div class="content">Matrix determinant
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.double">double</span></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Eigen" class="method">
+		<h4>EigenvalueDecomposition <strong>Eigen</strong>()</h4>
+		<div class="content">Eigenvalue Decomposition
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/EigenvalueDecomposition.htm">EigenvalueDecomposition</a></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Equals" class="method">
+		<h4>bool <strong>Equals</strong>(object obj)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.bool">bool</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.object">object</span></code> obj</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="GetArray" class="method">
+		<h4>Double[][] <strong>GetArray</strong>()</h4>
+		<div class="content">Returns the internal data structure array.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.Double[][]">Double[][]</span></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="GetColumnVector" class="method">
+		<h4>Vector <strong>GetColumnVector</strong>(int columnIndex)</h4>
+		<div class="content">Copies a specified column of this matrix to a new vector.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/Vector.htm">Vector</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.int">int</span></code> columnIndex</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="GetHashCode" class="method">
+		<h4>int <strong>GetHashCode</strong>()</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.int">int</span></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="GetMatrix" class="method">
+		<h4>Matrix <strong>GetMatrix</strong>(int i0, int i1, int j0, int j1)</h4>
+		<div class="content">Gets a submatrix.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/Matrix.htm">Matrix</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.int">int</span></code> i0</td>
+					<td>First row index.</td>
+				</tr><tr>
+					<td><code><span title="System.int">int</span></code> i1</td>
+					<td>Last row index (inclusive).</td>
+				</tr><tr>
+					<td><code><span title="System.int">int</span></code> j0</td>
+					<td>First column index.</td>
+				</tr><tr>
+					<td><code><span title="System.int">int</span></code> j1</td>
+					<td>Last column index (inclusive).</td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="GetMatrix" class="method">
+		<h4>Matrix <strong>GetMatrix</strong>(Int32[] r, Int32[] c)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/Matrix.htm">Matrix</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.Int32[]">Int32[]</span></code> r</td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.Int32[]">Int32[]</span></code> c</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="GetMatrix" class="method">
+		<h4>Matrix <strong>GetMatrix</strong>(int i0, int i1, Int32[] c)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/Matrix.htm">Matrix</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.int">int</span></code> i0</td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.int">int</span></code> i1</td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.Int32[]">Int32[]</span></code> c</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="GetMatrix" class="method">
+		<h4>Matrix <strong>GetMatrix</strong>(Int32[] r, int j0, int j1)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/Matrix.htm">Matrix</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.Int32[]">Int32[]</span></code> r</td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.int">int</span></code> j0</td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.int">int</span></code> j1</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="GetRowVector" class="method">
+		<h4>Vector <strong>GetRowVector</strong>(int rowIndex)</h4>
+		<div class="content">Copies a specified row of this matrix to a new vector.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/Vector.htm">Vector</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.int">int</span></code> rowIndex</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="GetType" class="method">
+		<h4>Type <strong>GetType</strong>()</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.Type">Type</span></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Inverse" class="method">
+		<h4>Matrix <strong>Inverse</strong>()</h4>
+		<div class="content">Matrix inverse or pseudoinverse.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/Matrix.htm">Matrix</a></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="LUD" class="method">
+		<h4>LUDecomposition <strong>LUD</strong>()</h4>
+		<div class="content">LU Decomposition
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/LUDecomposition.htm">LUDecomposition</a></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Multiply" class="method">
+		<h4>void <strong>Multiply</strong>(double s)</h4>
+		<div class="content">Multiplies in place this <code>Matrix</code> by a scalar.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td><code><span title="System.double">double</span></code> s</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Multiply" class="method">
+		<h4>Matrix <strong>Multiply</strong>(Matrix B)</h4>
+		<div class="content">Linear algebraic matrix multiplication, A * B
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/Matrix.htm">Matrix</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics.LinearAlgebra/Matrix.htm">Matrix</a></code> B</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Multiply" class="method">
+		<h4>void <strong>Multiply</strong>(Double[] diagonal)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td><code><span title="System.Double[]">Double[]</span></code> diagonal</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Norm1" class="method">
+		<h4>double <strong>Norm1</strong>()</h4>
+		<div class="content">One norm
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.double">double</span></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Norm2" class="method">
+		<h4>double <strong>Norm2</strong>()</h4>
+		<div class="content">Two norm
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.double">double</span></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="NormF" class="method">
+		<h4>double <strong>NormF</strong>()</h4>
+		<div class="content">Frobenius norm
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.double">double</span></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="NormInf" class="method">
+		<h4>double <strong>NormInf</strong>()</h4>
+		<div class="content">Infinity norm
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.double">double</span></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="QRD" class="method">
+		<h4>QRDecomposition <strong>QRD</strong>()</h4>
+		<div class="content">QR Decomposition
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/QRDecomposition.htm">QRDecomposition</a></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Rank" class="method">
+		<h4>int <strong>Rank</strong>()</h4>
+		<div class="content">Matrix rank
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.int">int</span></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="ResetComputations" class="method">
+		<h4>void <strong>ResetComputations</strong>()</h4>
+		<div class="content">Reset various internal computations.
+Call this method after you made changes directly
+on the the internal double[][] data structure.
+
+
+		</div>
+	</div><div id="SetColumnVector" class="method">
+		<h4>void <strong>SetColumnVector</strong>(IVector&lt;T&gt; columnVector, int columnIndex)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td><code><a href="../MathNet.Numerics.LinearAlgebra/IVector`1.htm">IVector&lt;T&gt;</a></code> columnVector</td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.int">int</span></code> columnIndex</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="SetMatrix" class="method">
+		<h4>void <strong>SetMatrix</strong>(Int32[] r, Int32[] c, IMatrix&lt;T&gt; X)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td><code><span title="System.Int32[]">Int32[]</span></code> r</td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.Int32[]">Int32[]</span></code> c</td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics.LinearAlgebra/IMatrix`1.htm">IMatrix&lt;T&gt;</a></code> X</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="SetMatrix" class="method">
+		<h4>void <strong>SetMatrix</strong>(int i0, int i1, Int32[] c, IMatrix&lt;T&gt; X)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td><code><span title="System.int">int</span></code> i0</td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.int">int</span></code> i1</td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.Int32[]">Int32[]</span></code> c</td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics.LinearAlgebra/IMatrix`1.htm">IMatrix&lt;T&gt;</a></code> X</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="SetMatrix" class="method">
+		<h4>void <strong>SetMatrix</strong>(int i0, int i1, int j0, int j1, IMatrix&lt;T&gt; X)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td><code><span title="System.int">int</span></code> i0</td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.int">int</span></code> i1</td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.int">int</span></code> j0</td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.int">int</span></code> j1</td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics.LinearAlgebra/IMatrix`1.htm">IMatrix&lt;T&gt;</a></code> X</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="SetMatrix" class="method">
+		<h4>void <strong>SetMatrix</strong>(Int32[] r, int j0, int j1, IMatrix&lt;T&gt; X)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td><code><span title="System.Int32[]">Int32[]</span></code> r</td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.int">int</span></code> j0</td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.int">int</span></code> j1</td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics.LinearAlgebra/IMatrix`1.htm">IMatrix&lt;T&gt;</a></code> X</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="SetRowVector" class="method">
+		<h4>void <strong>SetRowVector</strong>(IVector&lt;T&gt; rowVector, int rowIndex)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td><code><a href="../MathNet.Numerics.LinearAlgebra/IVector`1.htm">IVector&lt;T&gt;</a></code> rowVector</td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.int">int</span></code> rowIndex</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Solve" class="method">
+		<h4>Matrix <strong>Solve</strong>(Matrix B)</h4>
+		<div class="content">Solve A*X = B against a Least Square (L2) criterion.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/Matrix.htm">Matrix</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics.LinearAlgebra/Matrix.htm">Matrix</a></code> B</td>
+					<td>right hand side</td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="SolveRobust" class="method">
+		<h4>Matrix <strong>SolveRobust</strong>(Matrix B)</h4>
+		<div class="content">Solve A*X = B against a Least Absolute Deviation (L1) criterion.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/Matrix.htm">Matrix</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics.LinearAlgebra/Matrix.htm">Matrix</a></code> B</td>
+					<td>right hand side</td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="SolveTranspose" class="method">
+		<h4>Matrix <strong>SolveTranspose</strong>(Matrix B)</h4>
+		<div class="content">Solve X*A = B, which is also A'*X' = B'
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/Matrix.htm">Matrix</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics.LinearAlgebra/Matrix.htm">Matrix</a></code> B</td>
+					<td>right hand side</td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Subtract" class="method">
+		<h4>void <strong>Subtract</strong>(IMatrix&lt;T&gt; m)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td><code><a href="../MathNet.Numerics.LinearAlgebra/IMatrix`1.htm">IMatrix&lt;T&gt;</a></code> m</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="SVD" class="method">
+		<h4>SingularValueDecomposition <strong>SVD</strong>()</h4>
+		<div class="content">Singular Value Decomposition
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/SingularValueDecomposition.htm">SingularValueDecomposition</a></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="TensorMultiply" class="method">
+		<h4>Matrix <strong>TensorMultiply</strong>(Matrix B)</h4>
+		<div class="content">Tensor Product (Kronecker) of this and another matrix.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/Matrix.htm">Matrix</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics.LinearAlgebra/Matrix.htm">Matrix</a></code> B</td>
+					<td>The matrix to operate on.</td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="ToString" class="method">
+		<h4>string <strong>ToString</strong>()</h4>
+		<div class="content">Formats this matrix to a human-readable string
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.string">string</span></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Trace" class="method">
+		<h4>double <strong>Trace</strong>()</h4>
+		<div class="content">Matrix trace.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.double">double</span></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Transpose" class="method">
+		<h4>void <strong>Transpose</strong>()</h4>
+		<div class="content">In place transposition of this <code>Matrix</code>.<blockquote>
+  In case of non-quadratic matrices, this operation replaces the
+internal data structure. Hence, if you hold a reference to it
+for faster access, you'll need to get a new reference to it
+using <a href="">GetArray</a>.
+</blockquote>
+
+
+		</div>
+	</div><div id="UnaryMinus" class="method">
+		<h4>void <strong>UnaryMinus</strong>()</h4>
+		<div class="content">In place unary minus of the <code>Matrix</code>.
+
+
+		</div>
+	</div>
+
+	<h3 class="section">Public static methods</h3>
+<div id="AlmostEqual" class="method">
+		<h4>bool <strong>AlmostEqual</strong>(Matrix X, Matrix Y, double relativeAccuracy)</h4>
+		<div class="content">Returns true if two matrices are almost equal (with some given relative accuracy).
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.bool">bool</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics.LinearAlgebra/Matrix.htm">Matrix</a></code> X</td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics.LinearAlgebra/Matrix.htm">Matrix</a></code> Y</td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.double">double</span></code> relativeAccuracy</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="AlmostEqual" class="method">
+		<h4>bool <strong>AlmostEqual</strong>(Matrix X, Matrix Y)</h4>
+		<div class="content">Returns true if two matrices are almost equal.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.bool">bool</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics.LinearAlgebra/Matrix.htm">Matrix</a></code> X</td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics.LinearAlgebra/Matrix.htm">Matrix</a></code> Y</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="ArrayDivide" class="method">
+		<h4>Matrix <strong>ArrayDivide</strong>(IMatrix&lt;T&gt; m1, IMatrix&lt;T&gt; m2)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/Matrix.htm">Matrix</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics.LinearAlgebra/IMatrix`1.htm">IMatrix&lt;T&gt;</a></code> m1</td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics.LinearAlgebra/IMatrix`1.htm">IMatrix&lt;T&gt;</a></code> m2</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="ArrayMap" class="method">
+		<h4>Matrix <strong>ArrayMap</strong>(IMatrix&lt;T&gt; m, Converter&lt;double, double&gt; mapping)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/Matrix.htm">Matrix</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics.LinearAlgebra/IMatrix`1.htm">IMatrix&lt;T&gt;</a></code> m</td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.Converter<double, double>">Converter&lt;double, double&gt;</span></code> mapping</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="ArrayMultiply" class="method">
+		<h4>Matrix <strong>ArrayMultiply</strong>(IMatrix&lt;T&gt; m1, IMatrix&lt;T&gt; m2)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/Matrix.htm">Matrix</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics.LinearAlgebra/IMatrix`1.htm">IMatrix&lt;T&gt;</a></code> m1</td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics.LinearAlgebra/IMatrix`1.htm">IMatrix&lt;T&gt;</a></code> m2</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="ArrayPower" class="method">
+		<h4>Matrix <strong>ArrayPower</strong>(IMatrix&lt;T&gt; m, double exponent)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/Matrix.htm">Matrix</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics.LinearAlgebra/IMatrix`1.htm">IMatrix&lt;T&gt;</a></code> m</td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.double">double</span></code> exponent</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="CloneMatrixData" class="method">
+		<h4>Double[][] <strong>CloneMatrixData</strong>(Double[][] data)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.Double[][]">Double[][]</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.Double[][]">Double[][]</span></code> data</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Create" class="method">
+		<h4>Matrix <strong>Create</strong>(Double[,] A)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/Matrix.htm">Matrix</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.Double[,]">Double[,]</span></code> A</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Create" class="method">
+		<h4>Matrix <strong>Create</strong>(Double[][] A)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/Matrix.htm">Matrix</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.Double[][]">Double[][]</span></code> A</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="CreateFromColumns" class="method">
+		<h4>Matrix <strong>CreateFromColumns</strong>(IList&lt;Vector&gt; columnVectors)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/Matrix.htm">Matrix</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.Collections.Generic.IList<Vector>">IList&lt;Vector&gt;</span></code> columnVectors</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="CreateFromRows" class="method">
+		<h4>Matrix <strong>CreateFromRows</strong>(IList&lt;Vector&gt; rowVectors)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/Matrix.htm">Matrix</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.Collections.Generic.IList<Vector>">IList&lt;Vector&gt;</span></code> rowVectors</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="CreateMatrixData" class="method">
+		<h4>Double[][] <strong>CreateMatrixData</strong>(int m, int n)</h4>
+		<div class="content">Create the internal matrix data structure for a matrix of the given size.
+Initializing matrices directly on the internal structure may be faster
+than accessing the cells through the matrix class.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.Double[][]">Double[][]</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.int">int</span></code> m</td>
+					<td>Number of rows.</td>
+				</tr><tr>
+					<td><code><span title="System.int">int</span></code> n</td>
+					<td>Number of columns.</td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Diagonal" class="method">
+		<h4>Matrix <strong>Diagonal</strong>(IVector&lt;T&gt; diagonalVector, int m, int n)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/Matrix.htm">Matrix</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics.LinearAlgebra/IVector`1.htm">IVector&lt;T&gt;</a></code> diagonalVector</td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.int">int</span></code> m</td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.int">int</span></code> n</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Diagonal" class="method">
+		<h4>Matrix <strong>Diagonal</strong>(IVector&lt;T&gt; diagonalVector)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/Matrix.htm">Matrix</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics.LinearAlgebra/IVector`1.htm">IVector&lt;T&gt;</a></code> diagonalVector</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="GetRowColumnCount" class="method">
+		<h4>void <strong>GetRowColumnCount</strong>(Double[][] data, Int32&amp; rows, Int32&amp; columns)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td><code><span title="System.Double[][]">Double[][]</span></code> data</td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.Int32&">Int32&amp;</span></code> rows</td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.Int32&">Int32&amp;</span></code> columns</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Identity" class="method">
+		<h4>Matrix <strong>Identity</strong>(int m, int n)</h4>
+		<div class="content">Generates identity matrix
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/Matrix.htm">Matrix</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.int">int</span></code> m</td>
+					<td>Number of rows.</td>
+				</tr><tr>
+					<td><code><span title="System.int">int</span></code> n</td>
+					<td>Number of columns.</td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="KroneckerProduct" class="method">
+		<h4>Matrix <strong>KroneckerProduct</strong>(Matrix A, Matrix B)</h4>
+		<div class="content">Kronecker Product of two matrices.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/Matrix.htm">Matrix</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics.LinearAlgebra/Matrix.htm">Matrix</a></code> A</td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics.LinearAlgebra/Matrix.htm">Matrix</a></code> B</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Ones" class="method">
+		<h4>Matrix <strong>Ones</strong>(int m)</h4>
+		<div class="content">Generates an m-by-m matrix filled with 1.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/Matrix.htm">Matrix</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.int">int</span></code> m</td>
+					<td>Number of rows = Number of columns</td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Random" class="method">
+		<h4>Matrix <strong>Random</strong>(int m, int n)</h4>
+		<div class="content">Generates matrix with standard-distributed random elements.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/Matrix.htm">Matrix</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.int">int</span></code> m</td>
+					<td>Number of rows.</td>
+				</tr><tr>
+					<td><code><span title="System.int">int</span></code> n</td>
+					<td>Number of columns.</td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Random" class="method">
+		<h4>Matrix <strong>Random</strong>(int m, int n, IContinuousGenerator randomDistribution)</h4>
+		<div class="content">Generates matrix with random elements.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/Matrix.htm">Matrix</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.int">int</span></code> m</td>
+					<td>Number of rows.</td>
+				</tr><tr>
+					<td><code><span title="System.int">int</span></code> n</td>
+					<td>Number of columns.</td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics.Distributions/IContinuousGenerator.htm">IContinuousGenerator</a></code> randomDistribution</td>
+					<td>Continuous Random Distribution or Source</td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Transpose" class="method">
+		<h4>Matrix <strong>Transpose</strong>(IMatrix&lt;T&gt; m)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/Matrix.htm">Matrix</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics.LinearAlgebra/IMatrix`1.htm">IMatrix&lt;T&gt;</a></code> m</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Zeros" class="method">
+		<h4>Matrix <strong>Zeros</strong>(int m)</h4>
+		<div class="content">Generates an m-by-m matrix filled with 0.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/Matrix.htm">Matrix</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.int">int</span></code> m</td>
+					<td>Number of rows = Number of columns</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+  <h3 class="section">Public properties</h3>
+<div id="CholeskyDecomposition" class="method">
+    <h4>CholeskyDecomposition <strong>CholeskyDecomposition</strong> get; </h4>
+    <div class="content">Cholesky Decomposition
+      <table>
+        <tr>
+          <td>
+            <code>return <a href="../MathNet.Numerics.LinearAlgebra/CholeskyDecomposition.htm">CholeskyDecomposition</a></code>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div><div id="ColumnCount" class="method">
+    <h4>int <strong>ColumnCount</strong> get; </h4>
+    <div class="content">Gets the number of columns.
+      <table>
+        <tr>
+          <td>
+            <code>return <span title="System.int">int</span></code>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div><div id="EigenvalueDecomposition" class="method">
+    <h4>EigenvalueDecomposition <strong>EigenvalueDecomposition</strong> get; </h4>
+    <div class="content">Eigenvalue Decomposition
+      <table>
+        <tr>
+          <td>
+            <code>return <a href="../MathNet.Numerics.LinearAlgebra/EigenvalueDecomposition.htm">EigenvalueDecomposition</a></code>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div><div id="EigenValues" class="method">
+    <h4>ComplexVector <strong>EigenValues</strong> get; </h4>
+    <div class="content">Gets the complex eigen values of this matrix.<blockquote>
+  The eigenvalue decomposition is cached internally..
+</blockquote>
+      <table>
+        <tr>
+          <td>
+            <code>return <a href="../MathNet.Numerics.LinearAlgebra/ComplexVector.htm">ComplexVector</a></code>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div><div id="EigenVectors" class="method">
+    <h4>Matrix <strong>EigenVectors</strong> get; </h4>
+    <div class="content">Gets the complex eigen vectors of this matrix.<blockquote>
+  The eigenvalue decomposition is cached internally.
+</blockquote>
+      <table>
+        <tr>
+          <td>
+            <code>return <a href="../MathNet.Numerics.LinearAlgebra/Matrix.htm">Matrix</a></code>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div><div id="Item" class="method">
+    <h4>double <strong>Item</strong> get; set;</h4>
+    <div class="content">Gets or set the element indexed by <code>(i, j)</code>in the <code>Matrix</code>.
+      <table>
+        <tr>
+          <td>
+            <code>return <span title="System.double">double</span></code>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div><div id="LUDecomposition" class="method">
+    <h4>LUDecomposition <strong>LUDecomposition</strong> get; </h4>
+    <div class="content">LU Decomposition
+      <table>
+        <tr>
+          <td>
+            <code>return <a href="../MathNet.Numerics.LinearAlgebra/LUDecomposition.htm">LUDecomposition</a></code>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div><div id="QRDecomposition" class="method">
+    <h4>QRDecomposition <strong>QRDecomposition</strong> get; </h4>
+    <div class="content">QR Decomposition
+      <table>
+        <tr>
+          <td>
+            <code>return <a href="../MathNet.Numerics.LinearAlgebra/QRDecomposition.htm">QRDecomposition</a></code>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div><div id="RowCount" class="method">
+    <h4>int <strong>RowCount</strong> get; </h4>
+    <div class="content">Gets the number of rows.
+      <table>
+        <tr>
+          <td>
+            <code>return <span title="System.int">int</span></code>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div><div id="SingularValueDecomposition" class="method">
+    <h4>SingularValueDecomposition <strong>SingularValueDecomposition</strong> get; </h4>
+    <div class="content">Singular Value Decomposition
+      <table>
+        <tr>
+          <td>
+            <code>return <a href="../MathNet.Numerics.LinearAlgebra/SingularValueDecomposition.htm">SingularValueDecomposition</a></code>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+<div id="footer">
+  <p>Based on v2008.8.16.470 of Math.NET Iridium: Scientific Numerical Library (Math.NET)</p>
+  <p>Generated by <a href="http://docu.jagregory.com">docu</a></p>
+</div>
+  </body>
+</html>

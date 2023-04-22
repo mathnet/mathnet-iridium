@@ -1,0 +1,697 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <title>ComplexVector - Math.NET Documentation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+    <link type="text/css" rel="stylesheet" href="../main.css"/>
+  </head>
+  <body><div id="namespaces">
+	<h2 class="fixed">Namespaces</h2>
+	<div class="scroll">
+		<ul><li>
+          <a href="../MathNet.Numerics/index.htm">MathNet.Numerics</a>
+      </li><li>
+          <a href="../MathNet.Numerics.Distributions/index.htm">MathNet.Numerics.Distributions</a>
+      </li><li>
+          <a href="../MathNet.Numerics.Interpolation/index.htm">MathNet.Numerics.Interpolation</a>
+      </li><li>
+          <a href="../MathNet.Numerics.Interpolation.Algorithms/index.htm">MathNet.Numerics.Interpolation.Algorithms</a>
+      </li><li>
+          <a href="../MathNet.Numerics.LinearAlgebra/index.htm" class="current">MathNet.Numerics.LinearAlgebra</a>
+      </li><li>
+          <a href="../MathNet.Numerics.RandomSources/index.htm">MathNet.Numerics.RandomSources</a>
+      </li><li>
+          <a href="../MathNet.Numerics.Statistics/index.htm">MathNet.Numerics.Statistics</a>
+      </li><li>
+          <a href="../MathNet.Numerics.Transformations/index.htm">MathNet.Numerics.Transformations</a>
+      </li>
+		</ul>
+	</div>
+</div><div id="types">
+	<h2 class="fixed">Types</h2>
+	<div class="scroll">
+		<ul><li>
+            <a href="../MathNet.Numerics.LinearAlgebra/CholeskyDecomposition.htm">CholeskyDecomposition</a>
+        </li><li>
+            <a href="../MathNet.Numerics.LinearAlgebra/ComplexMatrix.htm">ComplexMatrix</a>
+        </li><li>
+            <a href="../MathNet.Numerics.LinearAlgebra/ComplexVector.htm" class="current">ComplexVector</a>
+        </li><li>
+            <a href="../MathNet.Numerics.LinearAlgebra/EigenvalueDecomposition.htm">EigenvalueDecomposition</a>
+        </li><li>
+            <a href="../MathNet.Numerics.LinearAlgebra/IMatrix`1.htm">IMatrix&lt;T&gt;</a>
+        </li><li>
+            <a href="../MathNet.Numerics.LinearAlgebra/IVector`1.htm">IVector&lt;T&gt;</a>
+        </li><li>
+            <a href="../MathNet.Numerics.LinearAlgebra/LUDecomposition.htm">LUDecomposition</a>
+        </li><li>
+            <a href="../MathNet.Numerics.LinearAlgebra/Matrix.htm">Matrix</a>
+        </li><li>
+            <a href="../MathNet.Numerics.LinearAlgebra/QRDecomposition.htm">QRDecomposition</a>
+        </li><li>
+            <a href="../MathNet.Numerics.LinearAlgebra/SingularValueDecomposition.htm">SingularValueDecomposition</a>
+        </li><li>
+            <a href="../MathNet.Numerics.LinearAlgebra/Vector.htm">Vector</a>
+        </li>
+		</ul>
+	</div>
+</div>
+    <div class="header">
+		<p class="class"><strong>Type</strong> ComplexVector</p>
+		<p><strong>Namespace</strong> MathNet.Numerics.LinearAlgebra</p><p><strong>Interfaces</strong> <a href="../MathNet.Numerics.LinearAlgebra/IVector`1.htm">IVector&lt;T&gt;</a>, <span title="System.Collections.Generic.IList<Complex>">IList&lt;Complex&gt;</span>, <span title="System.ICloneable">ICloneable</span></p>
+	</div>
+    <div class="sub-header">
+
+
+			<h3 class="section">Methods</h3>
+			<ul><li><a href="#Add" class="type">Add</a></li><li><a href="#Add" class="type">Add</a></li><li><a href="#AddInplace" class="type">AddInplace</a></li><li><a href="#AddInplace" class="type">AddInplace</a></li><li><a href="#ArrayDivide" class="type">ArrayDivide</a></li><li><a href="#ArrayDivideInplace" class="type">ArrayDivideInplace</a></li><li><a href="#ArrayMap" class="type">ArrayMap</a></li><li><a href="#ArrayMapInplace" class="type">ArrayMapInplace</a></li><li><a href="#ArrayMultiply" class="type">ArrayMultiply</a></li><li><a href="#ArrayMultiplyInplace" class="type">ArrayMultiplyInplace</a></li><li><a href="#ArrayPower" class="type">ArrayPower</a></li><li><a href="#ArrayPowerInplace" class="type">ArrayPowerInplace</a></li><li><a href="#ArrayProduct" class="type">ArrayProduct</a></li><li><a href="#ArrayQuotient" class="type">ArrayQuotient</a></li><li><a href="#BasisVector" class="type">BasisVector</a></li><li><a href="#Clone" class="type">Clone</a></li><li><a href="#Conjugate" class="type">Conjugate</a></li><li><a href="#ConjugateInplace" class="type">ConjugateInplace</a></li><li><a href="#CopyToArray" class="type">CopyToArray</a></li><li><a href="#Create" class="type">Create</a></li><li><a href="#Create" class="type">Create</a></li><li><a href="#CrossMultiply" class="type">CrossMultiply</a></li><li><a href="#CrossProduct" class="type">CrossProduct</a></li><li><a href="#DyadicProduct" class="type">DyadicProduct</a></li><li><a href="#Equals" class="type">Equals</a></li><li><a href="#GetHashCode" class="type">GetHashCode</a></li><li><a href="#GetType" class="type">GetType</a></li><li><a href="#Multiply" class="type">Multiply</a></li><li><a href="#MultiplyInplace" class="type">MultiplyInplace</a></li><li><a href="#Negate" class="type">Negate</a></li><li><a href="#NegateInplace" class="type">NegateInplace</a></li><li><a href="#Norm1" class="type">Norm1</a></li><li><a href="#Ones" class="type">Ones</a></li><li><a href="#ScalarMultiply" class="type">ScalarMultiply</a></li><li><a href="#ScalarProduct" class="type">ScalarProduct</a></li><li><a href="#Subtract" class="type">Subtract</a></li><li><a href="#Subtract" class="type">Subtract</a></li><li><a href="#SubtractInplace" class="type">SubtractInplace</a></li><li><a href="#SubtractInplace" class="type">SubtractInplace</a></li><li><a href="#TensorMultiply" class="type">TensorMultiply</a></li><li><a href="#ToColumnMatrix" class="type">ToColumnMatrix</a></li><li><a href="#ToRowMatrix" class="type">ToRowMatrix</a></li><li><a href="#ToString" class="type">ToString</a></li><li><a href="#Zeros" class="type">Zeros</a></li>
+			</ul>
+
+			<h3 class="section">Properties</h3>
+			<ul><li><a href="#Item" class="type">Item</a></li><li><a href="#Length" class="type">Length</a></li>
+			</ul>
+
+	</div>
+
+
+	<h3 class="section">Public instance methods</h3>
+<div id="Add" class="method">
+		<h4>ComplexVector <strong>Add</strong>(IVector&lt;T&gt; b)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/ComplexVector.htm">ComplexVector</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics.LinearAlgebra/IVector`1.htm">IVector&lt;T&gt;</a></code> b</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Add" class="method">
+		<h4>ComplexVector <strong>Add</strong>(Complex b)</h4>
+		<div class="content">Add a complex scalar to all elements of this vector.<blockquote>
+  This method has the same effect as the overloaded + operator.
+</blockquote>
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/ComplexVector.htm">ComplexVector</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics/Complex.htm">Complex</a></code> b</td>
+					<td>The complex scalar.</td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="AddInplace" class="method">
+		<h4>void <strong>AddInplace</strong>(IVector&lt;T&gt; b)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td><code><a href="../MathNet.Numerics.LinearAlgebra/IVector`1.htm">IVector&lt;T&gt;</a></code> b</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="AddInplace" class="method">
+		<h4>void <strong>AddInplace</strong>(Complex b)</h4>
+		<div class="content">In place addition of a complex scalar to all elements of this vector.<blockquote>
+  This method changes this vector.
+</blockquote>
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td><code><a href="../MathNet.Numerics/Complex.htm">Complex</a></code> b</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="ArrayDivide" class="method">
+		<h4>ComplexVector <strong>ArrayDivide</strong>(IVector&lt;T&gt; b)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/ComplexVector.htm">ComplexVector</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics.LinearAlgebra/IVector`1.htm">IVector&lt;T&gt;</a></code> b</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="ArrayDivideInplace" class="method">
+		<h4>void <strong>ArrayDivideInplace</strong>(IVector&lt;T&gt; b)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td><code><a href="../MathNet.Numerics.LinearAlgebra/IVector`1.htm">IVector&lt;T&gt;</a></code> b</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="ArrayMap" class="method">
+		<h4>ComplexVector <strong>ArrayMap</strong>(Converter&lt;Complex, Complex&gt; mapping)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/ComplexVector.htm">ComplexVector</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.Converter<Complex, Complex>">Converter&lt;Complex, Complex&gt;</span></code> mapping</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="ArrayMapInplace" class="method">
+		<h4>void <strong>ArrayMapInplace</strong>(Converter&lt;Complex, Complex&gt; mapping)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td><code><span title="System.Converter<Complex, Complex>">Converter&lt;Complex, Complex&gt;</span></code> mapping</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="ArrayMultiply" class="method">
+		<h4>ComplexVector <strong>ArrayMultiply</strong>(IVector&lt;T&gt; b)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/ComplexVector.htm">ComplexVector</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics.LinearAlgebra/IVector`1.htm">IVector&lt;T&gt;</a></code> b</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="ArrayMultiplyInplace" class="method">
+		<h4>void <strong>ArrayMultiplyInplace</strong>(IVector&lt;T&gt; b)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td><code><a href="../MathNet.Numerics.LinearAlgebra/IVector`1.htm">IVector&lt;T&gt;</a></code> b</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="ArrayPower" class="method">
+		<h4>ComplexVector <strong>ArrayPower</strong>(Complex exponent)</h4>
+		<div class="content">Array (element-by-element) raise to power.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/ComplexVector.htm">ComplexVector</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics/Complex.htm">Complex</a></code> exponent</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="ArrayPowerInplace" class="method">
+		<h4>void <strong>ArrayPowerInplace</strong>(Complex exponent)</h4>
+		<div class="content">In place array (element-by-element) raise to power.<blockquote>
+  This method changes this vector.
+</blockquote>
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td><code><a href="../MathNet.Numerics/Complex.htm">Complex</a></code> exponent</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Clone" class="method">
+		<h4>ComplexVector <strong>Clone</strong>()</h4>
+		<div class="content">Returns a deep copy of this instance.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/ComplexVector.htm">ComplexVector</a></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Conjugate" class="method">
+		<h4>ComplexVector <strong>Conjugate</strong>()</h4>
+		<div class="content">Conjugate this vector.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/ComplexVector.htm">ComplexVector</a></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="ConjugateInplace" class="method">
+		<h4>void <strong>ConjugateInplace</strong>()</h4>
+		<div class="content">In place conjugation of this vector.<blockquote>
+  This method changes this vector.
+</blockquote>
+
+
+		</div>
+	</div><div id="CopyToArray" class="method">
+		<h4>Complex[] <strong>CopyToArray</strong>()</h4>
+		<div class="content">Copies the internal data structure to an array.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="MathNet.Numerics.Complex[]">Complex[]</span></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="CrossMultiply" class="method">
+		<h4>ComplexVector <strong>CrossMultiply</strong>(IVector&lt;T&gt; b)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/ComplexVector.htm">ComplexVector</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics.LinearAlgebra/IVector`1.htm">IVector&lt;T&gt;</a></code> b</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Equals" class="method">
+		<h4>bool <strong>Equals</strong>(object obj)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.bool">bool</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.object">object</span></code> obj</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="GetHashCode" class="method">
+		<h4>int <strong>GetHashCode</strong>()</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.int">int</span></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="GetType" class="method">
+		<h4>Type <strong>GetType</strong>()</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.Type">Type</span></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Multiply" class="method">
+		<h4>ComplexVector <strong>Multiply</strong>(Complex scalar)</h4>
+		<div class="content">Scale this complex vector with a complex scalar.<blockquote>
+  This method has the same effect as the overloaded * operator.
+</blockquote>
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/ComplexVector.htm">ComplexVector</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics/Complex.htm">Complex</a></code> scalar</td>
+					<td>The scalar to scale with</td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="MultiplyInplace" class="method">
+		<h4>void <strong>MultiplyInplace</strong>(Complex scalar)</h4>
+		<div class="content">Multiplies in place this <code>Vector</code> by a scalar.<blockquote>
+  This method changes this vector.
+</blockquote>
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td><code><a href="../MathNet.Numerics/Complex.htm">Complex</a></code> scalar</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Negate" class="method">
+		<h4>ComplexVector <strong>Negate</strong>()</h4>
+		<div class="content">Negate this vector.<blockquote>
+  This method has the same effect as the overloaded - operator.
+</blockquote>
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/ComplexVector.htm">ComplexVector</a></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="NegateInplace" class="method">
+		<h4>void <strong>NegateInplace</strong>()</h4>
+		<div class="content">In place unary minus of the <code>Vector</code>.<blockquote>
+  This method changes this vector.
+</blockquote>
+
+
+		</div>
+	</div><div id="Norm1" class="method">
+		<h4>double <strong>Norm1</strong>()</h4>
+		<div class="content">1-Norm also known as Manhattan Norm or Taxicab Norm.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.double">double</span></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="ScalarMultiply" class="method">
+		<h4>Complex <strong>ScalarMultiply</strong>(IVector&lt;T&gt; b)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics/Complex.htm">Complex</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics.LinearAlgebra/IVector`1.htm">IVector&lt;T&gt;</a></code> b</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Subtract" class="method">
+		<h4>ComplexVector <strong>Subtract</strong>(IVector&lt;T&gt; b)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/ComplexVector.htm">ComplexVector</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics.LinearAlgebra/IVector`1.htm">IVector&lt;T&gt;</a></code> b</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Subtract" class="method">
+		<h4>ComplexVector <strong>Subtract</strong>(Complex b)</h4>
+		<div class="content">Subtract a complex scalar from all elements of this vector.<blockquote>
+  This method has the same effect as the overloaded - operator.
+</blockquote>
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/ComplexVector.htm">ComplexVector</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics/Complex.htm">Complex</a></code> b</td>
+					<td>The complex scalar.</td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="SubtractInplace" class="method">
+		<h4>void <strong>SubtractInplace</strong>(Complex b)</h4>
+		<div class="content">In place subtraction of a complex scalar from all elements of this vector.<blockquote>
+  This method changes this vector.
+</blockquote>
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td><code><a href="../MathNet.Numerics/Complex.htm">Complex</a></code> b</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="SubtractInplace" class="method">
+		<h4>void <strong>SubtractInplace</strong>(IVector&lt;T&gt; b)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td><code><a href="../MathNet.Numerics.LinearAlgebra/IVector`1.htm">IVector&lt;T&gt;</a></code> b</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="TensorMultiply" class="method">
+		<h4>ComplexMatrix <strong>TensorMultiply</strong>(IVector&lt;T&gt; b)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/ComplexMatrix.htm">ComplexMatrix</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics.LinearAlgebra/IVector`1.htm">IVector&lt;T&gt;</a></code> b</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="ToColumnMatrix" class="method">
+		<h4>ComplexMatrix <strong>ToColumnMatrix</strong>()</h4>
+		<div class="content">Create a matrix based on this vector in column form (one single column).
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/ComplexMatrix.htm">ComplexMatrix</a></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="ToRowMatrix" class="method">
+		<h4>ComplexMatrix <strong>ToRowMatrix</strong>()</h4>
+		<div class="content">Create a matrix based on this vector in row form (one single row).
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/ComplexMatrix.htm">ComplexMatrix</a></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="ToString" class="method">
+		<h4>string <strong>ToString</strong>()</h4>
+		<div class="content">Formats this vector to a human-readable string
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.string">string</span></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+	<h3 class="section">Public static methods</h3>
+<div id="ArrayProduct" class="method">
+		<h4>ComplexVector <strong>ArrayProduct</strong>(IVector&lt;T&gt; a, IVector&lt;T&gt; b)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/ComplexVector.htm">ComplexVector</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics.LinearAlgebra/IVector`1.htm">IVector&lt;T&gt;</a></code> a</td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics.LinearAlgebra/IVector`1.htm">IVector&lt;T&gt;</a></code> b</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="ArrayQuotient" class="method">
+		<h4>ComplexVector <strong>ArrayQuotient</strong>(IVector&lt;T&gt; a, IVector&lt;T&gt; b)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/ComplexVector.htm">ComplexVector</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics.LinearAlgebra/IVector`1.htm">IVector&lt;T&gt;</a></code> a</td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics.LinearAlgebra/IVector`1.htm">IVector&lt;T&gt;</a></code> b</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="BasisVector" class="method">
+		<h4>ComplexVector <strong>BasisVector</strong>(int n, int i)</h4>
+		<div class="content">Generates an n-dimensional unit vector for i'th coordinate.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/ComplexVector.htm">ComplexVector</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.int">int</span></code> n</td>
+					<td>Dimensionality of vector.</td>
+				</tr><tr>
+					<td><code><span title="System.int">int</span></code> i</td>
+					<td>Coordinate index.</td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Create" class="method">
+		<h4>ComplexVector <strong>Create</strong>(IList&lt;double&gt; realComponents, IList&lt;double&gt; imagComponents)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/ComplexVector.htm">ComplexVector</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.Collections.Generic.IList<double>">IList&lt;double&gt;</span></code> realComponents</td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.Collections.Generic.IList<double>">IList&lt;double&gt;</span></code> imagComponents</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Create" class="method">
+		<h4>ComplexVector <strong>Create</strong>(Complex[] components)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/ComplexVector.htm">ComplexVector</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="MathNet.Numerics.Complex[]">Complex[]</span></code> components</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="CrossProduct" class="method">
+		<h4>ComplexVector <strong>CrossProduct</strong>(IVector&lt;T&gt; u, IVector&lt;T&gt; v)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/ComplexVector.htm">ComplexVector</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics.LinearAlgebra/IVector`1.htm">IVector&lt;T&gt;</a></code> u</td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics.LinearAlgebra/IVector`1.htm">IVector&lt;T&gt;</a></code> v</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="DyadicProduct" class="method">
+		<h4>ComplexMatrix <strong>DyadicProduct</strong>(IVector&lt;T&gt; u, IVector&lt;T&gt; v)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/ComplexMatrix.htm">ComplexMatrix</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics.LinearAlgebra/IVector`1.htm">IVector&lt;T&gt;</a></code> u</td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics.LinearAlgebra/IVector`1.htm">IVector&lt;T&gt;</a></code> v</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Ones" class="method">
+		<h4>ComplexVector <strong>Ones</strong>(int n)</h4>
+		<div class="content">Generates an n-dimensional vector filled with 1.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/ComplexVector.htm">ComplexVector</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.int">int</span></code> n</td>
+					<td>Dimensionality of vector.</td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="ScalarProduct" class="method">
+		<h4>Complex <strong>ScalarProduct</strong>(IVector&lt;T&gt; u, IVector&lt;T&gt; v)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics/Complex.htm">Complex</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics.LinearAlgebra/IVector`1.htm">IVector&lt;T&gt;</a></code> u</td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics.LinearAlgebra/IVector`1.htm">IVector&lt;T&gt;</a></code> v</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Zeros" class="method">
+		<h4>ComplexVector <strong>Zeros</strong>(int n)</h4>
+		<div class="content">Generates an n-dimensional vector filled with 0.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics.LinearAlgebra/ComplexVector.htm">ComplexVector</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.int">int</span></code> n</td>
+					<td>Dimensionality of vector.</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+  <h3 class="section">Public properties</h3>
+<div id="Item" class="method">
+    <h4>Complex <strong>Item</strong> get; set;</h4>
+    <div class="content">Gets or sets the element indexed by <code>i</code>in the <code>Vector</code>.
+      <table>
+        <tr>
+          <td>
+            <code>return <a href="../MathNet.Numerics/Complex.htm">Complex</a></code>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div><div id="Length" class="method">
+    <h4>int <strong>Length</strong> get; </h4>
+    <div class="content">Gets dimensionality of the vector.
+      <table>
+        <tr>
+          <td>
+            <code>return <span title="System.int">int</span></code>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+<div id="footer">
+  <p>Based on v2008.8.16.470 of Math.NET Iridium: Scientific Numerical Library (Math.NET)</p>
+  <p>Generated by <a href="http://docu.jagregory.com">docu</a></p>
+</div>
+  </body>
+</html>

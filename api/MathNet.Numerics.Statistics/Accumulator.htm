@@ -1,0 +1,303 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <title>Accumulator - Math.NET Documentation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+    <link type="text/css" rel="stylesheet" href="../main.css"/>
+  </head>
+  <body><div id="namespaces">
+	<h2 class="fixed">Namespaces</h2>
+	<div class="scroll">
+		<ul><li>
+          <a href="../MathNet.Numerics/index.htm">MathNet.Numerics</a>
+      </li><li>
+          <a href="../MathNet.Numerics.Distributions/index.htm">MathNet.Numerics.Distributions</a>
+      </li><li>
+          <a href="../MathNet.Numerics.Interpolation/index.htm">MathNet.Numerics.Interpolation</a>
+      </li><li>
+          <a href="../MathNet.Numerics.Interpolation.Algorithms/index.htm">MathNet.Numerics.Interpolation.Algorithms</a>
+      </li><li>
+          <a href="../MathNet.Numerics.LinearAlgebra/index.htm">MathNet.Numerics.LinearAlgebra</a>
+      </li><li>
+          <a href="../MathNet.Numerics.RandomSources/index.htm">MathNet.Numerics.RandomSources</a>
+      </li><li>
+          <a href="../MathNet.Numerics.Statistics/index.htm" class="current">MathNet.Numerics.Statistics</a>
+      </li><li>
+          <a href="../MathNet.Numerics.Transformations/index.htm">MathNet.Numerics.Transformations</a>
+      </li>
+		</ul>
+	</div>
+</div><div id="types">
+	<h2 class="fixed">Types</h2>
+	<div class="scroll">
+		<ul><li>
+            <a href="../MathNet.Numerics.Statistics/Accumulator.htm" class="current">Accumulator</a>
+        </li><li>
+            <a href="../MathNet.Numerics.Statistics/Bucket.htm">Bucket</a>
+        </li><li>
+            <a href="../MathNet.Numerics.Statistics/Histogram.htm">Histogram</a>
+        </li>
+		</ul>
+	</div>
+</div>
+    <div class="header">
+		<p class="class"><strong>Type</strong> Accumulator</p>
+		<p><strong>Namespace</strong> MathNet.Numerics.Statistics</p>
+	</div>
+    <div class="sub-header">
+
+
+			<h3 class="section">Methods</h3>
+			<ul><li><a href="#Add" class="type">Add</a></li><li><a href="#AddRange" class="type">AddRange</a></li><li><a href="#AddRange" class="type">AddRange</a></li><li><a href="#AddRange" class="type">AddRange</a></li><li><a href="#Clear" class="type">Clear</a></li><li><a href="#Equals" class="type">Equals</a></li><li><a href="#GetHashCode" class="type">GetHashCode</a></li><li><a href="#GetType" class="type">GetType</a></li><li><a href="#Remove" class="type">Remove</a></li><li><a href="#RemoveRange" class="type">RemoveRange</a></li><li><a href="#RemoveRange" class="type">RemoveRange</a></li><li><a href="#RemoveRange" class="type">RemoveRange</a></li><li><a href="#ToString" class="type">ToString</a></li>
+			</ul>
+
+			<h3 class="section">Properties</h3>
+			<ul><li><a href="#Count" class="type">Count</a></li><li><a href="#ErrorEstimate" class="type">ErrorEstimate</a></li><li><a href="#Mean" class="type">Mean</a></li><li><a href="#MeanSquared" class="type">MeanSquared</a></li><li><a href="#Sigma" class="type">Sigma</a></li><li><a href="#SquaredSum" class="type">SquaredSum</a></li><li><a href="#Sum" class="type">Sum</a></li><li><a href="#Variance" class="type">Variance</a></li>
+			</ul>
+
+	</div>
+
+
+	<h3 class="section">Public instance methods</h3>
+<div id="Add" class="method">
+		<h4>void <strong>Add</strong>(double value)</h4>
+		<div class="content">Adds a real value to the accumulator.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td><code><span title="System.double">double</span></code> value</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="AddRange" class="method">
+		<h4>void <strong>AddRange</strong>(IEnumerable&lt;double&gt; values)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td><code><span title="System.Collections.Generic.IEnumerable<double>">IEnumerable&lt;double&gt;</span></code> values</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="AddRange" class="method">
+		<h4>void <strong>AddRange</strong>(ICollection values)</h4>
+		<div class="content">Adds a range of values to the accumulator.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td><code><span title="System.Collections.ICollection">ICollection</span></code> values</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="AddRange" class="method">
+		<h4>void <strong>AddRange</strong>(Double[] values)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td><code><span title="System.Double[]">Double[]</span></code> values</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Clear" class="method">
+		<h4>void <strong>Clear</strong>()</h4>
+		<div class="content">Clears (re-initialize) the accumulator.
+
+
+		</div>
+	</div><div id="Equals" class="method">
+		<h4>bool <strong>Equals</strong>(object obj)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.bool">bool</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.object">object</span></code> obj</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="GetHashCode" class="method">
+		<h4>int <strong>GetHashCode</strong>()</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.int">int</span></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="GetType" class="method">
+		<h4>Type <strong>GetType</strong>()</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.Type">Type</span></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Remove" class="method">
+		<h4>void <strong>Remove</strong>(double value)</h4>
+		<div class="content">Removes a value from the accumulator.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td><code><span title="System.double">double</span></code> value</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="RemoveRange" class="method">
+		<h4>void <strong>RemoveRange</strong>(Double[] values)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td><code><span title="System.Double[]">Double[]</span></code> values</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="RemoveRange" class="method">
+		<h4>void <strong>RemoveRange</strong>(ICollection values)</h4>
+		<div class="content">Removes a range of values from the accumulator.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td><code><span title="System.Collections.ICollection">ICollection</span></code> values</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="RemoveRange" class="method">
+		<h4>void <strong>RemoveRange</strong>(IEnumerable&lt;double&gt; values)</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td><code><span title="System.Collections.Generic.IEnumerable<double>">IEnumerable&lt;double&gt;</span></code> values</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="ToString" class="method">
+		<h4>string <strong>ToString</strong>()</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.string">string</span></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+
+  <h3 class="section">Public properties</h3>
+<div id="Count" class="method">
+    <h4>int <strong>Count</strong> get; </h4>
+    <div class="content">Gets the number of values added to the accumulator.
+      <table>
+        <tr>
+          <td>
+            <code>return <span title="System.int">int</span></code>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div><div id="ErrorEstimate" class="method">
+    <h4>double <strong>ErrorEstimate</strong> get; </h4>
+    <div class="content">Gets the mean error estimate defined as the square root of the ratio of
+the standard deviation to the number of values added to the accumulator.
+      <table>
+        <tr>
+          <td>
+            <code>return <span title="System.double">double</span></code>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div><div id="Mean" class="method">
+    <h4>double <strong>Mean</strong> get; </h4>
+    <div class="content">Gets the arithmetic mean of the values added to the accumulator.
+      <table>
+        <tr>
+          <td>
+            <code>return <span title="System.double">double</span></code>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div><div id="MeanSquared" class="method">
+    <h4>double <strong>MeanSquared</strong> get; </h4>
+    <div class="content">Gets the arithmetic mean of the squared values added to the accumulator. Note that this is not equal to the squared mean of the values.
+      <table>
+        <tr>
+          <td>
+            <code>return <span title="System.double">double</span></code>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div><div id="Sigma" class="method">
+    <h4>double <strong>Sigma</strong> get; </h4>
+    <div class="content">Gets the standard deviation of the values added to the accumulator.
+      <table>
+        <tr>
+          <td>
+            <code>return <span title="System.double">double</span></code>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div><div id="SquaredSum" class="method">
+    <h4>double <strong>SquaredSum</strong> get; </h4>
+    <div class="content">Gets the sum of the squared values added to the accumulator.
+      <table>
+        <tr>
+          <td>
+            <code>return <span title="System.double">double</span></code>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div><div id="Sum" class="method">
+    <h4>double <strong>Sum</strong> get; </h4>
+    <div class="content">Gets the sum of the values added to the accumulator.
+      <table>
+        <tr>
+          <td>
+            <code>return <span title="System.double">double</span></code>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div><div id="Variance" class="method">
+    <h4>double <strong>Variance</strong> get; </h4>
+    <div class="content">Gets the variance of the values added to the accumulator.
+      <table>
+        <tr>
+          <td>
+            <code>return <span title="System.double">double</span></code>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+<div id="footer">
+  <p>Based on v2008.8.16.470 of Math.NET Iridium: Scientific Numerical Library (Math.NET)</p>
+  <p>Generated by <a href="http://docu.jagregory.com">docu</a></p>
+</div>
+  </body>
+</html>

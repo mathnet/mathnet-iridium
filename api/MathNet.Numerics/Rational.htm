@@ -1,0 +1,460 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <title>Rational - Math.NET Documentation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
+    <link type="text/css" rel="stylesheet" href="../main.css"/>
+  </head>
+  <body><div id="namespaces">
+	<h2 class="fixed">Namespaces</h2>
+	<div class="scroll">
+		<ul><li>
+          <a href="../MathNet.Numerics/index.htm" class="current">MathNet.Numerics</a>
+      </li><li>
+          <a href="../MathNet.Numerics.Distributions/index.htm">MathNet.Numerics.Distributions</a>
+      </li><li>
+          <a href="../MathNet.Numerics.Interpolation/index.htm">MathNet.Numerics.Interpolation</a>
+      </li><li>
+          <a href="../MathNet.Numerics.Interpolation.Algorithms/index.htm">MathNet.Numerics.Interpolation.Algorithms</a>
+      </li><li>
+          <a href="../MathNet.Numerics.LinearAlgebra/index.htm">MathNet.Numerics.LinearAlgebra</a>
+      </li><li>
+          <a href="../MathNet.Numerics.RandomSources/index.htm">MathNet.Numerics.RandomSources</a>
+      </li><li>
+          <a href="../MathNet.Numerics.Statistics/index.htm">MathNet.Numerics.Statistics</a>
+      </li><li>
+          <a href="../MathNet.Numerics.Transformations/index.htm">MathNet.Numerics.Transformations</a>
+      </li>
+		</ul>
+	</div>
+</div><div id="types">
+	<h2 class="fixed">Types</h2>
+	<div class="scroll">
+		<ul><li>
+            <a href="../MathNet.Numerics/Collection.htm">Collection</a>
+        </li><li>
+            <a href="../MathNet.Numerics/Combinatorics.htm">Combinatorics</a>
+        </li><li>
+            <a href="../MathNet.Numerics/Complex.htm">Complex</a>
+        </li><li>
+            <a href="../MathNet.Numerics/Constants.htm">Constants</a>
+        </li><li>
+            <a href="../MathNet.Numerics/Fn.htm">Fn</a>
+        </li><li>
+            <a href="../MathNet.Numerics/IRealFunction.htm">IRealFunction</a>
+        </li><li>
+            <a href="../MathNet.Numerics/ISet`1.htm">ISet&lt;T&gt;</a>
+        </li><li>
+            <a href="../MathNet.Numerics/Natural.htm">Natural</a>
+        </li><li>
+            <a href="../MathNet.Numerics/Number.htm">Number</a>
+        </li><li>
+            <a href="../MathNet.Numerics/Polynomial.htm">Polynomial</a>
+        </li><li>
+            <a href="../MathNet.Numerics/Quaternion.htm">Quaternion</a>
+        </li><li>
+            <a href="../MathNet.Numerics/Rational.htm" class="current">Rational</a>
+        </li><li>
+            <a href="../MathNet.Numerics/Ratios.htm">Ratios</a>
+        </li><li>
+            <a href="../MathNet.Numerics/ReadOnlySet`1.htm">ReadOnlySet&lt;T&gt;</a>
+        </li><li>
+            <a href="../MathNet.Numerics/SampleAlteredEventArgs.htm">SampleAlteredEventArgs</a>
+        </li><li>
+            <a href="../MathNet.Numerics/SampleList.htm">SampleList</a>
+        </li><li>
+            <a href="../MathNet.Numerics/Set`1.htm">Set&lt;T&gt;</a>
+        </li><li>
+            <a href="../MathNet.Numerics/SetChangedEventArgs`1.htm">SetChangedEventArgs&lt;T&gt;</a>
+        </li><li>
+            <a href="../MathNet.Numerics/SetElementOperation.htm">SetElementOperation</a>
+        </li><li>
+            <a href="../MathNet.Numerics/SiConstants.htm">SiConstants</a>
+        </li><li>
+            <a href="../MathNet.Numerics/SiPrefixes.htm">SiPrefixes</a>
+        </li><li>
+            <a href="../MathNet.Numerics/Sorting.htm">Sorting</a>
+        </li><li>
+            <a href="../MathNet.Numerics/Trig.htm">Trig</a>
+        </li><li>
+            <a href="../MathNet.Numerics/Tuple`2.htm">Tuple&lt;TFirst, TSecond&gt;</a>
+        </li>
+		</ul>
+	</div>
+</div>
+    <div class="header">
+		<p class="class"><strong>Type</strong> Rational</p>
+		<p><strong>Namespace</strong> MathNet.Numerics</p><p><strong>Interfaces</strong> <span title="System.IComparable">IComparable</span>, <span title="System.ICloneable">ICloneable</span></p>
+	</div>
+    <div class="sub-header">
+
+
+			<h3 class="section">Methods</h3>
+			<ul><li><a href="#Add" class="type">Add</a></li><li><a href="#AddInplace" class="type">AddInplace</a></li><li><a href="#AddInplace" class="type">AddInplace</a></li><li><a href="#Clone" class="type">Clone</a></li><li><a href="#CompareTo" class="type">CompareTo</a></li><li><a href="#Divide" class="type">Divide</a></li><li><a href="#Divide" class="type">Divide</a></li><li><a href="#DivideInplace" class="type">DivideInplace</a></li><li><a href="#Equals" class="type">Equals</a></li><li><a href="#Equals" class="type">Equals</a></li><li><a href="#Equals" class="type">Equals</a></li><li><a href="#Evaluate" class="type">Evaluate</a></li><li><a href="#GetHashCode" class="type">GetHashCode</a></li><li><a href="#GetType" class="type">GetType</a></li><li><a href="#InvertInplace" class="type">InvertInplace</a></li><li><a href="#Multiply" class="type">Multiply</a></li><li><a href="#Multiply" class="type">Multiply</a></li><li><a href="#MultiplyInplace" class="type">MultiplyInplace</a></li><li><a href="#NegateInplace" class="type">NegateInplace</a></li><li><a href="#Normalize" class="type">Normalize</a></li><li><a href="#Subtract" class="type">Subtract</a></li><li><a href="#SubtractInplace" class="type">SubtractInplace</a></li><li><a href="#SubtractInplace" class="type">SubtractInplace</a></li><li><a href="#ToString" class="type">ToString</a></li><li><a href="#ToString" class="type">ToString</a></li>
+			</ul>
+
+			<h3 class="section">Properties</h3>
+			<ul><li><a href="#Denominator" class="type">Denominator</a></li><li><a href="#DenominatorOrder" class="type">DenominatorOrder</a></li><li><a href="#Numerator" class="type">Numerator</a></li><li><a href="#NumeratorOrder" class="type">NumeratorOrder</a></li>
+			</ul>
+
+	</div>
+
+
+	<h3 class="section">Public instance methods</h3>
+<div id="Add" class="method">
+		<h4>Rational <strong>Add</strong>(Rational rational)</h4>
+		<div class="content">Create a new rational as the result of adding a rational to this rational.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics/Rational.htm">Rational</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics/Rational.htm">Rational</a></code> rational</td>
+					<td>The rational to add</td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="AddInplace" class="method">
+		<h4>void <strong>AddInplace</strong>(Polynomial polynomial)</h4>
+		<div class="content">Add a polynomial directly inplace to this rational.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td><code><a href="../MathNet.Numerics/Polynomial.htm">Polynomial</a></code> polynomial</td>
+					<td>The polynomial to add.</td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="AddInplace" class="method">
+		<h4>void <strong>AddInplace</strong>(double n)</h4>
+		<div class="content">Add a floating point number directly inplace to this rational.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td><code><span title="System.double">double</span></code> n</td>
+					<td>The floating point number to add.</td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Clone" class="method">
+		<h4>Rational <strong>Clone</strong>()</h4>
+		<div class="content">Create a copy of this rational.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics/Rational.htm">Rational</a></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="CompareTo" class="method">
+		<h4>int <strong>CompareTo</strong>(Rational rational)</h4>
+		<div class="content">Compare this rational to another rational.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.int">int</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics/Rational.htm">Rational</a></code> rational</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Divide" class="method">
+		<h4>Rational <strong>Divide</strong>(Rational rational)</h4>
+		<div class="content">Create a new rational as the result of dividing a rational from this rational.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics/Rational.htm">Rational</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics/Rational.htm">Rational</a></code> rational</td>
+					<td>The rational to divide with.</td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Divide" class="method">
+		<h4>Rational <strong>Divide</strong>(Polynomial polynomial)</h4>
+		<div class="content">Create a new rational as the result of dividing a polynomial from this rational.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics/Rational.htm">Rational</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics/Polynomial.htm">Polynomial</a></code> polynomial</td>
+					<td>The polynomial to divide with.</td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="DivideInplace" class="method">
+		<h4>void <strong>DivideInplace</strong>(double n)</h4>
+		<div class="content">Divide a floating point number directly inplace from this rational.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td><code><span title="System.double">double</span></code> n</td>
+					<td>The floating point number to divide with.</td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Equals" class="method">
+		<h4>bool <strong>Equals</strong>(Rational rational)</h4>
+		<div class="content">Check whether this rational is equal to another rational.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.bool">bool</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics/Rational.htm">Rational</a></code> rational</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Equals" class="method">
+		<h4>bool <strong>Equals</strong>(object obj)</h4>
+		<div class="content">Check whether this rational is equal to another rational.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.bool">bool</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.object">object</span></code> obj</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Evaluate" class="method">
+		<h4>double <strong>Evaluate</strong>(double value)</h4>
+		<div class="content">Evaluate the value of this rational at a given point.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.double">double</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.double">double</span></code> value</td>
+					<td>The point where to evaluate the rational</td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="GetHashCode" class="method">
+		<h4>int <strong>GetHashCode</strong>()</h4>
+		<div class="content">Serves as a hash function for rationals.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.int">int</span></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="GetType" class="method">
+		<h4>Type <strong>GetType</strong>()</h4>
+		<div class="content">
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.Type">Type</span></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="InvertInplace" class="method">
+		<h4>void <strong>InvertInplace</strong>()</h4>
+		<div class="content">Invert this rational directly inplace.
+
+
+		</div>
+	</div><div id="Multiply" class="method">
+		<h4>Rational <strong>Multiply</strong>(Polynomial polynomial)</h4>
+		<div class="content">Create a new rational as the result of multiplying a polynomial to this rational.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics/Rational.htm">Rational</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics/Polynomial.htm">Polynomial</a></code> polynomial</td>
+					<td>The polynomial to multiply with.</td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="Multiply" class="method">
+		<h4>Rational <strong>Multiply</strong>(Rational rational)</h4>
+		<div class="content">Create a new rational as the result of multiplying a rational to this rational.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics/Rational.htm">Rational</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics/Rational.htm">Rational</a></code> rational</td>
+					<td>The rational to multiply with.</td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="MultiplyInplace" class="method">
+		<h4>void <strong>MultiplyInplace</strong>(double n)</h4>
+		<div class="content">Multiply a floating point number directly inplace to this rational.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td><code><span title="System.double">double</span></code> n</td>
+					<td>The floating point number to multiply with.</td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="NegateInplace" class="method">
+		<h4>void <strong>NegateInplace</strong>()</h4>
+		<div class="content">Negate this rational directly inplace.
+
+
+		</div>
+	</div><div id="Normalize" class="method">
+		<h4>void <strong>Normalize</strong>()</h4>
+		<div class="content">Normalize both numerator and denominator polynomials.
+
+
+		</div>
+	</div><div id="Subtract" class="method">
+		<h4>Rational <strong>Subtract</strong>(Rational rational)</h4>
+		<div class="content">Create a new rational as the result of subtracting a rational from this rational.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><a href="../MathNet.Numerics/Rational.htm">Rational</a></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics/Rational.htm">Rational</a></code> rational</td>
+					<td>The rational to subtract.</td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="SubtractInplace" class="method">
+		<h4>void <strong>SubtractInplace</strong>(Polynomial polynomial)</h4>
+		<div class="content">Subtract a polynomial directly inplace from this rational.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td><code><a href="../MathNet.Numerics/Polynomial.htm">Polynomial</a></code> polynomial</td>
+					<td>The polynomial to subtract.</td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="SubtractInplace" class="method">
+		<h4>void <strong>SubtractInplace</strong>(double n)</h4>
+		<div class="content">Subtract a floating point number directly inplace from this rational.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td><code><span title="System.double">double</span></code> n</td>
+					<td>The floating point number to subtract.</td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="ToString" class="method">
+		<h4>string <strong>ToString</strong>()</h4>
+		<div class="content">Format a human-readable string of this rational with "x" as base variable.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.string">string</span></code></td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div><div id="ToString" class="method">
+		<h4>string <strong>ToString</strong>(string baseVariable)</h4>
+		<div class="content">Format a human-readable string of this rational with the given string as base variable (e.g. "x").
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.string">string</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><span title="System.string">string</span></code> baseVariable</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+	<h3 class="section">Public static methods</h3>
+<div id="Equals" class="method">
+		<h4>bool <strong>Equals</strong>(Rational rational1, Rational rational2)</h4>
+		<div class="content">Check whether two rationals are equal.
+
+<table>
+        <caption>Parameters</caption><tr>
+					<td>return <code><span title="System.bool">bool</span></code></td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics/Rational.htm">Rational</a></code> rational1</td>
+					<td></td>
+				</tr><tr>
+					<td><code><a href="../MathNet.Numerics/Rational.htm">Rational</a></code> rational2</td>
+					<td></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+
+  <h3 class="section">Public properties</h3>
+<div id="Denominator" class="method">
+    <h4>Polynomial <strong>Denominator</strong> get; set;</h4>
+    <div class="content">The denominator polynomial.
+      <table>
+        <tr>
+          <td>
+            <code>return <a href="../MathNet.Numerics/Polynomial.htm">Polynomial</a></code>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div><div id="DenominatorOrder" class="method">
+    <h4>int <strong>DenominatorOrder</strong> get; </h4>
+    <div class="content">The order of the denominator polynomial.
+      <table>
+        <tr>
+          <td>
+            <code>return <span title="System.int">int</span></code>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div><div id="Numerator" class="method">
+    <h4>Polynomial <strong>Numerator</strong> get; set;</h4>
+    <div class="content">The numerator polynomial.
+      <table>
+        <tr>
+          <td>
+            <code>return <a href="../MathNet.Numerics/Polynomial.htm">Polynomial</a></code>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div><div id="NumeratorOrder" class="method">
+    <h4>int <strong>NumeratorOrder</strong> get; </h4>
+    <div class="content">The order of the numerator polynomial.
+      <table>
+        <tr>
+          <td>
+            <code>return <span title="System.int">int</span></code>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+<div id="footer">
+  <p>Based on v2008.8.16.470 of Math.NET Iridium: Scientific Numerical Library (Math.NET)</p>
+  <p>Generated by <a href="http://docu.jagregory.com">docu</a></p>
+</div>
+  </body>
+</html>
